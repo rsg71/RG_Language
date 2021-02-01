@@ -11,19 +11,27 @@ import "./Quiz.css"
 
 export default function Quiz() {
 
+    const [correctAnswers, setCorrectAnswers] = useState(0)
+
     const [questionIndex, setQuestionIndex] = useState(0)
     const [wordToTranslate, setWordToTranslate] = useState("")
     const [answer, setAnswer] = useState()
     const [userInput, setUserInput] = useState("")
-    const [questionsLength, setQuestionsLength] = useState()
+    const [questionsLength, setQuestionsLength] = useState(4)
 
 
     console.log(`question index: ${questionIndex}, question length: ${questionsLength}`)
 
+    // useEffect(() => {
+    //     setQuestionsLength(4)
+    //     renderQuestion()
+    // }, [])
+
     useEffect(() => {
-        setQuestionsLength(4)
-        renderQuestion()
-    }, [])
+        if (questionIndex < questionsLength) {
+            renderQuestion()
+        }
+    }, [questionIndex])
 
 
     // useEffect(() => {
@@ -33,9 +41,9 @@ export default function Quiz() {
 
 
     function renderQuestion() {
-        console.log(`now our questionIndex from render question function is : ${questionIndex}`)
-            setWordToTranslate(Data[questionIndex].word);
-            setAnswer(Data[questionIndex].translation)
+        // console.log(`now questionIndex from render question function is : ${questionIndex}`)
+        setWordToTranslate(Data[questionIndex].word);
+        setAnswer(Data[questionIndex].translation)
     }
 
 
@@ -43,16 +51,19 @@ export default function Quiz() {
     function verifyAnswer(value) {
         if (value === answer) {
             console.log("answer is correct!");
+            setCorrectAnswers(correctAnswers + 1);
+
             if (questionIndex < questionsLength) {
+                setUserInput("")
                 setQuestionIndex(questionIndex + 1)
-                renderQuestion()
+                // renderQuestion()    
             }
         }
     }
 
 
     function handleInputChange(event) {
-        const {value} = event.target;
+        const { value } = event.target;
 
         setUserInput(value);
 
@@ -78,7 +89,10 @@ export default function Quiz() {
                     </Col>
                 </Row>
 
-                <Row>
+                {
+                    questionIndex < questionsLength ? 
+                    <>
+                    <Row>
                     <Col xs="10" sm="6" lg="4">
 
                         <QuizQuestion word={wordToTranslate} />
@@ -98,13 +112,21 @@ export default function Quiz() {
                         {userInput.trim() === answer && <i id="correctAnswerCheck" className="far fa-check-circle"></i>}
                     </Col>
                 </Row>
+                </>
 
-                {/* <Row>
-                    <Col>
-                        quiz over
+                        :
+
+                        <>
+
+                            <Row>
+                                <Col>
+                                    <h1>Quiz over</h1>
+                                    <h2>You got {correctAnswers} / {questionsLength} correct</h2>
                             </Col>
-                </Row> */}
+                            </Row>
 
+                        </>
+                }
             </Container>
         </>
     )
