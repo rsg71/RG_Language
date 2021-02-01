@@ -10,10 +10,11 @@ export default function QuizQuestion(props) {
     return (
         <>
 
-            <h1>Translate:{props.data.meaning}</h1>
+            <h1>Translate:{props.word}</h1>
             
-            <input placeholder="translate ${props.data.word}"/><button onClick={}>Enter</button>
+            
           
         </>
     )
 }
+ 
