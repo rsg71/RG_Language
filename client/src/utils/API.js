@@ -1,8 +1,9 @@
-import Data from "../data/data.json"
+import axios from "axios";
 
 
-export const getQuestion = new Promise(function(resolve) {
-    resolve(
-        
-    )
-})
+export default {
+    //get all words
+    getAllSpanishWords: function () {
+        return axios.get("/api/spanish")
+    }
+}

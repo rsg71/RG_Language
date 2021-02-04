@@ -7,8 +7,6 @@ import Spanish from "./pages/Spanish/Spanish"
 import Quiz from "./pages/Quiz/Quiz"
 
 
-// import logo from "./logo.svg";
-// import "./App.css";
 
 function App() {
   return (
