@@ -1,0 +1,10 @@
+#NoMatchRow{
+    text-align: center;
+    margin-top:10%;
+    color:white;
+    background-color: rebeccapurple;
+}
+
+#NoMatchReturnHome {
+    color:white !important;
+}
