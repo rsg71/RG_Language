@@ -1,0 +1,51 @@
+[
+    {
+        "language": "Spanish",
+        "languageLowerCase": "spanish",
+        "source": "/images/flags/spain.svg",
+        "languageHomePage": "/spanish",
+        "bg": "warning"
+    },
+    {
+        "language": "French",
+        "languageLowerCase": "french",
+        "source": "/images/flags/france.svg",
+        "languageHomePage": "/french",
+        "bg": "primary",
+        "fontColor": "white"
+
+    },
+    {
+        "language": "Portuguese",
+        "languageLowerCase": "portuguese",
+        "source": "/images/flags/brazil.svg",
+        "languageHomePage": "/portuguese",
+        "bg": "success",
+        "fontColor": "white"
+    },
+    {
+        "language": "German",
+        "languageLowerCase": "german",
+        "source": "/images/flags/germany.svg",
+        "languageHomePage": "/german",
+        "bg":"light"
+    },
+    {
+        "language": "Italian",
+        "languageLowerCase": "italian",
+        "source": "/images/flags/italy.svg",
+        "languageHomePage": "/italian",
+        "bg":"dark",
+        "fontColor": "white"
+    },
+   
+    {
+        "language": "Swedish",
+        "languageLowerCase": "swedish",
+        "source": "/images/flags/sweden.svg",
+        "languageHomePage": "/swedish",
+        "bg":"primary",
+        "fontColor": "white"
+    }
+
+]
