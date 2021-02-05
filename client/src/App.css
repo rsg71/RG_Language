@@ -1,0 +1,8 @@
+.row{
+    margin:2rem auto;
+}
+
+input:focus,
+input:active {
+    box-shadow: none !important;
+}

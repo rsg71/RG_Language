@@ -15,9 +15,9 @@ export default function Spanish() {
     function loadWords() {
         API.getAllSpanishWords()
         .then(res => {
-            console.log("total length of words: ", res.length);
+            console.log("total length of spanish words: ", res.data.length);
             console.log(res)
-            setTotalSpanishWords(res)
+            setTotalSpanishWords(res.data.length)
         })
         .catch(err => console.log(err))
     }
@@ -31,6 +31,7 @@ export default function Spanish() {
                     <Col>
                         <h1>Spanish home</h1>
                         <Progress />
+                        <h2 style={{float: "right"}}>{totalSpanishWords}</h2>
                     </Col>
                 </Row>
 
