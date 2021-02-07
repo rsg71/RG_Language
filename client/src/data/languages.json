@@ -4,7 +4,8 @@
         "languageLowerCase": "spanish",
         "source": "/images/flags/spain.svg",
         "languageHomePage": "/spanish",
-        "bg": "warning"
+        "bg": "warning",
+        "totalWords": "22,000"
     },
     {
         "language": "French",
@@ -12,7 +13,8 @@
         "source": "/images/flags/france.svg",
         "languageHomePage": "/french",
         "bg": "primary",
-        "fontColor": "white"
+        "fontColor": "white",
+        "totalWords": "26,000"
 
     },
     {
@@ -21,14 +23,16 @@
         "source": "/images/flags/brazil.svg",
         "languageHomePage": "/portuguese",
         "bg": "success",
-        "fontColor": "white"
+        "fontColor": "white",
+        "totalWords": "22,000"
     },
     {
         "language": "German",
         "languageLowerCase": "german",
         "source": "/images/flags/germany.svg",
         "languageHomePage": "/german",
-        "bg":"light"
+        "bg":"light",
+        "totalWords": "25,000"
     },
     {
         "language": "Italian",
@@ -36,7 +40,8 @@
         "source": "/images/flags/italy.svg",
         "languageHomePage": "/italian",
         "bg":"dark",
-        "fontColor": "white"
+        "fontColor": "white",
+        "totalWords": "23,000"
     },
    
     {
@@ -45,7 +50,8 @@
         "source": "/images/flags/sweden.svg",
         "languageHomePage": "/swedish",
         "bg":"primary",
-        "fontColor": "white"
+        "fontColor": "white",
+        "totalWords": "28,000"
     }
 
 ]
