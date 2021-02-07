@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Row, Col, Card, CardDeck } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import LanguagesJson from "../../data/languages.json"
+import "./Home.css"
 
 function Home() {
 
@@ -18,10 +19,10 @@ function Home() {
                 </Row>
                 <Row>
                     <Col>
-                        <CardDeck>
+                        <CardDeck id="homeLanguagesCardDeck">
 
                             {LanguagesJson.map(language => (
-                                <Card bg={language.bg}>
+                                <Card bg={language.bg} className="languageCard">
                                     <Link to={language.languageHomePage}
                                         style={{ color: language.fontColor }}>
 
@@ -30,6 +31,7 @@ function Home() {
                                             <Card.Text>
                                                 {/* Get started with {language.language} */}
                                                 <img src={language.source} />
+                                                {language.totalWords} words
                                             </Card.Text>
 
                                         </Card.Body>

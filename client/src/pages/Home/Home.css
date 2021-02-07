@@ -1,0 +1,15 @@
+.languageCard a:hover {
+    text-decoration: none;
+}
+
+.languageCard:hover{
+    /* background-color: rebeccapurple !important; */
+    /* opacity: 50%; */
+    opacity:0.5;
+}
+
+.languageCard{
+    text-align: center;
+}
+
+
