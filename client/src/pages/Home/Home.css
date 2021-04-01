@@ -13,3 +13,13 @@
 }
 
 
+#questionmark{
+    font-size:3em;
+}
+
+@media all and (max-width: 768px) {
+    
+    #questionmark{
+        font-size:5em;
+    }
+}

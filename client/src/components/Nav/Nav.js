@@ -10,13 +10,17 @@ export default function NavBar() {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="#link">Link</Nav.Link>
-                        <NavDropdown title="Usage" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Languages</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">FAQ</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">About</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">Contact Us</NavDropdown.Item>
+                        <Nav.Link href="#link">About</Nav.Link>
+                        <Nav.Link href="#link">Contact</Nav.Link>
+
+                        <NavDropdown title="Languages" id="basic-nav-dropdown">
+                                <NavDropdown.Item href="/spanish">Spanish</NavDropdown.Item>
+                                <NavDropdown.Item href="/">French</NavDropdown.Item>
+                                <NavDropdown.Item href="/">Portuguese</NavDropdown.Item>
+                                <NavDropdown.Item href="/">German</NavDropdown.Item>
+                                <NavDropdown.Item href="/">Italian</NavDropdown.Item>
+                                <NavDropdown.Item href="/">Swedish</NavDropdown.Item>
+                                <NavDropdown.Item href="/secret"> <i className="bi bi-patch-question-fill"></i> Secret</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                     <Form inline>

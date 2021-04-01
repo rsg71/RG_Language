@@ -19,27 +19,44 @@ function Home() {
                 </Row>
                 <Row>
                     <Col>
-                        <CardDeck id="homeLanguagesCardDeck">
+                        <Row>
 
-                            {LanguagesJson.map(language => (
-                                <Card bg={language.bg} className="languageCard">
-                                    <Link to={language.languageHomePage}
-                                        style={{ color: language.fontColor }}>
-
-                                        <Card.Body>
-                                            <Card.Title >{language.language}</Card.Title>
-                                            <Card.Text>
-                                                {/* Get started with {language.language} */}
-                                                <img src={language.source} />
-                                                {language.totalWords} words
-                                            </Card.Text>
-
+                            <CardDeck id="homeLanguagesCardDeck">
+                            <Card className="languageCard">
+                                    <Link to="/secret">
+                                        <Card.Body className="text-center" id="secretLanguageCardBody" >
+                                            Secret Language
+                                        <i className="bi bi-patch-question" id="questionmark"></i>
                                         </Card.Body>
                                     </Link>
                                 </Card>
-                            ))}
+                                {LanguagesJson.map(language => (
+                                    <Col>
 
-                        </CardDeck>
+
+
+                                        <Card key={language.id} bg={language.bg} className="languageCard">
+                                            <Link to={language.languageHomePage}
+                                                style={{ color: language.fontColor }}>
+
+                                                <Card.Body>
+                                                    <Card.Title >{language.language}</Card.Title>
+                                                    <Card.Text>
+                                                        {/* Get started with {language.language} */}
+                                                        <img src={language.source} alt={language.language} />
+                                                        {language.totalWords} words
+                                            </Card.Text>
+
+                                                </Card.Body>
+                                            </Link>
+                                        </Card>
+                                    </Col>
+
+                                ))}
+                               
+
+                            </CardDeck>
+                        </Row>
 
                     </Col>
                 </Row>
