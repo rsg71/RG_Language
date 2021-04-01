@@ -11,6 +11,7 @@ import Footer from "./components/Footer/Footer";
 import SecretLanguage from "./pages/SecretLanguage/SecretLanguage";
 import SecretLanguageAllWords from "./pages/SecretLanguageAllWords/SecretLanguageAllWords";
 import SecretLanguageQuiz from "./pages/SecretLanguageQuiz/SecretLanguageQuiz";
+import { Container } from "react-bootstrap";
 
 
 
@@ -23,18 +24,22 @@ function App() {
         <NavBar />
         <main>
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/spanish" component={Spanish} />
-            <Route exact path="/quiz" component={Quiz} />
-            <Route exact path="/secret" component={SecretLanguage} />
-            <Route exact path="/secret-quiz" component={SecretLanguageQuiz} />
-            <Route exact path="/all-secret-language-words" component={SecretLanguageAllWords} />
-            {/* 404 page */}
-            <Route>
-              <NoMatch />
-            </Route>
+            <Container id="appContainer">
+              <Route exact path="/" component={Home} />
+              <Route exact path="/spanish" component={Spanish} />
+              <Route exact path="/quiz" component={Quiz} />
+              <Route exact path="/secret" component={SecretLanguage} />
+              <Route exact path="/secret-quiz" component={SecretLanguageQuiz} />
+              <Route exact path="/all-secret-language-words" component={SecretLanguageAllWords} />
+            </Container>
+
+              {/* 404 page */}
+
+              <Route>
+                <NoMatch />
+              </Route>
           </Switch>
-          </main>
+        </main>
         <Footer />
       </Router>
     </>

@@ -1,14 +1,27 @@
 import React from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
+import { Button, Col, Container, Row } from 'react-bootstrap'
 import allSecretWords from "../../data/secretlanguage.json"
+import { useHistory } from "react-router-dom";
 
 export default function SecretLanguageAllWords() {
 
-    console.log("all secret words", allSecretWords)
+    let history = useHistory();
+
+    function handleClick() {
+        history.push("/secret");
+        console.log("history" + history)
+    }
+
+
     return (
         <>
+
+
             <Container>
                 <div className="mt-4">
+                <Button type="button" onClick={handleClick}>
+                        <i className="fas fa-arrow-circle-left"></i> Back
+                </Button>
                     <h1 className="mt-4">All secret language words</h1>
 
                 </div>
@@ -24,13 +37,11 @@ export default function SecretLanguageAllWords() {
                             </thead>
                             <tbody>
                                 {allSecretWords.map((item, idx) => (
-                                    <>
-                                        <tr key={idx}>
-                                            <th scope="row">{idx + 1}</th>
-                                            <td>{item.english}</td>
-                                            <td>{item.foreign}</td>
-                                        </tr>
-                                    </>
+                                    <tr key={idx}>
+                                        <th scope="row">{idx + 1}</th>
+                                        <td>{item.english}</td>
+                                        <td>{item.foreign}</td>
+                                    </tr>
                                 ))}
                             </tbody>
                         </table>

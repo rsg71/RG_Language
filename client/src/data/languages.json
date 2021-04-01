@@ -58,6 +58,16 @@
         "bg":"primary",
         "fontColor": "white",
         "totalWords": "28,000"
+    },
+    {
+        "id":"7",
+        "language": "Secret Language",
+        "languageLowerCase": "secret",
+        "source": "/images/flags/secret.svg",
+        "languageHomePage": "/secret",
+        "bg":"white",
+        "fontColor": "",
+        "totalWords": "77"
     }
    
 

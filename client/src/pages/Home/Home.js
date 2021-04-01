@@ -8,7 +8,7 @@ function Home() {
 
     return (
         <>
-            <Container>
+            <Container >
                 <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
                 <Row>
                     <Col>
@@ -20,40 +20,31 @@ function Home() {
                 <Row>
                     <Col>
                         <Row>
-
+                           
                             <CardDeck id="homeLanguagesCardDeck">
-                            <Card className="languageCard">
-                                    <Link to="/secret">
-                                        <Card.Body className="text-center" id="secretLanguageCardBody" >
-                                            Secret Language
-                                        <i className="bi bi-patch-question" id="questionmark"></i>
-                                        </Card.Body>
-                                    </Link>
-                                </Card>
+
                                 {LanguagesJson.map(language => (
-                                    <Col>
-
-
-
-                                        <Card key={language.id} bg={language.bg} className="languageCard">
+                                    <Col sm={6} md={6} lg={3} key={language.id}>
+                                        <Card key={language.id} bg={language.bg} className="languageCard my-4 ">
                                             <Link to={language.languageHomePage}
                                                 style={{ color: language.fontColor }}>
-
                                                 <Card.Body>
                                                     <Card.Title >{language.language}</Card.Title>
                                                     <Card.Text>
-                                                        {/* Get started with {language.language} */}
-                                                        <img src={language.source} alt={language.language} />
-                                                        {language.totalWords} words
-                                            </Card.Text>
+                                                        {
+                                                            language.language === "Secret Language" ?
+                                                                <img style={{height:"4em", color:"#007BFF"}} src={language.source} alt={language.language} />
+                                                                :
+                                                                <img className="flagImage" src={language.source} alt={language.language} />
 
+                                                        }
+                                                        <div>{language.totalWords} words</div>
+                                                    </Card.Text>
                                                 </Card.Body>
                                             </Link>
                                         </Card>
                                     </Col>
-
                                 ))}
-                               
 
                             </CardDeck>
                         </Row>

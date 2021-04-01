@@ -5,6 +5,8 @@ import QuizQuestion from "../../components/QuizQuestion/QuizQuestion"
 import QuizProgressBar from "../../components/QuizProgressBar/QuizProgressBar"
 import Data from "../../data/secretlanguage.json"
 // import API from "../../utils/API"
+import { useHistory } from "react-router-dom";
+
 import "./SecretLanguageQuiz.css"
 
 
@@ -91,6 +93,12 @@ export default function SecretLanguageQuiz() {
         // }
     }
 
+    let history = useHistory();
+
+    function handleClick() {
+        history.push("/secret");
+        console.log("history" + history)
+    }
 
     return (
 
@@ -101,8 +109,10 @@ export default function SecretLanguageQuiz() {
 
                 <Row>
                     <Col>
-                        {/* <Link to="/spanish"><Button><i className="fas fa-arrow-circle-left"></i> Back</Button></Link> */}
-                        <Button><i className="fas fa-arrow-circle-left"></i> Back</Button>
+
+                        <Button type="button" onClick={handleClick}>
+                            <i className="fas fa-arrow-circle-left"></i> Back
+                </Button>
                     </Col>
                 </Row>
 
@@ -124,7 +134,7 @@ export default function SecretLanguageQuiz() {
                                     <InputGroup className="mt-5">
 
                                         <Form.Control id="quizInputField" type="text" placeholder="translate here" value={userInput} onChange={e => handleInputChange(e)}
-                                            className={correct && "correctAnswerInputBox" }
+                                            className={correct && "correctAnswerInputBox"}
                                             readOnly={correct}
                                             ref={inputRef}
                                             onSubmit={() => console.log('submitted')}
@@ -141,10 +151,10 @@ export default function SecretLanguageQuiz() {
                                 <Col>
                                     {correct &&
                                         <h5 className="correctSpan"><i id="correctAnswerCheck" className="far fa-check-circle"></i> Correct!</h5>}
-                                
+
                                     {answerIsIncorrect &&
                                         <h4 className="text-danger" >
-                                        <i className="bi bi-x-square"></i> incorrect..
+                                            <i className="bi bi-x-square"></i> incorrect..
                                       </h4>}
                                 </Col>
                             </Row>

@@ -13,13 +13,20 @@
 }
 
 
-#questionmark{
+.questionMark{
     font-size:3em;
 }
 
+.flagImage{
+    max-width:4em;
+}
+
+
+
+
 @media all and (max-width: 768px) {
     
-    #questionmark{
+    .questionMark{
         font-size:5em;
     }
 }
