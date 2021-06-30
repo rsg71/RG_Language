@@ -1,55 +1,56 @@
 import React from "react";
 import { Container, Row, Col, Card, CardDeck } from "react-bootstrap"
-import { Link } from "react-router-dom"
+import {  useHistory } from "react-router-dom"
 import LanguagesJson from "../../data/languages.json"
 import "./Home.css"
 
 function Home() {
 
+    let history = useHistory();
+
     return (
         <>
             <Container >
-                <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        
                 <Row>
                     <Col>
                         <h1>Hello and welcome to RG Language</h1>
-                        <h2>I want to learn vocabulary for:</h2>
-
                     </Col>
                 </Row>
-                <Row>
-                    <Col>
-                        <Row>
-                           
-                            <CardDeck id="homeLanguagesCardDeck">
 
-                                {LanguagesJson.map(language => (
-                                    <Col sm={6} md={6} lg={3} key={language.id}>
-                                        <Card key={language.id} bg={language.bg} className="languageCard my-4 ">
-                                            <Link to={language.languageHomePage}
-                                                style={{ color: language.fontColor }}>
-                                                <Card.Body>
-                                                    <Card.Title >{language.language}</Card.Title>
-                                                    <Card.Text>
-                                                        {
-                                                            language.language === "Secret Language" ?
-                                                                <img style={{height:"4em", color:"#007BFF"}} src={language.source} alt={language.language} />
-                                                                :
-                                                                <img className="flagImage" src={language.source} alt={language.language} />
+                <h2 className="lead display-5 mb-0">I want to learn vocabulary for:</h2>
 
-                                                        }
-                                                        <div>{language.totalWords} words</div>
-                                                    </Card.Text>
-                                                </Card.Body>
-                                            </Link>
-                                        </Card>
-                                    </Col>
-                                ))}
+                <Row className="mt-0">
 
-                            </CardDeck>
-                        </Row>
+                    <CardDeck id="homeLanguagesCardDeck">
 
-                    </Col>
+                        {LanguagesJson.map(language => (
+                            <Col sm={6} md={6} lg={3} key={language.id}>
+                                <Card key={language.id} bg={language.bg} onClick={() => history.push(`${language.languageHomePage}`)}
+                                    className={language.language === "German" || language.language === "Secret" ? "languageCard my-4 text-black" : "languageCard my-4 text-white"}
+                                >
+
+                                    <Card.Body style={{ cursor: "pointer" }}>
+                                        <Card.Title >{language.language}</Card.Title>
+                                        <Card.Text>
+                                            {language.language === "Secret" ?
+                                                <img style={{ height: "4em", color: "#007BFF" }} src={language.source} alt={language.language} />
+                                                :
+                                                <img className="flagImage" src={language.source} alt={language.language} />
+                                            }
+                                            <div>{language.totalWords} words</div>
+                                        </Card.Text>
+                                    </Card.Body>
+
+                                </Card>
+                            </Col>
+                        ))}
+
+                    </CardDeck>
+
+
+
+                    <div className="text-muted text-center ml-3" style={{ fontSize: "0.8rem" }}>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
                 </Row>
             </Container>
 

@@ -20,7 +20,7 @@ export default function NavBar() {
                                 <NavDropdown.Item href="/">German</NavDropdown.Item>
                                 <NavDropdown.Item href="/">Italian</NavDropdown.Item>
                                 <NavDropdown.Item href="/">Swedish</NavDropdown.Item>
-                                <NavDropdown.Item href="/secret"> <i className="bi bi-patch-question-fill"></i> Secret</NavDropdown.Item>
+                                <NavDropdown.Item href="/secret"> Secret</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                     <Form inline>

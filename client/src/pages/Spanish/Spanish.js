@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap'
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 import API from "../../utils/API"
 import Progress from '../../components/Progress/Progress'
+import GoToButton from '../../components/GoToButton/GoToButton'
 
 export default function Spanish() {
 
@@ -14,12 +15,12 @@ export default function Spanish() {
 
     function loadWords() {
         API.getAllSpanishWords()
-        .then(res => {
-            console.log("total length of spanish words: ", res.data.length);
-            console.log(res)
-            setTotalSpanishWords(res.data.length)
-        })
-        .catch(err => console.log(err))
+            .then(res => {
+                console.log("total length of spanish words: ", res.data.length);
+                console.log(res)
+                setTotalSpanishWords(res.data.length)
+            })
+            .catch(err => console.log(err))
     }
 
 
@@ -31,7 +32,7 @@ export default function Spanish() {
                     <Col>
                         <h1>Spanish home</h1>
                         <Progress />
-                        <h2 style={{float: "right"}}>{totalSpanishWords}</h2>
+                        <h2 style={{ float: "right" }}>{totalSpanishWords}</h2>
                     </Col>
                 </Row>
 
@@ -39,8 +40,7 @@ export default function Spanish() {
                 <Row>
                     <Col>
                         Continue learning:
-
-                        <Link to="/quiz"><Button variant="primary">Practice vocab</Button></Link>
+                        <GoToButton destination={"/quiz"}>Practice vocab</GoToButton>
                     </Col>
                 </Row>
 

@@ -61,7 +61,7 @@
     },
     {
         "id":"7",
-        "language": "Secret Language",
+        "language": "Secret",
         "languageLowerCase": "secret",
         "source": "/images/flags/secret.svg",
         "languageHomePage": "/secret",

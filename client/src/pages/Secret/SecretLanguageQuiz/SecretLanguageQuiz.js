@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react"
-import { Container, Row, Col, Button, Form, InputGroup, FormControl } from "react-bootstrap"
-import { Link } from "react-router-dom"
-import QuizQuestion from "../../components/QuizQuestion/QuizQuestion"
-import QuizProgressBar from "../../components/QuizProgressBar/QuizProgressBar"
-import Data from "../../data/secretlanguage.json"
+import { Container, Row, Col, Button, Form, InputGroup } from "react-bootstrap"
+import QuizQuestion from "../../../components/QuizQuestion/QuizQuestion"
+import QuizProgressBar from "../../../components/QuizProgressBar/QuizProgressBar"
+import QuizInput from "../../../components/QuizInput/QuizInput";
+import Data from "../../../data/secretlanguage.json"
 // import API from "../../utils/API"
 import { useHistory } from "react-router-dom";
 
@@ -82,6 +82,12 @@ export default function SecretLanguageQuiz() {
         // verifyAnswer(value);
     }
 
+
+    function handleEnterKeyPress(e) {
+        console.log(e)
+    }
+
+
     function handleSubmit(e) {
         const { value } = e.target;
 
@@ -97,7 +103,7 @@ export default function SecretLanguageQuiz() {
 
     function handleClick() {
         history.push("/secret");
-        console.log("history" + history)
+        // console.log("history" + history)
     }
 
     return (
@@ -105,72 +111,53 @@ export default function SecretLanguageQuiz() {
         <>
             <Container >
 
-
-
                 <Row>
                     <Col>
 
                         <Button type="button" onClick={handleClick}>
                             <i className="fas fa-arrow-circle-left"></i> Back
-                </Button>
+                        </Button>
                     </Col>
                 </Row>
 
-                <Row>
-                    <Col>
-                        <h6>Progress: {questionIndex}/{questionsLength}</h6>
-                        <QuizProgressBar currentVal={(questionIndex) / questionsLength * (100)} />
-                    </Col>
-                </Row>
+                <h6>Progress: {questionIndex}/{questionsLength}</h6>
+                <QuizProgressBar currentVal={(questionIndex) / questionsLength * (100)} />
 
-                {
-                    questionIndex < questionsLength ?
-                        <>
-                            <Row>
-                                <Col xs="10" sm="6" lg="4">
+                {questionIndex < questionsLength ?
+                    <>
+                        <Row>
+                            <Col xs="10" sm="6" lg="4">
 
-                                    <QuizQuestion word={wordToTranslate} />
+                                <QuizQuestion word={wordToTranslate} />
 
-                                    <InputGroup className="mt-5">
+                                <QuizInput handleSubmit={handleSubmit} userInput={userInput} handleInputChange={handleInputChange} correct={correct} inputRef={inputRef} />
 
-                                        <Form.Control id="quizInputField" type="text" placeholder="translate here" value={userInput} onChange={e => handleInputChange(e)}
-                                            className={correct && "correctAnswerInputBox"}
-                                            readOnly={correct}
-                                            ref={inputRef}
-                                            onSubmit={() => console.log('submitted')}
-                                        />
-                                        <InputGroup.Append>
-                                            <Button onClick={e => handleSubmit(e)} type="submit" variant="outline-secondary">check</Button>
-                                        </InputGroup.Append>
-                                    </InputGroup>
+                            </Col>
+                        </Row>
 
-                                </Col>
-                            </Row>
+                        <Row>
+                            <Col>
+                                {correct &&
+                                    <h5 className="correctSpan"><i id="correctAnswerCheck" className="far fa-check-circle"></i> Correct!</h5>}
 
-                            <Row>
-                                <Col>
-                                    {correct &&
-                                        <h5 className="correctSpan"><i id="correctAnswerCheck" className="far fa-check-circle"></i> Correct!</h5>}
+                                {answerIsIncorrect &&
+                                    <h4 className="text-danger" >
+                                        <i className="bi bi-x-square"></i> incorrect..
+                                    </h4>}
+                            </Col>
+                        </Row>
+                    </>
+                    :
+                    <>
 
-                                    {answerIsIncorrect &&
-                                        <h4 className="text-danger" >
-                                            <i className="bi bi-x-square"></i> incorrect..
-                                      </h4>}
-                                </Col>
-                            </Row>
-                        </>
-                        :
+                        <Row>
+                            <Col>
+                                <h1>Quiz over</h1>
+                                <h2>You got {correctAnswers} / {questionsLength} correct</h2>
+                            </Col>
+                        </Row>
 
-                        <>
-
-                            <Row>
-                                <Col>
-                                    <h1>Quiz over</h1>
-                                    <h2>You got {correctAnswers} / {questionsLength} correct</h2>
-                                </Col>
-                            </Row>
-
-                        </>
+                    </>
                 }
             </Container>
         </>

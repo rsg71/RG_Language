@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Col, Container, Row } from 'react-bootstrap'
-import allSecretWords from "../../data/secretlanguage.json"
+import allSecretWords from "../../../data/secretlanguage.json"
 import { useHistory } from "react-router-dom";
 
 export default function SecretLanguageAllWords() {

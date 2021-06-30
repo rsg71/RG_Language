@@ -6,6 +6,7 @@
     /* background-color: rebeccapurple !important; */
     /* opacity: 50%; */
     opacity:0.5;
+    cursor: "pointer" !important;
 }
 
 .languageCard{
@@ -21,7 +22,9 @@
     max-width:4em;
 }
 
-
+.pointer {
+    cursor: "pointer"
+}
 
 
 @media all and (max-width: 768px) {
