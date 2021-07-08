@@ -14,9 +14,9 @@ import { Container } from "react-bootstrap";
 import SecretTranslator from "./pages/Secret/SecretTranslator/SecretTranslator";
 import ScrollToTop from "./utils/ScrollToTop";
 import About from "./pages/About/About";
-import "./App.css";
 import Contact from "./pages/Contact/Contact";
-
+import 'animate.css';
+import "./App.css";
 
 
 function App() {

@@ -45,7 +45,7 @@ export default function Contact() {
                 <Row>
                     <Col>
                         {submitted ?
-                            <h3 className="text-success">Message submitted <i className="bi bi-check-circle-fill" /></h3>
+                            <h3 className="text-success animate__animated animate__fadeIn">Message submitted <i className="bi bi-check-circle-fill" /></h3>
                             :
                             <ContactForm submitting={submitting} submitForm={submitForm} />
                         }
