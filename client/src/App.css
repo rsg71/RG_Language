@@ -3,12 +3,9 @@ body {
 }
 
 main {
-    min-height: calc(100vh - 300px);
+    min-height: calc(100vh - 100px) !important;
 }
 
-.row{
-    margin:2rem auto;
-}
 
 input:focus,
 input:active {
