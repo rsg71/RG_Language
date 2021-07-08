@@ -1,8 +1,36 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import ContactForm from '../../components/ContactForm/ContactForm'
 
 export default function Contact() {
+
+
+
+    function simulateNetworkRequest() {
+        return new Promise((resolve) => setTimeout(resolve, 2000));
+    }
+
+
+    const [submitting, setSubmitting] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
+
+    const submitForm = () => {
+        setSubmitting(true)
+    }
+
+
+    useEffect(() => {
+        if (submitting) {
+            simulateNetworkRequest().then(() => {
+                setSubmitting(false);
+                setSubmitted(true);
+            });
+        }
+    }, [submitting]);
+
+
+
+
     return (
         <>
             <Container>
@@ -16,7 +44,11 @@ export default function Contact() {
 
                 <Row>
                     <Col>
-                        <ContactForm />
+                        {submitted ?
+                            <h3 className="text-success">Message submitted <i className="bi bi-check-circle-fill" /></h3>
+                            :
+                            <ContactForm submitting={submitting} submitForm={submitForm} />
+                        }
                     </Col>
                 </Row>
 

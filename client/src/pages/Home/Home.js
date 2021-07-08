@@ -15,10 +15,10 @@ function Home() {
                 <Row>
                     <Col>
                         <h1>Hello and welcome to RG Language</h1>
+                        <p className="lead text-muted">I want to learn vocabulary for:</p>
                     </Col>
                 </Row>
 
-                <h2 className="lead display-5 mb-0">I want to learn vocabulary for:</h2>
 
                 <Row className="mt-0">
 

@@ -28,7 +28,7 @@ function App() {
       <Router>
         <ScrollToTop />
         <NavigationBar />
-        <main className="py-4">
+        <main className="py-5">
           <Container id="appContainer">
 
             <Switch>
