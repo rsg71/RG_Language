@@ -1,37 +1,37 @@
 body {
-    margin:0;
+    margin: 0;
 }
 
 main {
     min-height: calc(100vh - 100px) !important;
 }
 
-
-input:focus,
-input:active {
+input:focus, input:active {
     box-shadow: none !important;
 }
-
 
 .pointer {
     cursor: "pointer"
 }
 
-@media all and (max-width:1400px) {
-    
-    #appContainer{
-        width: 70%;
-        margin:auto;   
-    }
+.rotateBtn::after {
+   content: url(/client/images/chevron-right.svg);
+   width:15px;
+   height:15px;
+   display:inline-flex;
+   color:black;
 }
 
+@media all and (max-width:1400px) {
+    #appContainer {
+        width: 70%;
+        margin: auto;
+    }
+}
 
 @media all and (max-width:576px) {
-    
-    #appContainer{
+    #appContainer {
         width: 100%;
-        margin:auto;   
+        margin: auto;
     }
 }
-
-

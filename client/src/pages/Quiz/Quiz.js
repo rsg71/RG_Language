@@ -4,59 +4,113 @@ import { Link } from "react-router-dom"
 import QuizQuestion from "../../components/QuizQuestion/QuizQuestion"
 import QuizProgressBar from "../../components/QuizProgressBar/QuizProgressBar"
 import Data from "../../data/data.json"
-// import API from "../../utils/API"
+import API from "../../utils/API"
 import "./Quiz.css"
 
 
 
 export default function Quiz() {
 
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
+    const [loaded, setLoaded] = useState(false);
+
     const inputRef = useRef(null)
-    const [correctAnswers, setCorrectAnswers] = useState(0)
+    const [correctAnswers, setCorrectAnswers] = useState(0);
+
+    const [currentWord, setCurrentWord] = useState({});
 
     const [questionIndex, setQuestionIndex] = useState(0)
     const [wordToTranslate, setWordToTranslate] = useState("")
     const [answer, setAnswer] = useState()
     const [userInput, setUserInput] = useState("")
-    const [questionsLength, ] = useState(4)
+    const [questionsLength, setQuestionsLength] = useState(0);
 
-    const [correct, setCorrect] = useState(false)
+    const [correct, setCorrect] = useState(false);
 
 
-    console.log(`question index: ${questionIndex}, question length: ${questionsLength}`)
+    // ==============================================================
+    const [totalSpanishWords, setTotalSpanishWords] = useState([]);
 
     useEffect(() => {
-        inputRef.current.focus()
+        loadWords()
     }, [])
 
+    function loadWords() {
+        setLoading(true);
+        API.getAllSpanishWords()
+            .then(res => {
+                console.log(res);
+                setTotalSpanishWords(res.data);
+                setCurrentWord(res.data[0]);
+                setQuestionsLength(res.data.length);
+
+                setLoading(false);
+                setLoaded(true);
+                setError(false);
+
+            })
+            .catch(err => {
+                console.log(err);
+                setLoading(false);
+                setLoaded(false);
+                setError(true);
+
+            })
+    }
+    // ==============================================================
+
+
+
+    // console.log(`question index: ${questionIndex}, question length: ${questionsLength}`)
+
     useEffect(() => {
-        if (questionIndex < questionsLength) {
-            renderQuestion()
+        if (loaded) {
+
+            if (questionsLength > 0 && loaded && !error) {
+                inputRef.current.focus()
+            }
         }
-    }, [questionIndex])
+
+    }, [questionsLength, loaded])
+
+    useEffect(() => {
+        if (loaded) {
+            if (totalSpanishWords.length > 0) {
+                if (questionIndex < questionsLength) {
+                    renderQuestion()
+                }
+            }
+        }
+
+    }, [questionIndex, totalSpanishWords, loaded])
 
 
     function renderQuestion() {
         // console.log(`now questionIndex from render question function is : ${questionIndex}`)
-        setWordToTranslate(Data[questionIndex].word);
-        setAnswer(Data[questionIndex].translation)
+        setCurrentWord(totalSpanishWords[questionIndex]);
+        setWordToTranslate(totalSpanishWords[questionIndex].word);
+        setAnswer(totalSpanishWords[questionIndex].translation)
     }
 
 
-    function verifyAnswer(value) {
+    async function verifyAnswer(value) {
         if (value === answer) {
             console.log("answer is correct!");
-            setCorrect(true)
+            setCorrect(true);
+
+            let res = await API.answerCorrectly(currentWord._id);
+            console.log("word correctly answered res: ", res);
 
             setTimeout(() => {
-            setCorrectAnswers(correctAnswers + 1);
-            if (questionIndex < questionsLength) {
-                setUserInput("")
-                setQuestionIndex(questionIndex + 1)
-                // renderQuestion()    
-                setCorrect(false)
-            }
-            },2000)
+                setCorrectAnswers(correctAnswers + 1);
+                if (questionIndex < questionsLength) {
+                    setUserInput("")
+                    setQuestionIndex(questionIndex + 1)
+                    // renderQuestion()    
+                    setCorrect(false)
+                }
+            }, 2000)
         }
     }
 
@@ -76,66 +130,71 @@ export default function Quiz() {
 
         <>
             <Container >
+                {error && <div>Error</div>}
+                {loading && <div>Loading...</div>}
 
-                <Row>
-                    <Col>
-                        <Link to="/spanish"><Button><i className="fas fa-arrow-circle-left"></i> Back</Button></Link>
-                    </Col>
-                </Row>
-
-                <Row>
-                    <Col>
-                        <QuizProgressBar currentVal={(questionIndex) / questionsLength * (100)} />
-                    </Col>
-                </Row>
-
-
-
-
-                {
-                    questionIndex < questionsLength ? 
+                {loaded && !error && !loading &&
                     <>
-                    <Row>
-                    <Col xs="10" sm="6" lg="4">
-
-                        <QuizQuestion word={wordToTranslate} />
-                        <Form>
-                            <Form.Group >
-                                <Form.Label>Translate:</Form.Label>
-                                <Form.Control id="quizInputField" type="text" placeholder="translate here" value={userInput} onChange={e => handleInputChange(e)} 
-                                className={userInput === answer? "correctAnswerInputBox": "notAnswered"}
-                                readOnly={correct}
-                                ref={inputRef}
-                                onSubmit={() => console.log('submitted')}
-                                />
-                            </Form.Group>
-                        </Form>
-
-
-                    </Col>
-                </Row>
-
-                <Row>
-                    <Col>
-                        {userInput === answer && 
-                        <span className="correctSpan"><i id="correctAnswerCheck" className="far fa-check-circle"></i> Correct!</span>}
-                    </Col>
-                </Row>
-                </>
-
-                        :
-
-                        <>
-
-                            <Row>
-                                <Col>
-                                    <h1>Quiz over</h1>
-                                    <h2>You got {correctAnswers} / {questionsLength} correct</h2>
+                        <Row>
+                            <Col className="mb-3">
+                                <Link to="/spanish"><Button><i className="fas fa-arrow-circle-left"></i> Back</Button></Link>
                             </Col>
-                            </Row>
+                        </Row>
 
-                        </>
+                        <Row>
+                            <Col>
+                                <QuizProgressBar currentVal={(questionIndex) / questionsLength * (100)} />
+                            </Col>
+                        </Row>
+
+
+                        {
+                            questionIndex < questionsLength ?
+                                <>
+                                    <Row>
+                                        <Col xs="10" sm="6" lg="4">
+
+                                            <QuizQuestion word={wordToTranslate} />
+                                            <Form>
+                                                <Form.Group >
+                                                    <Form.Label>Translate:</Form.Label>
+                                                    <Form.Control id="quizInputField" type="text" placeholder="translate here" value={userInput} onChange={e => handleInputChange(e)}
+                                                        className={userInput === answer ? "correctAnswerInputBox" : "notAnswered"}
+                                                        readOnly={correct}
+                                                        ref={inputRef}
+                                                        onSubmit={() => console.log('submitted')}
+                                                    />
+                                                </Form.Group>
+                                            </Form>
+
+
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            {userInput === answer &&
+                                                <span className="correctSpan"><i id="correctAnswerCheck" className="far fa-check-circle"></i> Correct!</span>}
+                                        </Col>
+                                    </Row>
+                                </>
+
+                                :
+
+                                <>
+
+                                    <Row>
+                                        <Col>
+                                            <h1>Quiz over</h1>
+                                            <h2>You got {correctAnswers} / {questionsLength} correct</h2>
+                                        </Col>
+                                    </Row>
+
+                                </>
+                        }
+                    </>
                 }
+
             </Container>
         </>
     )

@@ -13,31 +13,38 @@ mongoose.connect(
 const spanishSeed = [
     {
         word: "manzana",
-        translation: "apple"
+        translation: "apple",
+        answeredCorrectly: false
     },
     {
         word: "camisa",
-        translation: "shirt"
+        translation: "shirt",
+        answeredCorrectly: false
     },
     {
         word: "brazo",
-        translation: "arm"
+        translation: "arm",
+        answeredCorrectly: false
     },
     {
         word: "amarillo",
-        translation: "yellow"
+        translation: "yellow",
+        answeredCorrectly: false
     },
     {
         word: "mesa",
-        translation: "table"
+        translation: "table",
+        answeredCorrectly: false
     },
     {
         word: "vaca",
-        translation: "cow"
+        translation: "cow",
+        answeredCorrectly: false
     },
     {
         word: "plato",
-        translation: "plate"
+        translation: "plate",
+        answeredCorrectly: false
     }
 ];
 

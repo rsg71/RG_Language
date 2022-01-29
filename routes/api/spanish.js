@@ -6,5 +6,7 @@ router.route("/")
   .get(spanishController.findAll);
 
 
+router.route("/:word")
+  .patch(spanishController.answerCorrectly);
 
 module.exports = router;

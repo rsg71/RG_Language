@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col, Card, CardDeck } from "react-bootstrap"
-import {  useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import LanguagesJson from "../../data/languages.json"
 import "./Home.css"
 
@@ -11,7 +11,7 @@ function Home() {
     return (
         <>
             <Container >
-        
+
                 <Row>
                     <Col>
                         <h1>Hello and welcome to RG Language</h1>
@@ -32,14 +32,15 @@ function Home() {
 
                                     <Card.Body style={{ cursor: "pointer" }}>
                                         <Card.Title >{language.language}</Card.Title>
-                                        <Card.Text>
+                                        <Card.Text className="mb-1">
                                             {language.language === "Secret" ?
                                                 <img style={{ height: "4em", color: "#007BFF" }} src={language.source} alt={language.language} />
                                                 :
                                                 <img className="flagImage" src={language.source} alt={language.language} />
                                             }
-                                            <div>{language.totalWords} words</div>
                                         </Card.Text>
+                                        <div>{language.totalWords} words</div>
+
                                     </Card.Body>
 
                                 </Card>
