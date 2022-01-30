@@ -42,9 +42,10 @@ export default function FrenchQuiz() {
         API.getAllFrenchWords()
             .then(res => {
                 console.log(res);
-                setTotalSpanishWords(res.data);
-                setCurrentWord(res.data[0]);
-                setQuestionsLength(res.data.length);
+                let notAnsweredCorrectly = res.data.filter(words => words.answeredCorrectly === false)
+                setTotalSpanishWords(notAnsweredCorrectly);
+                setCurrentWord(notAnsweredCorrectly[0]);
+                setQuestionsLength(notAnsweredCorrectly.length);
 
                 setLoading(false);
                 setLoaded(true);
@@ -118,12 +119,12 @@ export default function FrenchQuiz() {
 
     function handleInputChange(e) {
         e.preventDefault();
-        console.log("handle")
         const { value } = e.target;
+        let lowercaseValue = value.toLowerCase();
 
-        setUserInput(value);
+        setUserInput(lowercaseValue);
 
-        verifyAnswer(value);
+        verifyAnswer(lowercaseValue);
     }
 
 
@@ -152,6 +153,7 @@ export default function FrenchQuiz() {
                         <Row>
                             <Col>
                                 <QuizProgressBar currentVal={(questionIndex) / questionsLength * (100)} />
+                                <div className="float-right">word {questionIndex +1} / {questionsLength}</div>
                             </Col>
                         </Row>
 

@@ -5,10 +5,12 @@ const spanishSeed = require("../utils/spanishSeed");
 
 // This file empties the spanish collection and inserts the spanish words & translations below
 
+
+
 mongoose.connect(
-    process.env.MONGODB_URI ||
-    "mongodb://localhost/rgLanguage"
-);
+    process.env.MONGODB_URI || "mongodb://localhost/rgLanguage"
+).then(res => console.log("connected successfully: ", res))
+    .catch(err => console.log("error:", err))
 
 
 
