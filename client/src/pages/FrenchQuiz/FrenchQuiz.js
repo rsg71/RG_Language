@@ -4,9 +4,9 @@ import { Link } from "react-router-dom"
 import QuizQuestion from "../../components/QuizQuestion/QuizQuestion"
 import QuizProgressBar from "../../components/QuizProgressBar/QuizProgressBar"
 import API from "../../utils/API"
-import blah from "../../utils/accentmarks/french"
-import "../Quiz/Quiz.css"
+import accentMarks from "../../utils/accentmarks/french"
 import LoadingCard from "../../components/LoadingCard/LoadingCard"
+import "../Quiz/Quiz.css"
 
 
 
@@ -28,6 +28,7 @@ export default function FrenchQuiz() {
     const [questionsLength, setQuestionsLength] = useState(0);
 
     const [correct, setCorrect] = useState(false);
+    const [incorrectAnswer, setIncorrectAnswer] = useState(false);
 
 
     // ==============================================================
@@ -96,10 +97,11 @@ export default function FrenchQuiz() {
     }
 
 
-    async function verifyAnswer(value) {
+    async function verifyAnswer(value, enterKeyPressed) {
         if (value === answer) {
             console.log("answer is correct!");
             setCorrect(true);
+            setIncorrectAnswer(false);
 
             let res = await API.answerFrenchCorrectly(currentWord._id);
             console.log("word correctly answered res: ", res);
@@ -112,7 +114,15 @@ export default function FrenchQuiz() {
                     // renderQuestion()    
                     setCorrect(false)
                 }
-            }, 2000)
+            }, 2000);
+        } else if (enterKeyPressed) {
+            setCorrect(false);
+            setIncorrectAnswer(true);
+            setTimeout(() => {
+                setQuestionIndex(questionIndex + 1);
+                setUserInput("");
+                setIncorrectAnswer(false);
+            }, 2000);
         }
     }
 
@@ -124,13 +134,21 @@ export default function FrenchQuiz() {
 
         setUserInput(lowercaseValue);
 
-        verifyAnswer(lowercaseValue);
+        let enterKeyPressed = false
+        verifyAnswer(lowercaseValue, enterKeyPressed);
     }
 
 
     const typeAccent = (value) => {
         setUserInput(userInput + value);
 
+    }
+
+    const handleEnterKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            let enterKeyPressed = true;
+            verifyAnswer(userInput, enterKeyPressed);
+        }
     }
 
 
@@ -153,7 +171,7 @@ export default function FrenchQuiz() {
                         <Row>
                             <Col>
                                 <QuizProgressBar currentVal={(questionIndex) / questionsLength * (100)} />
-                                <div className="float-right">word {questionIndex +1} / {questionsLength}</div>
+                                <div className="float-right">word {questionIndex + 1} / {questionsLength}</div>
                             </Col>
                         </Row>
 
@@ -167,7 +185,7 @@ export default function FrenchQuiz() {
                                             <QuizQuestion word={wordToTranslate} />
 
                                             <div classname="my-3">
-                                                {blah.map(mark => (
+                                                {accentMarks.map(mark => (
                                                     <button key={mark.unicode} onClick={e => typeAccent(mark.letter)}>{mark.letter}</button>
                                                 ))}
                                             </div>
@@ -179,6 +197,7 @@ export default function FrenchQuiz() {
                                                 readOnly={correct}
                                                 ref={inputRef}
                                                 onSubmit={e => e.preventDefault()}
+                                                onKeyDown={e => handleEnterKeyPress(e)}
                                             />
                                         </Col>
                                     </Row>
@@ -187,6 +206,8 @@ export default function FrenchQuiz() {
                                         <Col>
                                             {userInput === answer &&
                                                 <span className="correctSpan"><i id="correctAnswerCheck" className="far fa-check-circle"></i> Correct!</span>}
+                                            {incorrectAnswer &&
+                                                <span className="text-danger">Incorrect</span>}
                                         </Col>
                                     </Row>
                                 </>
