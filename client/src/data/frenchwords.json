@@ -1,0 +1,502 @@
+[
+    {
+        "Number": 1,
+        "French": "comme",
+        "English": "as"
+    },
+    {
+        "Number": 2,
+        "French": "je",
+        "English": "I"
+    },
+    {
+        "Number": 3,
+        "French": "son",
+        "English": "his"
+    },
+    {
+        "Number": 4,
+        "French": "que",
+        "English": "that"
+    },
+    {
+        "Number": 5,
+        "French": "il",
+        "English": "he"
+    },
+    {
+        "Number": 6,
+        "French": "était",
+        "English": "was"
+    },
+    {
+        "Number": 7,
+        "French": "pour",
+        "English": "for"
+    },
+    {
+        "Number": 8,
+        "French": "sur",
+        "English": "on"
+    },
+    {
+        "Number": 9,
+        "French": "sont",
+        "English": "are"
+    },
+    {
+        "Number": 10,
+        "French": "avec",
+        "English": "with"
+    },
+    {
+        "Number": 11,
+        "French": "ils",
+        "English": "they"
+    },
+    {
+        "Number": 12,
+        "French": "être",
+        "English": "be"
+    },
+    {
+        "Number": 13,
+        "French": "à",
+        "English": "at"
+    },
+    {
+        "Number": 14,
+        "French": "un",
+        "English": "one"
+    },
+    {
+        "Number": 15,
+        "French": "avoir",
+        "English": "have"
+    },
+    {
+        "Number": 16,
+        "French": "ce",
+        "English": "this"
+    },
+    {
+        "Number": 17,
+        "French": "à partir de",
+        "English": "from"
+    },
+    {
+        "Number": 18,
+        "French": "par",
+        "English": "by"
+    },
+    {
+        "Number": 19,
+        "French": "chaud",
+        "English": "hot"
+    },
+    {
+        "Number": 20,
+        "French": "mot",
+        "English": "word"
+    },
+    {
+        "Number": 21,
+        "French": "mais",
+        "English": "but"
+    },
+    {
+        "Number": 22,
+        "French": "que",
+        "English": "what"
+    },
+    {
+        "Number": 23,
+        "French": "certains",
+        "English": "some"
+    },
+    {
+        "Number": 24,
+        "French": "est",
+        "English": "is"
+    },
+    {
+        "Number": 25,
+        "French": "il",
+        "English": "it"
+    },
+    {
+        "Number": 26,
+        "French": "vous",
+        "English": "you"
+    },
+    {
+        "Number": 27,
+        "French": "ou",
+        "English": "or"
+    },
+    {
+        "Number": 28,
+        "French": "eu",
+        "English": "had"
+    },
+    {
+        "Number": 29,
+        "French": "la",
+        "English": "the"
+    },
+    {
+        "Number": 30,
+        "French": "de",
+        "English": "of"
+    },
+    {
+        "Number": 31,
+        "French": "à",
+        "English": "to"
+    },
+    {
+        "Number": 32,
+        "French": "et",
+        "English": "and"
+    },
+    {
+        "Number": 33,
+        "French": "un",
+        "English": "a"
+    },
+    {
+        "Number": 34,
+        "French": "dans",
+        "English": "in"
+    },
+    {
+        "Number": 35,
+        "French": "nous",
+        "English": "we"
+    },
+    {
+        "Number": 36,
+        "French": "boîte",
+        "English": "can"
+    },
+    {
+        "Number": 37,
+        "French": "dehors",
+        "English": "out"
+    },
+    {
+        "Number": 38,
+        "French": "autre",
+        "English": "other"
+    },
+    {
+        "Number": 39,
+        "French": "étaient",
+        "English": "were"
+    },
+    {
+        "Number": 40,
+        "French": "qui",
+        "English": "which"
+    },
+    {
+        "Number": 41,
+        "French": "faire",
+        "English": "do"
+    },
+    {
+        "Number": 42,
+        "French": "leur",
+        "English": "their"
+    },
+    {
+        "Number": 43,
+        "French": "temps",
+        "English": "time"
+    },
+    {
+        "Number": 44,
+        "French": "si",
+        "English": "if"
+    },
+    {
+        "Number": 45,
+        "French": "volonté",
+        "English": "will"
+    },
+    {
+        "Number": 46,
+        "French": "comment",
+        "English": "how"
+    },
+    {
+        "Number": 47,
+        "French": "dit",
+        "English": "said"
+    },
+    {
+        "Number": 48,
+        "French": "un",
+        "English": "an"
+    },
+    {
+        "Number": 49,
+        "French": "chaque",
+        "English": "each"
+    },
+    {
+        "Number": 50,
+        "French": "dire",
+        "English": "tell"
+    },
+    {
+        "Number": 51,
+        "French": "ne",
+        "English": "does"
+    },
+    {
+        "Number": 52,
+        "French": "ensemble",
+        "English": "set"
+    },
+    {
+        "Number": 53,
+        "French": "trois",
+        "English": "three"
+    },
+    {
+        "Number": 54,
+        "French": "vouloir",
+        "English": "want"
+    },
+    {
+        "Number": 55,
+        "French": "air",
+        "English": "air"
+    },
+    {
+        "Number": 56,
+        "French": "bien",
+        "English": "well"
+    },
+    {
+        "Number": 57,
+        "French": "aussi",
+        "English": "also"
+    },
+    {
+        "Number": 58,
+        "French": "jouer",
+        "English": "play"
+    },
+    {
+        "Number": 59,
+        "French": "petit",
+        "English": "small"
+    },
+    {
+        "Number": 60,
+        "French": "fin",
+        "English": "end"
+    },
+    {
+        "Number": 61,
+        "French": "mettre",
+        "English": "put"
+    },
+    {
+        "Number": 62,
+        "French": "maison",
+        "English": "home"
+    },
+    {
+        "Number": 63,
+        "French": "lire",
+        "English": "read"
+    },
+    {
+        "Number": 64,
+        "French": "main",
+        "English": "hand"
+    },
+    {
+        "Number": 65,
+        "French": "port",
+        "English": "port"
+    },
+    {
+        "Number": 66,
+        "French": "grand",
+        "English": "large"
+    },
+    {
+        "Number": 67,
+        "French": "épeler",
+        "English": "spell"
+    },
+    {
+        "Number": 68,
+        "French": "ajouter",
+        "English": "add"
+    },
+    {
+        "Number": 69,
+        "French": "même",
+        "English": "even"
+    },
+    {
+        "Number": 70,
+        "French": "terre",
+        "English": "land"
+    },
+    {
+        "Number": 71,
+        "French": "ici",
+        "English": "here"
+    },
+    {
+        "Number": 72,
+        "French": "il faut",
+        "English": "must"
+    },
+    {
+        "Number": 73,
+        "French": "grand",
+        "English": "big"
+    },
+    {
+        "Number": 74,
+        "French": "haut",
+        "English": "high"
+    },
+    {
+        "Number": 75,
+        "French": "tel",
+        "English": "such"
+    },
+    {
+        "Number": 76,
+        "French": "suivre",
+        "English": "follow"
+    },
+    {
+        "Number": 77,
+        "French": "acte",
+        "English": "act"
+    },
+    {
+        "Number": 78,
+        "French": "pourquoi",
+        "English": "why"
+    },
+    {
+        "Number": 79,
+        "French": "interroger",
+        "English": "ask"
+    },
+    {
+        "Number": 80,
+        "French": "hommes",
+        "English": "men"
+    },
+    {
+        "Number": 81,
+        "French": "changement",
+        "English": "change"
+    },
+    {
+        "Number": 82,
+        "French": "est allé",
+        "English": "went"
+    },
+    {
+        "Number": 83,
+        "French": "lumière",
+        "English": "light"
+    },
+    {
+        "Number": 84,
+        "French": "genre",
+        "English": "kind"
+    },
+    {
+        "Number": 85,
+        "French": "de",
+        "English": "off"
+    },
+    {
+        "Number": 86,
+        "French": "besoin",
+        "English": "need"
+    },
+    {
+        "Number": 87,
+        "French": "maison",
+        "English": "house"
+    },
+    {
+        "Number": 88,
+        "French": "image",
+        "English": "picture"
+    },
+    {
+        "Number": 89,
+        "French": "essayer",
+        "English": "try"
+    },
+    {
+        "Number": 90,
+        "French": "nous",
+        "English": "us"
+    },
+    {
+        "Number": 91,
+        "French": "encore",
+        "English": "again"
+    },
+    {
+        "Number": 92,
+        "French": "animal",
+        "English": "animal"
+    },
+    {
+        "Number": 93,
+        "French": "point",
+        "English": "point"
+    },
+    {
+        "Number": 94,
+        "French": "mère",
+        "English": "mother"
+    },
+    {
+        "Number": 95,
+        "French": "monde",
+        "English": "world"
+    },
+    {
+        "Number": 96,
+        "French": "près de",
+        "English": "near"
+    },
+    {
+        "Number": 97,
+        "French": "construire",
+        "English": "build"
+    },
+    {
+        "Number": 98,
+        "French": "soi",
+        "English": "self"
+    },
+    {
+        "Number": 99,
+        "French": "terre",
+        "English": "earth"
+    },
+    {
+        "Number": 100,
+        "French": "père",
+        "English": "father"
+    }
+]

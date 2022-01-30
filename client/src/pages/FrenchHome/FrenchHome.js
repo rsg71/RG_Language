@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap'
-import { Link } from "react-router-dom"
 import API from "../../utils/API"
 import Progress from '../../components/Progress/Progress'
 import GoToButton from '../../components/GoToButton/GoToButton'
+import LoadingCard from '../../components/LoadingCard/LoadingCard'
 
-export default function Spanish() {
+export default function FrenchHome() {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
@@ -24,7 +24,7 @@ export default function Spanish() {
 
     function loadWords() {
         setLoading(true);
-        API.getAllSpanishWords()
+        API.getAllFrenchWords()
             .then(res => {
                 console.log("total length of spanish words: ", res.data.length);
                 console.log(res);
@@ -60,12 +60,12 @@ export default function Spanish() {
         <>
             <Container>
                 {error && <div>Error loading</div>}
-                {loading && "Loading..."}
+                {loading && <LoadingCard/>}
                 {loaded && !error && !loading &&
                     <>
                         <Row>
                             <Col>
-                                <h1 className="mb-2">Spanish home</h1>
+                                <h1 className="mb-2">French home</h1>
                                 <div className="form-text text-muted">Percent correct:</div>
                                 <Progress percent={percentCorrect} />
                                 <h2 style={{ float: "right" }}>{totalSpanishWords} total</h2>
@@ -76,7 +76,7 @@ export default function Spanish() {
                         <Row>
                             <Col>
                                 <div>Continue learning:</div>
-                                <GoToButton destination={"/quiz"}>Practice vocab</GoToButton>
+                                <GoToButton destination={"/french-quiz"}>Practice vocab</GoToButton>
                             </Col>
                         </Row>
                     </>

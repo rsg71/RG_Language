@@ -8,5 +8,11 @@ export default {
     },
     answerCorrectly: function (wordId) {
         return axios.patch(`/api/spanish/${wordId}`)
-    }
+    },
+    getAllFrenchWords: function () {
+        return axios.get("/api/french")
+    },
+    answerFrenchCorrectly: function (wordId) {
+        return axios.patch(`/api/french/${wordId}`)
+    },
 }

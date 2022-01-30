@@ -4,11 +4,13 @@ import { Link } from "react-router-dom"
 import QuizQuestion from "../../components/QuizQuestion/QuizQuestion"
 import QuizProgressBar from "../../components/QuizProgressBar/QuizProgressBar"
 import API from "../../utils/API"
-import "./Quiz.css"
+import blah from "../../utils/accentmarks/french"
+import "../Quiz/Quiz.css"
+import LoadingCard from "../../components/LoadingCard/LoadingCard"
 
 
 
-export default function Quiz() {
+export default function FrenchQuiz() {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
@@ -37,7 +39,7 @@ export default function Quiz() {
 
     function loadWords() {
         setLoading(true);
-        API.getAllSpanishWords()
+        API.getAllFrenchWords()
             .then(res => {
                 console.log(res);
                 setTotalSpanishWords(res.data);
@@ -88,8 +90,8 @@ export default function Quiz() {
     function renderQuestion() {
         // console.log(`now questionIndex from render question function is : ${questionIndex}`)
         setCurrentWord(totalSpanishWords[questionIndex]);
-        setWordToTranslate(totalSpanishWords[questionIndex].word);
-        setAnswer(totalSpanishWords[questionIndex].translation)
+        setWordToTranslate(totalSpanishWords[questionIndex].translation);
+        setAnswer(totalSpanishWords[questionIndex].word);
     }
 
 
@@ -98,7 +100,7 @@ export default function Quiz() {
             console.log("answer is correct!");
             setCorrect(true);
 
-            let res = await API.answerCorrectly(currentWord._id);
+            let res = await API.answerFrenchCorrectly(currentWord._id);
             console.log("word correctly answered res: ", res);
 
             setTimeout(() => {
@@ -114,9 +116,10 @@ export default function Quiz() {
     }
 
 
-    function handleInputChange(event) {
-        event.preventDefault();
-        const { value } = event.target;
+    function handleInputChange(e) {
+        e.preventDefault();
+        console.log("handle")
+        const { value } = e.target;
 
         setUserInput(value);
 
@@ -124,19 +127,25 @@ export default function Quiz() {
     }
 
 
+    const typeAccent = (value) => {
+        setUserInput(userInput + value);
+
+    }
+
 
     return (
 
         <>
             <Container >
                 {error && <div>Error</div>}
-                {loading && <div>Loading...</div>}
+                {loading && <div><LoadingCard /></div>}
+
 
                 {loaded && !error && !loading &&
                     <>
                         <Row>
                             <Col className="mb-3">
-                                <Link to="/spanish"><Button><i className="fas fa-arrow-circle-left"></i> Back</Button></Link>
+                                <Link to="/french"><Button><i className="fas fa-arrow-circle-left"></i> Back</Button></Link>
                             </Col>
                         </Row>
 
@@ -154,19 +163,21 @@ export default function Quiz() {
                                         <Col xs="10" sm="6" lg="4">
 
                                             <QuizQuestion word={wordToTranslate} />
-                                            <Form>
-                                                <Form.Group >
-                                                    <Form.Label>Translate:</Form.Label>
-                                                    <Form.Control id="quizInputField" type="text" placeholder="translate here" value={userInput} onChange={e => handleInputChange(e)}
-                                                        className={userInput === answer ? "correctAnswerInputBox" : "notAnswered"}
-                                                        readOnly={correct}
-                                                        ref={inputRef}
-                                                        onSubmit={() => console.log('submitted')}
-                                                    />
-                                                </Form.Group>
-                                            </Form>
+
+                                            <div classname="my-3">
+                                                {blah.map(mark => (
+                                                    <button key={mark.unicode} onClick={e => typeAccent(mark.letter)}>{mark.letter}</button>
+                                                ))}
+                                            </div>
 
 
+                                            <Form.Label>Translate:</Form.Label>
+                                            <Form.Control id="quizInputField" type="text" placeholder="translate here" value={userInput} onChange={e => handleInputChange(e)}
+                                                className={userInput === answer ? "correctAnswerInputBox" : "notAnswered"}
+                                                readOnly={correct}
+                                                ref={inputRef}
+                                                onSubmit={e => e.preventDefault()}
+                                            />
                                         </Col>
                                     </Row>
 

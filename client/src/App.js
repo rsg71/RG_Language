@@ -15,8 +15,10 @@ import SecretTranslator from "./pages/Secret/SecretTranslator/SecretTranslator";
 import ScrollToTop from "./utils/ScrollToTop";
 import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
+import FrenchQuiz from "./pages/FrenchQuiz/FrenchQuiz";
 import 'animate.css';
 import "./App.css";
+import FrenchHome from "./pages/FrenchHome/FrenchHome";
 
 
 function App() {
@@ -35,6 +37,8 @@ function App() {
               <Route exact path="/" component={Home} />
               <Route exact path="/spanish" component={Spanish} />
               <Route exact path="/quiz" component={Quiz} />
+              <Route exact path="/french" component={FrenchHome} />
+              <Route exact path="/french-quiz" component={FrenchQuiz} />
               <Route exact path="/secret" component={SecretLanguage} />
               <Route exact path="/secret-quiz" component={SecretLanguageQuiz} />
               <Route exact path="/all-secret-language-words" component={SecretLanguageAllWords} />
