@@ -16,9 +16,12 @@ import ScrollToTop from "./utils/ScrollToTop";
 import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
 import FrenchQuiz from "./pages/FrenchQuiz/FrenchQuiz";
+import FrenchHome from "./pages/FrenchHome/FrenchHome";
+import GermanHome from "./pages/GermanHome/GermanHome";
+import GermanQuiz from "./pages/Quizes/GermanQuiz";
+
 import 'animate.css';
 import "./App.css";
-import FrenchHome from "./pages/FrenchHome/FrenchHome";
 
 
 function App() {
@@ -39,6 +42,9 @@ function App() {
               <Route exact path="/quiz" component={Quiz} />
               <Route exact path="/french" component={FrenchHome} />
               <Route exact path="/french-quiz" component={FrenchQuiz} />
+              <Route exact path="/german" component={GermanHome} />
+              <Route exact path="/german-quiz" component={GermanQuiz} />
+              
               <Route exact path="/secret" component={SecretLanguage} />
               <Route exact path="/secret-quiz" component={SecretLanguageQuiz} />
               <Route exact path="/all-secret-language-words" component={SecretLanguageAllWords} />

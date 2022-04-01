@@ -1,0 +1,502 @@
+[
+    {
+        "Number": 1,
+        "German": "wie",
+        "English": "as"
+    },
+    {
+        "Number": 2,
+        "German": "ich",
+        "English": "I"
+    },
+    {
+        "Number": 3,
+        "German": "seine",
+        "English": "his"
+    },
+    {
+        "Number": 4,
+        "German": "dass",
+        "English": "that"
+    },
+    {
+        "Number": 5,
+        "German": "er",
+        "English": "he"
+    },
+    {
+        "Number": 6,
+        "German": "war",
+        "English": "was"
+    },
+    {
+        "Number": 7,
+        "German": "für",
+        "English": "for"
+    },
+    {
+        "Number": 8,
+        "German": "auf",
+        "English": "on"
+    },
+    {
+        "Number": 9,
+        "German": "sind",
+        "English": "are"
+    },
+    {
+        "Number": 10,
+        "German": "mit",
+        "English": "with"
+    },
+    {
+        "Number": 11,
+        "German": "sie",
+        "English": "they"
+    },
+    {
+        "Number": 12,
+        "German": "sein",
+        "English": "be"
+    },
+    {
+        "Number": 13,
+        "German": "bei",
+        "English": "at"
+    },
+    {
+        "Number": 14,
+        "German": "ein",
+        "English": "one"
+    },
+    {
+        "Number": 15,
+        "German": "haben",
+        "English": "have"
+    },
+    {
+        "Number": 16,
+        "German": "dies",
+        "English": "this"
+    },
+    {
+        "Number": 17,
+        "German": "aus",
+        "English": "from"
+    },
+    {
+        "Number": 18,
+        "German": "durch",
+        "English": "by"
+    },
+    {
+        "Number": 19,
+        "German": "heiß",
+        "English": "hot"
+    },
+    {
+        "Number": 20,
+        "German": "Wort",
+        "English": "word"
+    },
+    {
+        "Number": 21,
+        "German": "aber",
+        "English": "but"
+    },
+    {
+        "Number": 22,
+        "German": "was",
+        "English": "what"
+    },
+    {
+        "Number": 23,
+        "German": "einige",
+        "English": "some"
+    },
+    {
+        "Number": 24,
+        "German": "ist",
+        "English": "is"
+    },
+    {
+        "Number": 25,
+        "German": "es",
+        "English": "it"
+    },
+    {
+        "Number": 26,
+        "German": "Sie",
+        "English": "you"
+    },
+    {
+        "Number": 27,
+        "German": "oder",
+        "English": "or"
+    },
+    {
+        "Number": 28,
+        "German": "hatte",
+        "English": "had"
+    },
+    {
+        "Number": 29,
+        "German": "die",
+        "English": "the"
+    },
+    {
+        "Number": 30,
+        "German": "von",
+        "English": "of"
+    },
+    {
+        "Number": 31,
+        "German": "zu",
+        "English": "to"
+    },
+    {
+        "Number": 32,
+        "German": "und",
+        "English": "and"
+    },
+    {
+        "Number": 33,
+        "German": "ein",
+        "English": "a"
+    },
+    {
+        "Number": 34,
+        "German": "bei",
+        "English": "in"
+    },
+    {
+        "Number": 35,
+        "German": "wir",
+        "English": "we"
+    },
+    {
+        "Number": 36,
+        "German": "können",
+        "English": "can"
+    },
+    {
+        "Number": 37,
+        "German": "aus",
+        "English": "out"
+    },
+    {
+        "Number": 38,
+        "German": "andere",
+        "English": "other"
+    },
+    {
+        "Number": 39,
+        "German": "waren",
+        "English": "were"
+    },
+    {
+        "Number": 40,
+        "German": "die",
+        "English": "which"
+    },
+    {
+        "Number": 41,
+        "German": "tun",
+        "English": "do"
+    },
+    {
+        "Number": 42,
+        "German": "ihre",
+        "English": "their"
+    },
+    {
+        "Number": 43,
+        "German": "Zeit",
+        "English": "time"
+    },
+    {
+        "Number": 44,
+        "German": "wenn",
+        "English": "if"
+    },
+    {
+        "Number": 45,
+        "German": "werden",
+        "English": "will"
+    },
+    {
+        "Number": 46,
+        "German": "wie",
+        "English": "how"
+    },
+    {
+        "Number": 47,
+        "German": "sagte",
+        "English": "said"
+    },
+    {
+        "Number": 48,
+        "German": "ein",
+        "English": "an"
+    },
+    {
+        "Number": 49,
+        "German": "jeder",
+        "English": "each"
+    },
+    {
+        "Number": 50,
+        "German": "sagen",
+        "English": "tell"
+    },
+    {
+        "Number": 51,
+        "German": "tut",
+        "English": "does"
+    },
+    {
+        "Number": 52,
+        "German": "Satz",
+        "English": "set"
+    },
+    {
+        "Number": 53,
+        "German": "drei",
+        "English": "three"
+    },
+    {
+        "Number": 54,
+        "German": "wollen",
+        "English": "want"
+    },
+    {
+        "Number": 55,
+        "German": "Luft",
+        "English": "air"
+    },
+    {
+        "Number": 56,
+        "German": "gut",
+        "English": "well"
+    },
+    {
+        "Number": 57,
+        "German": "auch",
+        "English": "also"
+    },
+    {
+        "Number": 58,
+        "German": "spielen",
+        "English": "play"
+    },
+    {
+        "Number": 59,
+        "German": "klein",
+        "English": "small"
+    },
+    {
+        "Number": 60,
+        "German": "Ende",
+        "English": "end"
+    },
+    {
+        "Number": 61,
+        "German": "setzen",
+        "English": "put"
+    },
+    {
+        "Number": 62,
+        "German": "Zuhause",
+        "English": "home"
+    },
+    {
+        "Number": 63,
+        "German": "lesen",
+        "English": "read"
+    },
+    {
+        "Number": 64,
+        "German": "seits",
+        "English": "hand"
+    },
+    {
+        "Number": 65,
+        "German": "Hafen",
+        "English": "port"
+    },
+    {
+        "Number": 66,
+        "German": "groß",
+        "English": "large"
+    },
+    {
+        "Number": 67,
+        "German": "buchstabieren",
+        "English": "spell"
+    },
+    {
+        "Number": 68,
+        "German": "hinzufügen",
+        "English": "add"
+    },
+    {
+        "Number": 69,
+        "German": "auch",
+        "English": "even"
+    },
+    {
+        "Number": 70,
+        "German": "Lande",
+        "English": "land"
+    },
+    {
+        "Number": 71,
+        "German": "hier",
+        "English": "here"
+    },
+    {
+        "Number": 72,
+        "German": "muss",
+        "English": "must"
+    },
+    {
+        "Number": 73,
+        "German": "groß",
+        "English": "big"
+    },
+    {
+        "Number": 74,
+        "German": "hoch",
+        "English": "high"
+    },
+    {
+        "Number": 75,
+        "German": "so",
+        "English": "such"
+    },
+    {
+        "Number": 76,
+        "German": "folgen",
+        "English": "follow"
+    },
+    {
+        "Number": 77,
+        "German": "Akt",
+        "English": "act"
+    },
+    {
+        "Number": 78,
+        "German": "warum",
+        "English": "why"
+    },
+    {
+        "Number": 79,
+        "German": "fragen",
+        "English": "ask"
+    },
+    {
+        "Number": 80,
+        "German": "Männer",
+        "English": "men"
+    },
+    {
+        "Number": 81,
+        "German": "Veränderung",
+        "English": "change"
+    },
+    {
+        "Number": 82,
+        "German": "ging",
+        "English": "went"
+    },
+    {
+        "Number": 83,
+        "German": "Licht",
+        "English": "light"
+    },
+    {
+        "Number": 84,
+        "German": "Art",
+        "English": "kind"
+    },
+    {
+        "Number": 85,
+        "German": "aus",
+        "English": "off"
+    },
+    {
+        "Number": 86,
+        "German": "müssen",
+        "English": "need"
+    },
+    {
+        "Number": 87,
+        "German": "Haus",
+        "English": "house"
+    },
+    {
+        "Number": 88,
+        "German": "Bild",
+        "English": "picture"
+    },
+    {
+        "Number": 89,
+        "German": "versuchen",
+        "English": "try"
+    },
+    {
+        "Number": 90,
+        "German": "uns",
+        "English": "us"
+    },
+    {
+        "Number": 91,
+        "German": "wieder",
+        "English": "again"
+    },
+    {
+        "Number": 92,
+        "German": "Tier",
+        "English": "animal"
+    },
+    {
+        "Number": 93,
+        "German": "Punkt",
+        "English": "point"
+    },
+    {
+        "Number": 94,
+        "German": "Mutter",
+        "English": "mother"
+    },
+    {
+        "Number": 95,
+        "German": "Welt",
+        "English": "world"
+    },
+    {
+        "Number": 96,
+        "German": "in der Nähe von",
+        "English": "near"
+    },
+    {
+        "Number": 97,
+        "German": "bauen",
+        "English": "build"
+    },
+    {
+        "Number": 98,
+        "German": "selbst",
+        "English": "self"
+    },
+    {
+        "Number": 99,
+        "German": "Erde",
+        "English": "earth"
+    },
+    {
+        "Number": 100,
+        "German": "Vater",
+        "English": "father"
+    }
+]

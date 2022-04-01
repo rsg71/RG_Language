@@ -15,4 +15,10 @@ export default {
     answerFrenchCorrectly: function (wordId) {
         return axios.patch(`/api/french/${wordId}`)
     },
+    getAllGermanWords: function () {
+        return axios.get("/api/german")
+    },
+    answerGermanCorrectly: function (wordId) {
+        return axios.patch(`/api/german/${wordId}`)
+    },
 }

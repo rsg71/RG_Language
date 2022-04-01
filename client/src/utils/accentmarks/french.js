@@ -1,5 +1,9 @@
 const frenchAccentMarks = [
-
+    {
+        "letter": "à",
+        "name": "",
+        "unicode": ""
+    },
     {
         "letter": "â",
         "name": "Lowercase Accent Circonflex (a)",
