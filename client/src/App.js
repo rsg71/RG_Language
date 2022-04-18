@@ -19,6 +19,8 @@ import FrenchQuiz from "./pages/FrenchQuiz/FrenchQuiz";
 import FrenchHome from "./pages/FrenchHome/FrenchHome";
 import GermanHome from "./pages/GermanHome/GermanHome";
 import GermanQuiz from "./pages/Quizes/GermanQuiz";
+import ItalianHome from "./pages/Italian/ItalianHome";
+import ItalianQuiz from "./pages/Quizes/ItalianQuiz";
 
 import 'animate.css';
 import "./App.css";
@@ -45,7 +47,9 @@ function App() {
               <Route exact path="/german" component={GermanHome} />
               <Route exact path="/german-quiz" component={GermanQuiz} />
 
-              
+              <Route exact path="/italian" component={ItalianHome} />
+              <Route exact path="/italian-quiz" component={ItalianQuiz} />
+
               
               <Route exact path="/secret" component={SecretLanguage} />
               <Route exact path="/secret-quiz" component={SecretLanguageQuiz} />

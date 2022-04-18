@@ -20,11 +20,12 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 // Connect to Mongoose
-mongoose.connect(process.env.MONGODB_URI,
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/rgLanguage",
   { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
 )
 .then(res => {
-  console.log("res: ", res);
+  // console.log("res: ", res);
+  console.log("mongodb is successfully connected ✔");
 })
 .catch(err => console.log("err!: ", err))
 ;

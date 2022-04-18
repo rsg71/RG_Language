@@ -26,7 +26,7 @@ export default function ItalianHome() {
         setLoading(true);
         API.getAllItalianWords()
             .then(res => {
-                console.log("total length of german words: ", res.data.length);
+                console.log("total length of italian words: ", res.data.length);
                 console.log("all words: ", res);
                 let totalWords = res.data;
                 console.log("total words length: ", totalWords.length)
@@ -65,7 +65,7 @@ export default function ItalianHome() {
                     <>
                         <Row>
                             <Col>
-                                <h1 className="mb-2">German home</h1>
+                                <h1 className="mb-2">Italian home</h1>
                                 <div className="form-text text-muted">Percent correct:</div>
                                 <Progress percent={percentCorrect} />
                                 <h2 style={{ float: "right" }}>{totalSpanishWords} total</h2>
@@ -76,7 +76,7 @@ export default function ItalianHome() {
                         <Row>
                             <Col>
                                 <div>Continue learning:</div>
-                                <GoToButton destination={"/german-quiz"}>Practice vocab</GoToButton>
+                                <GoToButton destination={"/italian-quiz"}>Practice vocab</GoToButton>
                             </Col>
                         </Row>
                     </>

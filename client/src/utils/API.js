@@ -25,6 +25,7 @@ export default {
 
     // Italian
     getAllItalianWords: function () {
+        console.log("getting all italian words...")
         return axios.get("/api/italian")
     },
     answerItalianCorrectly: function (wordId) {

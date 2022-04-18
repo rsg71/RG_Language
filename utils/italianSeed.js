@@ -1,19 +1,19 @@
 const italianSeed = [
     {
         "Number": 1,
-        "word": "Bagno",
+        "word": "bagno",
         "translation": "bathroom",
         answeredCorrectly: false
     },
     {
         "Number": 2,
-        "word": "Banco",
+        "word": "banco",
         "translation": "school desk",
         answeredCorrectly: false
     },
     {
         "Number": 3,
-        "word": "Gatto",
+        "word": "gatto",
         "translation": "cat",
         answeredCorrectly: false
     },
@@ -109,7 +109,7 @@ const italianSeed = [
     },
     {
         "Number": 19,
-        "word": "strada ",
+        "word": "strada",
         "translation": "road",
         answeredCorrectly: false
     },
