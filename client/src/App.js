@@ -44,6 +44,8 @@ function App() {
               <Route exact path="/french-quiz" component={FrenchQuiz} />
               <Route exact path="/german" component={GermanHome} />
               <Route exact path="/german-quiz" component={GermanQuiz} />
+
+              
               
               <Route exact path="/secret" component={SecretLanguage} />
               <Route exact path="/secret-quiz" component={SecretLanguageQuiz} />
