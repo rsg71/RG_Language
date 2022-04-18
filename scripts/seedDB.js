@@ -3,6 +3,7 @@ const db = require("../models");
 const frenchSeed = require("../utils/frenchSeed");
 const spanishSeed = require("../utils/spanishSeed");
 const germanSeed = require("../utils/germanSeed");
+const italianSeed = require("../utils/italianSeed");
 
 // This file empties the spanish collection and inserts the spanish words & translations below
 
@@ -11,7 +12,7 @@ const germanSeed = require("../utils/germanSeed");
 mongoose.connect(
     process.env.MONGODB_URI || "mongodb://localhost/rgLanguage"
 ).then(res => {
-    // console.log("connected successfully: ", res)
+    console.log("connected successfully: ", res)
 })
     .catch(err => console.log("error:", err))
 
@@ -46,9 +47,21 @@ db.German
     .then(() => db.German.collection.insertMany(germanSeed))
     .then(data => {
         console.log(data.result.n + " records inserted for german seed");
-        process.exit(0);
+        process.exit(1);
     })
     .catch(err => {
         console.error(err);
         process.exit(1);
+    });
+
+db.Italian
+    .remove({})
+    .then(() => db.Italian.collection.insertMany(italianSeed))
+    .then(data => {
+        console.log(data.result.n + " records inserted for italian seed");
+        // process.exit(0);
+    })
+    .catch(err => {
+        console.error(err);
+        process.exit(0);
     });

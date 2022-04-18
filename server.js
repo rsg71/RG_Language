@@ -20,9 +20,14 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 // Connect to Mongoose
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/rgLanguage",
+mongoose.connect(process.env.MONGODB_URI,
   { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
-);
+)
+.then(res => {
+  console.log("res: ", res);
+})
+.catch(err => console.log("err!: ", err))
+;
 
 
 app.listen(PORT, function () {
