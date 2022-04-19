@@ -55,7 +55,7 @@ const italianSeed = [
     },
     {
         "Number": 10,
-        "word": "zaino ",
+        "word": "zaino",
         "translation": "backpack",
         answeredCorrectly: false
     },

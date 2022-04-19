@@ -31,4 +31,7 @@ export default {
     answerItalianCorrectly: function (wordId) {
         return axios.patch(`/api/italian/${wordId}`)
     },
+    addItalianWord: function (word) {
+        return axios.post(`/api/italian`, word)
+    }
 }

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import QuizQuestion from "../../components/QuizQuestion/QuizQuestion"
 import QuizProgressBar from "../../components/QuizProgressBar/QuizProgressBar"
 import API from "../../utils/API"
-import accentMarks from "../../utils/accentmarks/german"
+import accentMarks from "../../utils/accentmarks/italian"
 import LoadingCard from "../../components/LoadingCard/LoadingCard"
 import "../Quiz/Quiz.css"
 
