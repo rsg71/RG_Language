@@ -14,12 +14,22 @@ input:focus, input:active {
     cursor: "pointer"
 }
 
+.nowrap {
+    white-space: nowrap;
+}
+
 .rotateBtn::after {
    content: url(/client/images/chevron-right.svg);
    width:15px;
    height:15px;
    display:inline-flex;
    color:black;
+}
+
+
+.bg-light-green {
+    background-color: #E5F9F6;
+    /* color: #33C9A7; */
 }
 
 @media all and (max-width:1400px) {

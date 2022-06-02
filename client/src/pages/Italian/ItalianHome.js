@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Row, Col, Button } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 import API from "../../utils/API"
 import Progress from '../../components/Progress/Progress'
 import GoToButton from '../../components/GoToButton/GoToButton'
@@ -77,6 +77,14 @@ export default function ItalianHome() {
                             <Col>
                                 <div>Continue learning:</div>
                                 <GoToButton destination={"/italian-quiz"}>Practice vocab</GoToButton>
+                            </Col>
+                        </Row>
+
+
+                        <Row>
+                            <Col>
+                                <div>Add new words:</div>
+                                <GoToButton destination={"/italian-add-words"}>Add words</GoToButton>
                             </Col>
                         </Row>
                     </>

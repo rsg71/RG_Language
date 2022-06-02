@@ -31,7 +31,7 @@ function Home() {
                                 >
 
                                     <Card.Body style={{ cursor: "pointer" }}>
-                                        <Card.Title >{language.language}</Card.Title>
+                                        <Card.Title> <span className="nowrap">{language.language}</span></Card.Title>
                                         <Card.Text className="mb-1">
                                             {language.language === "Secret" ?
                                                 <img style={{ height: "4em", color: "#007BFF" }} src={language.source} alt={language.language} />

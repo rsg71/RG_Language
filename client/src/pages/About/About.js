@@ -1,82 +1,28 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 
 export default function About() {
 
-    const [searchTerm, setSearchTerm] = useState("");
-
-    const [searchResults, setSearchResults] = useState([]);
-
-
-    const searchPeople = (term) => {
-        let results = people.filter(person => person.name.includes(term));
-        setSearchResults(results)
-        // this will only search for people who have a letter in their name 
-        // todo: include other search terms in the person.name.includes
-        // probably want to do person.name.includes (term) and person.tag.includes(term)
-        // something along those lines. But this basic example should get you going.
-        
-
-    }
-
-    useEffect(() => {
-        searchPeople(searchTerm)
-    }, [searchTerm])
-
-
-    const people = [
-        {
-            name: "fred",
-            age: 22
-        },
-        {
-            name: "sara",
-            age: 56
-        },
-        {
-            name: "wilson",
-            age: 12
-        },
-        {
-            name: "frederick",
-            age: 12
-        }
-    ]
-    return (
+        return (
         <>
             <Container>
 
+                <Row>
+                    <Col>
+                        <h1>About</h1>
 
-                <input
-                    name="searchTerm"
-                    value={searchTerm}
-                    onChange={e => setSearchTerm(e.target.value)}
-                />
-                <button onClick={() => searchPeople(searchTerm)}>search</button>
+                        <p>
+                            I've always thought that vocabulary acquisition is the most challenging and time consuming process in learning a new language. I created this site to shortcut this process and make it into a game. In the future I would like to add the following features to this site:
+                        </p>
 
-                <div className="bg-success text-white">
-                    search term is: {searchTerm}
-                </div>
-
-
-
-
-                {searchResults.length > 0 ?
-                    <>
-                        {
-                            searchResults.map(person => (
-                                <>
-                                    <div className="mb-2 border border-success">
-                                        <p>{person.name}</p>
-                                        <p>{person.age}</p>
-                                    </div>
-                                </>
-                            ))
-                        }
-                    </>
-                    :
-                    "NO SEARCH REsults"
-                }
+                        <ul>
+                            <li>Full vocabulary lists (thousands of words per language)</li>
+                            <li>Selections based on desired vocabulary level</li>
+                            <li>Initial vocabulary tests to determine a learner's appropriate starting point</li>
+                            <li>Regional selections to account for different vocabulary across different areas of the world</li>
+                        </ul>
+                    </Col>
+                </Row>
             </Container>
 
         </>
