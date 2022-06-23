@@ -4,6 +4,7 @@ const frenchSeed = require("../utils/frenchSeed");
 const spanishSeed = require("../utils/spanishSeed");
 const germanSeed = require("../utils/germanSeed");
 const italianSeed = require("../utils/italianSeed");
+const portugueseSeed = require("../utils/portugueseSeed");
 
 // This file empties the spanish collection and inserts the spanish words & translations below
 
@@ -47,6 +48,18 @@ db.German
     .then(() => db.German.collection.insertMany(germanSeed))
     .then(data => {
         console.log(data.result.n + " records inserted for german seed");
+        process.exit(1);
+    })
+    .catch(err => {
+        console.error(err);
+        process.exit(1);
+    });
+
+db.Portuguese
+    .remove({})
+    .then(() => db.Portuguese.collection.insertMany(portugueseSeed))
+    .then(data => {
+        console.log(data.result.n + " records inserted for portuguese seed");
         process.exit(1);
     })
     .catch(err => {
