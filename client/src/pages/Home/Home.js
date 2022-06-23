@@ -8,6 +8,12 @@ function Home() {
 
     let history = useHistory();
 
+    const cardClass1 = "languageCard my-4 text-black pointer";
+    const cardClass2 = "languageCard my-4 text-white pointer";
+
+    const notDisabledCard = "pointer";
+    const disabledCard = "semi-opaque pointer"
+
     return (
         <>
             <Container >
@@ -26,11 +32,12 @@ function Home() {
 
                         {LanguagesJson.map(language => (
                             <Col sm={6} md={6} lg={3} key={language.id}>
-                                <Card key={language.id} bg={language.bg} onClick={() => history.push(`${language.languageHomePage}`)}
-                                    className={language.language === "German" || language.language === "Secret" ? "languageCard my-4 text-black" : "languageCard my-4 text-white"}
+                                <Card key={language.id} bg={language.bg}
+                                    onClick={() => history.push(`${language.languageHomePage}`)}
+                                    className={language.language === "German" || language.language === "Secret" ? cardClass1 : cardClass2}
                                 >
 
-                                    <Card.Body style={{ cursor: "pointer" }}>
+                                    <Card.Body className={language.isActive ? "notDisabledCard" : "disabledCard"}>
                                         <Card.Title> <span className="nowrap">{language.language}</span></Card.Title>
                                         <Card.Text className="mb-1">
                                             {language.language === "Secret" ?

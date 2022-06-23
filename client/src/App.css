@@ -32,6 +32,14 @@ input:focus, input:active {
     /* color: #33C9A7; */
 }
 
+.pointer {
+    cursor: pointer;
+}
+
+.semi-opaque {
+    opacity: 20%;
+}
+
 @media all and (max-width:1400px) {
     #appContainer {
         width: 70%;

@@ -127,9 +127,9 @@ export default function ItalianAddWords() {
 
                     {/* {JSON.stringify(allWords, null, 4)} */}
 
-                    <button onClick={searchWordBank}>serach word bank</button>
+                    {/* <button onClick={searchWordBank}>search word bank</button> */}
 
-                    {JSON.stringify(newWord, null, 4)}
+                    {/* {JSON.stringify(newWord, null, 4)} */}
 
                     <Row>
                         <Col>

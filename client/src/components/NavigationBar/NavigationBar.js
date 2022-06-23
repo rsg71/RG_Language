@@ -20,13 +20,13 @@ export default function NavigationBar() {
                                 <NavDropdown.Item href="/">German</NavDropdown.Item>
                                 <NavDropdown.Item href="/">Italian</NavDropdown.Item>
                                 <NavDropdown.Item href="/">Swedish</NavDropdown.Item>
-                                <NavDropdown.Item href="/secret"> Secret</NavDropdown.Item>
+                                {/* <NavDropdown.Item href="/secret"> Secret</NavDropdown.Item> */}
                         </NavDropdown>
                     </Nav>
-                    <Form inline>
+                    {/* <Form inline>
                         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
                         <Button variant="outline-success">Search</Button>
-                    </Form>
+                    </Form> */}
                 </Navbar.Collapse>
             </Navbar>
         </>
