@@ -27,6 +27,7 @@ import SwedishHome from "./pages/Swedish/SwedishHome";
 
 import 'animate.css';
 import "./App.css";
+import PortugueseQuiz from "./pages/Quizes/PortugueseQuiz";
 
 
 function App() {
@@ -55,6 +56,8 @@ function App() {
               <Route exact path="/italian-add-words" component={ItalianAddWords} />
 
               <Route exact path="/portuguese" component={PortugueseHome} />
+              <Route exact path="/portuguese-quiz" component={PortugueseQuiz} />
+
               <Route exact path="/swedish" component={SwedishHome} />
 
               

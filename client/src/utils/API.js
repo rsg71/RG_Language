@@ -33,5 +33,13 @@ export default {
     },
     addItalianWord: function (word) {
         return axios.post(`/api/italian`, word)
-    }
+    },
+
+    // Portuguse
+    getAllPortugueseWords: function () {
+        return axios.get(`/api/portuguese/`)
+    },
+    answerPortugueseCorrectly: function (wordId) {
+        return axios.patch(`/api/portuguese/${wordId}`)
+    },
 }

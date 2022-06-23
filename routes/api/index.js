@@ -3,6 +3,7 @@ const spanishRoutes = require("./spanish");
 const frenchRoutes = require("./french");
 const germanRoutes = require("./german");
 const italianRoutes = require("./italian");
+const portugueseRoutes = require("./portuguese");
 
 //Spanish Routes
 router.use("/spanish", spanishRoutes);
@@ -12,5 +13,7 @@ router.use("/french", frenchRoutes);
 router.use("/german", germanRoutes);
 // Italian routes
 router.use("/italian", italianRoutes);
+// Portuguese routes
+router.use("/portuguese", portugueseRoutes);
 
 module.exports = router;
