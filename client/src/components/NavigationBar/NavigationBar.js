@@ -15,11 +15,11 @@ export default function NavigationBar() {
 
                         <NavDropdown title="Languages" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="/spanish">Spanish</NavDropdown.Item>
-                                <NavDropdown.Item href="/">French</NavDropdown.Item>
-                                <NavDropdown.Item href="/">Portuguese</NavDropdown.Item>
-                                <NavDropdown.Item href="/">German</NavDropdown.Item>
-                                <NavDropdown.Item href="/">Italian</NavDropdown.Item>
-                                <NavDropdown.Item href="/">Swedish</NavDropdown.Item>
+                                <NavDropdown.Item href="/french">French</NavDropdown.Item>
+                                <NavDropdown.Item href="/portuguese">Portuguese</NavDropdown.Item>
+                                <NavDropdown.Item href="/german">German</NavDropdown.Item>
+                                <NavDropdown.Item href="/italian">Italian</NavDropdown.Item>
+                                <NavDropdown.Item href="/swedish">Swedish</NavDropdown.Item>
                                 {/* <NavDropdown.Item href="/secret"> Secret</NavDropdown.Item> */}
                         </NavDropdown>
                     </Nav>
