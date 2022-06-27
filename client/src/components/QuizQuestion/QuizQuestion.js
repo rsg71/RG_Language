@@ -4,17 +4,7 @@ import React from 'react'
 
 export default function QuizQuestion(props) {
 
-
-
-
     return (
-        <>
-
-            <h1>Translate: {props.word}</h1>
-            
-            
-          
-        </>
+        <h1>Translate: {props.word}</h1>
     )
 }
- 

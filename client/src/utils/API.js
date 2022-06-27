@@ -6,6 +6,9 @@ export default {
     getAllSpanishWords: function () {
         return axios.get("/api/spanish")
     },
+    getSpanishWordsForReview: function () {
+        return axios.get("/api/spanish/for-review")
+    },
     answerCorrectly: function (wordId) {
         return axios.patch(`/api/spanish/${wordId}`)
     },

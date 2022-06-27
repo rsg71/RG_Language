@@ -16,42 +16,56 @@ export default function Spanish() {
     const [correctWords, setCorrectWords] = useState([]);
     const [incorrectWords, setIncorrectWords] = useState([]);
     const [percentCorrect, setPercentCorrect] = useState(0);
+    const [numberWordsForReview, setNumberWordsForReview] = useState(0);
 
 
     useEffect(() => {
         loadWords()
     }, []);
 
+    const handleError = (err) => {
+        console.log(err);
+        setLoading(false);
+        setLoaded(false);
+        setError(true);
+    }
+
     function loadWords() {
         setLoading(true);
-        API.getAllSpanishWords()
+
+        API.getSpanishWordsForReview()
             .then(res => {
-                console.log("total length of spanish words: ", res.data.length);
-                console.log(res);
-                let totalWords = res.data;
-                console.log("total words length: ", totalWords.length)
-                setTotalSpanishWords(totalWords.length);
+                setNumberWordsForReview(res.data.length);
 
-                let correctWords = totalWords.filter(word => word.answeredCorrectly === true);
-                setCorrectWords(correctWords);
-                setNumberAnsweredCorrectly(correctWords.length);
-                setPercentCorrect((correctWords.length / totalWords.length * 100).toFixed(0));
+                API.getAllSpanishWords()
+                    .then(res => {
+                        console.log("total length of spanish words: ", res.data.length);
+                        console.log(res);
+                        let totalWords = res.data;
+                        console.log("total words length: ", totalWords.length)
+                        setTotalSpanishWords(totalWords.length);
 
-                console.log("total words corr: ", correctWords.length / totalWords.length);
+                        let correctWords = totalWords.filter(word => word.answeredCorrectly === true);
+                        setCorrectWords(correctWords);
+                        setNumberAnsweredCorrectly(correctWords.length);
+                        setPercentCorrect((correctWords.length / totalWords.length * 100).toFixed(0));
 
-                let incorrectWords = totalWords.filter(word => word.answeredCorrectly);
-                setIncorrectWords(incorrectWords);
+                        console.log("total words corr: ", correctWords.length / totalWords.length);
 
-                setLoading(false);
-                setLoaded(true);
-                setError(false);
+                        let incorrectWords = totalWords.filter(word => word.answeredCorrectly);
+                        setIncorrectWords(incorrectWords);
 
+                        setLoading(false);
+                        setLoaded(true);
+                        setError(false);
+
+                    })
+                    .catch(err => {
+                        handleError(err);
+                    })
             })
             .catch(err => {
-                console.log(err);
-                setLoading(false);
-                setLoaded(false);
-                setError(true);
+                handleError(err);
             })
     }
 
@@ -77,6 +91,10 @@ export default function Spanish() {
                             <Col>
                                 <div>Continue learning:</div>
                                 <GoToButton destination={"/quiz"}>Practice vocab</GoToButton>
+                            </Col>
+                            <Col>
+                                <div>Up for review: {numberWordsForReview} words</div>
+                                <GoToButton destination={"/up-for-review"}>Review words</GoToButton>
                             </Col>
                         </Row>
                     </>

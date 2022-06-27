@@ -5,7 +5,8 @@ const spanishSchema = new Schema({
 
     word: String,
     translation: String,
-    answeredCorrectly: Boolean
+    answeredCorrectly: Boolean,
+    lastDateAnsweredCorrectly: Date
 });
 
 const Spanish = mongoose.model("Spanish", spanishSchema);

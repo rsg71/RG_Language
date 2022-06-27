@@ -28,6 +28,7 @@ import SwedishHome from "./pages/Swedish/SwedishHome";
 import 'animate.css';
 import "./App.css";
 import PortugueseQuiz from "./pages/Quizes/PortugueseQuiz";
+import UpForReview from "./pages/Spanish/UpForReview";
 
 
 function App() {
@@ -45,9 +46,14 @@ function App() {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/spanish" component={Spanish} />
+              <Route exact path="/up-for-review" component={UpForReview} />
+
+              
               <Route exact path="/quiz" component={Quiz} />
+              
               <Route exact path="/french" component={FrenchHome} />
               <Route exact path="/french-quiz" component={FrenchQuiz} />
+              
               <Route exact path="/german" component={GermanHome} />
               <Route exact path="/german-quiz" component={GermanQuiz} />
 
@@ -60,7 +66,6 @@ function App() {
 
               <Route exact path="/swedish" component={SwedishHome} />
 
-              
               <Route exact path="/secret" component={SecretLanguage} />
               <Route exact path="/secret-quiz" component={SecretLanguageQuiz} />
               <Route exact path="/all-secret-language-words" component={SecretLanguageAllWords} />

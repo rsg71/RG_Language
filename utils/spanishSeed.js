@@ -2,37 +2,44 @@ const spanishSeed = [
     {
         word: "manzana",
         translation: "apple",
-        answeredCorrectly: false
+        answeredCorrectly: false,
+        lastDateAnsweredCorrectly: null
     },
     {
         word: "camisa",
         translation: "shirt",
-        answeredCorrectly: false
+        answeredCorrectly: false,
+        lastDateAnsweredCorrectly: null
     },
     {
         word: "brazo",
         translation: "arm",
-        answeredCorrectly: false
+        answeredCorrectly: false,
+        lastDateAnsweredCorrectly: null
     },
     {
         word: "amarillo",
         translation: "yellow",
-        answeredCorrectly: false
+        answeredCorrectly: false,
+        lastDateAnsweredCorrectly: null
     },
     {
         word: "mesa",
         translation: "table",
-        answeredCorrectly: false
+        answeredCorrectly: false,
+        lastDateAnsweredCorrectly: null
     },
     {
         word: "vaca",
         translation: "cow",
-        answeredCorrectly: false
+        answeredCorrectly: false,
+        lastDateAnsweredCorrectly: null
     },
     {
         word: "plato",
         translation: "plate",
-        answeredCorrectly: false
+        answeredCorrectly: false,
+        lastDateAnsweredCorrectly: null
     }
 ];
 

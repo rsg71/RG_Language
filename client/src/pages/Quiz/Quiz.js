@@ -147,49 +147,48 @@ export default function Quiz() {
                         </Row>
 
 
-                        {
-                            questionIndex < questionsLength ?
-                                <>
-                                    <Row>
-                                        <Col xs="10" sm="6" lg="4">
+                        {questionIndex < questionsLength ?
+                            <>
+                                <Row>
+                                    <Col xs="10" sm="6" lg="4">
 
-                                            <QuizQuestion word={wordToTranslate} />
-                                            <Form>
-                                                <Form.Group >
-                                                    <Form.Label>Translate:</Form.Label>
-                                                    <Form.Control id="quizInputField" type="text" placeholder="translate here" value={userInput} onChange={e => handleInputChange(e)}
-                                                        className={userInput === answer ? "correctAnswerInputBox" : "notAnswered"}
-                                                        readOnly={correct}
-                                                        ref={inputRef}
-                                                        onSubmit={() => console.log('submitted')}
-                                                    />
-                                                </Form.Group>
-                                            </Form>
+                                        <QuizQuestion word={wordToTranslate} />
+                                        <Form>
+                                            <Form.Group >
+                                                <Form.Label>Translate:</Form.Label>
+                                                <Form.Control id="quizInputField" type="text" placeholder="translate here" value={userInput} onChange={e => handleInputChange(e)}
+                                                    className={userInput === answer ? "correctAnswerInputBox" : "notAnswered"}
+                                                    readOnly={correct}
+                                                    ref={inputRef}
+                                                    onSubmit={() => console.log('submitted')}
+                                                />
+                                            </Form.Group>
+                                        </Form>
 
 
-                                        </Col>
-                                    </Row>
+                                    </Col>
+                                </Row>
 
-                                    <Row>
-                                        <Col>
-                                            {userInput === answer &&
-                                                <span className="correctSpan"><i id="correctAnswerCheck" className="far fa-check-circle"></i> Correct!</span>}
-                                        </Col>
-                                    </Row>
-                                </>
+                                <Row>
+                                    <Col>
+                                        {userInput === answer &&
+                                            <span className="correctSpan"><i id="correctAnswerCheck" className="far fa-check-circle"></i> Correct!</span>}
+                                    </Col>
+                                </Row>
+                            </>
 
-                                :
+                            :
 
-                                <>
+                            <>
 
-                                    <Row>
-                                        <Col>
-                                            <h1>Quiz over</h1>
-                                            <h2>You got {correctAnswers} / {questionsLength} correct</h2>
-                                        </Col>
-                                    </Row>
+                                <Row>
+                                    <Col>
+                                        <h1>Quiz over</h1>
+                                        <h2>You got {correctAnswers} / {questionsLength} correct</h2>
+                                    </Col>
+                                </Row>
 
-                                </>
+                            </>
                         }
                     </>
                 }
