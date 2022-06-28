@@ -40,16 +40,44 @@ input:focus, input:active {
     opacity: 20%;
 }
 
+
+.bg-light-red {
+    color: #ED4C78;
+    background-color: rgba(237,76,120,.1)!important;
+}
+
+
+.containerX {
+    position: relative;
+    text-align: center;
+    color: white;
+  }
+
+  .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+.bannerImageClass {
+    display: block;
+    max-width:100%;
+    /* max-height:95px; */
+    width: auto;
+    /* height: auto; */
+}
+
 @media all and (max-width:1400px) {
-    #appContainer {
+    /* #appContainer {
         width: 70%;
         margin: auto;
-    }
+    } */
 }
 
 @media all and (max-width:576px) {
-    #appContainer {
+    /* #appContainer {
         width: 100%;
         margin: auto;
-    }
+    } */
 }

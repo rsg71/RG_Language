@@ -9,4 +9,7 @@ router.route("/")
 router.route("/:word")
   .patch(portugueseController.answerCorrectly);
 
+router.route("/words/unlearned")
+  .get(portugueseController.findAllUnlearnedWords)
+
 module.exports = router;

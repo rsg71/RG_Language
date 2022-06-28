@@ -40,7 +40,7 @@ export default function FrenchQuiz() {
 
     function loadWords() {
         setLoading(true);
-        API.getAllFrenchWords()
+        API.getAllUnlearnedWords('french')
             .then(res => {
                 console.log(res);
                 let notAnsweredCorrectly = res.data.filter(words => words.answeredCorrectly === false)

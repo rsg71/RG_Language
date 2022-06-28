@@ -28,44 +28,44 @@ export default function ItalianHome() {
 
 
         API.getItalianWordsForReview()
-        .then(res => {
-            setNumberWordsForReview(res.data.length);
-
-
-            API.getAllItalianWords()
             .then(res => {
-                console.log("total length of italian words: ", res.data.length);
-                console.log("all words: ", res);
-                let totalWords = res.data;
-                console.log("total words length: ", totalWords.length)
-                setTotalSpanishWords(totalWords.length);
+                setNumberWordsForReview(res.data.length);
 
-                let correctWords = totalWords.filter(word => word.answeredCorrectly === true);
-                setCorrectWords(correctWords);
-                setNumberAnsweredCorrectly(correctWords.length);
-                setPercentCorrect((correctWords.length / totalWords.length * 100).toFixed(0));
 
-                console.log("total words corr: ", correctWords.length / totalWords.length);
+                API.getAllItalianWords()
+                    .then(res => {
+                        console.log("total length of italian words: ", res.data.length);
+                        console.log("all words: ", res);
+                        let totalWords = res.data;
+                        console.log("total words length: ", totalWords.length)
+                        setTotalSpanishWords(totalWords.length);
 
-                let incorrectWords = totalWords.filter(word => word.answeredCorrectly);
-                setIncorrectWords(incorrectWords);
+                        let correctWords = totalWords.filter(word => word.answeredCorrectly === true);
+                        setCorrectWords(correctWords);
+                        setNumberAnsweredCorrectly(correctWords.length);
+                        setPercentCorrect((correctWords.length / totalWords.length * 100).toFixed(0));
 
-                setLoading(false);
-                setLoaded(true);
-                setError(false);
+                        console.log("total words corr: ", correctWords.length / totalWords.length);
+
+                        let incorrectWords = totalWords.filter(word => word.answeredCorrectly);
+                        setIncorrectWords(incorrectWords);
+
+                        setLoading(false);
+                        setLoaded(true);
+                        setError(false);
+
+                    })
+                    .catch(err => {
+                        handleError(err);
+                    })
 
             })
             .catch(err => {
                 handleError(err);
             })
 
-        })
-        .catch(err => {
-            handleError(err);
-        })
 
-            
-        
+
     }
 
     const handleError = (err) => {
@@ -86,9 +86,15 @@ export default function ItalianHome() {
                         <Row>
                             <Col>
                                 <h1 className="mb-2">Italian home</h1>
-                                <div className="form-text text-muted">Percent correct:</div>
+                                <div className="form-text text-muted">Words learned:</div>
                                 <Progress percent={percentCorrect} />
                                 <h2 style={{ float: "right" }}>{totalSpanishWords} total</h2>
+                            </Col>
+                        </Row>
+
+                        <Row>
+                            <Col>
+                                <img src="images/backgrounds/italy_bg.jpg" class="img-fluid" alt="..." />
                             </Col>
                         </Row>
 

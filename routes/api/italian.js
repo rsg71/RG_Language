@@ -14,4 +14,8 @@ router.route("/for-review")
   .get(italianController.findAllForReview);
 
 
+router.route("/words/unlearned")
+  .get(italianController.findAllUnlearnedWords)
+
+
 module.exports = router;

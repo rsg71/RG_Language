@@ -8,12 +8,14 @@ const portugueseSeed = require("../utils/portugueseSeed");
 
 // This file empties the spanish collection and inserts the spanish words & translations below
 
+require('dotenv').config();
 
+console.log("mongodb is: ", process.env.MONGODB_URI)
 
 mongoose.connect(
     process.env.MONGODB_URI || "mongodb://localhost/rgLanguage"
 ).then(res => {
-    console.log("connected successfully: ", res)
+    console.log("connected successfully: ", res.connections[0]._connectionString)
 })
     .catch(err => console.log("error:", err))
 

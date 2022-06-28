@@ -17,6 +17,23 @@ module.exports = {
 
             });
     },
+    findAllUnlearnedWords: function (req, res) {
+
+        let unlearnedWordsFilter = { lastDateAnsweredCorrectly: null }
+
+        db.German
+            .find(unlearnedWordsFilter)
+            .then(words => {
+                console.log('found');
+                console.log(words)
+                res.json(words);
+                console.log('sent')
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(422).json(err)
+            });
+    },
     remove: function (req, res) {
         db.German
             .findById({ _id: req.params.id })

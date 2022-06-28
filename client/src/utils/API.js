@@ -48,4 +48,8 @@ export default {
     answerPortugueseCorrectly: function (wordId) {
         return axios.patch(`/api/portuguese/${wordId}`)
     },
+
+    getAllUnlearnedWords: function (language) {
+        return axios.get(`/api/${language}/words/unlearned`)
+    }
 }

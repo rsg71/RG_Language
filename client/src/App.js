@@ -49,12 +49,12 @@ function App() {
               <Route exact path="/spanish" component={Spanish} />
               <Route exact path="/spanish/up-for-review" component={UpForReview} />
 
-              
+
               <Route exact path="/quiz" component={Quiz} />
-              
+
               <Route exact path="/french" component={FrenchHome} />
               <Route exact path="/french-quiz" component={FrenchQuiz} />
-              
+
               <Route exact path="/german" component={GermanHome} />
               <Route exact path="/german-quiz" component={GermanQuiz} />
 

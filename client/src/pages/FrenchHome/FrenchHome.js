@@ -58,19 +58,45 @@ export default function FrenchHome() {
 
     return (
         <>
+
+            {/* <div className="">
+                <img
+                    src="images/backgrounds/france_bg.jpg"
+                    alt="Snow"
+                    className="bannerImageClass"
+                />
+                <div className="centered">
+                    <h2>French home</h2>
+                </div>
+            </div> */}
+            {/* <Container fluid>
+                <Row>
+                    <Col>
+                        <div className="containerX">
+                            <img src="images/backgrounds/france_bg.jpg" alt="Snow" style={{ width: "100%" }} />
+                            <div className="centered">
+                                <h2>French home</h2>
+                            </div>
+                        </div>
+                    </Col>
+                </Row>
+            </Container> */}
             <Container>
                 {error && <div>Error loading</div>}
-                {loading && <LoadingCard/>}
+                {loading && <LoadingCard />}
                 {loaded && !error && !loading &&
                     <>
                         <Row>
                             <Col>
                                 <h1 className="mb-2">French home</h1>
-                                <div className="form-text text-muted">Percent correct:</div>
+                                <div className="form-text text-muted">Words learned:</div>
                                 <Progress percent={percentCorrect} />
                                 <h2 style={{ float: "right" }}>{totalSpanishWords} total</h2>
                             </Col>
                         </Row>
+
+
+
 
 
                         <Row>

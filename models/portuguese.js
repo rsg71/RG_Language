@@ -5,7 +5,8 @@ const portugueseSchema = new Schema({
 
     word: String,
     translation: String,
-    answeredCorrectly: Boolean
+    answeredCorrectly: Boolean,
+    lastDateAnsweredCorrectly: Date
 });
 
 const Portuguese = mongoose.model("Portuguese", portugueseSchema);

@@ -40,7 +40,7 @@ export default function GermanQuiz() {
 
     function loadWords() {
         setLoading(true);
-        API.getAllGermanWords()
+        API.getAllUnlearnedWords('german')
             .then(res => {
                 console.log(res);
                 let notAnsweredCorrectly = res.data.filter(words => words.answeredCorrectly === false)

@@ -40,7 +40,7 @@ export default function ItalianQuiz() {
 
     function loadWords() {
         setLoading(true);
-        API.getAllItalianWords()
+        API.getAllUnlearnedWords('italian')
             .then(res => {
                 console.log(res);
                 let notAnsweredCorrectly = res.data.filter(words => words.answeredCorrectly === false)

@@ -66,7 +66,7 @@ export default function PortugueseHome() {
                         <Row>
                             <Col>
                                 <h1 className="mb-2">Portuguese home</h1>
-                                <div className="form-text text-muted">Percent correct:</div>
+                                <div className="form-text text-muted">Words learned:</div>
                                 <Progress percent={percentCorrect} />
                                 <h2 style={{ float: "right" }}>{totalSpanishWords} total</h2>
                             </Col>

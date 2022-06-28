@@ -18,6 +18,23 @@ module.exports = {
 
             });
     },
+    findAllUnlearnedWords: function (req, res) {
+
+        let unlearnedWordsFilter = { lastDateAnsweredCorrectly: null }
+
+        db.Italian
+            .find(unlearnedWordsFilter)
+            .then(words => {
+                console.log('found');
+                console.log(words)
+                res.json(words);
+                console.log('sent')
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(422).json(err)
+            });
+    },
     findAllForReview: function (req, res) {
 
         // the date to look for should be x number of days in the past

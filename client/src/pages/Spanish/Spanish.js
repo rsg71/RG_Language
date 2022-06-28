@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import API from "../../utils/API"
 import Progress from '../../components/Progress/Progress'
 import GoToButton from '../../components/GoToButton/GoToButton'
+import LoadingCard from '../../components/LoadingCard/LoadingCard'
 
 export default function Spanish() {
 
@@ -70,22 +71,30 @@ export default function Spanish() {
     }
 
 
+    const getWordsUnlearned = () => {
+        API.getAllUnlearnedWords('spanish')
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+    }
+
     return (
         <>
             <Container>
-                {error && <div>Error loading</div>}
-                {loading && "Loading..."}
+                {error && <div className="bg-light-red">Error loading</div>}
+                {loading && <LoadingCard />}
                 {loaded && !error && !loading &&
                     <>
+                    <button onClick={getWordsUnlearned}>get unlearned</button>
                         <Row>
                             <Col>
                                 <h1 className="mb-2">Spanish home</h1>
-                                <div className="form-text text-muted">Percent correct:</div>
+                                <div className="form-text text-muted">Words learned:</div>
                                 <Progress percent={percentCorrect} />
                                 <h2 style={{ float: "right" }}>{totalSpanishWords} total</h2>
                             </Col>
                         </Row>
 
+                       
 
                         <Row>
                             <Col>

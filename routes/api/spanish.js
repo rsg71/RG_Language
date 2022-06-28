@@ -12,4 +12,7 @@ router.route("/:word")
 router.route("/for-review")
   .get(spanishController.findAllForReview);
 
+router.route("/words/unlearned")
+  .get(spanishController.findAllUnlearnedWords)
+
 module.exports = router;

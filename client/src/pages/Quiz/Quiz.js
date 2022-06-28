@@ -35,9 +35,11 @@ export default function Quiz() {
         loadWords()
     }, [])
 
+
+
     function loadWords() {
         setLoading(true);
-        API.getAllSpanishWords()
+        API.getAllUnlearnedWords('spanish')
             .then(res => {
                 console.log(res);
                 setTotalSpanishWords(res.data);

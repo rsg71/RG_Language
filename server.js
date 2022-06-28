@@ -5,6 +5,8 @@ const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+require('dotenv').config();
+
 
 
 // Define middleware for JSON parsing
@@ -20,11 +22,12 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 // Connect to Mongoose
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/rgLanguage",
+mongoose.connect(process.env.MONGODB_UR || "mongodb://localhost/rgLanguage",
   { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
 )
 .then(res => {
   // console.log("res: ", res);
+  console.log("connected successfully to: ", res.connections[0]._connectionString)
   console.log("mongodb is successfully connected ✔");
 })
 .catch(err => console.log("err!: ", err))
