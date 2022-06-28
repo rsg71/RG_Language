@@ -71,11 +71,6 @@ export default function Spanish() {
     }
 
 
-    const getWordsUnlearned = () => {
-        API.getAllUnlearnedWords('spanish')
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
-    }
 
     return (
         <>
@@ -84,7 +79,6 @@ export default function Spanish() {
                 {loading && <LoadingCard />}
                 {loaded && !error && !loading &&
                     <>
-                    <button onClick={getWordsUnlearned}>get unlearned</button>
                         <Row>
                             <Col>
                                 <h1 className="mb-2">Spanish home</h1>
