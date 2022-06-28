@@ -94,7 +94,7 @@ export default function Spanish() {
                             </Col>
                             <Col>
                                 <div>Up for review: {numberWordsForReview} words</div>
-                                <GoToButton destination={"/up-for-review"}>Review words</GoToButton>
+                                <GoToButton destination={"/spanish/up-for-review"}>Review words</GoToButton>
                             </Col>
                         </Row>
                     </>

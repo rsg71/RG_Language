@@ -16,6 +16,7 @@ export default function ItalianHome() {
     const [correctWords, setCorrectWords] = useState([]);
     const [incorrectWords, setIncorrectWords] = useState([]);
     const [percentCorrect, setPercentCorrect] = useState(0);
+    const [numberWordsForReview, setNumberWordsForReview] = useState(0);
 
 
     useEffect(() => {
@@ -24,7 +25,14 @@ export default function ItalianHome() {
 
     function loadWords() {
         setLoading(true);
-        API.getAllItalianWords()
+
+
+        API.getItalianWordsForReview()
+        .then(res => {
+            setNumberWordsForReview(res.data.length);
+
+
+            API.getAllItalianWords()
             .then(res => {
                 console.log("total length of italian words: ", res.data.length);
                 console.log("all words: ", res);
@@ -48,11 +56,23 @@ export default function ItalianHome() {
 
             })
             .catch(err => {
-                console.log(err);
-                setLoading(false);
-                setLoaded(false);
-                setError(true);
+                handleError(err);
             })
+
+        })
+        .catch(err => {
+            handleError(err);
+        })
+
+            
+        
+    }
+
+    const handleError = (err) => {
+        console.log(err);
+        setLoading(false);
+        setLoaded(false);
+        setError(true);
     }
 
 
@@ -60,7 +80,7 @@ export default function ItalianHome() {
         <>
             <Container>
                 {error && <div>Error loading</div>}
-                {loading && <LoadingCard/>}
+                {loading && <LoadingCard />}
                 {loaded && !error && !loading &&
                     <>
                         <Row>
@@ -77,6 +97,11 @@ export default function ItalianHome() {
                             <Col>
                                 <div>Continue learning:</div>
                                 <GoToButton destination={"/italian-quiz"}>Practice vocab</GoToButton>
+                            </Col>
+
+                            <Col>
+                                <div>Up for review: {numberWordsForReview} words</div>
+                                <GoToButton destination={"/spanish/up-for-review"}>Review words</GoToButton>
                             </Col>
                         </Row>
 

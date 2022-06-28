@@ -29,6 +29,7 @@ import 'animate.css';
 import "./App.css";
 import PortugueseQuiz from "./pages/Quizes/PortugueseQuiz";
 import UpForReview from "./pages/Spanish/UpForReview";
+import UpForReviewItalian from "./pages/Italian/UpForReviewItalian";
 
 
 function App() {
@@ -46,7 +47,7 @@ function App() {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/spanish" component={Spanish} />
-              <Route exact path="/up-for-review" component={UpForReview} />
+              <Route exact path="/spanish/up-for-review" component={UpForReview} />
 
               
               <Route exact path="/quiz" component={Quiz} />
@@ -60,6 +61,7 @@ function App() {
               <Route exact path="/italian" component={ItalianHome} />
               <Route exact path="/italian-quiz" component={ItalianQuiz} />
               <Route exact path="/italian-add-words" component={ItalianAddWords} />
+              <Route exact path="/italian/up-for-review" component={UpForReviewItalian} />
 
               <Route exact path="/portuguese" component={PortugueseHome} />
               <Route exact path="/portuguese-quiz" component={PortugueseQuiz} />

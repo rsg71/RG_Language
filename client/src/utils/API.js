@@ -37,6 +37,9 @@ export default {
     addItalianWord: function (word) {
         return axios.post(`/api/italian`, word)
     },
+    getItalianWordsForReview: function () {
+        return axios.get("/api/italian/for-review")
+    },
 
     // Portuguse
     getAllPortugueseWords: function () {

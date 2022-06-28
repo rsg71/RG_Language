@@ -10,6 +10,8 @@ router.route("/")
 router.route("/:word")
   .patch(italianController.answerCorrectly);
 
-  router.route("/")
+router.route("/for-review")
+  .get(italianController.findAllForReview);
+
 
 module.exports = router;
