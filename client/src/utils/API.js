@@ -51,5 +51,29 @@ export default {
 
     getAllUnlearnedWords: function (language) {
         return axios.get(`/api/${language}/words/unlearned`)
+    },
+
+
+
+    // Auth
+    signup: function (data) {
+        return axios.post(`/api/auth/signup`, data)
+    },
+    // Auth
+    login: function (data) {
+        return axios.post(`/api/auth/login`, data)
+    },
+    // Auth
+    logout: function () {
+        return axios.get(`/api/auth/logout`)
+    },
+
+    getUser: function () {
+        return axios.get("/user", { withCredentials: true })
+    },
+
+
+    getUsersHomepageData: function () {
+        return axios.get("/users-languages", { withCredentials: true })
     }
 }

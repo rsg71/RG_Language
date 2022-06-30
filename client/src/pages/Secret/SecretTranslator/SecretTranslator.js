@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import BackButton from '../../../components/BackButton/BackButton';
 import SecretLanguage from "../../../data/secretlanguage.json";
 
 export default function SecretTranslator() {
 
-    let history = useHistory();
+    let navigate = useNavigate();
 
     function handleClick() {
-        history.push("/secret");
+        navigate("/secret");
     }
 
     const [wordState, setWordState] = useState([]);

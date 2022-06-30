@@ -1,15 +1,14 @@
 import React from 'react'
 import { Button, Col, Container, Row } from 'react-bootstrap'
 import allSecretWords from "../../../data/secretlanguage.json"
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function SecretLanguageAllWords() {
 
-    let history = useHistory();
+    let navigate = useNavigate();
 
     function handleClick() {
-        history.push("/secret");
-        console.log("history" + history)
+        navigate("/secret");
     }
 
 

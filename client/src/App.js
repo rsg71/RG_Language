@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavigationBar from "./components/NavigationBar/NavigationBar";
 
 import Home from "./pages/Home/Home"
@@ -30,59 +30,84 @@ import "./App.css";
 import PortugueseQuiz from "./pages/Quizes/PortugueseQuiz";
 import UpForReview from "./pages/Spanish/UpForReview";
 import UpForReviewItalian from "./pages/Italian/UpForReviewItalian";
+import Login from "./pages/Login/Login";
+import Signup from "./pages/Signup/Signup";
+import UserHome from "./pages/UserHome/UserHome";
 
 
 function App() {
 
+
+  const [currentUser, setCurrentUser] = useState(null);
+
+  let CurrentUserContext = React.createContext({});
+
+
+
+  const handleSetUser = (user) => {
+    setCurrentUser(user);
+  }
 
   return (
 
     <>
       <Router>
         <ScrollToTop />
-        <NavigationBar />
-        <main className="py-5">
-          <Container id="appContainer">
 
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/spanish" component={Spanish} />
-              <Route exact path="/spanish/up-for-review" component={UpForReview} />
+        <CurrentUserContext.Provider value={currentUser}>
+
+          <NavigationBar />
+          <main className="py-5">
+            <Container id="appContainer">
+
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/spanish" element={<Spanish />} />
+                <Route path="/spanish/up-for-review" element={<UpForReview />} />
 
 
-              <Route exact path="/quiz" component={Quiz} />
+                <Route path="/quiz" element={<Quiz />} />
 
-              <Route exact path="/french" component={FrenchHome} />
-              <Route exact path="/french-quiz" component={FrenchQuiz} />
+                <Route path="/french" element={<FrenchHome />} />
+                <Route path="/french-quiz" element={<FrenchQuiz />} />
 
-              <Route exact path="/german" component={GermanHome} />
-              <Route exact path="/german-quiz" component={GermanQuiz} />
+                <Route path="/german" element={<GermanHome />} />
+                <Route path="/german-quiz" element={<GermanQuiz />} />
 
-              <Route exact path="/italian" component={ItalianHome} />
-              <Route exact path="/italian-quiz" component={ItalianQuiz} />
-              <Route exact path="/italian-add-words" component={ItalianAddWords} />
-              <Route exact path="/italian/up-for-review" component={UpForReviewItalian} />
+                <Route path="/italian" element={<ItalianHome />} />
+                <Route path="/italian-quiz" element={<ItalianQuiz />} />
+                <Route path="/italian-add-words" element={<ItalianAddWords />} />
+                <Route path="/italian/up-for-review" element={<UpForReviewItalian />} />
 
-              <Route exact path="/portuguese" component={PortugueseHome} />
-              <Route exact path="/portuguese-quiz" component={PortugueseQuiz} />
+                <Route path="/portuguese" element={<PortugueseHome />} />
+                <Route path="/portuguese-quiz" element={<PortugueseQuiz />} />
 
-              <Route exact path="/swedish" component={SwedishHome} />
+                <Route path="/swedish" element={<SwedishHome />} />
 
-              <Route exact path="/secret" component={SecretLanguage} />
-              <Route exact path="/secret-quiz" component={SecretLanguageQuiz} />
-              <Route exact path="/all-secret-language-words" component={SecretLanguageAllWords} />
-              <Route exact path="/secret-translator" component={SecretTranslator} />
-              <Route exact path="/about" component={About} />
-              <Route exact path="/contact" component={Contact} />
+                <Route path="/secret" element={<SecretLanguage />} />
+                <Route path="/secret-quiz" element={<SecretLanguageQuiz />} />
+                <Route path="/all-secret-language-words" element={<SecretLanguageAllWords />} />
+                <Route path="/secret-translator" element={<SecretTranslator />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
 
-              {/* 404 page */}
 
-              <Route path="*" render={() => <NoMatch />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/login" element={<Login handleSetUser={handleSetUser}/>} />
 
-            </Switch>
-          </Container>
+                <Route path="/user-home" element={<UserHome />} />
 
-        </main>
+
+                {/* 404 page */}
+
+                <Route path="*" render={() => <NoMatch />} />
+
+              </Routes>
+            </Container>
+
+          </main>
+
+        </CurrentUserContext.Provider>
         <Footer />
       </Router>
     </>

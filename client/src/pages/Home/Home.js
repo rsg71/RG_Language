@@ -1,18 +1,17 @@
 import React from "react";
 import { Container, Row, Col, Card, CardDeck } from "react-bootstrap"
-import { useHistory } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import LanguagesJson from "../../data/languages.json"
+import { cardClass1, cardClass2 } from "../../styles/style";
 import "./Home.css"
 
 function Home() {
 
-    let history = useHistory();
+    let navigate = useNavigate();
 
-    const cardClass1 = "languageCard my-4 text-black pointer";
-    const cardClass2 = "languageCard my-4 text-white pointer";
+    
 
-    const notDisabledCard = "pointer";
-    const disabledCard = "semi-opaque pointer"
+    
 
     return (
         <>
@@ -33,7 +32,7 @@ function Home() {
                         {LanguagesJson.map(language => (
                             <Col sm={6} md={6} lg={3} key={language.id}>
                                 <Card key={language.id} bg={language.bg}
-                                    onClick={() => history.push(`${language.languageHomePage}`)}
+                                    onClick={() => navigate(`${language.languageHomePage}`)}
                                     className={language.language === "German" || language.language === "Secret" ? cardClass1 : cardClass2}
                                 >
 

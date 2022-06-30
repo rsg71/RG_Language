@@ -1,5 +1,6 @@
 import React from 'react'
-import { Navbar, Nav, NavDropdown, Form, Button, FormControl } from "react-bootstrap"
+import { Navbar, Nav, NavDropdown, Form, Button, FormControl } from "react-bootstrap";
+import {Link} from 'react-router-dom';
 
 export default function NavigationBar() {
     return (
@@ -12,6 +13,8 @@ export default function NavigationBar() {
                         <Nav.Link href="/">Home</Nav.Link>
                         <Nav.Link href="/about">About</Nav.Link>
                         <Nav.Link href="/contact">Contact</Nav.Link>
+                        {/* <Nav.Link href="/login">Login</Nav.Link> */}
+                        {/* <Nav.Link href="/signup">Signup</Nav.Link> */}
 
                         <NavDropdown title="Languages" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="/spanish">Spanish</NavDropdown.Item>

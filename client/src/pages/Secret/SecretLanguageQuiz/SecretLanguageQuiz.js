@@ -5,7 +5,7 @@ import QuizProgressBar from "../../../components/QuizProgressBar/QuizProgressBar
 import QuizInput from "../../../components/QuizInput/QuizInput";
 import Data from "../../../data/secretlanguage.json"
 // import API from "../../utils/API"
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import "./SecretLanguageQuiz.css"
 
@@ -99,10 +99,10 @@ export default function SecretLanguageQuiz() {
         // }
     }
 
-    let history = useHistory();
+    let navigate = useNavigate();
 
     function handleClick() {
-        history.push("/secret");
+        navigate("/secret");
         // console.log("history" + history)
     }
 
