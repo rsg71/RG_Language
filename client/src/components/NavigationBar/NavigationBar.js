@@ -6,23 +6,23 @@ export default function NavigationBar() {
     return (
         <>
             <Navbar bg="light" expand="lg">
-                <Navbar.Brand href="/">RG Language</Navbar.Brand>
+                <Navbar.Brand as={Link} to="/">RG Language</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="/about">About</Nav.Link>
-                        <Nav.Link href="/contact">Contact</Nav.Link>
+                        <Nav.Link as={Link} to="/">Home</Nav.Link>
+                        <Nav.Link as={Link} to="/about">About</Nav.Link>
+                        <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
                         {/* <Nav.Link href="/login">Login</Nav.Link> */}
                         {/* <Nav.Link href="/signup">Signup</Nav.Link> */}
 
                         <NavDropdown title="Languages" id="basic-nav-dropdown">
-                                <NavDropdown.Item href="/spanish">Spanish</NavDropdown.Item>
-                                <NavDropdown.Item href="/french">French</NavDropdown.Item>
-                                <NavDropdown.Item href="/portuguese">Portuguese</NavDropdown.Item>
-                                <NavDropdown.Item href="/german">German</NavDropdown.Item>
-                                <NavDropdown.Item href="/italian">Italian</NavDropdown.Item>
-                                <NavDropdown.Item href="/swedish">Swedish</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to="/spanish">Spanish</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to="/french">French</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to="/portuguese">Portuguese</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to="/german">German</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to="/italian">Italian</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to="/swedish">Swedish</NavDropdown.Item>
                                 {/* <NavDropdown.Item href="/secret"> Secret</NavDropdown.Item> */}
                         </NavDropdown>
                     </Nav>
