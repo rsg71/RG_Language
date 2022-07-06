@@ -7,6 +7,8 @@ export default function Login({ handleSetUser }) {
 
     const navigate = useNavigate();
 
+    const [isError, setIsError] = useState(false);
+
     const [formData, setFormData] = useState({
         username: "",
         password: ""
@@ -28,6 +30,7 @@ export default function Login({ handleSetUser }) {
             })
             .catch(err => {
                 console.log(err);
+                setIsError(true);
             })
     }
 
@@ -72,6 +75,11 @@ export default function Login({ handleSetUser }) {
                         <label>Password</label>
                         <input name="password" value={formData.password} className="form-control" onChange={e => handleChange(e.target)} type="password" />
 
+                        {isError &&
+                            <div className="text-danger">
+                                Incorrect username or password
+                            </div>
+                        }
 
                         <div className="mt-2">
                             <button className="btn btn-primary" onClick={handleLogin}>Login</button>

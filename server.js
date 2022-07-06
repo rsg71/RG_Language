@@ -71,11 +71,17 @@ require('./passportConfig')(passport);
 
 
 app.post("/api/auth/login", (req, res, next) => {
+  console.log("we're here")
 
   passport.authenticate("local", (err, user, info) => {
-    if (err) throw err;
-    if (!user) res.send("No User Exists");
-    else {
+    if (err) {
+      console.log("ERROR!, ", err);
+      // throw err
+      res.send('error with this user')
+    } else if (!user) {
+      
+      res.status(400).send("No User Exists dude")
+    } else {
       console.log("user is: ", user);
       req.logIn(user, (err) => {
         if (err) throw err;
