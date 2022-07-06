@@ -18,7 +18,7 @@ export default function UserHome() {
     useEffect(() => {
         setIsLoadingData(true);
 
-        API.getUsersHomepageData()
+        API.getAllLanguagesForUser()
             .then(res => {
                 console.log(res)
 
@@ -44,14 +44,14 @@ export default function UserHome() {
 
     return (
         <div>
-            
+
 
 
             <Container>
                 <Row>
                     <Col>
 
-                    <h1>Homepage for User</h1>
+                        <h1>Homepage for User</h1>
 
                         {isLoadingData && <LoadingCard />}
                         {error && <div className="bg-danger text-white">Error</div>}
@@ -62,7 +62,18 @@ export default function UserHome() {
 
                                 <CardDeck id="homeLanguagesCardDeck">
 
-                                    {data.languages.map(language => (
+                                    {/* <pre>{JSON.stringify(data, null, 4)}</pre> */}
+
+                                    {data.map(language => (
+                                        <Col sm={6} md={6} lg={3} key={language.language}>
+                                            <Card key={language.language} bg="primary" className="text-white mb-1">
+                                                    <div>{language.language}</div>
+                                            </Card>
+                                        </Col>
+
+                                    ))}
+
+                                    {/* {data.languages.map(language => (
                                         <Col sm={6} md={6} lg={3} key={language}>
                                             <Card key={language} bg={language.bg}
                                                 onClick={() => navigate(`/`)}
@@ -84,7 +95,7 @@ export default function UserHome() {
 
                                             </Card>
                                         </Col>
-                                    ))}
+                                    ))} */}
 
                                 </CardDeck>
 

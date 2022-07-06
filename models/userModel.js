@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const userBankSchema = new Schema({
+const wordGroupSchema = new Schema({
 
     language: String,
     wordsLearned: [
@@ -16,6 +16,6 @@ const userBankSchema = new Schema({
 
 });
 
-const French = mongoose.model("WordGroup", userBankSchema);
+const WordGroup = mongoose.model("WordGroup", wordGroupSchema);
 
-module.exports = French;
+module.exports = WordGroup;

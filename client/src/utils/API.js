@@ -80,6 +80,13 @@ export default {
 
     addLanguage: function (language) {
         console.log("language: ", language);
-        return axios.post("/api/users/languages", language, {withCredentials: true})
+
+        let data = {
+            language
+        }
+        return axios.post("/api/users/languages", data, { withCredentials: true })
+    },
+    getAllLanguagesForUser: function () {
+        return axios.get("/api/users/languages", { withCredentials: true })
     }
 }

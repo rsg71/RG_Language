@@ -18,6 +18,6 @@ router.use("/italian", italianRoutes);
 router.use("/portuguese", portugueseRoutes);
 
 // User routes 
-router.use("/users", userRoutes)
+router.use("/users/languages", userRoutes)
 
 module.exports = router;

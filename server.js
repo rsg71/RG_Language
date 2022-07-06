@@ -35,7 +35,7 @@ if (process.env.NODE_ENV === "production") {
 
 
 // Connect to Mongoose --- //
-mongoose.connect(process.env.MONGODB_UR || "mongodb://localhost/rgLanguage",
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/rgLanguage",
   { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
 )
   .then(res => {
