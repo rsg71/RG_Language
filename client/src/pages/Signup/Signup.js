@@ -34,7 +34,7 @@ export default function Signup() {
                         <h1>Sign up</h1>
 
 
-                        <pre>{JSON.stringify(formData, null, 4)}</pre>
+                        {/* <pre>{JSON.stringify(formData, null, 4)}</pre> */}
 
                         <div>
                             <label>Username</label>

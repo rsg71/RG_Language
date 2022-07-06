@@ -109,12 +109,22 @@ app.post("/api/auth/signup", (req, res) => {
   });
 });
 
+
+
 app.get("/api/auth/logout", (req, res) => {
-  console.log("/GET logout")
+  console.log("GET /api/auth/logout");
+
   req.logout(function (err) {
-    if (err) return next(err);
-  })
-  res.send("you are logged out successfully")
+    if (err) {
+      console.log("error upon logout attempt is: ", err);
+      return next(err);
+    }
+  });
+
+  console.log("user has been logged out ✔");
+  return res.status(200).send("User successfully logged out");
+
+
 })
 
 const saySomething = (req, res, next) => {
@@ -144,6 +154,8 @@ app.get("/users-languages", ensureAuthenticated, (req, res) => {
       languages: [
         {
           name: "Spanish",
+          flag: "spain",
+          bg: "warning",
           totalWords: "25,000",
           isActive: true, // what is this
           wordsLearned: [

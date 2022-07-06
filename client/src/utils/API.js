@@ -65,6 +65,7 @@ export default {
     },
     // Auth
     logout: function () {
+        console.log("on the logout function")
         return axios.get(`/api/auth/logout`)
     },
 
@@ -75,5 +76,10 @@ export default {
 
     getUsersHomepageData: function () {
         return axios.get("/users-languages", { withCredentials: true })
+    },
+
+    addLanguage: function (language) {
+        console.log("language: ", language);
+        return axios.post("/api/users/languages", language, {withCredentials: true})
     }
 }

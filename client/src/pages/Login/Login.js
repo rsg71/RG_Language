@@ -31,23 +31,27 @@ export default function Login({ handleSetUser }) {
             })
     }
 
-    const getUser = () => {
-        API.getUser()
+
+
+
+
+    const mockLogin = () => {
+        let formData = {
+            username: 'rg',
+            password: '123'
+        }
+        API.login(formData)
             .then(res => {
-                console.log(res)
+                console.log(res);
+                let userData = res.data;
+                handleSetUser(userData);
+
+                navigate("/user-home")
             })
-            .catch(err => console.log(err))
-    }
-
-
-    const logout = () => {
-        API.logout()
-            .then(res => {
-                console.log(res)
+            .catch(err => {
+                console.log(err);
             })
-            .catch(err => console.log(err))
     }
-
 
     return (
         <div>
@@ -55,10 +59,12 @@ export default function Login({ handleSetUser }) {
                 <Row className="d-flex justify-content-center">
                     <Col lg={6}>
                         <h1>Login</h1>
-                        <button onClick={getUser}>getUser</button>
-                        <button onClick={logout}>logout</button>
 
-                        <pre>{JSON.stringify(formData, null, 4)}</pre>
+                        {/* <div>
+                            <button onClick={mockLogin} className="btn btn-info">mockLogin</button>
+                        </div> */}
+
+                        {/* <pre>{JSON.stringify(formData, null, 4)}</pre> */}
 
                         <label>Username</label>
                         <input name="username" value={formData.username} className="form-control" onChange={e => handleChange(e.target)} />

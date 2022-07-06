@@ -33,6 +33,11 @@ import UpForReviewItalian from "./pages/Italian/UpForReviewItalian";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import UserHome from "./pages/UserHome/UserHome";
+import UserProfile from "./pages/UserProfile/UserProfile";
+import AddLanguage from "./pages/AddLanguage/AddLanguage";
+
+
+export const CurrentUserContext = React.createContext({});
 
 
 function App() {
@@ -40,7 +45,6 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState(null);
 
-  let CurrentUserContext = React.createContext({});
 
 
 
@@ -55,6 +59,8 @@ function App() {
         <ScrollToTop />
 
         <CurrentUserContext.Provider value={currentUser}>
+
+          {/* <pre>{JSON.stringify(currentUser, null, 4)}</pre> */}
 
           <NavigationBar />
           <main className="py-5">
@@ -96,6 +102,10 @@ function App() {
                 <Route path="/login" element={<Login handleSetUser={handleSetUser}/>} />
 
                 <Route path="/user-home" element={<UserHome />} />
+                <Route path="/user-profile" element={<UserProfile setCurrentUser={setCurrentUser} />} />
+
+
+                <Route path="/add-language" element={<AddLanguage />} />
 
 
                 {/* 404 page */}

@@ -4,4 +4,5 @@ module.exports = {
     German: require("./german"),
     Italian: require("./italian"),
     Portuguese: require("./portuguese"),
+    User: require("./userModel")
 }
