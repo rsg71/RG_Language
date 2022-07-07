@@ -4,6 +4,9 @@ const db = require("../models");
 module.exports = {
 
     addLanguage: async function (req, res) {
+
+        console.log("==========================================")
+        console.log(`attempting to add a language for user ${req.user.username} id ${req.user.id}`)
         console.log("req.body: ", req.body);
         console.log("req.user: ", req.user);
         console.log("userId: ===> ", req.user.id);
@@ -27,7 +30,7 @@ module.exports = {
 
         let languageToFind = newLanguage;
 
-        let languageFound = await db.UserCollection.find({ language: languageToFind });
+        let languageFound = await db.UserCollection.find({ language: languageToFind, userId: req.user.id });
         console.log("languageFound is: ", languageFound);
 
         // return res.status(400).send("hello")
@@ -74,18 +77,29 @@ module.exports = {
     },
 
     findAllLanguagesForThisUser: function (req, res) {
-        db.UserCollection
-            .find()
-            .then(words => {
-                console.log('all words found');
-                console.log(words)
-                res.json(words);
-                console.log('sent')
-            })
-            .catch(err => {
-                console.log(err);
-                res.status(422).json(err)
-            });
+        let userId = req.params.userId;
+        console.log("userId: ", userId);
+
+        if (!userId) {
+            console.log("USER ID IS MISSING")
+            return res.status(400);
+        } else {
+
+
+            db.UserCollection
+                .find({ userId: userId })
+                .then(words => {
+                    console.log('all words found');
+                    console.log(words)
+                    res.json(words);
+                    console.log('sent')
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.status(422).json(err)
+                });
+        }
+
     },
 
 

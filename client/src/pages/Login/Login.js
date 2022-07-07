@@ -5,6 +5,10 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Login({ handleSetUser }) {
 
+    let env = process.env.NODE_ENV;
+
+    let isDevelopmentEnv = env === 'development';
+
     const navigate = useNavigate();
 
     const [isError, setIsError] = useState(false);
@@ -66,9 +70,11 @@ export default function Login({ handleSetUser }) {
                     <Col lg={6}>
                         <h1>Login</h1>
 
-                        {/* <div>
-                            <button onClick={mockLogin} className="btn btn-info">mockLogin</button>
-                        </div> */}
+                        {isDevelopmentEnv &&
+                            <div>
+                                <button onClick={mockLogin} className="btn btn-info">mockLogin</button>
+                            </div>
+                        }
 
                         {/* <pre>{JSON.stringify(formData, null, 4)}</pre> */}
 

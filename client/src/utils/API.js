@@ -89,7 +89,7 @@ export default {
         let data = { language }
         return axios.post("/api/users/languages", data, { withCredentials: true })
     },
-    getAllLanguagesForUser: function () {
-        return axios.get("/api/users/languages", { withCredentials: true })
+    findAllLanguagesForThisUser: function (userId) {
+        return axios.get(`/api/users/languages/${userId}`, { withCredentials: true })
     }
 }

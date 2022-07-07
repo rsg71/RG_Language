@@ -68,6 +68,8 @@ function App() {
             <Container id="appContainer">
 
               <Routes>
+
+
                 <Route path="/" element={<Home />} />
                 <Route path="/spanish" element={<Spanish />} />
                 <Route path="/spanish/up-for-review" element={<UpForReview />} />
@@ -100,11 +102,15 @@ function App() {
 
 
                 <Route path="/signup" element={<Signup />} />
-                <Route path="/login" element={<Login handleSetUser={handleSetUser}/>} />
+                <Route path="/login" element={<Login handleSetUser={handleSetUser} />} />
 
-                <Route path="/user-home" element={<UserHome />} />
-                <Route path="/user-profile" element={<UserProfile setCurrentUser={setCurrentUser} />} />
 
+                {currentUser !== null &&
+                  <>
+                    <Route path="/user-home" element={<UserHome />} />
+                    <Route path="/user-profile" element={<UserProfile setCurrentUser={setCurrentUser} />} />
+                  </>
+                }
 
                 <Route path="/add-language" element={<AddLanguage />} />
                 <Route path="/generic/:languageName" element={<GenericHomepage />} />

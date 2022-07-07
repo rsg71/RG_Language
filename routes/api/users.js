@@ -6,7 +6,7 @@ router.route("/")
   .post(userController.addLanguage);
 
 
-router.route("/")
+router.route("/:userId")
   .get(userController.findAllLanguagesForThisUser);
 
 

@@ -5,6 +5,7 @@ const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+
 require('dotenv').config();
 
 // Authentication
@@ -29,13 +30,29 @@ app.use(express.json());
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
+} else {
+  console.log("===============================================")
+  console.log("process.env.NODE_ENV:", process.env.NODE_ENV);
+  console.log("process.env.MONGODB_URI: ", process.env.MONGODB_URI)
 }
 
 
 
 
+
+let isDev = process.env.NODE_ENV === 'dev';
+
+let chooseConnection = isDev ? process.env.DEV_MONGO : process.env.MONGODB_URI;
+
+
+
+
+
+let whatIsEnvironment = process.env.NODE_ENV;
+console.log("ENVIRONMENT: ", whatIsEnvironment);
+//
 // Connect to Mongoose --- //
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/rgLanguage",
+mongoose.connect(chooseConnection || "",
   { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
 )
   .then(res => {

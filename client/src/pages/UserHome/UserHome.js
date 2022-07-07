@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, CardDeck } from 'react-bootstrap';
 import API from '../../utils/API';
 import LoadingCard from '../../components/LoadingCard/LoadingCard';
 import { cardClass1, cardClass2 } from '../../styles/style';
+import { CurrentUserContext } from '../../App';
 
 export default function UserHome() {
+
+    let currentUser = useContext(CurrentUserContext);
 
     const navigate = useNavigate();
 
@@ -18,9 +21,9 @@ export default function UserHome() {
     useEffect(() => {
         setIsLoadingData(true);
 
-        API.getAllLanguagesForUser()
+        API.findAllLanguagesForThisUser(currentUser._id)
             .then(res => {
-                console.log(res)
+                console.log("userHome retrieve all languages for this user: ", res)
 
                 setData(res.data);
                 setIsLoadingData(false);
@@ -60,6 +63,14 @@ export default function UserHome() {
                             <div>
                                 <p>Your languages: </p>
 
+                                {data.length === 0 &&
+                                    <>
+                                        <div className="bg-light text-muted p-3">
+                                            No languages added yet
+                                        </div>
+                                    </>
+                                }
+
                                 <CardDeck id="homeLanguagesCardDeck">
 
                                     {/* <pre>{JSON.stringify(data, null, 4)}</pre> */}
@@ -67,11 +78,13 @@ export default function UserHome() {
                                     {data.map(language => (
                                         <Col sm={6} md={6} lg={3} key={language.language}>
                                             <Card key={language.language} bg="light" className="mb-1 p-3 pointer blue" onClick={() => navigate(`/generic/${language.language}`)}>
-                                                    <div>{language.language}</div>
+                                                <div>{language.language}</div>
                                             </Card>
                                         </Col>
 
                                     ))}
+
+
 
                                     {/* {data.languages.map(language => (
                                         <Col sm={6} md={6} lg={3} key={language}>

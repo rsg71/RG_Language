@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Row, Col } from 'react-bootstrap';
+import { CurrentUserContext } from '../../App';
 import LoadingCard from '../../components/LoadingCard/LoadingCard';
 import PageContainer from '../../components/PageContainer/PageContainer';
 import API from '../../utils/API';
 
 export default function AddLanguage() {
+
+    let currentUser = useContext(CurrentUserContext);
 
     const [languagesForThisUser, setLanguagesForThisUser] = useState([]);
 
@@ -13,41 +16,49 @@ export default function AddLanguage() {
     const [error, setError] = useState(false);
 
 
-    const handleGetAllLanguagesForUser = () => {
+    const handlefindAllLanguagesForThisUser = () => {
 
-        API.getAllLanguagesForUser()
-            .then(res => {
-                console.log(res);
-                setLanguagesForThisUser(res.data);
-                setIsLoaded(true);
-                setIsLoading(false);
-                setError(false);
-            })
-            .catch(err => {
-                console.log(err);
-                setError(true);
-                setIsLoaded(true);
-                setIsLoading(false);
-            })
+        if (currentUser) {
+
+            API.findAllLanguagesForThisUser(currentUser._id)
+                .then(res => {
+                    console.log(res);
+                    setLanguagesForThisUser(res.data);
+                    setIsLoaded(true);
+                    setIsLoading(false);
+                    setError(false);
+                })
+                .catch(err => {
+                    console.log(err);
+                    setError(true);
+                    setIsLoaded(true);
+                    setIsLoading(false);
+                })
+        }
     }
 
     useEffect(() => {
-        setIsLoading(true);
-        handleGetAllLanguagesForUser();
+        if (currentUser) {
+            setIsLoading(true);
+            handlefindAllLanguagesForThisUser(currentUser._id);
+        }
     }, [])
 
     const handleAddLanguage = (languageChosen) => {
 
-        setIsLoading(true);
+        if (currentUser) {
 
-        API.addLanguage(languageChosen)
-            .then(res => {
-                console.log(res);
-                handleGetAllLanguagesForUser();
-            })
-            .catch(err => {
-                console.log(err);
-            })
+            setIsLoading(true);
+
+            API.addLanguage(languageChosen)
+                .then(res => {
+                    console.log(res);
+                    handlefindAllLanguagesForThisUser(currentUser._id);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
     }
 
     let languages = [
