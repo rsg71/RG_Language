@@ -79,7 +79,7 @@ app.post("/api/auth/login", (req, res, next) => {
       // throw err
       res.send('error with this user')
     } else if (!user) {
-      
+
       res.status(400).send("No User Exists dude")
     } else {
       console.log("user is: ", user);
@@ -101,8 +101,12 @@ app.post("/api/auth/signup", (req, res) => {
   console.log("new username is: ", req.body.username)
 
   User.findOne({ username: req.body.username }, async (err, doc) => {
-    if (err) throw err;
-    if (doc) res.send("User Already Exists");
+    if (err) {
+      throw err;
+    }
+    if (doc) {
+      return res.status(422).send("User Already Exists");
+    }
     if (!doc) {
       const hashedPassword = await bcrypt.hash(req.body.password, 10)
       const newUser = new User({
