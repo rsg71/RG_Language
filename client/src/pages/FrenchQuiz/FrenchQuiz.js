@@ -184,7 +184,7 @@ export default function FrenchQuiz() {
 
                                             <QuizQuestion word={wordToTranslate} />
 
-                                            <div classname="my-3">
+                                            <div className="my-3">
                                                 {accentMarks.map(mark => (
                                                     <button key={mark.unicode} onClick={e => typeAccent(mark.letter)}>{mark.letter}</button>
                                                 ))}

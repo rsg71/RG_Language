@@ -75,7 +75,7 @@ function App() {
                 <Route path="/spanish/up-for-review" element={<UpForReview />} />
 
 
-                <Route path="/quiz" element={<Quiz />} />
+                <Route path="/spanish-quiz" element={<Quiz />} />
 
                 <Route path="/french" element={<FrenchHome />} />
                 <Route path="/french-quiz" element={<FrenchQuiz />} />

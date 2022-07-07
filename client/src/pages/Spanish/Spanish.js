@@ -93,7 +93,7 @@ export default function Spanish() {
                         <Row>
                             <Col>
                                 <div>Continue learning:</div>
-                                <GoToButton destination={"/quiz"}>Practice vocab</GoToButton>
+                                <GoToButton destination={"/spanish-quiz"}>Practice vocab</GoToButton>
                             </Col>
                             <Col>
                                 <div>Up for review: {numberWordsForReview} words</div>

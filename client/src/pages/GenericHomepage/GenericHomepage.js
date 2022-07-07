@@ -1,12 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { CurrentUserContext } from '../../App';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import API from '../../utils/API';
 import { Container, Row, Col } from 'react-bootstrap';
 import { capitalizeFirstLetter } from '../../utils/helperFunctions';
 
 export default function GenericHomepage() {
     let { languageName } = useParams();
+    let navigate = useNavigate();
 
     let currentUser = useContext(CurrentUserContext)
 
@@ -49,7 +50,7 @@ export default function GenericHomepage() {
 
                         <Row>
                             <Col>
-                                <button className="btn btn-primary">Learn new words</button>
+                                <button className="btn btn-primary" onClick={() => navigate(`/${languageName}-quiz`)}>Learn new words</button>
                             </Col>
                             <Col>
                                 <button className="btn btn-primary">Review words</button>
