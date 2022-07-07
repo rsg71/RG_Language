@@ -13,11 +13,15 @@ export default function Signup() {
     const [isSigningUp, setIsSigningUp] = useState(false);
     const [error, setError] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [invalidPass, setInvalidPass] = useState(false);
+    const [invalidFields, setInvalidFields] = useState(false);
 
 
     const [formData, setFormData] = useState({
         username: "",
-        password: ""
+        password: "",
+        confirmPassword: ""
     })
 
 
@@ -27,9 +31,26 @@ export default function Signup() {
     }
 
     const handleSignUp = () => {
+
+        if (formData.password !== formData.confirmPassword) {
+            setInvalidPass(true);
+            return
+        }
+
+        if (!formData.username || !formData.password || !formData.confirmPassword) {
+            setInvalidFields(true);
+            return
+        } else {
+            setInvalidFields(false);
+        }
+
         setIsSigningUp(true);
 
-        API.signup(formData)
+        let relevantData = {
+            username: formData.username,
+            password: formData.password
+        }
+        API.signup(relevantData)
             .then(res => {
                 console.log(res);
                 setIsSigningUp(false);
@@ -74,6 +95,26 @@ export default function Signup() {
                                         <i className={showPassword ? "bi bi-eye" : "bi bi-eye-slash"} />
                                     </span>
                                 </div>
+
+                                <div className="">
+                                    <label>Confirm Password</label>
+                                    <input name="confirmPassword" value={formData.confirmPassword} className="form-control d-inline" onChange={e => handleInputChange(e.target)} type={showConfirmPassword ? "text" : "password"} />
+                                    <span style={{ marginLeft: "-30px", cursor: "pointer" }} onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="grey font-lg">
+                                        <i className={showConfirmPassword ? "bi bi-eye" : "bi bi-eye-slash"} />
+                                    </span>
+                                </div>
+
+                                {invalidPass &&
+                                    <div className="text-danger">
+                                        Passwords do not match
+                                    </div>
+                                }
+
+                                {invalidFields &&
+                                    <div className="text-danger">
+                                        Please fill out all fields
+                                    </div>
+                                }
 
 
 

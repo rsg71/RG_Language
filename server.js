@@ -102,9 +102,11 @@ app.post("/api/auth/signup", (req, res) => {
 
   User.findOne({ username: req.body.username }, async (err, doc) => {
     if (err) {
+      console.log(err);
       throw err;
     }
     if (doc) {
+      console.log("user already exists");
       return res.status(422).send("User Already Exists");
     }
     if (!doc) {
