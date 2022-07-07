@@ -29,6 +29,13 @@ export default function UserProfile({ setCurrentUser }) {
                         <h1>User Profile</h1>
 
                         <button onClick={handleLogout}>Logout</button>
+
+                        {/* <Row>
+                            <Col>
+                                <h2>Username: </h2>
+                            </Col>
+                        </Row> */}
+
                     </Col>
                 </Row>
             </Container>

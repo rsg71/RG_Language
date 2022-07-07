@@ -1,13 +1,14 @@
 import React, { useContext } from 'react'
-import { Navbar, Nav, NavDropdown } from "react-bootstrap";
-import { Link } from 'react-router-dom';
+import { Navbar, Nav, NavDropdown, Dropdown, DropdownButton, ButtonGroup } from "react-bootstrap";
+import { Link, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../App';
+import API from '../../utils/API';
 
 
-export default function NavigationBar() {
+export default function NavigationBar({ setCurrentUser }) {
 
 
-
+    let navigate = useNavigate();
     let currentUser = useContext(CurrentUserContext);
     console.log("currentUser: ", currentUser);
 
@@ -15,25 +16,43 @@ export default function NavigationBar() {
     const handleClose = () => {
         let item = document.getElementById("basic-navbar-nav");
         let btnItem = document.getElementById("navbar-toggler-btn");
-       
+
         item.classList.remove("show");
         btnItem.classList.add("collapsed");
     }
 
+    const handleLogout = () => {
+        API.logout()
+            .then(res => {
+                console.log(res);
+                setCurrentUser(null);
+                navigate("/")
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
+    const isCurrentUser = currentUser !== null;
+    const homepageUrl = isCurrentUser ? "/user-home" : "/";
 
 
     return (
         <>
             <Navbar bg="light" expand="lg">
                 <Navbar.Brand as={Link} to="/">RG Language</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" id="navbar-toggler-btn"/>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" id="navbar-toggler-btn" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link as={Link} to="/">Home</Nav.Link>
+                        <Nav.Link as={Link} to={homepageUrl}>Home</Nav.Link>
                         <Nav.Link as={Link} to="/about" onClick={handleClose}>About</Nav.Link>
                         <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
-                        <Nav.Link as={Link} to="/login">Login</Nav.Link>
-                        <Nav.Link as={Link} to="/signup">Signup</Nav.Link>
+                        {!isCurrentUser &&
+                            <>
+                                <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                                <Nav.Link as={Link} to="/signup">Signup</Nav.Link>
+                            </>
+                        }
                         {/* <Nav.Link as={Link} to="/user-home">My Home</Nav.Link> */}
 
                         <NavDropdown title="Languages" id="basic-nav-dropdown">
@@ -50,7 +69,25 @@ export default function NavigationBar() {
                         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
                         <Button variant="outline-success">Search</Button>
                     </Form> */}
-                    <span style={{ fontSize: "larger" }}><Link to="/user-profile"><i className="bi bi-person-circle" /></Link></span>
+
+                    {currentUser !== null &&
+                        <span style={{ fontSize: "larger" }}>
+                            <DropdownButton
+                                as={ButtonGroup}
+                                align={{ lg: 'start' }}
+                                title="My account"
+                                id="dropdown-menu-align-responsive-1"
+                            >
+                                <Dropdown.Item eventKey="1" onClick={() => navigate("/user-profile")}>
+                                    User profile
+                                </Dropdown.Item>
+                                <Dropdown.Item eventKey="2" onClick={handleLogout}>
+                                    Logout
+                                </Dropdown.Item>
+                            </DropdownButton>
+                        </span>
+                    }
+
                 </Navbar.Collapse>
             </Navbar>
         </>

@@ -62,7 +62,7 @@ function App() {
 
           {/* <pre>{JSON.stringify(currentUser, null, 4)}</pre> */}
 
-          <NavigationBar />
+          <NavigationBar setCurrentUser={setCurrentUser} />
           <main className="py-5">
             <Container id="appContainer">
 
