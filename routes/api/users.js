@@ -11,4 +11,8 @@ router.route("/")
 
 
 
+router.route("/:username/languages/:language")
+  .get(userController.getLanguageDataForUser)
+
+
 module.exports = router;

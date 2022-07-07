@@ -6,7 +6,8 @@ module.exports = {
     addLanguage: async function (req, res) {
         console.log("req.body: ", req.body);
         console.log("req.user: ", req.user);
-        console.log("userId: ===> ", req.user.id)
+        console.log("userId: ===> ", req.user.id);
+        let username = req.user.username;
 
         let newLanguage = req.body.language.toLowerCase();
 
@@ -22,11 +23,14 @@ module.exports = {
             ],
             userId: req.user.id // an id really
         }
+        console.log("newUserLanguage: ", newUserLanguage)
 
         let languageToFind = newLanguage;
 
         let languageFound = await db.UserCollection.find({ language: languageToFind });
         console.log("languageFound is: ", languageFound);
+
+        // return res.status(400).send("hello")
 
         if (languageFound.length > 0) {
             return res.send("language already exists")
@@ -47,6 +51,26 @@ module.exports = {
                     res.status(422).json(err)
                 });
         }
+    },
+
+    getLanguageDataForUser: async function (req, res) {
+
+        console.log("here is the req.params: ", req.params);
+        console.log("here is the req.body: ", req.body);
+
+        const languageToFind = req.params.language.toLowerCase(); // ensuring it's lowercase (probably already is by this point)
+        const userIdToFind = req.params.username;
+
+
+
+        let languageFound = await db.UserCollection.find({
+            userId: userIdToFind,
+            language: languageToFind
+        });
+        console.log("languageFound is: ", languageFound);
+
+        return res.status(200).send(languageFound);
+
     },
 
     findAllLanguagesForThisUser: function (req, res) {

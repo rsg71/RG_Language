@@ -66,7 +66,7 @@ export default function UserHome() {
 
                                     {data.map(language => (
                                         <Col sm={6} md={6} lg={3} key={language.language}>
-                                            <Card key={language.language} bg="primary" className="text-white mb-1">
+                                            <Card key={language.language} bg="light" className="mb-1 p-3 pointer blue" onClick={() => navigate(`/generic/${language.language}`)}>
                                                     <div>{language.language}</div>
                                             </Card>
                                         </Col>
@@ -99,8 +99,8 @@ export default function UserHome() {
 
                                 </CardDeck>
 
-                                <div>
-                                    <button onClick={goToAddLanguagePage} className="btn btn-light">+ add</button>
+                                <div className="mt-3">
+                                    <button onClick={goToAddLanguagePage} className="btn btn-primary">+ add</button>
                                 </div>
 
                             </div>

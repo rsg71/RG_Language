@@ -12,7 +12,7 @@ const wordGroupSchema = new Schema({
             lastDateAnsweredCorrectly: Date,
         }
     ],
-    username: String // an id really
+    userId: String // an id really
 
 });
 

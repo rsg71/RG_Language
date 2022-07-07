@@ -101,7 +101,7 @@ export default function AddLanguage() {
                                                     {language.name} {isLanguageAlreadyBeingLearned(language.name) && "✔"}
                                                 </div>
                                                 {!isLanguageAlreadyBeingLearned(language.name) &&
-                                                    <button className="btn btn-primary" onClick={() => handleAddLanguage(language.name)}>Select</button>
+                                                    <button className="btn btn-primary" onClick={() => handleAddLanguage(language.name)}>Add</button>
                                                 }
                                             </div>
                                         </div>

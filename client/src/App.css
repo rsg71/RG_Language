@@ -38,6 +38,14 @@ input:focus, input:active {
     color: rgb(44, 44, 44);
 }
 
+.blue {
+    color: blue
+}
+
+.blue:hover {
+    color: lightskyblue;
+}
+
 .bg-light-green {
     background-color: #E5F9F6;
     /* color: #33C9A7; */

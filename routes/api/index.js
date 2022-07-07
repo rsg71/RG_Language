@@ -6,6 +6,9 @@ const italianRoutes = require("./italian");
 const portugueseRoutes = require("./portuguese");
 const userRoutes = require("./users");
 
+
+// ALL below routes start with /api
+
 //Spanish Routes
 router.use("/spanish", spanishRoutes);
 //French Routes

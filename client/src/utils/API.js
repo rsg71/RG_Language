@@ -74,6 +74,13 @@ export default {
     },
 
 
+    // WIP
+    getLanguageDataForUser: function (username, language) {
+        return axios.get(`/api/users/languages/${username}/languages/${language}`)
+    },
+
+
+
     getUsersHomepageData: function () {
         return axios.get("/users-languages", { withCredentials: true })
     },
