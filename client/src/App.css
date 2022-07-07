@@ -26,6 +26,17 @@ input:focus, input:active {
    color:black;
 }
 
+.font-lg {
+    font-size: large !important;
+}
+
+.grey {
+    color: lightgrey;
+}
+
+.grey:hover {
+    color: rgb(44, 44, 44);
+}
 
 .bg-light-green {
     background-color: #E5F9F6;

@@ -9,6 +9,9 @@ export default function Login({ handleSetUser }) {
 
     const [isError, setIsError] = useState(false);
 
+    const [showPassword, setShowPassword] = useState(false);
+
+
     const [formData, setFormData] = useState({
         username: "",
         password: ""
@@ -72,8 +75,11 @@ export default function Login({ handleSetUser }) {
                         <label>Username</label>
                         <input name="username" value={formData.username} className="form-control" onChange={e => handleChange(e.target)} />
 
-                        <label>Password</label>
-                        <input name="password" value={formData.password} className="form-control" onChange={e => handleChange(e.target)} type="password" />
+                        <label>Password: </label>
+                        <input name="password" value={formData.password} className="form-control d-inline" onChange={e => handleChange(e.target)} type={showPassword ? "text" : "password"} />
+                        <span style={{ marginLeft: "-30px", cursor: "pointer" }} onClick={() => setShowPassword(!showPassword)} className="grey font-lg">
+                            <i className={showPassword ? "bi bi-eye" : "bi bi-eye-slash"} />
+                        </span>
 
                         {isError &&
                             <div className="text-danger">

@@ -12,6 +12,8 @@ export default function Signup() {
     const [signupSuccessful, setSignupSuccessful] = useState(false);
     const [isSigningUp, setIsSigningUp] = useState(false);
     const [error, setError] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+
 
     const [formData, setFormData] = useState({
         username: "",
@@ -67,7 +69,10 @@ export default function Signup() {
 
                                 <div className="">
                                     <label>Password</label>
-                                    <input name="password" value={formData.password} className="form-control" onChange={e => handleInputChange(e.target)} type="password" />
+                                    <input name="password" value={formData.password} className="form-control d-inline" onChange={e => handleInputChange(e.target)} type={showPassword ? "text" : "password"} />
+                                    <span style={{ marginLeft: "-30px", cursor: "pointer" }} onClick={() => setShowPassword(!showPassword)} className="grey font-lg">
+                                        <i className={showPassword ? "bi bi-eye" : "bi bi-eye-slash"} />
+                                    </span>
                                 </div>
 
 
