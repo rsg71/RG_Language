@@ -1,699 +1,699 @@
 const frenchSeed = [
     {
-        "Number": 1,
+        "number": 1,
         "word": "comme",
         "translation": "as",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 2,
+        "number": 2,
         "word": "je",
         "translation": "I",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 3,
+        "number": 3,
         "word": "son",
         "translation": "his",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 4,
+        "number": 4,
         "word": "que",
         "translation": "that",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 5,
+        "number": 5,
         "word": "il",
         "translation": "he",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 6,
+        "number": 6,
         "word": "était",
         "translation": "was",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 7,
+        "number": 7,
         "word": "pour",
         "translation": "for",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 8,
+        "number": 8,
         "word": "sur",
         "translation": "on",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 9,
+        "number": 9,
         "word": "sont",
         "translation": "are",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 10,
+        "number": 10,
         "word": "avec",
         "translation": "with",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 11,
+        "number": 11,
         "word": "ils",
         "translation": "they",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 12,
+        "number": 12,
         "word": "être",
         "translation": "be",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 13,
+        "number": 13,
         "word": "à",
         "translation": "at",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 14,
+        "number": 14,
         "word": "un",
         "translation": "one",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 15,
+        "number": 15,
         "word": "avoir",
         "translation": "have",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 16,
+        "number": 16,
         "word": "ce",
         "translation": "this",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 17,
+        "number": 17,
         "word": "à partir de",
         "translation": "from",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 18,
+        "number": 18,
         "word": "par",
         "translation": "by",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 19,
+        "number": 19,
         "word": "chaud",
         "translation": "hot",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 20,
+        "number": 20,
         "word": "mot",
         "translation": "word",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 21,
+        "number": 21,
         "word": "mais",
         "translation": "but",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 22,
+        "number": 22,
         "word": "que",
         "translation": "what",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 23,
+        "number": 23,
         "word": "certains",
         "translation": "some",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 24,
+        "number": 24,
         "word": "est",
         "translation": "is",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 25,
+        "number": 25,
         "word": "il",
         "translation": "it",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 26,
+        "number": 26,
         "word": "vous",
         "translation": "you",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 27,
+        "number": 27,
         "word": "ou",
         "translation": "or",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 28,
+        "number": 28,
         "word": "eu",
         "translation": "had",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 29,
+        "number": 29,
         "word": "la",
         "translation": "the",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 30,
+        "number": 30,
         "word": "de",
         "translation": "of",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 31,
+        "number": 31,
         "word": "à",
         "translation": "to",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 32,
+        "number": 32,
         "word": "et",
         "translation": "and",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 33,
+        "number": 33,
         "word": "un",
         "translation": "a",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 34,
+        "number": 34,
         "word": "dans",
         "translation": "in",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 35,
+        "number": 35,
         "word": "nous",
         "translation": "we",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 36,
+        "number": 36,
         "word": "boîte",
         "translation": "can",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 37,
+        "number": 37,
         "word": "dehors",
         "translation": "out",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 38,
+        "number": 38,
         "word": "autre",
         "translation": "other",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 39,
+        "number": 39,
         "word": "étaient",
         "translation": "were",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 40,
+        "number": 40,
         "word": "qui",
         "translation": "which",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 41,
+        "number": 41,
         "word": "faire",
         "translation": "do",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 42,
+        "number": 42,
         "word": "leur",
         "translation": "their",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 43,
+        "number": 43,
         "word": "temps",
         "translation": "time",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 44,
+        "number": 44,
         "word": "si",
         "translation": "if",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 45,
+        "number": 45,
         "word": "volonté",
         "translation": "will",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 46,
+        "number": 46,
         "word": "comment",
         "translation": "how",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 47,
+        "number": 47,
         "word": "dit",
         "translation": "said",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 48,
+        "number": 48,
         "word": "un",
         "translation": "an",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 49,
+        "number": 49,
         "word": "chaque",
         "translation": "each",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 50,
+        "number": 50,
         "word": "dire",
         "translation": "tell",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 51,
+        "number": 51,
         "word": "ne",
         "translation": "does",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 52,
+        "number": 52,
         "word": "ensemble",
         "translation": "set",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 53,
+        "number": 53,
         "word": "trois",
         "translation": "three",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 54,
+        "number": 54,
         "word": "vouloir",
         "translation": "want",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 55,
+        "number": 55,
         "word": "air",
         "translation": "air",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 56,
+        "number": 56,
         "word": "bien",
         "translation": "well",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 57,
+        "number": 57,
         "word": "aussi",
         "translation": "also",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 58,
+        "number": 58,
         "word": "jouer",
         "translation": "play",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 59,
+        "number": 59,
         "word": "petit",
         "translation": "small",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 60,
+        "number": 60,
         "word": "fin",
         "translation": "end",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 61,
+        "number": 61,
         "word": "mettre",
         "translation": "put",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 62,
+        "number": 62,
         "word": "maison",
         "translation": "home",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 63,
+        "number": 63,
         "word": "lire",
         "translation": "read",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 64,
+        "number": 64,
         "word": "main",
         "translation": "hand",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 65,
+        "number": 65,
         "word": "port",
         "translation": "port",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 66,
+        "number": 66,
         "word": "grand",
         "translation": "large",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 67,
+        "number": 67,
         "word": "épeler",
         "translation": "spell",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 68,
+        "number": 68,
         "word": "ajouter",
         "translation": "add",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 69,
+        "number": 69,
         "word": "même",
         "translation": "even",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 70,
+        "number": 70,
         "word": "terre",
         "translation": "land",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 71,
+        "number": 71,
         "word": "ici",
         "translation": "here",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 72,
+        "number": 72,
         "word": "il faut",
         "translation": "must",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 73,
+        "number": 73,
         "word": "grand",
         "translation": "big",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 74,
+        "number": 74,
         "word": "haut",
         "translation": "high",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 75,
+        "number": 75,
         "word": "tel",
         "translation": "such",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 76,
+        "number": 76,
         "word": "suivre",
         "translation": "follow",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 77,
+        "number": 77,
         "word": "acte",
         "translation": "act",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 78,
+        "number": 78,
         "word": "pourquoi",
         "translation": "why",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 79,
+        "number": 79,
         "word": "interroger",
         "translation": "ask",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 80,
+        "number": 80,
         "word": "hommes",
         "translation": "men",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 81,
+        "number": 81,
         "word": "changement",
         "translation": "change",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 82,
+        "number": 82,
         "word": "est allé",
         "translation": "went",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 83,
+        "number": 83,
         "word": "lumière",
         "translation": "light",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 84,
+        "number": 84,
         "word": "genre",
         "translation": "kind",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 85,
+        "number": 85,
         "word": "de",
         "translation": "off",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 86,
+        "number": 86,
         "word": "besoin",
         "translation": "need",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 87,
+        "number": 87,
         "word": "maison",
         "translation": "house",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 88,
+        "number": 88,
         "word": "image",
         "translation": "picture",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 89,
+        "number": 89,
         "word": "essayer",
         "translation": "try",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 90,
+        "number": 90,
         "word": "nous",
         "translation": "us",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 91,
+        "number": 91,
         "word": "encore",
         "translation": "again",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 92,
+        "number": 92,
         "word": "animal",
         "translation": "animal",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 93,
+        "number": 93,
         "word": "point",
         "translation": "point",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 94,
+        "number": 94,
         "word": "mère",
         "translation": "mother",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 95,
+        "number": 95,
         "word": "monde",
         "translation": "world",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 96,
+        "number": 96,
         "word": "près de",
         "translation": "near",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 97,
+        "number": 97,
         "word": "construire",
         "translation": "build",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 98,
+        "number": 98,
         "word": "soi",
         "translation": "self",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 99,
+        "number": 99,
         "word": "terre",
         "translation": "earth",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 100,
+        "number": 100,
         "word": "père",
         "translation": "father",
         answeredCorrectly: false,

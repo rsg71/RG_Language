@@ -10,11 +10,22 @@ const portugueseSeed = require("../utils/portugueseSeed");
 
 require('dotenv').config();
 
-console.log("mongodb is: ", process.env.MONGODB_URI)
+console.log("mongodb is: ", process.env.MONGODB_URI);
 
-mongoose.connect(
-    process.env.MONGODB_URI || "mongodb://localhost/rgLanguage"
-).then(res => {
+
+
+let isDev = process.env.NODE_ENV === 'dev';
+
+let chooseConnection = isDev ? process.env.DEV_MONGO : process.env.MONGODB_URI;
+
+let whatIsEnvironment = process.env.NODE_ENV;
+console.log("ENVIRONMENT: ", whatIsEnvironment);
+//
+
+
+
+
+mongoose.connect('mongodb://localhost/rgLanguage').then(res => {
     console.log("connected successfully: ", res.connections[0]._connectionString)
 })
     .catch(err => console.log("error:", err))

@@ -68,8 +68,7 @@ const portugueseAccentMarks = [
         "letter": "ç",
         "name": "",
         "unicode": "U+0233"
-    },
-   
+    }
 ]
 
 export default portugueseAccentMarks;

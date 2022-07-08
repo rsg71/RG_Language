@@ -50,7 +50,7 @@ export default {
     },
 
     getAllUnlearnedWords: function (language) {
-        return axios.get(`/api/${language}/words/unlearned`)
+        return axios.get(`/api/${language}/words/unlearned`, { params: { language } })
     },
 
 
@@ -79,6 +79,13 @@ export default {
         return axios.get(`/api/users/languages/${username}/languages/${language}`)
     },
 
+
+
+    // Generic quiz
+    answerWordCorrectly: function (language, wordId, word) {
+        console.log("word is: ", word);
+        return axios.patch(`/api/${language}/${wordId}`, null, { params: { word } })
+    },
 
 
     getUsersHomepageData: function () {

@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import API from '../../utils/API';
 import { useNavigate } from 'react-router-dom';
+import { CurrentUserContext } from '../../App';
 
 
 export default function UserProfile({ setCurrentUser }) {
 
+    let currentUser = useContext(CurrentUserContext);
+
     const navigate = useNavigate();
 
     const handleLogout = () => {
+
         API.logout()
             .then(res => {
                 console.log(res);
@@ -27,6 +31,8 @@ export default function UserProfile({ setCurrentUser }) {
                 <Row>
                     <Col>
                         <h1>User Profile</h1>
+
+                        <h2>Name: {currentUser && currentUser.username}</h2>
 
                         <button onClick={handleLogout}>Logout</button>
 

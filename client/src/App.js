@@ -36,6 +36,7 @@ import UserHome from "./pages/UserHome/UserHome";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import AddLanguage from "./pages/AddLanguage/AddLanguage";
 import GenericHomepage from "./pages/GenericHomepage/GenericHomepage";
+import GenericQuiz from "./pages/Quizes/GenericQuiz";
 
 
 export const CurrentUserContext = React.createContext({});
@@ -114,6 +115,7 @@ function App() {
 
                 <Route path="/add-language" element={<AddLanguage />} />
                 <Route path="/generic/:languageName" element={<GenericHomepage />} />
+                <Route path="/quiz/generic/:languageName" element={<GenericQuiz />} />
 
 
                 {/* 404 page */}

@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const frenchController = require("../../controllers/frenchController");
 
-// Matches with "/api/spanish"
+// Matches with "/api/french"
 router.route("/")
   .get(frenchController.findAll);
 

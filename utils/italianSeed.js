@@ -1,440 +1,440 @@
 const italianSeed = [
     {
-        "Number": 1,
+        "number": 1,
         "word": "bagno",
         "translation": "bathroom",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 2,
+        "number": 2,
         "word": "banco",
         "translation": "school desk",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 3,
+        "number": 3,
         "word": "gatto",
         "translation": "cat",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 4,
+        "number": 4,
         "word": "libro",
         "translation": "book",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 5,
+        "number": 5,
         "word": "nonno",
         "translation": "grandfather",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 6,
+        "number": 6,
         "word": "ragazzo",
         "translation": "boy",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 7,
+        "number": 7,
         "word": "specchio",
         "translation": "mirror",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 8,
+        "number": 8,
         "word": "telefono",
         "translation": "telephone",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 9,
+        "number": 9,
         "word": "vino",
         "translation": "wine",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 10,
+        "number": 10,
         "word": "zaino",
         "translation": "backpack",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 11,
+        "number": 11,
         "word": "casa",
         "translation": "house",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 12,
+        "number": 12,
         "word": "mamma",
         "translation": "mother",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 13,
+        "number": 13,
         "word": "nonna",
         "translation": "grandmother",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 14,
+        "number": 14,
         "word": "patata",
         "translation": "potato",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 15,
+        "number": 15,
         "word": "penna",
         "translation": "pen",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 16,
+        "number": 16,
         "word": "ragazza",
         "translation": "girl",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 17,
+        "number": 17,
         "word": "scuola",
         "translation": "school",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 18,
+        "number": 18,
         "word": "stella",
         "translation": "star",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 19,
+        "number": 19,
         "word": "strada",
         "translation": "road",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 20,
+        "number": 20,
         "word": "zia",
         "translation": "aunt",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 21,
+        "number": 21,
         "word": "fiore",
         "translation": "flower",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 22,
+        "number": 22,
         "word": "gionale",
         "translation": "newspaper",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 23,
+        "number": 23,
         "word": "mare",
         "translation": "sea",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 24,
+        "number": 24,
         "word": "padrone",
         "translation": "owner",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 25,
+        "number": 25,
         "word": "pane",
         "translation": "bread",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 26,
+        "number": 26,
         "word": "sale",
         "translation": "salt",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 27,
+        "number": 27,
         "word": "sapone",
         "translation": "soap",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 28,
+        "number": 28,
         "word": "canzone",
         "translation": "song",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 29,
+        "number": 29,
         "word": "chiave",
         "translation": "key",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 30,
+        "number": 30,
         "word": "classe",
         "translation": "class",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 31,
+        "number": 31,
         "word": "frase",
         "translation": "phrase",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 32,
+        "number": 32,
         "word": "lezione",
         "translation": "lesson",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 33,
+        "number": 33,
         "word": "nave",
         "translation": "ship",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 34,
+        "number": 34,
         "word": "notte",
         "translation": "night",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 35,
+        "number": 35,
         "word": "clima",
         "translation": "climate",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 36,
+        "number": 36,
         "word": "dramma",
         "translation": "drama",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 37,
+        "number": 37,
         "word": "programma",
         "translation": "program",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 38,
+        "number": 38,
         "word": "sistema",
         "translation": "system",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 39,
+        "number": 39,
         "word": "illusione",
         "translation": "illusion",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 40,
+        "number": 40,
         "word": "pensione",
         "translation": "pension",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 41,
+        "number": 41,
         "word": "stazione",
         "translation": "station",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 42,
+        "number": 42,
         "word": "animale",
         "translation": "animal",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 43,
+        "number": 43,
         "word": "bastone",
         "translation": "cane",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 44,
+        "number": 44,
         "word": "catrame",
         "translation": "tar",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 45,
+        "number": 45,
         "word": "dottore",
         "translation": "doctor",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 46,
+        "number": 46,
         "word": "porcile",
         "translation": "pig pen",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 47,
+        "number": 47,
         "word": "analisi",
         "translation": "analysis",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 48,
+        "number": 48,
         "word": "crisi",
         "translation": "crisis",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 49,
+        "number": 49,
         "word": "ipotesi",
         "translation": "hypothesis",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 50,
+        "number": 50,
         "word": "tesi",
         "translation": "thesis",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 51,
+        "number": 51,
         "word": "arancia",
         "translation": "orange",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 52,
+        "number": 52,
         "word": "cilegia",
         "translation": "cherry",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 53,
+        "number": 53,
         "word": "mela",
         "translation": "apple",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 54,
+        "number": 54,
         "word": "pera",
         "translation": "pear",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 55,
+        "number": 55,
         "word": "pesca",
         "translation": "peach",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 56,
+        "number": 56,
         "word": "limone",
         "translation": "lemon",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 57,
+        "number": 57,
         "word": "attore",
         "translation": "actor",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 58,
+        "number": 58,
         "word": "pittrice",
         "translation": "painter",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 59,
+        "number": 59,
         "word": "scrittore",
         "translation": "writer",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 60,
+        "number": 60,
         "word": "scultrice",
         "translation": "scultptress",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 61,
+        "number": 61,
         "word": "dottore",
         "translation": "doctor",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 62,
+        "number": 62,
         "word": "dentista",
         "translation": "dentist",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
     {
-        "Number": 63,
+        "number": 63,
         "word": "pianista",
         "translation": "pianist",
         answeredCorrectly: false,

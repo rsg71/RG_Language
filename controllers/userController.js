@@ -1,5 +1,11 @@
 const db = require("../models");
+const path = require('path');
 
+const frenchSeed = require('../utils/frenchSeed');
+const germanSeed = require('../utils/germanSeed');
+const italianSeed = require('../utils/italianSeed');
+const portugueseSeed = require('../utils/portugueseSeed');
+const spanishSeed = require('../utils/spanishSeed');
 
 module.exports = {
 
@@ -14,16 +20,12 @@ module.exports = {
 
         let newLanguage = req.body.language.toLowerCase();
 
+
+        let seedToFind = require(`../utils/${newLanguage}Seed`);
+
         let newUserLanguage = {
             language: newLanguage,
-            wordsLearned: [
-                {
-                    word: "abc",
-                    translation: "xyz",
-                    answeredCorrectly: false,
-                    lastDateAnsweredCorrectly: null,
-                }
-            ],
+            wordsLearned: seedToFind,
             userId: req.user.id // an id really
         }
         console.log("newUserLanguage: ", newUserLanguage)
@@ -118,5 +120,27 @@ module.exports = {
                 console.log(err);
                 res.status(422).json(err);
             });
-    }
+    },
+
+
+    findAllUnlearnedWordsForGivenLanguageForUser: function (req, res) {
+
+        let userId = req.user.id;
+        let language = req.query.language;
+
+        let unlearnedWordsFilter = { userId: userId, language: language, lastDateAnsweredCorrectly: null }
+
+        db.UserCollection
+            .find(unlearnedWordsFilter)
+            .then(words => {
+                console.log('found');
+                console.log(words)
+                res.json(words);
+                console.log('sent')
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(422).json(err)
+            });
+    },
 };

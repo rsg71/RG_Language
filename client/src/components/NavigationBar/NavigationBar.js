@@ -10,7 +10,7 @@ export default function NavigationBar({ setCurrentUser }) {
 
     let navigate = useNavigate();
     let currentUser = useContext(CurrentUserContext);
-    console.log("currentUser: ", currentUser);
+    // console.log("currentUser: ", currentUser);
 
 
     const handleClose = () => {

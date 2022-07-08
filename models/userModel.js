@@ -6,6 +6,7 @@ const wordGroupSchema = new Schema({
     language: String,
     wordsLearned: [
         {
+            number: Number,
             word: String,
             translation: String,
             answeredCorrectly: Boolean,

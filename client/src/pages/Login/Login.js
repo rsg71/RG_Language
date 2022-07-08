@@ -29,7 +29,7 @@ export default function Login({ handleSetUser }) {
     const handleLogin = () => {
         API.login(formData)
             .then(res => {
-                console.log(res);
+                console.log("user: ", res);
                 let userData = res.data;
                 handleSetUser(userData);
 
