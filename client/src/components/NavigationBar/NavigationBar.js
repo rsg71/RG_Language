@@ -53,17 +53,18 @@ export default function NavigationBar({ setCurrentUser }) {
                                 <Nav.Link as={Link} to="/signup">Signup</Nav.Link>
                             </>
                         }
-                        {/* <Nav.Link as={Link} to="/user-home">My Home</Nav.Link> */}
 
-                        <NavDropdown title="Languages" id="basic-nav-dropdown">
-                            <NavDropdown.Item as={Link} to="/spanish">Spanish</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/french">French</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/portuguese">Portuguese</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/german">German</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/italian">Italian</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/swedish">Swedish</NavDropdown.Item>
-                            {/* <NavDropdown.Item href="/secret"> Secret</NavDropdown.Item> */}
-                        </NavDropdown>
+                        {!isCurrentUser &&
+                            <NavDropdown title="Languages" id="basic-nav-dropdown">
+                                <NavDropdown.Item as={Link} to="/spanish">Spanish</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to="/french">French</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to="/portuguese">Portuguese</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to="/german">German</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to="/italian">Italian</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to="/swedish">Swedish</NavDropdown.Item>
+                                {/* <NavDropdown.Item href="/secret"> Secret</NavDropdown.Item> */}
+                            </NavDropdown>
+                        }
                     </Nav>
                     {/* <Form inline>
                         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
