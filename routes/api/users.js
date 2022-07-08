@@ -15,4 +15,11 @@ router.route("/:username/languages/:language")
   .get(userController.getLanguageDataForUser)
 
 
+router.route("/words/unlearned")
+  .get(userController.findAllUnlearnedWordsForGivenLanguageForUser)
+
+
+router.route("/:language/quiz/answer-word")
+  .patch(userController.answerCorrectly)
+
 module.exports = router;

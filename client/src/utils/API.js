@@ -49,9 +49,16 @@ export default {
         return axios.patch(`/api/portuguese/${wordId}`)
     },
 
+
+
+    // ===================================
+    // Generic 
     getAllUnlearnedWords: function (language) {
-        return axios.get(`/api/${language}/words/unlearned`, { params: { language } })
+        // return axios.get(`/api/${language}/words/unlearned`, { params: { language } })
+
+        return axios.get(`/api/users/languages/words/unlearned`, { params: { language } })
     },
+    // ===================================
 
 
 
@@ -84,7 +91,8 @@ export default {
     // Generic quiz
     answerWordCorrectly: function (language, wordId, word) {
         console.log("word is: ", word);
-        return axios.patch(`/api/${language}/${wordId}`, null, { params: { word } })
+        // return axios.patch(`/api/${language}/${wordId}`, null, { params: { word } })
+        return axios.patch(`/api/users/languages/${language}/quiz/answer-word/`, null, { params: { language, wordId, word } })
     },
 
 

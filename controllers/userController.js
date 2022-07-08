@@ -105,25 +105,62 @@ module.exports = {
     },
 
 
-    answerCorrectly: function (req, res) {
-        console.log("controller hit!");
-        console.log("req.params: ", req.params)
-        let filter = { _id: req.params.word };
-        let update = { answeredCorrectly: true }
-        db.French
-            .findOneAndUpdate(filter, update, { new: true })
+    answerCorrectly: async function (req, res) {
+        console.log("user controller hit!");
+        console.log("user answer correctly req.params: ", req.params);
+        console.log("user answer correctly req.query: ", req.query);
+        console.log("---------------------")
+        console.log(req.user);
+        console.log("---------------------")
+
+        if (req.user.id === undefined) {
+            return res.status(422).send('no user')
+        }
+
+        let wordToLookFor = req.query.word;
+        let language = req.query.language // NOTE: this must end up being dynamic eventually
+        let filter = { userId: req.user.id, language: language }; //✔ good
+        let targetLanguageForUser = await db.UserCollection.find(filter);
+        console.log("targetLanguageForUser: ", targetLanguageForUser); // ✔good
+
+
+        let wordToUpdateObj = targetLanguageForUser[0].wordsLearned.find(item => item.word === wordToLookFor);
+        let indexOfWordToUpdate = (targetLanguageForUser[0].wordsLearned.findIndex(item => item.word === wordToLookFor)) + 1;
+        console.log("\nwordToUpdateObj is: ", wordToUpdateObj);
+        console.log("\nindexOfWordToUpdate is: ", indexOfWordToUpdate);
+
+
+
+        db.UserCollection.updateOne(
+            {
+                userId: req.user.id, language: language, "wordsLearned.word": wordToLookFor // note that all three of these are used to narrow down the object within the document that we want to update (the nth object in the wordsLearned array). What happens here is the first two filters lock down the document itself. The wordsLearned.word loops through each word (element) in the wordsLearned array. If it finds the word we are looking for, it carries on in the update function to the next section ($set);
+            },
+            {
+                "$set": {
+                    "wordsLearned.$.answeredCorrectly": true,
+                    "wordsLearned.$.lastDateAnsweredCorrectly": new Date()
+                }
+            },
+            {
+                new: true
+            }
+        )
             .then(model => {
-                console.log("model is:", model)
-                res.json(model)
+                console.log(model)
+                return res.json(model);
             })
             .catch(err => {
                 console.log(err);
-                res.status(422).json(err);
-            });
+                return res.status(422).json(err);
+            })
     },
 
 
     findAllUnlearnedWordsForGivenLanguageForUser: function (req, res) {
+
+        console.log(`finding all unlearned ${req.query.language} words for user...`);
+        console.log(req.user);
+        console.log(req.query);
 
         let userId = req.user.id;
         let language = req.query.language;
@@ -133,9 +170,9 @@ module.exports = {
         db.UserCollection
             .find(unlearnedWordsFilter)
             .then(words => {
-                console.log('found');
-                console.log(words)
-                res.json(words);
+                console.log('found unlearned words for user...');
+                console.log("unlearned words: ", words)
+                res.json(words[0]);
                 console.log('sent')
             })
             .catch(err => {
