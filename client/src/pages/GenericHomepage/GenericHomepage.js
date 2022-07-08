@@ -53,7 +53,7 @@ export default function GenericHomepage() {
                                 <button className="btn btn-primary" onClick={() => navigate(`/quiz/generic/${languageName}`)}>Learn new words</button>
                             </Col>
                             <Col>
-                                <button className="btn btn-primary">Review words</button>
+                                {/* <button className="btn btn-primary">Review words</button> */}
                             </Col>
                         </Row>
                     </Col>
