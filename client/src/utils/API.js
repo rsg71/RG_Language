@@ -58,8 +58,12 @@ export default {
 
         return axios.get(`/api/users/languages/words/unlearned`, { params: { language } })
     },
+    getWordsForReviewForLanguageForUser: function (language) {
+        console.log("getting all words for review for a particular language")
+        return axios.get(`/api/users/languages/${language}/for-review`)
+    },
     // ===================================
-
+    
 
 
     // Auth

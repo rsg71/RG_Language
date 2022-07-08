@@ -1,11 +1,7 @@
 const db = require("../models");
 const path = require('path');
 
-const frenchSeed = require('../utils/frenchSeed');
-const germanSeed = require('../utils/germanSeed');
-const italianSeed = require('../utils/italianSeed');
-const portugueseSeed = require('../utils/portugueseSeed');
-const spanishSeed = require('../utils/spanishSeed');
+const { getDateXDaysAgo } = require('../utils/helperFunctions');
 
 module.exports = {
 
@@ -180,4 +176,90 @@ module.exports = {
                 res.status(422).json(err)
             });
     },
+
+
+    getWordsForReviewForLanguageForUser: async function (req, res) {
+
+        console.log(`finding all reviewable ${req.params.language} words for user...`);
+        console.log(req.user);
+        console.log(req.params);
+
+        let userId = req.user.id;
+        let language = req.params.language;
+
+        // the date to look for should be x number of days in the past
+
+        // find all words that have a lastDateAnsweredCorrectly where the value (the date) is more than X # of days ago.
+
+
+
+        // let date_to_look_for = new Date(2022, 05, 26, 20, 36, 8);
+
+
+        let date_to_look_for = getDateXDaysAgo(2);
+
+
+        console.log("==================================");
+        console.log("date_to_look_for is: ", date_to_look_for);
+        console.log("==================================");
+
+        // ^ I want to get everything before this date. 
+
+        let filter_for_past_certain_date = {
+            userId: userId,
+            language: language,
+            // "wordsLearned.lastDateAnsweredCorrectly": { $lte: date_to_look_for }
+        }
+
+        let words = await db.UserCollection.find(filter_for_past_certain_date);
+        console.log("words: ", words);
+
+        let arrAllWords = words[0].wordsLearned;
+
+        let wordsToReview = arrAllWords.filter(wordObj => {
+            let { lastDateAnsweredCorrectly: lastDate } = wordObj;
+            if (lastDate === null) { return false }
+            else {
+                console.log("lastDate: ", lastDate);
+                if (lastDate < date_to_look_for) {
+                    console.log("==> ", lastDate, " IS LESS than", date_to_look_for)
+                    return true
+                } else {
+                    console.log(lastDate, " is NOT LESS than", date_to_look_for)
+                    return false
+                }
+
+            }
+        });
+        console.log("wordsToReview: ", wordsToReview);
+
+        return res.json(wordsToReview);
+
+        // db.UserCollection.aggregate([
+        //     {
+        //         $project: {
+        //             wordsLearned: {
+        //                 $filter: {
+        //                     input: "$wordsLearned",
+        //                     as: "item",
+        //                     cond: { $lte: ["$$item.lastDateAnsweredCorrectly", date_to_look_for] }
+        //                 }
+        //             }
+        //         }
+        //     }
+        // ])
+
+        // db.UserCollection
+        //     .find(filter_for_past_certain_date)
+        // .then(words => {
+        //     console.log('found all words for review');
+        //     console.log(words);
+        //     res.json(words[0]);
+        //     console.log('sent')
+        // })
+        // .catch(err => {
+        //     console.log(err);
+        //     res.status(422).json(err)
+        // });
+    }
 };

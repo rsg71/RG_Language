@@ -19,6 +19,11 @@ router.route("/words/unlearned")
   .get(userController.findAllUnlearnedWordsForGivenLanguageForUser)
 
 
+
+router.route("/:language/for-review")
+  .get(userController.getWordsForReviewForLanguageForUser)
+
+
 router.route("/:language/quiz/answer-word")
   .patch(userController.answerCorrectly)
 
