@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { Link, useParams } from "react-router-dom";
 import Error from '../../components/Error/Error';
+import LoadingCard from '../../components/LoadingCard/LoadingCard';
 import QuizProgressBar from '../../components/QuizProgressBar/QuizProgressBar';
 import QuizQuestion from '../../components/QuizQuestion/QuizQuestion';
 import API from '../../utils/API';
@@ -129,7 +130,7 @@ export default function GenericReview() {
                 <h1 className="mb-3">UpForReview</h1>
 
                 {error && <Error />}
-                {isLoading && <div>Loading...</div>}
+                {isLoading && <LoadingCard />}
 
                 {isLoaded && !error && !isLoading &&
                     <>

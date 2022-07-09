@@ -27,7 +27,7 @@ export default function Footer() {
                     <Col className="footerColumn" sm={4}>
                         <h6>Contact</h6>
                         <ul>
-                            <li>rglanguage@gmail.com</li>
+                            <li>robert.greenawalt@protonmail.com</li>
                             <li>215-913-7231</li>
                         </ul>
                     </Col>

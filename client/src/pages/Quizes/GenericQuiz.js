@@ -41,6 +41,19 @@ export default function GenericQuiz() {
     // ==============================================================
     const [totalWordsInLanguage, setWordsInLanguage] = useState([]);
 
+
+    const resetAndReload = () => {
+        setCorrectAnswers(0);
+        setQuestionIndex(0);
+        setQuestionsLength(0);
+
+        loadWords();
+
+        if (inputRef.current) {
+            inputRef.current.focus()
+        }
+    }
+
     useEffect(() => {
         loadWords()
     }, [])
@@ -50,7 +63,7 @@ export default function GenericQuiz() {
         API.getAllUnlearnedWords(languageNameUrlParam)
             .then(res => {
                 console.log("words for this quiz: ", res.data);
-                let notAnsweredCorrectly = res.data.wordsLearned.filter(word => word.answeredCorrectly === false)
+                let notAnsweredCorrectly = res.data.wordsLearned;
                 setWordsInLanguage(notAnsweredCorrectly);
                 setCurrentWord(notAnsweredCorrectly[0]);
                 setQuestionsLength(notAnsweredCorrectly.length);
@@ -78,7 +91,9 @@ export default function GenericQuiz() {
         if (loaded) {
 
             if (questionsLength > 0 && loaded && !error) {
-                inputRef.current.focus()
+                if (inputRef.current) {
+                    inputRef.current.focus()
+                }
             }
         }
 
@@ -148,6 +163,7 @@ export default function GenericQuiz() {
 
     const typeAccent = (value) => {
         setUserInput(userInput + value);
+        inputRef.current.focus();
 
     }
 
@@ -171,14 +187,25 @@ export default function GenericQuiz() {
                     <>
                         <Row>
                             <Col className="mb-3">
-                                <Link to={`/user-home`}><Button><i className="fas fa-arrow-circle-left"></i> Back</Button></Link>
+                                <Link to={`/generic/${languageNameUrlParam}`}><Button><i className="fas fa-arrow-circle-left"></i> Back</Button></Link>
                             </Col>
                         </Row>
 
                         <Row>
                             <Col>
                                 <QuizProgressBar currentVal={(questionIndex) / questionsLength * (100)} />
-                                <div className="float-right">word {questionIndex + 1} / {questionsLength}</div>
+                                <div className="float-right">
+
+                                    {questionIndex + 1 > questionsLength ?
+                                        <>
+                                            word {questionIndex} / {questionsLength}
+                                        </>
+                                        :
+                                        <>
+                                            word {questionIndex + 1} / {questionsLength}
+                                        </>
+                                    }
+                                </div>
                             </Col>
                         </Row>
 
@@ -200,7 +227,7 @@ export default function GenericQuiz() {
                                         <Form.Label>Translate:</Form.Label>
                                         <Form.Control id="quizInputField" type="text" placeholder="translate here" value={userInput} onChange={e => handleInputChange(e)}
                                             className={userInput === answer ? "correctAnswerInputBox" : "notAnswered"}
-                                            readOnly={correct}
+                                            readOnly={correct || incorrectAnswer}
                                             ref={inputRef}
                                             onSubmit={e => e.preventDefault()}
                                             onKeyDown={e => handleEnterKeyPress(e)}
@@ -221,18 +248,23 @@ export default function GenericQuiz() {
                             :
 
                             <>
-
                                 <Row>
                                     <Col>
                                         <h1>Quiz over</h1>
-                                        <h2>You got {correctAnswers} / {questionsLength} correct</h2>
+                                        <h4>You got {correctAnswers} / {questionsLength} correct</h4>
+
+                                        <p className="mt-3">Ready for more? <button className="btn btn-sm btn-success" onClick={resetAndReload}>Learn 25 more words</button></p>
+
+                                        <p>Or <Link to={`/generic/${languageNameUrlParam}`}>back to {languageNameUrlParam} home</Link></p>
+
                                     </Col>
                                 </Row>
-
                             </>
                         }
                     </>
                 }
+
+
 
             </Container>
         </>

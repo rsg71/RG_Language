@@ -26,68 +26,43 @@ console.log("ENVIRONMENT: ", whatIsEnvironment);
 
 
 mongoose.connect('mongodb://localhost/rgLanguage').then(res => {
-    console.log("connected successfully: ", res.connections[0]._connectionString)
+    console.log("connected successfully: ", res.connections[0]._connectionString);
+
+
+    seedDb();
+
 })
     .catch(err => console.log("error:", err))
 
 
 
-db.Spanish
-    .remove({})
-    .then(() => db.Spanish.collection.insertMany(spanishSeed))
-    .then(data => {
-        console.log(data.result.n + " records inserted for spanish seed");
-        // process.exit(0);
-    })
-    .catch(err => {
-        console.error(err);
-        process.exit(1);
-    });
+const seedDb = async () => {
+    try {
 
-db.French
-    .remove({})
-    .then(() => db.French.collection.insertMany(frenchSeed))
-    .then(data => {
-        console.log(data.result.n + " records inserted for french seed");
-        // process.exit(0);
-    })
-    .catch(err => {
-        console.error(err);
-        process.exit(1);
-    });
+        await db.Spanish.remove({})
+        let spanish = await db.Spanish.collection.insertMany(spanishSeed);
+        console.log("✔ " + spanish.result.n + " records inserted for spanish seed");
 
-db.German
-    .remove({})
-    .then(() => db.German.collection.insertMany(germanSeed))
-    .then(data => {
-        console.log(data.result.n + " records inserted for german seed");
-        process.exit(1);
-    })
-    .catch(err => {
-        console.error(err);
-        process.exit(1);
-    });
+        await db.French.remove({})
+        let french = await db.Spanish.collection.insertMany(frenchSeed);
+        console.log("✔ " + french.result.n + " records inserted for french seed");
 
-db.Portuguese
-    .remove({})
-    .then(() => db.Portuguese.collection.insertMany(portugueseSeed))
-    .then(data => {
-        console.log(data.result.n + " records inserted for portuguese seed");
-        process.exit(1);
-    })
-    .catch(err => {
-        console.error(err);
-        process.exit(1);
-    });
+        await db.German.remove({})
+        let german = await db.German.collection.insertMany(germanSeed);
+        console.log("✔ " + german.result.n + " records inserted for german seed");
 
-db.Italian
-    .remove({})
-    .then(() => db.Italian.collection.insertMany(italianSeed))
-    .then(data => {
-        console.log(data.result.n + " records inserted for italian seed");
-        // process.exit(0);
-    })
-    .catch(err => {
-        console.error(err);
-        process.exit(0);
-    });
+        await db.Portuguese.remove({})
+        let portuguese = await db.Portuguese.collection.insertMany(portugueseSeed);
+        console.log("✔ " + portuguese.result.n + " records inserted for portuguese seed");
+
+        await db.Italian.remove({})
+        let italian = await db.Italian.collection.insertMany(portugueseSeed);
+        console.log("✔ " + italian.result.n + " records inserted for italian seed");
+
+    } catch (err) {
+        console.log(err);
+        return err
+    }
+}
+
+

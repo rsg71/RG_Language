@@ -165,10 +165,27 @@ module.exports = {
 
         db.UserCollection
             .find(unlearnedWordsFilter)
+            // .aggregate([
+            //     {
+            //         $project: {
+            //             language: 1,
+            //             userId: 1,
+            //             wordsLearned: {
+            //                 $slice: ["$wordsLearned", 10]
+            //             }
+            //         }
+            //     }
+            // ])
             .then(words => {
                 console.log('found unlearned words for user...');
-                console.log("unlearned words: ", words)
-                res.json(words[0]);
+                console.log("unlearned words: ", words);
+
+                let base = words[0];
+                console.log("baseis: ", base);
+                let sliced = { ...base, wordsLearned: base.wordsLearned.filter(word => word.answeredCorrectly === false).slice(0, 25) } // for now, doing automatically up to 25 words in a quiz at a time. Might make this selectable by the user first.
+
+                console.log("sliced: ", sliced);
+                res.json(sliced);
                 console.log('sent')
             })
             .catch(err => {

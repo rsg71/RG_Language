@@ -30,7 +30,7 @@ export default function GenericHomepage() {
                 let correct = totalWords.filter(word => word.answeredCorrectly);
                 let numberCorrect = correct.length;
                 // console.log("numberCorrect: ", numberCorrect);
-                let percentCorrect = ((numberCorrect / totalWords.length).toFixed(2)) * 100;
+                let percentCorrect = ((numberCorrect / totalWords.length) * 100).toFixed(0);
                 // console.log("percentCorrect: ", percentCorrect);
 
                 setTotalWords(totalWords.length);

@@ -40,7 +40,7 @@ export default function NavigationBar({ setCurrentUser }) {
     return (
         <>
             <Navbar bg="light" expand="lg">
-                <Navbar.Brand as={Link} to="/">RG Language</Navbar.Brand>
+                <Navbar.Brand as={Link} to={isCurrentUser ? "/user-home" : "/"}>RG Language</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" id="navbar-toggler-btn" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
@@ -79,7 +79,7 @@ export default function NavigationBar({ setCurrentUser }) {
                                 menuAlign={{ lg: 'left' }}
                                 title="My account"
                                 id="dropdown-menu-align-responsive-1"
-                                drop={{lg: 'left'}}
+                                drop={{ lg: 'left' }}
                             >
                                 <Dropdown.Item eventKey="1" onClick={() => navigate("/user-profile")}>
                                     User profile
