@@ -309,8 +309,8 @@ const italianSeed = [
     },
     {
         "number": 45,
-        "word": "dottore",
-        "translation": "doctor",
+        "word": "blanket",
+        "translation": "lenzuolo",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
     },
