@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
 import API from '../../utils/API';
 import { useNavigate } from 'react-router-dom';
@@ -42,6 +42,11 @@ export default function Login({ handleSetUser }) {
     }
 
 
+    useEffect(() => {
+        if (process.env.NODE_ENV === 'development') {
+            mockLogin();
+        }
+    }, [])
 
 
 
@@ -52,7 +57,7 @@ export default function Login({ handleSetUser }) {
         }
         API.login(formData)
             .then(res => {
-                console.log(res);
+                console.log("login res: ", res);
                 let userData = res.data;
                 handleSetUser(userData);
 

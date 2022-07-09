@@ -7,6 +7,7 @@ import API from "../../utils/API"
 import accentMarks from "../../utils/accentmarks/allAccentMarks"
 import LoadingCard from "../../components/LoadingCard/LoadingCard"
 import "../Quiz/Quiz.css"
+import Error from "../../components/Error/Error"
 
 
 
@@ -14,7 +15,7 @@ export default function GenericQuiz() {
 
     let { languageName: languageNameUrlParam } = useParams();
 
-    console.log("languageNameUrlParam: ", languageNameUrlParam);
+    // console.log("languageNameUrlParam: ", languageNameUrlParam);
 
     const thisLanguageAccentMarks = accentMarks[`${languageNameUrlParam}`];
 
@@ -162,7 +163,7 @@ export default function GenericQuiz() {
 
         <>
             <Container >
-                {error && <div>Error</div>}
+                {error && <Error />}
                 {loading && <div><LoadingCard /></div>}
 
 
@@ -212,7 +213,7 @@ export default function GenericQuiz() {
                                         {userInput === answer &&
                                             <span className="correctSpan"><i id="correctAnswerCheck" className="far fa-check-circle"></i> Correct!</span>}
                                         {incorrectAnswer &&
-                                            <span className="text-danger">Incorrect</span>}
+                                            <span className="text-danger">Incorrect. {answer}</span>}
                                     </Col>
                                 </Row>
                             </>

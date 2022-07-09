@@ -5,6 +5,8 @@ import API from '../../utils/API';
 import LoadingCard from '../../components/LoadingCard/LoadingCard';
 import { cardClass1, cardClass2 } from '../../styles/style';
 import { CurrentUserContext } from '../../App';
+import LanguagesJson from '../../data/languages.json';
+import { capitalizeFirstLetter } from '../../utils/helperFunctions';
 
 export default function UserHome() {
 
@@ -17,6 +19,20 @@ export default function UserHome() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [error, setError] = useState(false);
 
+
+    const determineFlag = (language) => {
+        if (language === 'portuguese') { return 'brazil' }
+        else if (language === 'french') { return 'france' }
+        else if (language === 'german') { return 'germany' }
+        else if (language === 'italian') { return 'italy' }
+        else if (language === 'spanish') { return 'spain' }
+    }
+
+    const determineBgColor = (language) => {
+        let foundLanguage = LanguagesJson.find(l => l.languageLowerCase === language);
+        let backgroundColor = foundLanguage.bg;
+        return backgroundColor;
+    }
 
     useEffect(() => {
         setIsLoadingData(true);
@@ -75,40 +91,40 @@ export default function UserHome() {
 
                                     {/* <pre>{JSON.stringify(data, null, 4)}</pre> */}
 
-                                    {data.map(language => (
+                                    {/* {data.map(language => (
                                         <Col sm={6} md={6} lg={3} key={language.language}>
                                             <Card key={language.language} bg="light" className="mb-1 p-3 pointer blue" onClick={() => navigate(`/generic/${language.language}`)}>
                                                 <div>{language.language}</div>
                                             </Card>
                                         </Col>
 
-                                    ))}
+                                    ))} */}
 
 
 
-                                    {/* {data.languages.map(language => (
-                                        <Col sm={6} md={6} lg={3} key={language}>
-                                            <Card key={language} bg={language.bg}
-                                                onClick={() => navigate(`/`)}
-                                                className={language.name === "German" || language.name === "Secret" ? cardClass1 : cardClass2}
+                                    {data.map(language => (
+                                        <Col sm={6} md={6} lg={3} key={language.language}>
+                                            <Card key={language.language} bg={determineBgColor(language.language)}
+                                                onClick={() => navigate(`/generic/${language.language}`)}
+                                                className={language.language === "german" || language.language === "Secret" ? cardClass1 : cardClass2}
                                             >
 
                                                 <Card.Body className={language.isActive ? "notDisabledCard" : "disabledCard"}>
-                                                    <Card.Title> <span className="nowrap">{language.name}</span></Card.Title>
+                                                    <Card.Title> <span className="nowrap">{capitalizeFirstLetter(language.language)}</span></Card.Title>
                                                     <Card.Text className="mb-1">
-                                                        {language.name === "Secret" ?
-                                                            <img style={{ height: "4em", color: "#007BFF" }} src={language.source} alt={language.name} />
+                                                        {language.language === "Secret" ?
+                                                            <img style={{ height: "4em", color: "#007BFF" }} src={language.source} alt={language} />
                                                             :
-                                                            <img className="flagImage" src={`images/flags/${language.flag}.svg`} alt={language.name} />
+                                                            <img className="flagImage" src={`images/flags/${determineFlag(language.language)}.svg`} alt={language.language} />
                                                         }
                                                     </Card.Text>
-                                                    <div>{language.totalWords} words</div>
+                                                    <div>{language.wordsLearned.length} words</div>
 
                                                 </Card.Body>
 
                                             </Card>
                                         </Col>
-                                    ))} */}
+                                    ))}
 
                                 </CardDeck>
 

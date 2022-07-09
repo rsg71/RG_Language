@@ -22,7 +22,7 @@ export default function ItalianAddWords() {
     const [loading, setLoading] = useState(false);
     const [added, setAdded] = useState(false);
 
-    const [searchText, setSearchText] = useState("");
+    // const [searchText, setSearchText] = useState("");
 
 
     const getAllWords = async () => {

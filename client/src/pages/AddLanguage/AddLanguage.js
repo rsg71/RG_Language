@@ -1,12 +1,14 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Breadcrumb } from 'react-bootstrap';
 import { CurrentUserContext } from '../../App';
 import LoadingCard from '../../components/LoadingCard/LoadingCard';
 import PageContainer from '../../components/PageContainer/PageContainer';
 import API from '../../utils/API';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function AddLanguage() {
 
+    let navigate = useNavigate();
     let currentUser = useContext(CurrentUserContext);
 
     const [languagesForThisUser, setLanguagesForThisUser] = useState([]);
@@ -90,6 +92,14 @@ export default function AddLanguage() {
     return (
         <div>
             <PageContainer>
+
+                <Breadcrumb bg="white">
+                    <Breadcrumb.Item as={Link} to="/user-home" onClick={() => navigate("/user-home")}>Home</Breadcrumb.Item>
+                    <Breadcrumb.Item active>
+                        Add language
+                    </Breadcrumb.Item>
+                </Breadcrumb>
+
                 <h1>Add a language</h1>
 
                 <div className="mt-2">

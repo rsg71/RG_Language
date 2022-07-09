@@ -73,11 +73,13 @@ export default function NavigationBar({ setCurrentUser }) {
 
                     {currentUser !== null &&
                         <span style={{ fontSize: "larger" }}>
+
                             <DropdownButton
                                 as={ButtonGroup}
-                                align={{ lg: 'start' }}
+                                menuAlign={{ lg: 'left' }}
                                 title="My account"
                                 id="dropdown-menu-align-responsive-1"
+                                drop={{lg: 'left'}}
                             >
                                 <Dropdown.Item eventKey="1" onClick={() => navigate("/user-profile")}>
                                     User profile

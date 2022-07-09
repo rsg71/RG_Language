@@ -12,9 +12,9 @@ export default function ItalianHome() {
     const [loaded, setLoaded] = useState(false);
 
     const [totalSpanishWords, setTotalSpanishWords] = useState(0);
-    const [numberAnsweredCorrectly, setNumberAnsweredCorrectly] = useState(0);
-    const [correctWords, setCorrectWords] = useState([]);
-    const [incorrectWords, setIncorrectWords] = useState([]);
+    // const [numberAnsweredCorrectly, setNumberAnsweredCorrectly] = useState(0);
+    // const [correctWords, setCorrectWords] = useState([]);
+    // const [incorrectWords, setIncorrectWords] = useState([]);
     const [percentCorrect, setPercentCorrect] = useState(0);
     const [numberWordsForReview, setNumberWordsForReview] = useState(0);
 
@@ -41,14 +41,14 @@ export default function ItalianHome() {
                         setTotalSpanishWords(totalWords.length);
 
                         let correctWords = totalWords.filter(word => word.answeredCorrectly === true);
-                        setCorrectWords(correctWords);
-                        setNumberAnsweredCorrectly(correctWords.length);
+                        // setCorrectWords(correctWords);
+                        // setNumberAnsweredCorrectly(correctWords.length);
                         setPercentCorrect((correctWords.length / totalWords.length * 100).toFixed(0));
 
                         console.log("total words corr: ", correctWords.length / totalWords.length);
 
-                        let incorrectWords = totalWords.filter(word => word.answeredCorrectly);
-                        setIncorrectWords(incorrectWords);
+                        // let incorrectWords = totalWords.filter(word => word.answeredCorrectly);
+                        // setIncorrectWords(incorrectWords);
 
                         setLoading(false);
                         setLoaded(true);

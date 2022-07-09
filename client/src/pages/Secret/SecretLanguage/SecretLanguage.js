@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import { Button, Col, Container, Row } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
-import GoToButton from '../../../components/GoToButton/GoToButton';
+import React from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+// import GoToButton from '../../../components/GoToButton/GoToButton';
 
 export default function SecretLanguage() {
-
 
     return (
         <>

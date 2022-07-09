@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react"
-import { Container, Row, Col, Button, Form, InputGroup } from "react-bootstrap"
+import { Container, Row, Col, Button } from "react-bootstrap"
 import QuizQuestion from "../../../components/QuizQuestion/QuizQuestion"
 import QuizProgressBar from "../../../components/QuizProgressBar/QuizProgressBar"
 import QuizInput from "../../../components/QuizInput/QuizInput";
@@ -83,13 +83,13 @@ export default function SecretLanguageQuiz() {
     }
 
 
-    function handleEnterKeyPress(e) {
-        console.log(e)
-    }
+    // function handleEnterKeyPress(e) {
+    //     console.log(e)
+    // }
 
 
     function handleSubmit(e) {
-        const { value } = e.target;
+        // const { value } = e.target;
 
         e.preventDefault();
         verifyAnswer(userInput)
@@ -99,7 +99,7 @@ export default function SecretLanguageQuiz() {
         // }
     }
 
-    let navigate = useNavigate();
+    let navigate = useNavigate()
 
     function handleClick() {
         navigate("/secret");
