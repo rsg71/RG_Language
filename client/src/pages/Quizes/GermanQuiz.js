@@ -6,7 +6,7 @@ import QuizProgressBar from "../../components/QuizProgressBar/QuizProgressBar"
 import API from "../../utils/API"
 import accentMarks from "../../utils/accentmarks/german"
 import LoadingCard from "../../components/LoadingCard/LoadingCard"
-import "../Quiz/Quiz.css"
+import "../SpanishQuiz/SpanishQuiz.css"
 
 
 
@@ -40,7 +40,7 @@ export default function GermanQuiz() {
 
     function loadWords() {
         setLoading(true);
-        API.getAllUnlearnedWords('german')
+        API.getAllGermanWords()
             .then(res => {
                 console.log(res);
                 let notAnsweredCorrectly = res.data.filter(words => words.answeredCorrectly === false)

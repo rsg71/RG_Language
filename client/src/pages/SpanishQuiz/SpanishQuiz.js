@@ -4,11 +4,12 @@ import { Link } from "react-router-dom"
 import QuizQuestion from "../../components/QuizQuestion/QuizQuestion"
 import QuizProgressBar from "../../components/QuizProgressBar/QuizProgressBar"
 import API from "../../utils/API"
-import "./Quiz.css"
+import "./SpanishQuiz.css"
 
 
 
-export default function Quiz() {
+
+export default function SpanishQuiz() {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
@@ -39,7 +40,7 @@ export default function Quiz() {
 
     function loadWords() {
         setLoading(true);
-        API.getAllUnlearnedWords('spanish')
+        API.getAllSpanishWords()
             .then(res => {
                 console.log(res);
                 setTotalSpanishWords(res.data);

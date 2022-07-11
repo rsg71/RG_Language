@@ -4,7 +4,7 @@ import NavigationBar from "./components/NavigationBar/NavigationBar";
 
 import Home from "./pages/Home/Home"
 import Spanish from "./pages/Spanish/Spanish"
-import Quiz from "./pages/Quiz/Quiz"
+import SpanishQuiz from "./pages/SpanishQuiz/SpanishQuiz"
 import NoMatch from "./pages/NoMatch/NoMatch";
 import Footer from "./components/Footer/Footer";
 import SecretLanguage from "./pages/Secret/SecretLanguage/SecretLanguage";
@@ -138,7 +138,7 @@ function App() {
                 <Route path="/spanish/up-for-review" element={<UpForReview />} />
 
 
-                <Route path="/spanish-quiz" element={<Quiz />} />
+                <Route path="/spanish-quiz" element={<SpanishQuiz />} />
 
                 <Route path="/french" element={<FrenchHome />} />
                 <Route path="/french-quiz" element={<FrenchQuiz />} />

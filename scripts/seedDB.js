@@ -29,7 +29,7 @@ mongoose.connect('mongodb://localhost/rgLanguage').then(res => {
     console.log("connected successfully: ", res.connections[0]._connectionString);
 
 
-    seedDb();
+    seedDb()
 
 })
     .catch(err => console.log("error:", err))
@@ -44,7 +44,7 @@ const seedDb = async () => {
         console.log("✔ " + spanish.result.n + " records inserted for spanish seed");
 
         await db.French.remove({})
-        let french = await db.Spanish.collection.insertMany(frenchSeed);
+        let french = await db.French.collection.insertMany(frenchSeed);
         console.log("✔ " + french.result.n + " records inserted for french seed");
 
         await db.German.remove({})

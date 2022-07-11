@@ -6,7 +6,7 @@ import QuizProgressBar from "../../components/QuizProgressBar/QuizProgressBar"
 import API from "../../utils/API"
 import accentMarks from "../../utils/accentmarks/allAccentMarks"
 import LoadingCard from "../../components/LoadingCard/LoadingCard"
-import "../Quiz/Quiz.css"
+import "../SpanishQuiz/SpanishQuiz.css"
 import Error from "../../components/Error/Error"
 
 
