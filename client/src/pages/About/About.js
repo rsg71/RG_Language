@@ -17,7 +17,7 @@ export default function About() {
 
                         <ul>
                             <li>Full vocabulary lists (thousands of words per language)</li>
-                            <li>Selections based on desired vocabulary level</li>
+                            <li>Selections based on desired vocabulary level (10,000 words, 15,000 words, etc.)</li>
                             <li>Initial vocabulary tests to determine a learner's appropriate starting point</li>
                             <li>Regional selections to account for different vocabulary across different areas of the world</li>
                         </ul>
