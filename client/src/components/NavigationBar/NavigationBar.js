@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Navbar, Nav, NavDropdown, Dropdown, DropdownButton, ButtonGroup } from "react-bootstrap";
 import { Link, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../App';
@@ -7,18 +7,20 @@ import API from '../../utils/API';
 
 export default function NavigationBar({ setCurrentUser }) {
 
+    const [expanded, setExpanded] = useState(false);  // initially closed
+
 
     let navigate = useNavigate();
     let currentUser = useContext(CurrentUserContext);
     // console.log("currentUser: ", currentUser);
 
 
-    const handleClose = () => {
-        let item = document.getElementById("basic-navbar-nav");
-        let btnItem = document.getElementById("navbar-toggler-btn");
+    const closeMenu = () => {
+        setExpanded(false);
+    }
 
-        item.classList.remove("show");
-        btnItem.classList.add("collapsed");
+    const toggleMenu = () => {
+        setExpanded(!expanded)
     }
 
     const handleLogout = () => {
@@ -39,29 +41,29 @@ export default function NavigationBar({ setCurrentUser }) {
 
     return (
         <>
-            <Navbar bg="light" expand="lg">
+            <Navbar bg="light" expand="lg" expanded={expanded}>
                 <Navbar.Brand as={Link} to={isCurrentUser ? "/user-home" : "/"}>RG Language</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" id="navbar-toggler-btn" />
-                <Navbar.Collapse id="basic-navbar-nav">
+                <Navbar.Toggle aria-controls="basic-navbar-nav" id="navbar-toggler-btn" onClick={toggleMenu} />
+                <Navbar.Collapse id="basic-navbar-nav" >
                     <Nav className="mr-auto">
-                        <Nav.Link as={Link} to={homepageUrl}>Home</Nav.Link>
-                        <Nav.Link as={Link} to="/about" onClick={handleClose}>About</Nav.Link>
-                        <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
+                        <Nav.Link as={Link} onClick={closeMenu} to={homepageUrl} >Home</Nav.Link>
+                        <Nav.Link as={Link} onClick={closeMenu} to="/about">About</Nav.Link>
+                        <Nav.Link as={Link} onClick={closeMenu} to="/contact">Contact</Nav.Link>
                         {!isCurrentUser &&
                             <>
-                                <Nav.Link as={Link} to="/login">Login</Nav.Link>
-                                <Nav.Link as={Link} to="/signup">Signup</Nav.Link>
+                                <Nav.Link as={Link} onClick={closeMenu} to="/login">Login</Nav.Link>
+                                <Nav.Link as={Link} onClick={closeMenu} to="/signup">Signup</Nav.Link>
                             </>
                         }
 
                         {!isCurrentUser &&
                             <NavDropdown title="Languages" id="basic-nav-dropdown">
-                                <NavDropdown.Item as={Link} to="/spanish">Spanish</NavDropdown.Item>
-                                <NavDropdown.Item as={Link} to="/french">French</NavDropdown.Item>
-                                <NavDropdown.Item as={Link} to="/portuguese">Portuguese</NavDropdown.Item>
-                                <NavDropdown.Item as={Link} to="/german">German</NavDropdown.Item>
-                                <NavDropdown.Item as={Link} to="/italian">Italian</NavDropdown.Item>
-                                <NavDropdown.Item as={Link} to="/swedish">Swedish</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} onClick={closeMenu} to="/spanish">Spanish</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} onClick={closeMenu} to="/french">French</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} onClick={closeMenu} to="/portuguese">Portuguese</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} onClick={closeMenu} to="/german">German</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} onClick={closeMenu} to="/italian">Italian</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} onClick={closeMenu} to="/swedish">Swedish</NavDropdown.Item>
                                 {/* <NavDropdown.Item href="/secret"> Secret</NavDropdown.Item> */}
                             </NavDropdown>
                         }
