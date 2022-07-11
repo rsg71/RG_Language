@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { Link } from "react-router-dom";
+import { Container, Row, Col, Form, Button, Breadcrumb } from 'react-bootstrap';
+import { Link, useNavigate } from "react-router-dom";
 import QuizProgressBar from '../../components/QuizProgressBar/QuizProgressBar';
 import QuizQuestion from '../../components/QuizQuestion/QuizQuestion';
 import API from '../../utils/API';
 
 export default function UpForReview() {
+
+    const navigate = useNavigate();
 
     const [wordsToReview, setWordsToReview] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -121,9 +123,17 @@ export default function UpForReview() {
         <div>
 
 
-            <Container >
+            <Container>
 
-                <h1 className="mb-3">UpForReview</h1>
+                <Breadcrumb bg="white">
+                    <Breadcrumb.Item as={Link} to="/user-home" onClick={() => navigate("/")}>Home</Breadcrumb.Item>
+                    <Breadcrumb.Item active>
+                        Up for Review
+                    </Breadcrumb.Item>
+                </Breadcrumb>
+
+
+                <h1 className="mb-3">Up for Review</h1>
 
                 {error && <div>Error</div>}
                 {isLoading && <div>Loading...</div>}
@@ -161,7 +171,7 @@ export default function UpForReview() {
                                                             className={userInput === answer ? "correctAnswerInputBox" : "notAnswered"}
                                                             readOnly={correct}
                                                             ref={inputRef}
-                                                            
+
                                                         />
                                                     </Form.Group>
                                                 </Form>
