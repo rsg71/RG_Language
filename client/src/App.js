@@ -25,8 +25,6 @@ import ItalianAddWords from "./pages/Italian/ItalianAddWords";
 import PortugueseHome from "./pages/Portuguese/PortugueseHome";
 import SwedishHome from "./pages/Swedish/SwedishHome";
 
-import 'animate.css';
-import "./App.css";
 import PortugueseQuiz from "./pages/Quizes/PortugueseQuiz";
 import UpForReview from "./pages/Spanish/UpForReview";
 import UpForReviewItalian from "./pages/Italian/UpForReviewItalian";
@@ -42,6 +40,8 @@ import API from "./utils/API";
 import LoadingCard from "./components/LoadingCard/LoadingCard";
 import Error from "./components/Error/Error";
 
+import 'animate.css';
+import "./App.css";
 
 export const CurrentUserContext = React.createContext({});
 
@@ -133,6 +133,8 @@ function App() {
               <Routes>
 
 
+
+
                 <Route path="/" element={<Home />} />
                 <Route path="/spanish" element={<Spanish />} />
                 <Route path="/spanish/up-for-review" element={<UpForReview />} />
@@ -165,7 +167,9 @@ function App() {
 
 
                 <Route path="/signup" element={<Signup />} />
-                <Route path="/login" element={<Login handleSetUser={handleSetUser} setLoading={setLoading} setLoaded={setLoaded} setError={setError} />} />
+                <Route path="/login" element={
+                  <Login handleSetUser={handleSetUser} setLoading={setLoading} setLoaded={setLoaded} setError={setError} loading={loading}/>
+                } />
 
 
                 {loaded && !error && !loading &&
@@ -193,8 +197,7 @@ function App() {
 
               </Routes>
 
-              {/* {error && <Error />} */}
-              {loading && <LoadingCard />}
+
 
             </Container>
 

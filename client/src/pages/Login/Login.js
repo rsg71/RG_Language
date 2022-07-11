@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
 import API from '../../utils/API';
 import { useNavigate } from 'react-router-dom';
+import LoadingCard from '../../components/LoadingCard/LoadingCard';
 
-export default function Login({ handleSetUser, setLoading, setLoaded, setError }) {
+export default function Login({ handleSetUser, setLoading, setLoaded, setError, loading }) {
 
     let env = process.env.NODE_ENV;
 
@@ -106,14 +107,21 @@ export default function Login({ handleSetUser, setLoading, setLoaded, setError }
 
                         {/* <pre>{JSON.stringify(formData, null, 4)}</pre> */}
 
-                        <label>Username</label>
-                        <input name="username" value={formData.username} className="form-control" onChange={e => handleChange(e.target)} />
+                        {loading && <LoadingCard />}
 
-                        <label>Password: </label>
-                        <input name="password" value={formData.password} className="form-control d-inline" onChange={e => handleChange(e.target)} type={showPassword ? "text" : "password"} />
-                        <span style={{ marginLeft: "-30px", cursor: "pointer" }} onClick={() => setShowPassword(!showPassword)} className="grey font-lg">
-                            <i className={showPassword ? "bi bi-eye" : "bi bi-eye-slash"} />
-                        </span>
+                        {!loading &&
+                            <>
+
+                                <label>Username</label>
+                                <input name="username" value={formData.username} className="form-control" onChange={e => handleChange(e.target)} />
+
+                                <label>Password: </label>
+                                <input name="password" value={formData.password} className="form-control d-inline" onChange={e => handleChange(e.target)} type={showPassword ? "text" : "password"} />
+                                <span style={{ marginLeft: "-30px", cursor: "pointer" }} onClick={() => setShowPassword(!showPassword)} className="grey font-lg">
+                                    <i className={showPassword ? "bi bi-eye" : "bi bi-eye-slash"} />
+                                </span>
+                            </>
+                        }
 
                         {isError &&
                             <div className="text-danger">
@@ -122,7 +130,7 @@ export default function Login({ handleSetUser, setLoading, setLoaded, setError }
                         }
 
                         <div className="mt-2">
-                            <button className="btn btn-primary" onClick={handleLogin}>Login</button>
+                            <button className="btn btn-primary" onClick={handleLogin} disabled={loading}>Login</button>
                         </div>
                     </Col>
                 </Row>
