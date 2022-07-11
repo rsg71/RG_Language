@@ -81,7 +81,6 @@ export default function NavigationBar({ setCurrentUser }) {
                                 menuAlign={{ lg: 'left' }}
                                 title="My account"
                                 id="dropdown-menu-align-responsive-1"
-                                drop={{ lg: 'left' }}
                             >
                                 <Dropdown.Item eventKey="1" onClick={() => navigate("/user-profile")}>
                                     User profile
