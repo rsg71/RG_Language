@@ -3,7 +3,7 @@ import { Row, Col, Container } from 'react-bootstrap';
 import API from '../../utils/API';
 import { useNavigate } from 'react-router-dom';
 
-export default function Login({ handleSetUser }) {
+export default function Login({ handleSetUser, setLoading, setLoaded, setError }) {
 
     let env = process.env.NODE_ENV;
 
@@ -27,24 +27,35 @@ export default function Login({ handleSetUser }) {
     }
 
     const handleLogin = () => {
+        setLoading(true);
         API.login(formData)
             .then(res => {
                 console.log("user: ", res);
                 let userData = res.data;
                 handleSetUser(userData);
 
+                setLoading(false);
+                setLoaded(true);
+                setError(false);
+
                 navigate("/user-home")
             })
             .catch(err => {
+
                 console.log(err);
                 setIsError(true);
+
+
+                setLoading(false);
+                setLoaded(true);
+                setError(true);
             })
     }
 
 
     useEffect(() => {
         if (process.env.NODE_ENV === 'development') {
-            mockLogin();
+            // mockLogin();
         }
     }, [])
 
@@ -55,16 +66,28 @@ export default function Login({ handleSetUser }) {
             username: 'rg',
             password: '123'
         }
+
+        setLoading(true);
+
+
         API.login(formData)
             .then(res => {
                 console.log("login res: ", res);
                 let userData = res.data;
                 handleSetUser(userData);
 
+                setLoading(false);
+                setLoaded(true);
+                setError(false);
+
                 navigate("/user-home")
             })
             .catch(err => {
                 console.log(err);
+
+                setLoading(false);
+                setLoaded(true);
+                setError(true);
             })
     }
 

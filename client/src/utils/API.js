@@ -63,7 +63,7 @@ export default {
         return axios.get(`/api/users/languages/${language}/for-review`)
     },
     // ===================================
-    
+
 
 
     // Auth
@@ -78,6 +78,12 @@ export default {
     logout: function () {
         console.log("on the logout function")
         return axios.get(`/api/auth/logout`)
+    },
+
+    // Auth
+    pageLoadCheckLoggedIn: function () {
+        console.log("page load check login login function being called by app.js")
+        return axios.get(`/api/auth/page-load-login`)
     },
 
     getUser: function () {

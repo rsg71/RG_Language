@@ -85,6 +85,19 @@ app.use(passport.session());
 require('./passportConfig')(passport);
 
 
+app.get("/api/auth/page-load-login", (req, res, next) => {
+  console.log("\n/api/auth/page-load-login req.user: ", req.user);
+
+  if (!req.user) {
+    return res.status(404).send("no user found")
+  } else {
+    let { username, id: _id } = req.user;
+    let userData = { username, _id }
+    res.send(userData);
+  }
+
+})
+
 
 
 app.post("/api/auth/login", (req, res, next) => {

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import NavigationBar from "./components/NavigationBar/NavigationBar";
 
 import Home from "./pages/Home/Home"
@@ -38,6 +38,9 @@ import AddLanguage from "./pages/AddLanguage/AddLanguage";
 import GenericHomepage from "./pages/GenericHomepage/GenericHomepage";
 import GenericQuiz from "./pages/Quizes/GenericQuiz";
 import GenericReview from "./pages/GenericReview/GenericReview";
+import API from "./utils/API";
+import LoadingCard from "./components/LoadingCard/LoadingCard";
+import Error from "./components/Error/Error";
 
 
 export const CurrentUserContext = React.createContext({});
@@ -46,14 +49,63 @@ export const CurrentUserContext = React.createContext({});
 function App() {
 
 
-  const [currentUser, setCurrentUser] = useState(null);
+  let env = process.env.NODE_ENV;
 
+  let isDevelopmentEnv = env === 'development';
+
+
+
+  const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState(false);
 
 
 
   const handleSetUser = (user) => {
     setCurrentUser(user);
   }
+
+  // const handleLogin = (loginData) => {
+  //   setLoading(true)
+
+  //   API.login(formData)
+  //   .then(res => {
+  //       console.log("user: ", res);
+  //       let userData = res.data;
+  //       handleSetUser(userData);
+
+  //       navigate("/user-home")
+  //   })
+  //   .catch(err => {
+  //       console.log(err);
+  //       setIsError(true);
+  //   })
+  // }
+
+
+
+
+  useEffect(() => {
+    console.log("testing login")
+    setLoading(true);
+    API.pageLoadCheckLoggedIn()
+      .then(res => {
+        console.log("test login res: ", res)
+        setCurrentUser(res.data);
+        setLoading(false);
+        setLoaded(true);
+        setError(false);
+
+      })
+      .catch(err => {
+        console.log(err);
+        setLoading(false);
+        setLoaded(false);
+        setError(true);
+
+      })
+  }, [])
 
   return (
 
@@ -63,7 +115,16 @@ function App() {
 
         <CurrentUserContext.Provider value={currentUser}>
 
-          {/* <pre>{JSON.stringify(currentUser, null, 4)}</pre> */}
+
+          {isDevelopmentEnv &&
+            <>
+              <pre>currentUser: {JSON.stringify(currentUser, null, 4)}</pre>
+              <pre>loading: {JSON.stringify(loading, null, 4)}</pre>
+              <pre>loaded: {JSON.stringify(loaded, null, 4)}</pre>
+            </>
+          }
+
+
 
           <NavigationBar setCurrentUser={setCurrentUser} />
           <main className="py-5">
@@ -104,20 +165,26 @@ function App() {
 
 
                 <Route path="/signup" element={<Signup />} />
-                <Route path="/login" element={<Login handleSetUser={handleSetUser} />} />
+                <Route path="/login" element={<Login handleSetUser={handleSetUser} setLoading={setLoading} setLoaded={setLoaded} setError={setError} />} />
 
 
-                {currentUser !== null &&
+                {loaded && !error && !loading &&
                   <>
+                    {/* {currentUser !== null && */}
+                    {/* <> */}
                     <Route path="/user-home" element={<UserHome />} />
                     <Route path="/user-profile" element={<UserProfile setCurrentUser={setCurrentUser} />} />
+                    {/* </> */}
+                    {/* } */}
+
+                    <Route path="/add-language" element={<AddLanguage />} />
+                    <Route path="/generic/:languageName" element={<GenericHomepage />} />
+                    <Route path="/quiz/generic/:languageName" element={<GenericQuiz />} />
+                    <Route path="/review/generic/:languageName" element={<GenericReview />} />
+
                   </>
                 }
 
-                <Route path="/add-language" element={<AddLanguage />} />
-                <Route path="/generic/:languageName" element={<GenericHomepage />} />
-                <Route path="/quiz/generic/:languageName" element={<GenericQuiz />} />
-                <Route path="/review/generic/:languageName" element={<GenericReview />} />
 
 
                 {/* 404 page */}
@@ -125,6 +192,10 @@ function App() {
                 <Route path="*" render={() => <NoMatch />} />
 
               </Routes>
+
+              {/* {error && <Error />} */}
+              {loading && <LoadingCard />}
+
             </Container>
 
           </main>
