@@ -76,7 +76,7 @@ export default function UserHome() {
                         {error && <div className="bg-danger text-white">Error</div>}
 
                         {!isLoadingData && isLoaded && !error && data &&
-                            <div>
+                            <div className="animate__animated animate__fadeIn">
                                 <p>Your languages: </p>
 
                                 {data.length === 0 &&

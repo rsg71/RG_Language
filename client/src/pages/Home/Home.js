@@ -25,7 +25,7 @@ function Home() {
                 </Row>
 
 
-                <Row className="mt-0">
+                <Row className="mt-0 animate__animated animate__fadeIn">
 
                     <CardDeck id="homeLanguagesCardDeck">
 
