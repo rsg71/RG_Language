@@ -56,7 +56,7 @@ export default function NavigationBar({ setCurrentUser }) {
                             </>
                         }
 
-                        {!isCurrentUser &&
+                        {/* {!isCurrentUser &&
                             <NavDropdown title="Languages" id="basic-nav-dropdown">
                                 <NavDropdown.Item as={Link} onClick={closeMenu} to="/spanish">Spanish</NavDropdown.Item>
                                 <NavDropdown.Item as={Link} onClick={closeMenu} to="/french">French</NavDropdown.Item>
@@ -64,9 +64,8 @@ export default function NavigationBar({ setCurrentUser }) {
                                 <NavDropdown.Item as={Link} onClick={closeMenu} to="/german">German</NavDropdown.Item>
                                 <NavDropdown.Item as={Link} onClick={closeMenu} to="/italian">Italian</NavDropdown.Item>
                                 <NavDropdown.Item as={Link} onClick={closeMenu} to="/swedish">Swedish</NavDropdown.Item>
-                                {/* <NavDropdown.Item href="/secret"> Secret</NavDropdown.Item> */}
                             </NavDropdown>
-                        }
+                        } */}
                     </Nav>
                     {/* <Form inline>
                         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
