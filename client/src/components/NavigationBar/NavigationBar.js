@@ -81,10 +81,10 @@ export default function NavigationBar({ setCurrentUser }) {
                                 title="My account"
                                 id="dropdown-menu-align-responsive-1"
                             >
-                                <Dropdown.Item eventKey="1" onClick={() => navigate("/user-profile")}>
+                                <Dropdown.Item eventKey="1" onClick={() => { closeMenu(); navigate("/user-profile"); }}>
                                     User profile
                                 </Dropdown.Item>
-                                <Dropdown.Item eventKey="2" onClick={handleLogout}>
+                                <Dropdown.Item eventKey="2" onClick={() => { closeMenu(); handleLogout(); }}>
                                     Logout
                                 </Dropdown.Item>
                             </DropdownButton>

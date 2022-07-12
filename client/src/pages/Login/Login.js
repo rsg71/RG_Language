@@ -133,7 +133,7 @@ export default function Login({ handleSetUser, setLoading, setLoaded, setError, 
                             <button className="btn btn-primary" onClick={handleLogin} disabled={loading}>Login</button>
                         </div>
 
-                        <div>
+                        <div className="mt-2">
                             Don't have a login? <Link to="/signup">Sign up here</Link>
                         </div>
                     </Col>
