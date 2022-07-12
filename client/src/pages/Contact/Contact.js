@@ -21,7 +21,7 @@ export default function Contact() {
     const publicKey = process.env.REACT_APP_YOUR_PUBLIC_KEY;
 
 
-    console.log('keys are: ', serviceId + '\n' + templateId + '\n' + publicKey + '\n');
+    // console.log('keys are: ', serviceId + '\n' + templateId + '\n' + publicKey + '\n');
 
     const sendEmail = (e) => {
         setSubmitting(true);

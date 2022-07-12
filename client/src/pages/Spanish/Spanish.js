@@ -5,6 +5,7 @@ import API from "../../utils/API"
 import Progress from '../../components/Progress/Progress'
 import GoToButton from '../../components/GoToButton/GoToButton'
 import LoadingCard from '../../components/LoadingCard/LoadingCard'
+// import DefaultBreadcrumb from '../DefaultBreadcrumb/DefaultBreadcrumb'
 
 export default function Spanish() {
 
@@ -75,6 +76,7 @@ export default function Spanish() {
     return (
         <>
             <Container>
+
                 {error && <div className="bg-light-red">Error loading</div>}
                 {loading && <LoadingCard />}
                 {loaded && !error && !loading &&
@@ -88,7 +90,7 @@ export default function Spanish() {
                             </Col>
                         </Row>
 
-                       
+
 
                         <Row>
                             <Col>

@@ -7,6 +7,7 @@ import API from "../../utils/API"
 import accentMarks from "../../utils/accentmarks/french"
 import LoadingCard from "../../components/LoadingCard/LoadingCard"
 import "../SpanishQuiz/SpanishQuiz.css"
+import DefaultBreadcrumb from "../DefaultBreadcrumb/DefaultBreadcrumb"
 
 
 
@@ -156,6 +157,10 @@ export default function FrenchQuiz() {
 
         <>
             <Container >
+
+                <DefaultBreadcrumb pageTitle="French Quiz" />
+
+
                 {error && <div>Error</div>}
                 {loading && <div><LoadingCard /></div>}
 

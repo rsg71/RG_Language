@@ -126,7 +126,7 @@ export default function UpForReview() {
             <Container>
 
                 <Breadcrumb bg="white">
-                    <Breadcrumb.Item as={Link} to="/user-home" onClick={() => navigate("/")}>Home</Breadcrumb.Item>
+                    <Breadcrumb.Item as={Link} to="/" onClick={() => navigate("/")}>Home</Breadcrumb.Item>
                     <Breadcrumb.Item active>
                         Up for Review
                     </Breadcrumb.Item>

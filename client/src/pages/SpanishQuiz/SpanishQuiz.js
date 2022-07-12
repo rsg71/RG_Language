@@ -5,6 +5,7 @@ import QuizQuestion from "../../components/QuizQuestion/QuizQuestion"
 import QuizProgressBar from "../../components/QuizProgressBar/QuizProgressBar"
 import API from "../../utils/API"
 import "./SpanishQuiz.css"
+import DefaultBreadcrumb from "../DefaultBreadcrumb/DefaultBreadcrumb"
 
 
 
@@ -132,6 +133,9 @@ export default function SpanishQuiz() {
 
         <>
             <Container >
+
+                <DefaultBreadcrumb pageTitle="Spanish Quiz"/>
+
                 {error && <div>Error</div>}
                 {loading && <div>Loading...</div>}
 
