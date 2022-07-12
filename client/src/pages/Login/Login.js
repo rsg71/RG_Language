@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
 import API from '../../utils/API';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import LoadingCard from '../../components/LoadingCard/LoadingCard';
 
 export default function Login({ handleSetUser, setLoading, setLoaded, setError, loading }) {
@@ -131,6 +131,10 @@ export default function Login({ handleSetUser, setLoading, setLoaded, setError, 
 
                         <div className="mt-2">
                             <button className="btn btn-primary" onClick={handleLogin} disabled={loading}>Login</button>
+                        </div>
+
+                        <div>
+                            Don't have a login? <Link to="/signup">Sign up here</Link>
                         </div>
                     </Col>
                 </Row>
