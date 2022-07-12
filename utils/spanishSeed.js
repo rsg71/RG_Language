@@ -47,6 +47,27 @@ const spanishSeed = [
         translation: "plate",
         answeredCorrectly: false,
         lastDateAnsweredCorrectly: null
+    },
+    {
+        "number": 8,
+        word: "puerta",
+        translation: "door",
+        answeredCorrectly: false,
+        lastDateAnsweredCorrectly: null
+    },
+    {
+        "number": 9,
+        word: "barco",
+        translation: "boat",
+        answeredCorrectly: false,
+        lastDateAnsweredCorrectly: null
+    },
+    {
+        "number": 10,
+        word: "guitarra",
+        translation: "guitar",
+        answeredCorrectly: false,
+        lastDateAnsweredCorrectly: null
     }
 ];
 

@@ -119,12 +119,28 @@ export default function SpanishQuiz() {
 
 
     function handleInputChange(event) {
+        
         event.preventDefault();
         const { value } = event.target;
 
-        setUserInput(value);
+        let lowercaseValue = value.toLowerCase();
 
-        verifyAnswer(value);
+        setUserInput(lowercaseValue);
+
+        verifyAnswer(lowercaseValue);
+    }
+
+    const typeAccent = (value) => {
+        setUserInput(userInput + value);
+        inputRef.current.focus();
+
+    }
+
+    const handleEnterKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            let enterKeyPressed = true;
+            verifyAnswer(userInput, enterKeyPressed);
+        }
     }
 
 

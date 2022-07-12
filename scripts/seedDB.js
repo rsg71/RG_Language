@@ -25,7 +25,7 @@ console.log("ENVIRONMENT: ", whatIsEnvironment);
 
 
 
-mongoose.connect('mongodb://localhost/rgLanguage').then(res => {
+mongoose.connect('mongodb+srv://terrible:shepherd@cluster0.auweh.mongodb.net/rglanguagedb').then(res => {
     console.log("connected successfully: ", res.connections[0]._connectionString);
 
 

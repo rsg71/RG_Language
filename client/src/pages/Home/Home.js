@@ -9,9 +9,9 @@ function Home() {
 
     let navigate = useNavigate();
 
-    
 
-    
+
+
 
     return (
         <>
@@ -21,13 +21,14 @@ function Home() {
                     <Col>
                         <h1>Hello and welcome to RG Language</h1>
                         <p className="lead text-muted">I want to learn vocabulary for:</p>
+
+                        <button className="btn btn-primary" onClick={() => navigate("/login")}>Log in</button>
+
                     </Col>
-                </Row>
 
+                    <Row className="mt-0 animate__animated animate__fadeIn">
 
-                <Row className="mt-0 animate__animated animate__fadeIn">
-
-                    <CardDeck id="homeLanguagesCardDeck">
+                        {/* <CardDeck id="homeLanguagesCardDeck">
 
                         {LanguagesJson.map(language => (
                             <Col sm={6} md={6} lg={3} key={language.id}>
@@ -53,12 +54,14 @@ function Home() {
                             </Col>
                         ))}
 
-                    </CardDeck>
+                    </CardDeck> */}
 
 
 
-                    <div className="text-muted text-center ml-3" style={{ fontSize: "0.8rem" }}>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                        {/* <div className="text-muted text-center ml-3" style={{ fontSize: "0.8rem" }}>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> */}
+                    </Row>
                 </Row>
+
             </Container>
 
 
