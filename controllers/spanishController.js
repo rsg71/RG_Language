@@ -1,5 +1,5 @@
 const db = require("../models");
-const { speak, getDateXDaysAgo } = require('../utils/helperFunctions');
+const { getDateXDaysAgo } = require('../utils/helperFunctions');
 
 
 module.exports = {
@@ -27,7 +27,7 @@ module.exports = {
 
 
         // let date_to_look_for = new Date(2022, 05, 26, 20, 36, 8);
-        speak();
+        g
 
 
         let date_to_look_for = getDateXDaysAgo(2);

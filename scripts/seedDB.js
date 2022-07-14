@@ -56,12 +56,14 @@ const seedDb = async () => {
         console.log("✔ " + portuguese.result.n + " records inserted for portuguese seed");
 
         await db.Italian.remove({})
-        let italian = await db.Italian.collection.insertMany(portugueseSeed);
+        let italian = await db.Italian.collection.insertMany(italianSeed);
         console.log("✔ " + italian.result.n + " records inserted for italian seed");
+
+        process.exit(0);
 
     } catch (err) {
         console.log(err);
-        return err
+        process.exit(1);
     }
 }
 

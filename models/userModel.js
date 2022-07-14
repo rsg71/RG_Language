@@ -11,6 +11,8 @@ const wordGroupSchema = new Schema({
             translation: String,
             answeredCorrectly: Boolean,
             lastDateAnsweredCorrectly: Date,
+            instancesWordHasBeenSeen: Number,
+            nextReviewDate: Date
         }
     ],
     userId: String // an id really

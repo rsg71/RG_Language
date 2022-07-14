@@ -83,22 +83,19 @@ export default function GenericQuiz() {
     }
     // ==============================================================
 
-
-
-    // console.log(`question index: ${questionIndex}, question length: ${questionsLength}`)
-
+    // focus on current question
     useEffect(() => {
         if (loaded) {
-
             if (questionsLength > 0 && loaded && !error) {
                 if (inputRef.current) {
                     inputRef.current.focus()
                 }
             }
         }
-
     }, [questionsLength, loaded])
 
+
+    // render the question
     useEffect(() => {
         if (loaded) {
             if (totalWordsInLanguage.length > 0) {

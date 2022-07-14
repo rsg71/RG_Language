@@ -1,7 +1,7 @@
 const db = require("../models");
 const path = require('path');
 
-const { getDateXDaysAgo } = require('../utils/helperFunctions');
+const { getDateXDaysAgo, getDateXDaysAhead } = require('../utils/helperFunctions');
 
 module.exports = {
 
@@ -88,7 +88,7 @@ module.exports = {
                 .find({ userId: userId })
                 .then(words => {
                     console.log('all words found');
-                    console.log(words)
+                    // console.log(words)
                     res.json(words);
                     console.log('sent')
                 })
@@ -114,27 +114,65 @@ module.exports = {
         }
 
         let wordToLookFor = req.query.word;
-        let language = req.query.language // NOTE: this must end up being dynamic eventually
+        let language = req.query.language
         let filter = { userId: req.user.id, language: language }; //✔ good
         let targetLanguageForUser = await db.UserCollection.find(filter);
         console.log("targetLanguageForUser: ", targetLanguageForUser); // ✔good
 
 
+        // finding the word obj within the wordsLearned array for this user
         let wordToUpdateObj = targetLanguageForUser[0].wordsLearned.find(item => item.word === wordToLookFor);
         let indexOfWordToUpdate = (targetLanguageForUser[0].wordsLearned.findIndex(item => item.word === wordToLookFor)) + 1;
         console.log("\nwordToUpdateObj is: ", wordToUpdateObj);
         console.log("\nindexOfWordToUpdate is: ", indexOfWordToUpdate);
 
+        let instances = wordToUpdateObj.instancesWordHasBeenSeen;
+        console.log("\ninstances: ", instances);
+        console.log("\ninstances++: ", instances++);
+
+        // also if you got the word wrong in the session, you need to see it again until you get it right
+
+        let nextReviewDate;
+        const today = new Date();
+
+
+        if (instances === 0) {
+            // instance 0: see word, gets correct
+            // - next time seeing word: 1 days later
+            nextReviewDate = getDateXDaysAhead(1, today);
+        } else if (instances === 1) {
+            // instance 1: see word, gets correct
+            // - next time seeing word: 5 days later
+            nextReviewDate = getDateXDaysAhead(5, today);
+        } else if (instances === 2) {
+            // instance 2: see word, gets correct
+            // - next time seeing word: 12 days later
+            nextReviewDate = getDateXDaysAhead(12, today);
+        } else if (instances === 3) {
+            // instance 3: see word, gets correct
+            // - next time seeing word: 28 days later
+            nextReviewDate = getDateXDaysAhead(28, today);
+        } else if (instances > 3) {
+            // If answered correctly 4 times already, 
+            // - next time seeing word: 45 days later
+            nextReviewDate = getDateXDaysAhead(45, today);
+        }
+
+
+        console.log('nextReviewDate: ', nextReviewDate);
 
 
         db.UserCollection.updateOne(
             {
                 userId: req.user.id, language: language, "wordsLearned.word": wordToLookFor // note that all three of these are used to narrow down the object within the document that we want to update (the nth object in the wordsLearned array). What happens here is the first two filters lock down the document itself. The wordsLearned.word loops through each word (element) in the wordsLearned array. If it finds the word we are looking for, it carries on in the update function to the next section ($set);
             },
+            // here we need to set new values for several fields
             {
                 "$set": {
                     "wordsLearned.$.answeredCorrectly": true,
-                    "wordsLearned.$.lastDateAnsweredCorrectly": new Date()
+                    "wordsLearned.$.lastDateAnsweredCorrectly": new Date(),
+                    "wordsLearned.$.instancesWordHasBeenSeen": instances++,
+                    "wordsLearned.$.nextReviewDate": nextReviewDate
                 }
             },
             {

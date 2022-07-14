@@ -27,9 +27,13 @@ function getDateXDaysAgo(numOfDays, date = new Date()) {
     return daysAgo;
 }
 
-function speak () {
-    console.log("88888888 8*********** 8**** ******** helo world!")
-    return 5
+function getDateXDaysAhead(numOfDays, date = new Date()) {
+    const daysAhead = new Date(date.getTime());
+
+    daysAhead.setDate(date.getDate() + numOfDays);
+
+    return daysAhead;
 }
 
-module.exports = { getDateXDaysAgo, speak }
+
+module.exports = { getDateXDaysAgo, getDateXDaysAhead }
