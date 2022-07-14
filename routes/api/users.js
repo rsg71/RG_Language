@@ -27,4 +27,8 @@ router.route("/:language/for-review")
 router.route("/:language/quiz/answer-word")
   .patch(userController.answerCorrectly)
 
+
+router.route("/:language/quiz/answer-word-incorrectly")
+  .patch(userController.answerIncorrectly)
+
 module.exports = router;

@@ -189,6 +189,68 @@ module.exports = {
             })
     },
 
+    answerIncorrectly: async function (req, res) {
+        console.log("user answer incorrectly req.params: ", req.params);
+        console.log("user answer incorrectly req.query: ", req.query);
+        console.log("---------------------")
+        console.log(req.user);
+        console.log("---------------------")
+
+        if (req.user.id === undefined) { return res.status(422).send('no user') };
+
+        let wordToLookFor = req.query.word;
+        let language = req.query.language;
+        let filter = { userId: req.user.id, language: language };
+        let targetLanguageForUser = await db.UserCollection.find(filter);
+        console.log("targetLanguageForUser: ", targetLanguageForUser);
+
+
+        // finding the word obj within the wordsLearned array for this user
+        let wordToUpdateObj = targetLanguageForUser[0].wordsLearned.find(item => item.word === wordToLookFor);
+        let indexOfWordToUpdate = (targetLanguageForUser[0].wordsLearned.findIndex(item => item.word === wordToLookFor)) + 1;
+        console.log("\nwordToUpdateObj is: ", wordToUpdateObj);
+        console.log("\nindexOfWordToUpdate is: ", indexOfWordToUpdate);
+
+        let instances = wordToUpdateObj.instancesWordHasBeenSeen;
+        console.log("\ninstances: ", instances);
+        console.log("\ninstances++: ", instances++);
+
+
+        let nextReviewDate;
+        const today = new Date();
+
+
+        // see word, gets incorrect
+        // - next time seeing word: 2 days later (every time for now. May modify going forward)
+        nextReviewDate = getDateXDaysAhead(1, today);
+        console.log('nextReviewDate: ', nextReviewDate);
+
+
+        db.UserCollection.updateOne(
+            {
+                userId: req.user.id, language: language, "wordsLearned.word": wordToLookFor // note that all three of these are used to narrow down the object within the document that we want to update (the nth object in the wordsLearned array). What happens here is the first two filters lock down the document itself. The wordsLearned.word loops through each word (element) in the wordsLearned array. If it finds the word we are looking for, it carries on in the update function to the next section ($set);
+            },
+            // here we need to set new values for several fields
+            {
+                "$set": {
+                    "wordsLearned.$.nextReviewDate": nextReviewDate,
+                    "wordsLearned.$.instancesWordHasBeenSeen": instances++
+                }
+            },
+            {
+                new: true
+            }
+        )
+            .then(model => {
+                console.log(model)
+                return res.json(model);
+            })
+            .catch(err => {
+                console.log(err);
+                return res.status(422).json(err);
+            })
+    },
+
 
     findAllUnlearnedWordsForGivenLanguageForUser: function (req, res) {
 

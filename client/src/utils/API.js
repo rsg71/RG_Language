@@ -105,8 +105,8 @@ export default {
         return axios.patch(`/api/users/languages/${language}/quiz/answer-word/`, null, { params: { language, wordId, word } })
     },
     answerWordIncorrectly: function (language, wordId, word) {
-        console.log("word is: ", word);
-        return axios.patch(`/api/users/languages/${language}/quiz/answer-word/incorrect`, null, { params: { language, wordId, word } })
+        console.log("answer incorrectly word is: ", word);
+        return axios.patch(`/api/users/languages/${language}/quiz/answer-word-incorrectly`, null, { params: { language, wordId, word } })
     },
 
 

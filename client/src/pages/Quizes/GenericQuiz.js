@@ -71,14 +71,12 @@ export default function GenericQuiz() {
                 setLoading(false);
                 setLoaded(true);
                 setError(false);
-
             })
             .catch(err => {
                 console.log(err);
                 setLoading(false);
                 setLoaded(false);
                 setError(true);
-
             })
     }
     // ==============================================================
@@ -135,6 +133,9 @@ export default function GenericQuiz() {
                 }
             }, 2000);
         } else if (enterKeyPressed) {
+            let res = await API.answerWordIncorrectly(languageNameUrlParam, currentWord._id, currentWord.word);
+            console.log("word incorrectly answered res: ", res);
+
             setCorrect(false);
             setIncorrectAnswer(true);
             setTimeout(() => {
@@ -216,7 +217,7 @@ export default function GenericQuiz() {
 
                                         <div className="my-3">
                                             {thisLanguageAccentMarks.map(mark => (
-                                                <button key={mark.unicode} onClick={e => typeAccent(mark.letter)}>{mark.letter}</button>
+                                                <button key={mark.letter} onClick={e => typeAccent(mark.letter)}>{mark.letter}</button>
                                             ))}
                                         </div>
 

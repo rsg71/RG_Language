@@ -119,7 +119,7 @@ app.post("/api/auth/login", (req, res, next) => {
         let { username, _id } = user;
         let userData = { username, _id }
         res.send(userData);
-        console.log(req.user);
+        // console.log(req.user);
       });
     }
   })(req, res, next)
