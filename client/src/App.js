@@ -87,11 +87,11 @@ function App() {
 
 
   useEffect(() => {
-    console.log("testing login")
+    // console.log("testing login")
     setLoading(true);
     API.pageLoadCheckLoggedIn()
       .then(res => {
-        console.log("test login res: ", res)
+        // console.log("test login res: ", res)
         setCurrentUser(res.data);
         setLoading(false);
         setLoaded(true);
@@ -118,9 +118,9 @@ function App() {
 
           {isDevelopmentEnv &&
             <>
-              <pre>currentUser: {JSON.stringify(currentUser, null, 4)}</pre>
-              <pre>loading: {JSON.stringify(loading, null, 4)}</pre>
-              <pre>loaded: {JSON.stringify(loaded, null, 4)}</pre>
+              {/* <pre>currentUser: {JSON.stringify(currentUser, null, 4)}</pre> */}
+              {/* <pre style={{margin: "0"}}>loading: {JSON.stringify(loading, null, 4)}</pre> */}
+              {/* <pre style={{margin: "0"}}>loaded: {JSON.stringify(loaded, null, 4)}</pre> */}
             </>
           }
 

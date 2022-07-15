@@ -282,7 +282,7 @@ module.exports = {
 
                 let base = words[0];
                 console.log("baseis: ", base);
-                let sliced = { ...base, wordsLearned: base.wordsLearned.filter(word => word.answeredCorrectly === false).slice(0, 25) } // for now, doing automatically up to 25 words in a quiz at a time. Might make this selectable by the user first.
+                let sliced = { ...base, wordsLearned: base.wordsLearned.filter(word => word.answeredCorrectly === false).slice(0, 15) } // for now, doing automatically up to 15 words in a quiz at a time. Might make this selectable by the user first.
 
                 console.log("sliced: ", sliced);
                 res.json(sliced);

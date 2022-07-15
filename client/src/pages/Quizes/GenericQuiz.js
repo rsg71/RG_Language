@@ -8,6 +8,7 @@ import accentMarks from "../../utils/accentmarks/allAccentMarks"
 import LoadingCard from "../../components/LoadingCard/LoadingCard"
 import "../SpanishQuiz/SpanishQuiz.css"
 import Error from "../../components/Error/Error"
+import { capitalizeFirstLetter } from '../../utils/helperFunctions';
 
 
 
@@ -28,10 +29,10 @@ export default function GenericQuiz() {
 
     const [currentWord, setCurrentWord] = useState({});
 
-    const [questionIndex, setQuestionIndex] = useState(0)
-    const [wordToTranslate, setWordToTranslate] = useState("")
-    const [answer, setAnswer] = useState()
-    const [userInput, setUserInput] = useState("")
+    const [questionIndex, setQuestionIndex] = useState(0);
+    const [wordToTranslate, setWordToTranslate] = useState("");
+    const [answer, setAnswer] = useState();
+    const [userInput, setUserInput] = useState("");
     const [questionsLength, setQuestionsLength] = useState(0);
 
     const [correct, setCorrect] = useState(false);
@@ -40,6 +41,9 @@ export default function GenericQuiz() {
 
     // ==============================================================
     const [totalWordsInLanguage, setWordsInLanguage] = useState([]);
+
+    const [wordsInQuiz, setWordsInQuiz] = useState([]);
+    const [isQuizOver, setIsQuizOver] = useState(false);
 
 
     const resetAndReload = () => {
@@ -65,6 +69,11 @@ export default function GenericQuiz() {
                 console.log("words for this quiz: ", res.data);
                 let notAnsweredCorrectly = res.data.wordsLearned;
                 setWordsInLanguage(notAnsweredCorrectly);
+
+                let words = notAnsweredCorrectly.map(word => {
+                    return { ...word, correct: false }
+                }); // add the field "correct" to the object
+                setWordsInQuiz(words); // note: may want to rename
                 setCurrentWord(notAnsweredCorrectly[0]);
                 setQuestionsLength(notAnsweredCorrectly.length);
 
@@ -99,6 +108,8 @@ export default function GenericQuiz() {
             if (totalWordsInLanguage.length > 0) {
                 if (questionIndex < questionsLength) {
                     renderQuestion()
+                } else {
+                    setIsQuizOver(true);
                 }
             }
         }
@@ -116,12 +127,24 @@ export default function GenericQuiz() {
 
     async function verifyAnswer(value, enterKeyPressed) {
         if (value === answer) {
+            console.log('value: ', value);
+            console.log('answer: ', answer);
             console.log("answer is correct!");
             setCorrect(true);
             setIncorrectAnswer(false);
 
             let res = await API.answerWordCorrectly(languageNameUrlParam, currentWord._id, currentWord.word);
             console.log("word correctly answered res: ", res);
+
+            console.log('wordsInQuiz: ', wordsInQuiz);
+            // now update this quiz's words for the session
+            let index = wordsInQuiz.findIndex(obj => obj.word === answer);
+            console.log('index: ', index);
+            console.log('word to compare is: ', value);
+            let copy = [...wordsInQuiz];
+            copy[index].correct = true;
+            setWordsInQuiz(copy);
+
 
             setTimeout(() => {
                 setCorrectAnswers(correctAnswers + 1);
@@ -133,11 +156,19 @@ export default function GenericQuiz() {
                 }
             }, 2000);
         } else if (enterKeyPressed) {
+            setCorrect(false);
+            setIncorrectAnswer(true);
             let res = await API.answerWordIncorrectly(languageNameUrlParam, currentWord._id, currentWord.word);
             console.log("word incorrectly answered res: ", res);
 
-            setCorrect(false);
-            setIncorrectAnswer(true);
+            let index = wordsInQuiz.findIndex(obj => obj.word === answer);
+            console.log('index: ', index);
+            console.log('word to compare is: ', value);
+            let copy = [...wordsInQuiz];
+            copy[index].correct = false;
+            setWordsInQuiz(copy);
+
+
             setTimeout(() => {
                 setQuestionIndex(questionIndex + 1);
                 setUserInput("");
@@ -173,13 +204,61 @@ export default function GenericQuiz() {
     }
 
 
+
+    const resetQuizWhenIncorrectWordsRemain = () => {
+        setCorrectAnswers(0);
+        setQuestionIndex(0);
+        setQuestionsLength(0);
+
+        // loadWords();
+        let words = wordsInQuiz.filter(word => word.correct === false);
+        setWordsInLanguage(words);
+
+        console.log('resetting quiz, words are: ', words);
+
+        // let words = notAnsweredCorrectly.map(word => {
+        //     return { ...word, correct: false }
+        // }); // add the field "correct" to the object
+        // no longer a need to add these. We are already using the wordsInQuiz which have a 'correct': false key value pair
+        // at this point
+        setWordsInQuiz(words); // note: may want to rename
+        setCurrentWord(words[0]);
+        setQuestionsLength(words.length);
+        setIsQuizOver(false);
+
+        if (inputRef.current) {
+            inputRef.current.focus()
+        }
+    }
+
+    const isQuizOngoing = questionIndex < questionsLength;
+
+
+    const doIncorrectWordsRemainForThisQuiz = wordsInQuiz.some(word => word.correct === false);
+
+
+    useEffect(() => {
+        if (isQuizOver) {
+            console.log('questionIndex: ', questionIndex);
+            console.log('questionsLength: ', questionsLength);
+
+            console.log('QUIZ IS OVER')
+            if (doIncorrectWordsRemainForThisQuiz) {
+                console.log('doIncorrectWordsRemainForThisQuiz: ', doIncorrectWordsRemainForThisQuiz);
+                resetQuizWhenIncorrectWordsRemain();
+            }
+        }
+
+    }, [isQuizOver]);
+
     return (
 
         <>
             <Container >
                 {error && <Error />}
                 {loading && <div><LoadingCard /></div>}
-
+                {/* <pre>{JSON.stringify(wordsInQuiz, null, 4)}</pre> */}
+                {/* <pre>isQuizOver: {isQuizOver.toString()}</pre> */}
 
                 {loaded && !error && !loading &&
                     <>
@@ -208,7 +287,7 @@ export default function GenericQuiz() {
                         </Row>
 
 
-                        {questionIndex < questionsLength ?
+                        {isQuizOngoing ?
                             <>
                                 <Row>
                                     <Col xs="10" sm="6" lg="4">
@@ -249,11 +328,29 @@ export default function GenericQuiz() {
                                 <Row>
                                     <Col>
                                         <h1>Quiz over</h1>
-                                        <h4>You got {correctAnswers} / {questionsLength} correct</h4>
+                                        {/* <h4>You got {correctAnswers} / {questionsLength} correct</h4> */}
 
-                                        <p className="mt-3">Ready for more? <button className="btn btn-sm btn-success" onClick={resetAndReload}>Learn 25 more words</button></p>
 
-                                        <p>Or <Link to={`/generic/${languageNameUrlParam}`}>back to {languageNameUrlParam} home</Link></p>
+                                        {/* {doIncorrectWordsRemainForThisQuiz &&
+                                            <div>
+                                                <p>Here are the words you got wrong: </p>
+                                                <ol>
+                                                    {
+                                                        wordsInQuiz.filter(word => word.correct === false).map(word => (
+                                                            <li key={word.word}>{word.word}</li>
+                                                        ))
+                                                    }
+                                                </ol>
+
+                                                <button onClick={resetQuizWhenIncorrectWordsRemain}>reset and review incorrect words from this quiz</button>
+
+                                            </div>
+                                        } */}
+
+
+                                        <p className="mt-3">Ready for more? <button className="btn btn-sm btn-success" onClick={resetAndReload}>Learn 15 more words</button></p>
+
+                                        <p>Or <Link to={`/generic/${languageNameUrlParam}`}>back to {capitalizeFirstLetter(languageNameUrlParam)} home</Link></p>
 
                                     </Col>
                                 </Row>

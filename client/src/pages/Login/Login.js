@@ -56,7 +56,7 @@ export default function Login({ handleSetUser, setLoading, setLoaded, setError, 
 
     useEffect(() => {
         if (process.env.NODE_ENV === 'development') {
-            // mockLogin();
+            mockLogin();
         }
     }, [])
 
@@ -73,7 +73,7 @@ export default function Login({ handleSetUser, setLoading, setLoaded, setError, 
 
         API.login(formData)
             .then(res => {
-                console.log("login res: ", res);
+                // console.log("login res: ", res);
                 let userData = res.data;
                 handleSetUser(userData);
 
