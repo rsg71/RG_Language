@@ -2,7 +2,12 @@ import React from 'react'
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom'
 
-export default function GoToButton({ destination, children }) {
+interface Props {
+    destination: string;
+    children: JSX.Element;
+}
+
+export default function GoToButton({ destination, children }: Props) {
 
     let navigate = useNavigate();
 

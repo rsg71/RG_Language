@@ -5,12 +5,13 @@ import { capitalizeFirstLetter } from '../../utils/helperFunctions';
 import { Container, Row, Col, Breadcrumb } from 'react-bootstrap';
 import API from '../../utils/API';
 import Progress from '../../components/Progress/Progress';
+import { CurrentUserInterface } from '../../utils/interfaces';
 
 export default function GenericHomepage() {
     let { languageName } = useParams();
     let navigate = useNavigate();
 
-    let currentUser = useContext(CurrentUserContext)
+    let currentUser: CurrentUserInterface = useContext(CurrentUserContext)
 
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -27,10 +28,10 @@ export default function GenericHomepage() {
 
                 let totalWords = res.data[0].wordsLearned;
 
-                let correct = totalWords.filter(word => word.answeredCorrectly);
+                let correct = totalWords.filter((word: any) => word.answeredCorrectly);
                 let numberCorrect = correct.length;
                 // console.log("numberCorrect: ", numberCorrect);
-                let percentCorrect = ((numberCorrect / totalWords.length) * 100).toFixed(0);
+                let percentCorrect = parseFloat(((numberCorrect / totalWords.length) * 100).toFixed(0));
                 // console.log("percentCorrect: ", percentCorrect);
 
                 setTotalWords(totalWords.length);
@@ -61,15 +62,15 @@ export default function GenericHomepage() {
                             <Col>
 
 
-                                <Breadcrumb bg="white">
+                                <Breadcrumb className="bg-white">
                                     <Breadcrumb.Item as={Link} to="/user-home" onClick={() => navigate("/user-home")}>Home</Breadcrumb.Item>
                                     <Breadcrumb.Item active>
-                                        {capitalizeFirstLetter(languageName)}
+                                        {capitalizeFirstLetter(languageName || "")}
                                     </Breadcrumb.Item>
                                 </Breadcrumb>
 
 
-                                <h1>{capitalizeFirstLetter(languageName)} Home</h1>
+                                <h1>{capitalizeFirstLetter(languageName || "")} Home</h1>
                                 <div>
                                     <p>language: {languageName}</p>
                                     <div className="form-text text-muted">Words learned:</div>

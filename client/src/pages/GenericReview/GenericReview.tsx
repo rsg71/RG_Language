@@ -13,7 +13,7 @@ export default function GenericReview() {
 
     let { languageName: languageNameUrlParam } = useParams();
 
-    const [wordsToReview, setWordsToReview] = useState([]);
+    const [wordsToReview, setWordsToReview] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
     const [error, setError] = useState(false);
@@ -24,7 +24,7 @@ export default function GenericReview() {
     const inputRef = useRef(null)
     const [correctAnswers, setCorrectAnswers] = useState(0);
 
-    const [currentWord, setCurrentWord] = useState({});
+    const [currentWord, setCurrentWord] = useState<any>({});
 
     const [questionIndex, setQuestionIndex] = useState(0)
     const [wordToTranslate, setWordToTranslate] = useState("")
@@ -91,7 +91,7 @@ export default function GenericReview() {
     }
 
 
-    async function verifyAnswer(value) {
+    async function verifyAnswer(value: string) {
         if (value === answer) {
             console.log("answer is correct!");
             setCorrect(true);
@@ -112,7 +112,7 @@ export default function GenericReview() {
     }
 
 
-    function handleInputChange(event) {
+    function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
         event.preventDefault();
 
         const { value } = event.target;
@@ -129,7 +129,7 @@ export default function GenericReview() {
 
             <Container>
 
-                <Breadcrumb bg="white">
+                <Breadcrumb className="bg-white">
                     <Breadcrumb.Item as={Link} to="/user-home" onClick={() => navigate("/user-home")}>Home</Breadcrumb.Item>
                     <Breadcrumb.Item active>
                         Up for Review
@@ -171,7 +171,7 @@ export default function GenericReview() {
                                                 <Form>
                                                     <Form.Group >
                                                         <Form.Label>Translate:</Form.Label>
-                                                        <Form.Control id="quizInputField" type="text" placeholder="translate here" value={userInput} onChange={e => handleInputChange(e)}
+                                                        <Form.Control id="quizInputField" type="text" placeholder="translate here" value={userInput} onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(e)}
                                                             className={userInput === answer ? "correctAnswerInputBox" : "notAnswered"}
                                                             readOnly={correct}
                                                             ref={inputRef}

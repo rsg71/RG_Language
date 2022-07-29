@@ -130,18 +130,18 @@ export default function SpanishQuiz() {
         verifyAnswer(lowercaseValue);
     }
 
-    const typeAccent = (value) => {
-        setUserInput(userInput + value);
-        inputRef.current.focus();
+    // const typeAccent = (value) => {
+    //     setUserInput(userInput + value);
+    //     inputRef.current.focus();
 
-    }
+    // }
 
-    const handleEnterKeyPress = (e) => {
-        if (e.key === 'Enter') {
-            let enterKeyPressed = true;
-            verifyAnswer(userInput, enterKeyPressed);
-        }
-    }
+    // const handleEnterKeyPress = (e) => {
+    //     if (e.key === 'Enter') {
+    //         let enterKeyPressed = true;
+    //         verifyAnswer(userInput, enterKeyPressed);
+    //     }
+    // }
 
 
 

@@ -4,10 +4,13 @@ import API from '../../utils/API';
 import { useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../App';
 
+interface Props {
+    setCurrentUser: (user: any) => void;
+}
 
-export default function UserProfile({ setCurrentUser }) {
+export default function UserProfile({ setCurrentUser }: Props) {
 
-    let currentUser = useContext(CurrentUserContext);
+    let currentUser: any = useContext(CurrentUserContext);
 
     const navigate = useNavigate();
 

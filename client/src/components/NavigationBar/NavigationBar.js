@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Navbar, Nav, NavDropdown, Dropdown, DropdownButton, ButtonGroup } from "react-bootstrap";
+import { Navbar, Nav, Dropdown, DropdownButton, ButtonGroup } from "react-bootstrap";
 import { Link, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../App';
 import API from '../../utils/API';

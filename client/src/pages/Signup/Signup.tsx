@@ -25,8 +25,8 @@ export default function Signup() {
     })
 
 
-    const handleInputChange = (e) => {
-        let { name, value } = e;
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let { name, value } = e.target;
         setFormData({ ...formData, [name]: value })
     }
 
@@ -85,12 +85,12 @@ export default function Signup() {
                             <>
                                 <div>
                                     <label>Username</label>
-                                    <input name="username" value={formData.username} className="form-control" onChange={e => handleInputChange(e.target)} />
+                                    <input name="username" value={formData.username} className="form-control" onChange={e => handleInputChange(e)} />
                                 </div>
 
                                 <div className="">
                                     <label>Password</label>
-                                    <input name="password" value={formData.password} className="form-control d-inline" onChange={e => handleInputChange(e.target)} type={showPassword ? "text" : "password"} />
+                                    <input name="password" value={formData.password} className="form-control d-inline" onChange={e => handleInputChange(e)} type={showPassword ? "text" : "password"} />
                                     <span style={{ marginLeft: "-30px", cursor: "pointer" }} onClick={() => setShowPassword(!showPassword)} className="grey font-lg">
                                         <i className={showPassword ? "bi bi-eye" : "bi bi-eye-slash"} />
                                     </span>
@@ -98,7 +98,7 @@ export default function Signup() {
 
                                 <div className="">
                                     <label>Confirm Password</label>
-                                    <input name="confirmPassword" value={formData.confirmPassword} className="form-control d-inline" onChange={e => handleInputChange(e.target)} type={showConfirmPassword ? "text" : "password"} />
+                                    <input name="confirmPassword" value={formData.confirmPassword} className="form-control d-inline" onChange={e => handleInputChange(e)} type={showConfirmPassword ? "text" : "password"} />
                                     <span style={{ marginLeft: "-30px", cursor: "pointer" }} onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="grey font-lg">
                                         <i className={showConfirmPassword ? "bi bi-eye" : "bi bi-eye-slash"} />
                                     </span>

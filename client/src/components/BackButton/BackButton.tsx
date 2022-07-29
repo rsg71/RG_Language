@@ -1,7 +1,11 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
-export default function BackButton({handleClick}) {
+interface Props {
+    handleClick: any;
+}
+
+export default function BackButton({handleClick}: Props) {
     return (
         <div>
              <Button type="button" onClick={handleClick}>

@@ -42,8 +42,12 @@ import Error from "./components/Error/Error";
 
 import 'animate.css';
 import "./App.css";
+import { CurrentUserInterface } from "./utils/interfaces";
 
-export const CurrentUserContext = React.createContext({});
+export const CurrentUserContext = React.createContext<CurrentUserInterface>({
+  _id: "",
+  username: ""
+});
 
 
 function App() {
@@ -55,14 +59,14 @@ function App() {
 
 
 
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
 
 
 
-  const handleSetUser = (user) => {
+  const handleSetUser = (user: any) => {
     setCurrentUser(user);
   }
 
@@ -193,7 +197,7 @@ function App() {
 
                 {/* 404 page */}
 
-                <Route path="*" render={() => <NoMatch />} />
+                <Route path="*" element={<NoMatch />} />
 
               </Routes>
 

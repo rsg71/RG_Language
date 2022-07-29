@@ -17,17 +17,17 @@ export default function GenericQuiz() {
     let { languageName: languageNameUrlParam } = useParams();
 
     // console.log("languageNameUrlParam: ", languageNameUrlParam);
-
-    const thisLanguageAccentMarks = accentMarks[`${languageNameUrlParam}`];
+    let marks = accentMarks as any;
+    const thisLanguageAccentMarks = marks[`${languageNameUrlParam}`];
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [loaded, setLoaded] = useState(false);
 
-    const inputRef = useRef(null)
+    const inputRef = useRef<any>(null);
     const [correctAnswers, setCorrectAnswers] = useState(0);
 
-    const [currentWord, setCurrentWord] = useState({});
+    const [currentWord, setCurrentWord] = useState<any>({});
 
     const [questionIndex, setQuestionIndex] = useState(0);
     const [wordToTranslate, setWordToTranslate] = useState("");
@@ -40,9 +40,9 @@ export default function GenericQuiz() {
 
 
     // ==============================================================
-    const [totalWordsInLanguage, setWordsInLanguage] = useState([]);
+    const [totalWordsInLanguage, setWordsInLanguage] = useState<any[]>([]);
 
-    const [wordsInQuiz, setWordsInQuiz] = useState([]);
+    const [wordsInQuiz, setWordsInQuiz] = useState<any[]>([]);
     const [isQuizOver, setIsQuizOver] = useState(false);
 
 
@@ -70,7 +70,7 @@ export default function GenericQuiz() {
                 let notAnsweredCorrectly = res.data.wordsLearned;
                 setWordsInLanguage(notAnsweredCorrectly);
 
-                let words = notAnsweredCorrectly.map(word => {
+                let words = notAnsweredCorrectly.map((word: any) => {
                     return { ...word, correct: false }
                 }); // add the field "correct" to the object
                 setWordsInQuiz(words); // note: may want to rename
@@ -125,7 +125,7 @@ export default function GenericQuiz() {
     }
 
 
-    async function verifyAnswer(value, enterKeyPressed) {
+    async function verifyAnswer(value: string, enterKeyPressed: boolean) {
         if (value === answer) {
             console.log('value: ', value);
             console.log('answer: ', answer);
@@ -178,7 +178,7 @@ export default function GenericQuiz() {
     }
 
 
-    function handleInputChange(e) {
+    function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
         e.preventDefault();
         const { value } = e.target;
         let lowercaseValue = value.toLowerCase();
@@ -190,13 +190,13 @@ export default function GenericQuiz() {
     }
 
 
-    const typeAccent = (value) => {
+    const typeAccent = (value: string) => {
         setUserInput(userInput + value);
         inputRef.current.focus();
 
     }
 
-    const handleEnterKeyPress = (e) => {
+    const handleEnterKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             let enterKeyPressed = true;
             verifyAnswer(userInput, enterKeyPressed);
@@ -295,19 +295,19 @@ export default function GenericQuiz() {
                                         <QuizQuestion word={wordToTranslate} />
 
                                         <div className="my-3">
-                                            {thisLanguageAccentMarks.map(mark => (
+                                            {thisLanguageAccentMarks.map((mark: any) => (
                                                 <button key={mark.letter} onClick={e => typeAccent(mark.letter)}>{mark.letter}</button>
                                             ))}
                                         </div>
 
 
                                         <Form.Label>Translate:</Form.Label>
-                                        <Form.Control id="quizInputField" type="text" placeholder="translate here" value={userInput} onChange={e => handleInputChange(e)}
+                                        <Form.Control id="quizInputField" type="text" placeholder="translate here" value={userInput} onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(e)}
                                             className={userInput === answer ? "correctAnswerInputBox" : "notAnswered"}
                                             readOnly={correct || incorrectAnswer}
                                             ref={inputRef}
-                                            onSubmit={e => e.preventDefault()}
-                                            onKeyDown={e => handleEnterKeyPress(e)}
+                                            onSubmit={(e: any) => e.preventDefault()}
+                                            onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => handleEnterKeyPress(e)}
                                         />
                                     </Col>
                                 </Row>
@@ -350,7 +350,7 @@ export default function GenericQuiz() {
 
                                         <p className="mt-3">Ready for more? <button className="btn btn-sm btn-success" onClick={resetAndReload}>Learn 15 more words</button></p>
 
-                                        <p>Or <Link to={`/generic/${languageNameUrlParam}`}>back to {capitalizeFirstLetter(languageNameUrlParam)} home</Link></p>
+                                        <p>Or <Link to={`/generic/${languageNameUrlParam}`}>back to {capitalizeFirstLetter(languageNameUrlParam || "")} home</Link></p>
 
                                     </Col>
                                 </Row>
