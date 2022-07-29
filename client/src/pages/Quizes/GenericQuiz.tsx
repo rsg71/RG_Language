@@ -63,30 +63,33 @@ export default function GenericQuiz() {
     }, [])
 
     function loadWords() {
-        setLoading(true);
-        API.getAllUnlearnedWords(languageNameUrlParam)
-            .then(res => {
-                console.log("words for this quiz: ", res.data);
-                let notAnsweredCorrectly = res.data.wordsLearned;
-                setWordsInLanguage(notAnsweredCorrectly);
+        if (languageNameUrlParam) {
+            setLoading(true);
+            API.getAllUnlearnedWords(languageNameUrlParam)
+                .then(res => {
+                    console.log("words for this quiz: ", res.data);
+                    let notAnsweredCorrectly = res.data.wordsLearned;
+                    setWordsInLanguage(notAnsweredCorrectly);
 
-                let words = notAnsweredCorrectly.map((word: any) => {
-                    return { ...word, correct: false }
-                }); // add the field "correct" to the object
-                setWordsInQuiz(words); // note: may want to rename
-                setCurrentWord(notAnsweredCorrectly[0]);
-                setQuestionsLength(notAnsweredCorrectly.length);
+                    let words = notAnsweredCorrectly.map((word: any) => {
+                        return { ...word, correct: false }
+                    }); // add the field "correct" to the object
+                    setWordsInQuiz(words); // note: may want to rename
+                    setCurrentWord(notAnsweredCorrectly[0]);
+                    setQuestionsLength(notAnsweredCorrectly.length);
 
-                setLoading(false);
-                setLoaded(true);
-                setError(false);
-            })
-            .catch(err => {
-                console.log(err);
-                setLoading(false);
-                setLoaded(false);
-                setError(true);
-            })
+                    setLoading(false);
+                    setLoaded(true);
+                    setError(false);
+                })
+                .catch(err => {
+                    console.log(err);
+                    setLoading(false);
+                    setLoaded(false);
+                    setError(true);
+                })
+        }
+
     }
     // ==============================================================
 
@@ -132,8 +135,8 @@ export default function GenericQuiz() {
             console.log("answer is correct!");
             setCorrect(true);
             setIncorrectAnswer(false);
-
-            let res = await API.answerWordCorrectly(languageNameUrlParam, currentWord._id, currentWord.word);
+            
+            let res = await API.answerWordCorrectly(languageNameUrlParam || "", currentWord._id, currentWord.word);
             console.log("word correctly answered res: ", res);
 
             console.log('wordsInQuiz: ', wordsInQuiz);
@@ -158,7 +161,7 @@ export default function GenericQuiz() {
         } else if (enterKeyPressed) {
             setCorrect(false);
             setIncorrectAnswer(true);
-            let res = await API.answerWordIncorrectly(languageNameUrlParam, currentWord._id, currentWord.word);
+            let res = await API.answerWordIncorrectly(languageNameUrlParam || "", currentWord._id, currentWord.word);
             console.log("word incorrectly answered res: ", res);
 
             let index = wordsInQuiz.findIndex(obj => obj.word === answer);

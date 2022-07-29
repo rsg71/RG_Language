@@ -40,36 +40,39 @@ export default function GenericReview() {
 
     useEffect(() => {
         setIsLoading(true);
+        if (languageNameUrlParam) {
 
-        API.getWordsForReviewForLanguageForUser(languageNameUrlParam)
-            .then(res => {
-                console.log("words to review: ", res);
+            API.getWordsForReviewForLanguageForUser(languageNameUrlParam)
+                .then(res => {
+                    console.log("words to review: ", res);
 
-                let words = res.data;
+                    let words = res.data;
 
-                setWordsToReview(words);
-                setIsLoading(false);
-                setIsLoaded(true);
+                    setWordsToReview(words);
+                    setIsLoading(false);
+                    setIsLoaded(true);
 
-                if (words.length > 0) {
-                    setCurrentWord(words[0]);
-                    setQuestionsLength(words.length);
+                    if (words.length > 0) {
+                        setCurrentWord(words[0]);
+                        setQuestionsLength(words.length);
 
-                    setCurrentWord(words[0]);
-                    setWordToTranslate(words[0].word);
-                    setAnswer(words[0].translation)
-                } else {
-                    setNoWordsToTranslate(true);
-                }
+                        setCurrentWord(words[0]);
+                        setWordToTranslate(words[0].word);
+                        setAnswer(words[0].translation)
+                    } else {
+                        setNoWordsToTranslate(true);
+                    }
 
 
-            })
-            .catch(err => {
-                console.log(err);
-                setError(true);
-                setIsLoading(false);
-                setIsLoaded(true);
-            })
+                })
+                .catch(err => {
+                    console.log(err);
+                    setError(true);
+                    setIsLoading(false);
+                    setIsLoaded(true);
+                })
+        }
+
     }, [])
 
 
@@ -95,19 +98,20 @@ export default function GenericReview() {
         if (value === answer) {
             console.log("answer is correct!");
             setCorrect(true);
+            if (languageNameUrlParam) {
+                let res = await API.answerWordCorrectly(languageNameUrlParam, currentWord._id, currentWord.word);
+                console.log("word correctly answered res: ", res);
 
-            let res = await API.answerWordCorrectly(languageNameUrlParam, currentWord._id, currentWord.word);
-            console.log("word correctly answered res: ", res);
-
-            setTimeout(() => {
-                setCorrectAnswers(correctAnswers + 1);
-                if (questionIndex < questionsLength) {
-                    setUserInput("")
-                    setQuestionIndex(questionIndex + 1)
-                    // renderQuestion()    
-                    setCorrect(false)
-                }
-            }, 2000)
+                setTimeout(() => {
+                    setCorrectAnswers(correctAnswers + 1);
+                    if (questionIndex < questionsLength) {
+                        setUserInput("")
+                        setQuestionIndex(questionIndex + 1)
+                        // renderQuestion()    
+                        setCorrect(false)
+                    }
+                }, 2000)
+            }
         }
     }
 
