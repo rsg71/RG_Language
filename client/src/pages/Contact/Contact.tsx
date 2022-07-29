@@ -10,26 +10,26 @@ export default function Contact() {
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
 
-    const form = useRef();
+    const form = useRef<any>();
 
     function simulateNetworkRequest() {
         return new Promise((resolve) => setTimeout(resolve, 2000));
     }
 
-    const serviceId = process.env.REACT_APP_YOUR_SERVICE_ID;
-    const templateId = process.env.REACT_APP_YOUR_TEMPLATE_ID;
-    const publicKey = process.env.REACT_APP_YOUR_PUBLIC_KEY;
+    const serviceId = process.env.REACT_APP_YOUR_SERVICE_ID || "";
+    const templateId = process.env.REACT_APP_YOUR_TEMPLATE_ID || "";
+    const publicKey = process.env.REACT_APP_YOUR_PUBLIC_KEY || "";
 
-
+// fdsfs
     // console.log('keys are: ', serviceId + '\n' + templateId + '\n' + publicKey + '\n');
 
-    const sendEmail = (e) => {
+    const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
         setSubmitting(true);
 
         e.preventDefault();
         console.log('form.current: ', form.current);
 
-        emailjs.sendForm(serviceId, templateId, form.current, publicKey)
+        emailjs.sendForm(serviceId, templateId, form.current as any, publicKey)
             .then((result) => {
                 console.log(result.text);
                 setSubmitting(false);

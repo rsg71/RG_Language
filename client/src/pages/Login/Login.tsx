@@ -4,7 +4,15 @@ import API from '../../utils/API';
 import { useNavigate, Link } from 'react-router-dom';
 import LoadingCard from '../../components/LoadingCard/LoadingCard';
 
-export default function Login({ handleSetUser, setLoading, setLoaded, setError, loading }) {
+interface Props {
+    handleSetUser: any;
+    setLoading: (loading: boolean) => void;
+    setLoaded: (loading: boolean) => void;
+    setError: (loading: boolean) => void;
+    loading: boolean;
+}
+
+export default function Login({ handleSetUser, setLoading, setLoaded, setError, loading }: Props) {
 
     let env = process.env.NODE_ENV;
 
@@ -22,8 +30,8 @@ export default function Login({ handleSetUser, setLoading, setLoaded, setError, 
         password: ""
     })
 
-    const handleChange = (e) => {
-        let { name, value } = e;
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let { name, value } = e.target;
         setFormData({ ...formData, [name]: value })
     }
 
@@ -113,10 +121,10 @@ export default function Login({ handleSetUser, setLoading, setLoaded, setError, 
                             <>
 
                                 <label>Username</label>
-                                <input name="username" value={formData.username} className="form-control" onChange={e => handleChange(e.target)} />
+                                <input name="username" value={formData.username} className="form-control" onChange={e => handleChange(e)} />
 
                                 <label>Password: </label>
-                                <input name="password" value={formData.password} className="form-control d-inline" onChange={e => handleChange(e.target)} type={showPassword ? "text" : "password"} />
+                                <input name="password" value={formData.password} className="form-control d-inline" onChange={e => handleChange(e)} type={showPassword ? "text" : "password"} />
                                 <span style={{ marginLeft: "-30px", cursor: "pointer" }} onClick={() => setShowPassword(!showPassword)} className="grey font-lg">
                                     <i className={showPassword ? "bi bi-eye" : "bi bi-eye-slash"} />
                                 </span>

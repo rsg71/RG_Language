@@ -1,7 +1,11 @@
 import React from 'react'
 import ProgressBar from "react-bootstrap/ProgressBar"
 
-export default function Progress({percent}) {
+interface Props {
+    percent: number;
+}
+
+export default function Progress({percent}: Props) {
 
     return (
         <>

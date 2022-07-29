@@ -1,7 +1,11 @@
 import React from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
 
-export default function PageContainer({ children }) {
+interface Props {
+    children: JSX.Element[];
+}
+
+export default function PageContainer({ children }: Props) {
     return (
         <div>
             <Container>

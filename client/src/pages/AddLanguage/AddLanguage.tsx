@@ -5,13 +5,15 @@ import LoadingCard from '../../components/LoadingCard/LoadingCard';
 import PageContainer from '../../components/PageContainer/PageContainer';
 import API from '../../utils/API';
 import { Link, useNavigate } from 'react-router-dom';
+import { CurrentUserInterface } from '../../utils/interfaces';
 
 export default function AddLanguage() {
 
     let navigate = useNavigate();
-    let currentUser = useContext(CurrentUserContext);
+    let currentUser: CurrentUserInterface = useContext(CurrentUserContext);
+    console.log("currentUser, check this out: ", currentUser);
 
-    const [languagesForThisUser, setLanguagesForThisUser] = useState([]);
+    const [languagesForThisUser, setLanguagesForThisUser] = useState<any>([]);
 
     const [isLoaded, setIsLoaded] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -42,11 +44,11 @@ export default function AddLanguage() {
     useEffect(() => {
         if (currentUser) {
             setIsLoading(true);
-            handlefindAllLanguagesForThisUser(currentUser._id);
+            handlefindAllLanguagesForThisUser();
         }
     }, [])
 
-    const handleAddLanguage = (languageChosen) => {
+    const handleAddLanguage = (languageChosen: any) => {
 
         if (currentUser) {
 
@@ -55,7 +57,7 @@ export default function AddLanguage() {
             API.addLanguage(languageChosen)
                 .then(res => {
                     console.log(res);
-                    handlefindAllLanguagesForThisUser(currentUser._id);
+                    handlefindAllLanguagesForThisUser();
                 })
                 .catch(err => {
                     console.log(err);
@@ -83,8 +85,8 @@ export default function AddLanguage() {
     ]
 
 
-    const isLanguageAlreadyBeingLearned = (languageName) => {
-        let isBeingLearned = languagesForThisUser.some(language => language.language === languageName.toLowerCase());
+    const isLanguageAlreadyBeingLearned = (languageName: string) => {
+        let isBeingLearned = languagesForThisUser.some((language: any) => language.language === languageName.toLowerCase());
         console.log(languageName, "isBeingLearned: ", isBeingLearned)
         return isBeingLearned;
     }
@@ -93,7 +95,7 @@ export default function AddLanguage() {
         <div>
             <PageContainer>
 
-                <Breadcrumb bg="white">
+                <Breadcrumb className="bg-white">
                     <Breadcrumb.Item as={Link} to="/user-home" onClick={() => navigate("/user-home")}>Home</Breadcrumb.Item>
                     <Breadcrumb.Item active>
                         Add language

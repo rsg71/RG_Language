@@ -10,17 +10,17 @@ import { capitalizeFirstLetter } from '../../utils/helperFunctions';
 
 export default function UserHome() {
 
-    let currentUser = useContext(CurrentUserContext);
+    let currentUser: any = useContext(CurrentUserContext);
 
     const navigate = useNavigate();
 
-    const [data, setData] = useState(null);
+    const [data, setData] = useState<any>(null);
     const [isLoadingData, setIsLoadingData] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
     const [error, setError] = useState(false);
 
 
-    const determineFlag = (language) => {
+    const determineFlag = (language: string) => {
         if (language === 'portuguese') { return 'brazil' }
         else if (language === 'french') { return 'france' }
         else if (language === 'german') { return 'germany' }
@@ -28,8 +28,8 @@ export default function UserHome() {
         else if (language === 'spanish') { return 'spain' }
     }
 
-    const determineBgColor = (language) => {
-        let foundLanguage = LanguagesJson.find(l => l.languageLowerCase === language);
+    const determineBgColor = (language: string) => {
+        let foundLanguage = LanguagesJson.find(l => l.languageLowerCase === language) as any;
         let backgroundColor = foundLanguage.bg;
         return backgroundColor;
     }
@@ -102,7 +102,7 @@ export default function UserHome() {
 
 
 
-                                    {data.map(language => (
+                                    {data.map((language: any) => (
                                         <Col sm={6} md={6} lg={3} key={language.language}>
                                             <Card key={language.language} bg={determineBgColor(language.language)}
                                                 onClick={() => navigate(`/generic/${language.language}`)}

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Breadcrumb} from "react-bootstrap";
 
-export default function Breadcrumbs(props) {
+export default function Breadcrumbs() {
     return (
         <>
             <Breadcrumb>
