@@ -1,11 +1,14 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react';
 import { Navbar, Nav, Dropdown, DropdownButton, ButtonGroup } from "react-bootstrap";
 import { Link, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../App';
 import API from '../../utils/API';
 
+interface Props {
+    setCurrentUser: (currentUser: any) => void;
+}
 
-export default function NavigationBar({ setCurrentUser }) {
+export default function NavigationBar({ setCurrentUser }: Props) {
 
     const [expanded, setExpanded] = useState(false);  // initially closed
 
