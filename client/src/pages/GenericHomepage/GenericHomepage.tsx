@@ -21,7 +21,7 @@ export default function GenericHomepage() {
     const [percentCorrect, setPercentCorrect] = useState(0);
 
     const loadData = () => {
-
+        if (languageName) {
         API.getLanguageDataForUser(currentUser._id, languageName)
             .then(res => {
                 console.log("languages for this user: ", res.data);
@@ -41,6 +41,7 @@ export default function GenericHomepage() {
             .catch(err => {
                 console.log(err);
             })
+        }
     }
 
     useEffect(() => {
