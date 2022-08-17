@@ -21,6 +21,7 @@ import User from "./models/user";
 import ensureAuthenticated from './auth';
 
 
+import logger from './logger';
 
 
 // Define middleware for JSON parsing
@@ -66,8 +67,8 @@ mongoose.connect(chooseConnection || "",
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({
-  origin: "http://localhost:3000", // <-- location of the react app we're connecting to
-  credentials: true
+    origin: "http://localhost:3000", // <-- location of the react app we're connecting to
+    credentials: true
 }))
 
 // Express sessions
@@ -90,17 +91,22 @@ require('./passportConfig')(passport);
 
 
 app.get("/test", (req: Request, res) => {
+    logger.warn(`${req.method} ${req.url}`);
     const date = new Date().toLocaleDateString();
     return res.send(`/test working as of ${date}`);
 })
 
 app.get("/api/auth/page-load-login", (req: Request, res: Response) => {
-    console.log("\n/api/auth/page-load-login req.user: ", req.user);
+    logger.warn(`${req.method} ${req.url}`);
+    logger.debug("user is...");
+    logger.debug({user: req.user});
 
     if (!req.user) {
         return res.status(404).send("no user found")
     } else {
+        logger.trace("user found upon page load login");
         const user = req.user as any;
+        logger.debug({user});
         let { username, id: _id } = user;
         let userData = { username, _id }
         return res.send(userData);
@@ -111,18 +117,19 @@ app.get("/api/auth/page-load-login", (req: Request, res: Response) => {
 
 
 app.post("/api/auth/login", (req: Request, res, next) => {
-    console.log("we're here")
+    logger.warn(`${req.method} ${req.url}`);
+
 
     passport.authenticate("local", {}, (err: any, user: any, info: any) => {
         if (err) {
-            console.log("ERROR!, ", err);
+            logger.error(err);
             // throw err
             res.send('error with this user')
         } else if (!user) {
 
             res.status(400).send("No User Exists dude")
         } else {
-            console.log("user is: ", user);
+            logger.debug({ user });
             req.logIn(user, (err) => {
                 if (err) throw err;
 
@@ -137,6 +144,7 @@ app.post("/api/auth/login", (req: Request, res, next) => {
 
 
 app.post("/api/auth/signup", (req: Request, res: Response) => {
+    logger.warn(`${req.method} ${req.url}`);
 
     console.log("new username is: ", req.body.username)
 
@@ -164,7 +172,7 @@ app.post("/api/auth/signup", (req: Request, res: Response) => {
 
 
 app.get("/api/auth/logout", (req: Request, res: Response, next) => {
-    console.log("GET /api/auth/logout");
+    logger.warn(`${req.method} ${req.url}`);
 
     req.logout(function (err) {
         if (err) {
@@ -173,34 +181,32 @@ app.get("/api/auth/logout", (req: Request, res: Response, next) => {
         }
     });
 
-    console.log("user has been logged out ✔");
+    logger.trace("user has been logged out ✔");
     return res.status(200).send("User successfully logged out");
 
 
 })
 
-const saySomething = (req: Request, res: Response, next: any) => {
-    console.log("HI!");
-    next();
-}
+
 
 app.get("/user", ensureAuthenticated, (req: Request, res: Response) => {
-    console.log("req.user: ", req.user);
-    console.log("GET /user")
-    console.log("=========================")
+    logger.warn(`${req.method} ${req.url}`);
+
+    logger.info({user: req.user});
     if (req.user) {
-        console.log("there is a user!")
+        logger.debug("there is a user!")
     } else {
-        console.log("no user found...")
+        logger.debug("no user found...")
     }
-    console.log("=========================")
     res.send(req.user) // <--- this is where the entire user is stored 
 })
 
 
 app.get("/users-languages", ensureAuthenticated, (req: Request, res: Response) => {
+    logger.warn(`${req.method} ${req.url}`);
+
     if (req.user) {
-        console.log("user exists on GET /users-languages");
+        logger.debug("user exists on GET /users-languages");
         const user = req.user as any;
         let id = user.id;
         let userData = {
