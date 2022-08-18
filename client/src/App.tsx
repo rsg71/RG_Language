@@ -43,6 +43,7 @@ import Error from "./components/Error/Error";
 import 'animate.css';
 import "./App.css";
 import { CurrentUserInterface } from "./utils/interfaces";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 export const CurrentUserContext = React.createContext<CurrentUserInterface>({
   _id: "",
@@ -87,7 +88,9 @@ function App() {
   //   })
   // }
 
+  const notLoggedInElement = <div></div>;
 
+  const isCurrentUser = currentUser !== null;
 
 
   useEffect(() => {
@@ -138,8 +141,6 @@ function App() {
               <Routes>
 
 
-
-
                 <Route path="/" element={<Home />} />
                 <Route path="/spanish" element={<Spanish />} />
                 <Route path="/spanish/up-for-review" element={<UpForReview />} />
@@ -173,26 +174,44 @@ function App() {
 
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={
-                  <Login handleSetUser={handleSetUser} setLoading={setLoading} setLoaded={setLoaded} setError={setError} loading={loading}/>
+                  <Login handleSetUser={handleSetUser} setLoading={setLoading} setLoaded={setLoaded} setError={setError} loading={loading} />
                 } />
 
+                {/* want these routes to be findable and render, but only logged in users can access them */}
 
-                {loaded && !error && !loading &&
-                  <>
-                    {/* {currentUser !== null && */}
-                    {/* <> */}
-                    <Route path="/user-home" element={<UserHome />} />
-                    <Route path="/user-profile" element={<UserProfile setCurrentUser={setCurrentUser} />} />
-                    {/* </> */}
-                    {/* } */}
+                {/* {loaded && !error && !loading && */}
+                <>
+                  <Route path="/user-home" element={
+                    <PrivateRoute>
+                      <UserHome />
+                    </PrivateRoute>
+                  } />
+                  <Route path="/user-profile" element={
+                    <PrivateRoute>
+                      <UserProfile setCurrentUser={setCurrentUser} />
+                    </PrivateRoute>
+                  } />
 
-                    <Route path="/add-language" element={<AddLanguage />} />
-                    <Route path="/generic/:languageName" element={<GenericHomepage />} />
-                    <Route path="/quiz/generic/:languageName" element={<GenericQuiz />} />
-                    <Route path="/review/generic/:languageName" element={<GenericReview />} />
+                  <Route path="/add-language" element={
+                    <PrivateRoute>
+                      <AddLanguage />
+                    </PrivateRoute>} />
+                  <Route path="/generic/:languageName" element={
+                    <PrivateRoute>
+                      <GenericHomepage />
+                    </PrivateRoute>} />
+                  <Route path="/quiz/generic/:languageName" element={
+                    <PrivateRoute>
+                      <GenericQuiz />
+                    </PrivateRoute>
+                  } />
+                  <Route path="/review/generic/:languageName" element={
+                    <PrivateRoute>
+                      <GenericReview />
+                    </PrivateRoute>
+                  } />
 
-                  </>
-                }
+                </>
 
 
 
