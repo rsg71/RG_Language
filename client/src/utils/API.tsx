@@ -82,6 +82,7 @@ export default {
 
     // Auth
     pageLoadCheckLoggedIn: function () {
+        console.log("checking if already logged in...");
         // console.log("page load check login login function being called by app.js")
         return axios.get(`/api/auth/page-load-login`)
     },
