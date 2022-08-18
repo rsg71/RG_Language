@@ -1,4 +1,5 @@
 import Express, { Request, Response } from "express";
+import { join } from "path";
 
 import mongoose from "mongoose";
 import routes from "./routes/index";
@@ -231,7 +232,10 @@ app.get("/users-languages", ensureAuthenticated, (req: Request, res: Response) =
 app.use(routes);
 
 
-
+// If no API routes are hit, send the React app
+app.use(function (req: Request, res: Response) {
+    res.sendFile(join(__dirname, "/client/build/index.html"));
+});
 
 app.listen(PORT, function () {
     console.log(`🌎 ==> API server now on port ${PORT}!`);
