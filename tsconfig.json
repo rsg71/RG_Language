@@ -30,6 +30,7 @@
     "models/**/*",
     "utils/**/*",
     "scripts/**/*",
-    "passportConfig.ts"
+    "passportConfig.ts",
+    "logger.ts"
   ]
 }

@@ -27,7 +27,7 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const cors_1 = __importDefault(require("cors"));
 const user_1 = __importDefault(require("./models/user"));
 const auth_1 = __importDefault(require("./auth"));
-const logger_1 = __importDefault(require("./logger"));
+// trivial change
 // Define middleware for JSON parsing
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
@@ -70,31 +70,23 @@ app.use(passport_1.default.initialize());
 app.use(passport_1.default.session());
 require('./passportConfig')(passport_1.default);
 app.get("/test", (req, res) => {
-    logger_1.default.warn(`${req.method} ${req.url}`);
     const date = new Date().toLocaleDateString();
     return res.send(`/test working as of ${date}`);
 });
 app.get("/api/auth/page-load-login", (req, res) => {
-    logger_1.default.warn(`${req.method} ${req.url}`);
-    logger_1.default.debug("user is...");
-    logger_1.default.debug({ user: req.user });
     if (!req.user) {
         return res.status(404).send("no user found");
     }
     else {
-        logger_1.default.trace("user found upon page load login");
         const user = req.user;
-        logger_1.default.debug({ user });
         let { username, id: _id } = user;
         let userData = { username, _id };
         return res.send(userData);
     }
 });
 app.post("/api/auth/login", (req, res, next) => {
-    logger_1.default.warn(`${req.method} ${req.url}`);
     passport_1.default.authenticate("local", {}, (err, user, info) => {
         if (err) {
-            logger_1.default.error(err);
             // throw err
             res.send('error with this user');
         }
@@ -102,7 +94,6 @@ app.post("/api/auth/login", (req, res, next) => {
             res.status(400).send("No User Exists dude");
         }
         else {
-            logger_1.default.debug({ user });
             req.logIn(user, (err) => {
                 if (err)
                     throw err;
@@ -115,7 +106,6 @@ app.post("/api/auth/login", (req, res, next) => {
     })(req, res, next);
 });
 app.post("/api/auth/signup", (req, res) => {
-    logger_1.default.warn(`${req.method} ${req.url}`);
     console.log("new username is: ", req.body.username);
     user_1.default.findOne({ username: req.body.username }, (err, doc) => __awaiter(void 0, void 0, void 0, function* () {
         if (err) {
@@ -138,31 +128,23 @@ app.post("/api/auth/signup", (req, res) => {
     }));
 });
 app.get("/api/auth/logout", (req, res, next) => {
-    logger_1.default.warn(`${req.method} ${req.url}`);
     req.logout(function (err) {
         if (err) {
             console.log("error upon logout attempt is: ", err);
             return next(err);
         }
     });
-    logger_1.default.trace("user has been logged out ✔");
     return res.status(200).send("User successfully logged out");
 });
 app.get("/user", auth_1.default, (req, res) => {
-    logger_1.default.warn(`${req.method} ${req.url}`);
-    logger_1.default.info({ user: req.user });
     if (req.user) {
-        logger_1.default.debug("there is a user!");
     }
     else {
-        logger_1.default.debug("no user found...");
     }
     res.send(req.user); // <--- this is where the entire user is stored 
 });
 app.get("/users-languages", auth_1.default, (req, res) => {
-    logger_1.default.warn(`${req.method} ${req.url}`);
     if (req.user) {
-        logger_1.default.debug("user exists on GET /users-languages");
         const user = req.user;
         let id = user.id;
         let userData = {
