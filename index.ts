@@ -20,7 +20,7 @@ import cors from "cors";
 import User from "./models/user";
 import ensureAuthenticated from './auth';
 
-// trivial change
+import logger from './logger';
 
 
 
@@ -91,12 +91,13 @@ require('./passportConfig')(passport);
 
 
 app.get("/test", (req: Request, res) => {
+    logger.trace(`${req.method} ${req.url}`);
     const date = new Date().toLocaleDateString();
     return res.send(`/test working as of ${date}`);
 })
 
 app.get("/api/auth/page-load-login", (req: Request, res: Response) => {
-
+    logger.trace(`${req.method} ${req.url}`);
     if (!req.user) {
         return res.status(404).send("no user found")
     } else {
@@ -111,7 +112,7 @@ app.get("/api/auth/page-load-login", (req: Request, res: Response) => {
 
 
 app.post("/api/auth/login", (req: Request, res, next) => {
-
+    logger.trace(`${req.method} ${req.url}`);
 
     passport.authenticate("local", {}, (err: any, user: any, info: any) => {
         if (err) {
@@ -135,6 +136,7 @@ app.post("/api/auth/login", (req: Request, res, next) => {
 
 
 app.post("/api/auth/signup", (req: Request, res: Response) => {
+    logger.trace(`${req.method} ${req.url}`);
 
     console.log("new username is: ", req.body.username)
 
@@ -162,6 +164,7 @@ app.post("/api/auth/signup", (req: Request, res: Response) => {
 
 
 app.get("/api/auth/logout", (req: Request, res: Response, next) => {
+    logger.trace(`${req.method} ${req.url}`);
 
     req.logout(function (err) {
         if (err) {
@@ -178,6 +181,7 @@ app.get("/api/auth/logout", (req: Request, res: Response, next) => {
 
 
 app.get("/user", ensureAuthenticated, (req: Request, res: Response) => {
+    logger.trace(`${req.method} ${req.url}`);
 
     if (req.user) {
     } else {
@@ -187,6 +191,7 @@ app.get("/user", ensureAuthenticated, (req: Request, res: Response) => {
 
 
 app.get("/users-languages", ensureAuthenticated, (req: Request, res: Response) => {
+    logger.trace(`${req.method} ${req.url}`);
 
     if (req.user) {
         const user = req.user as any;

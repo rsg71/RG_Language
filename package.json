@@ -14,7 +14,7 @@
     "build": "cd client && npm run build",
     "heroku-postbuild": "npx tsc && npm run build",
     "ts-build": "npx tsc",
-    "start-app-typescript:dev": "set NODE_ENV=dev&& node dist/index.js",
+    "start-app-typescript:dev": "set NODE_ENV=dev&& node dist/index.js | pino-pretty",
     "start-app-typescript:prod": "node dist/index.js"
   },
   "author": "",
