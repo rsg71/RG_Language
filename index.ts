@@ -20,7 +20,7 @@ import cors from "cors";
 import User from "./models/user";
 import ensureAuthenticated from './auth';
 
-
+// trivial change
 
 
 // Define middleware for JSON parsing
