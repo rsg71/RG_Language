@@ -23,6 +23,7 @@ import ensureAuthenticated from './auth';
 // trivial change
 
 
+
 // Define middleware for JSON parsing
 app.use(Express.urlencoded({ extended: true }));
 app.use(Express.json());
@@ -66,8 +67,8 @@ mongoose.connect(chooseConnection || "",
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({
-  origin: "http://localhost:3000", // <-- location of the react app we're connecting to
-  credentials: true
+    origin: "http://localhost:3000", // <-- location of the react app we're connecting to
+    credentials: true
 }))
 
 // Express sessions
@@ -95,7 +96,6 @@ app.get("/test", (req: Request, res) => {
 })
 
 app.get("/api/auth/page-load-login", (req: Request, res: Response) => {
-    console.log("\n/api/auth/page-load-login req.user: ", req.user);
 
     if (!req.user) {
         return res.status(404).send("no user found")
@@ -111,18 +111,16 @@ app.get("/api/auth/page-load-login", (req: Request, res: Response) => {
 
 
 app.post("/api/auth/login", (req: Request, res, next) => {
-    console.log("we're here")
+
 
     passport.authenticate("local", {}, (err: any, user: any, info: any) => {
         if (err) {
-            console.log("ERROR!, ", err);
             // throw err
             res.send('error with this user')
         } else if (!user) {
 
             res.status(400).send("No User Exists dude")
         } else {
-            console.log("user is: ", user);
             req.logIn(user, (err) => {
                 if (err) throw err;
 
@@ -164,7 +162,6 @@ app.post("/api/auth/signup", (req: Request, res: Response) => {
 
 
 app.get("/api/auth/logout", (req: Request, res: Response, next) => {
-    console.log("GET /api/auth/logout");
 
     req.logout(function (err) {
         if (err) {
@@ -173,34 +170,25 @@ app.get("/api/auth/logout", (req: Request, res: Response, next) => {
         }
     });
 
-    console.log("user has been logged out ✔");
     return res.status(200).send("User successfully logged out");
 
 
 })
 
-const saySomething = (req: Request, res: Response, next: any) => {
-    console.log("HI!");
-    next();
-}
+
 
 app.get("/user", ensureAuthenticated, (req: Request, res: Response) => {
-    console.log("req.user: ", req.user);
-    console.log("GET /user")
-    console.log("=========================")
+
     if (req.user) {
-        console.log("there is a user!")
     } else {
-        console.log("no user found...")
     }
-    console.log("=========================")
     res.send(req.user) // <--- this is where the entire user is stored 
 })
 
 
 app.get("/users-languages", ensureAuthenticated, (req: Request, res: Response) => {
+
     if (req.user) {
-        console.log("user exists on GET /users-languages");
         const user = req.user as any;
         let id = user.id;
         let userData = {

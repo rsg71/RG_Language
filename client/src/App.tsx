@@ -95,7 +95,7 @@ function App() {
     setLoading(true);
     API.pageLoadCheckLoggedIn()
       .then(res => {
-        // console.log("test login res: ", res)
+        console.log("check if logged in res: ", res.data);
         setCurrentUser(res.data);
         setLoading(false);
         setLoaded(true);
@@ -103,6 +103,7 @@ function App() {
 
       })
       .catch(err => {
+        console.log("check if loggedin err");
         console.log(err);
         setLoading(false);
         setLoaded(false);

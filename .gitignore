@@ -4,5 +4,6 @@ package-lock.json
 .DS_Store
 .env.dev
 .notes.env
-dist/
 client/build/
+.notes.env
+dist/
