@@ -20,8 +20,8 @@ import cors from "cors";
 import User from "./models/user";
 import ensureAuthenticated from './auth';
 
+// trivial change
 
-import logger from './logger';
 
 
 // Define middleware for JSON parsing
@@ -91,22 +91,16 @@ require('./passportConfig')(passport);
 
 
 app.get("/test", (req: Request, res) => {
-    logger.warn(`${req.method} ${req.url}`);
     const date = new Date().toLocaleDateString();
     return res.send(`/test working as of ${date}`);
 })
 
 app.get("/api/auth/page-load-login", (req: Request, res: Response) => {
-    logger.warn(`${req.method} ${req.url}`);
-    logger.debug("user is...");
-    logger.debug({user: req.user});
 
     if (!req.user) {
         return res.status(404).send("no user found")
     } else {
-        logger.trace("user found upon page load login");
         const user = req.user as any;
-        logger.debug({user});
         let { username, id: _id } = user;
         let userData = { username, _id }
         return res.send(userData);
@@ -117,19 +111,16 @@ app.get("/api/auth/page-load-login", (req: Request, res: Response) => {
 
 
 app.post("/api/auth/login", (req: Request, res, next) => {
-    logger.warn(`${req.method} ${req.url}`);
 
 
     passport.authenticate("local", {}, (err: any, user: any, info: any) => {
         if (err) {
-            logger.error(err);
             // throw err
             res.send('error with this user')
         } else if (!user) {
 
             res.status(400).send("No User Exists dude")
         } else {
-            logger.debug({ user });
             req.logIn(user, (err) => {
                 if (err) throw err;
 
@@ -144,7 +135,6 @@ app.post("/api/auth/login", (req: Request, res, next) => {
 
 
 app.post("/api/auth/signup", (req: Request, res: Response) => {
-    logger.warn(`${req.method} ${req.url}`);
 
     console.log("new username is: ", req.body.username)
 
@@ -172,7 +162,6 @@ app.post("/api/auth/signup", (req: Request, res: Response) => {
 
 
 app.get("/api/auth/logout", (req: Request, res: Response, next) => {
-    logger.warn(`${req.method} ${req.url}`);
 
     req.logout(function (err) {
         if (err) {
@@ -181,7 +170,6 @@ app.get("/api/auth/logout", (req: Request, res: Response, next) => {
         }
     });
 
-    logger.trace("user has been logged out ✔");
     return res.status(200).send("User successfully logged out");
 
 
@@ -190,23 +178,17 @@ app.get("/api/auth/logout", (req: Request, res: Response, next) => {
 
 
 app.get("/user", ensureAuthenticated, (req: Request, res: Response) => {
-    logger.warn(`${req.method} ${req.url}`);
 
-    logger.info({user: req.user});
     if (req.user) {
-        logger.debug("there is a user!")
     } else {
-        logger.debug("no user found...")
     }
     res.send(req.user) // <--- this is where the entire user is stored 
 })
 
 
 app.get("/users-languages", ensureAuthenticated, (req: Request, res: Response) => {
-    logger.warn(`${req.method} ${req.url}`);
 
     if (req.user) {
-        logger.debug("user exists on GET /users-languages");
         const user = req.user as any;
         let id = user.id;
         let userData = {

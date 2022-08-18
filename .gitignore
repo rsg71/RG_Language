@@ -6,3 +6,4 @@ package-lock.json
 .notes.env
 client/build/
 .notes.env
+dist/
