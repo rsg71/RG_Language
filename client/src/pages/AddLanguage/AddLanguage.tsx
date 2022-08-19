@@ -65,21 +65,27 @@ export default function AddLanguage() {
         }
     }
 
+
     let languages = [
         {
-            name: "French"
+            name: "French",
+            words: 100
         },
         {
-            name: "Spanish"
+            name: "Spanish",
+            words: 245
         },
         {
-            name: "Italian"
+            name: "Italian",
+            words: 1000
         },
         {
-            name: "Portuguese"
+            name: "Portuguese",
+            words: 100
         },
         {
-            name: "German"
+            name: "German",
+            words: 100
         },
 
     ]
@@ -126,6 +132,9 @@ export default function AddLanguage() {
                                                 {!isLanguageAlreadyBeingLearned(language.name) &&
                                                     <button className="btn btn-primary" onClick={() => handleAddLanguage(language.name)}>Add</button>
                                                 }
+                                            </div>
+                                            <div className="text-muted">
+                                            {`total words: ${language.words}`}
                                             </div>
                                         </div>
                                     ))}
