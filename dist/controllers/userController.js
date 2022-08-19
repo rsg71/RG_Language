@@ -13,22 +13,43 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const models_1 = __importDefault(require("../models"));
+const logger_1 = __importDefault(require("../logger"));
+const frenchSeed_1 = __importDefault(require("../utils/frenchSeed"));
+const germanSeed_1 = __importDefault(require("../utils/germanSeed"));
+const italianSeed_1 = __importDefault(require("../utils/italianSeed"));
+const portugueseSeed_1 = __importDefault(require("../utils/portugueseSeed"));
+const spanishSeed_1 = __importDefault(require("../utils/spanishSeed"));
 const helperFunctions_1 = require("../utils/helperFunctions");
 const userController = {
     addLanguage: function (req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const user = req.user;
             console.log("==========================================");
-            console.log(`attempting to add a language for user ${user.username} id ${user.id}`);
+            logger_1.default.debug(`attempting to add a language for user ${user.username} id ${user.id}`);
             console.log("req.body: ", req.body);
             console.log("req.user: ", req.user);
             console.log("userId: ===> ", user.id);
-            let username = user.username;
             let newLanguage = req.body.language.toLowerCase();
-            let seedToFind = require(`../utils/${newLanguage}Seed`);
+            function determineSeedToUse(newLanguage) {
+                if (newLanguage === 'french') {
+                    return frenchSeed_1.default;
+                }
+                else if (newLanguage === 'german') {
+                    return germanSeed_1.default;
+                }
+                else if (newLanguage === 'italian') {
+                    return italianSeed_1.default;
+                }
+                else if (newLanguage === 'portuguese') {
+                    return portugueseSeed_1.default;
+                }
+                else if (newLanguage === 'spanish') {
+                    return spanishSeed_1.default;
+                }
+            }
             let newUserLanguage = {
                 language: newLanguage,
-                wordsLearned: seedToFind,
+                wordsLearned: determineSeedToUse(newLanguage),
                 userId: user.id // an id really
             };
             console.log("newUserLanguage: ", newUserLanguage);
@@ -40,11 +61,12 @@ const userController = {
                 return res.send("language already exists");
             }
             else {
-                console.log("languageFound is: ", languageFound);
+                logger_1.default.debug("languageFound is: ", languageFound);
                 models_1.default.UserCollection
                     .create(newUserLanguage)
                     .then((words) => {
-                    console.log(`inserted ${newUserLanguage.language} for this user`);
+                    const wordsLength = newUserLanguage.wordsLearned.length;
+                    logger_1.default.info(`inserted ${newUserLanguage.language} for this user with ${wordsLength} words`);
                     console.log(words);
                     res.json(words);
                     console.log('sent');

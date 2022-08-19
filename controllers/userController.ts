@@ -1,6 +1,12 @@
 import db from "../models";
 import path from 'path';
 import { Request, Response } from 'express';
+import logger from '../logger';
+import frenchSeed from '../utils/frenchSeed';
+import germanSeed from '../utils/germanSeed';
+import italianSeed from '../utils/italianSeed';
+import portugueseSeed from '../utils/portugueseSeed';
+import spanishSeed from '../utils/spanishSeed';
 
 import { getDateXDaysAgo, getDateXDaysAhead } from '../utils/helperFunctions';
 
@@ -10,20 +16,30 @@ const userController = {
         const user = req.user as any;
 
         console.log("==========================================")
-        console.log(`attempting to add a language for user ${user.username} id ${user.id}`)
+        logger.debug(`attempting to add a language for user ${user.username} id ${user.id}`)
         console.log("req.body: ", req.body);
         console.log("req.user: ", req.user);
         console.log("userId: ===> ", user.id);
-        let username = user.username;
 
         let newLanguage = req.body.language.toLowerCase();
 
-
-        let seedToFind = require(`../utils/${newLanguage}Seed`);
+        function determineSeedToUse (newLanguage: string) {
+            if (newLanguage === 'french') {
+                return frenchSeed
+            } else if (newLanguage === 'german') {
+                return germanSeed
+            } else if (newLanguage === 'italian') {
+                return italianSeed
+            } else if (newLanguage === 'portuguese') {
+                return portugueseSeed
+            } else if (newLanguage === 'spanish') {
+                return spanishSeed
+            }
+        }
 
         let newUserLanguage = {
             language: newLanguage,
-            wordsLearned: seedToFind,
+            wordsLearned: determineSeedToUse(newLanguage),
             userId: user.id // an id really
         }
         console.log("newUserLanguage: ", newUserLanguage)
@@ -39,13 +55,14 @@ const userController = {
             return res.send("language already exists")
         } else {
 
-            console.log("languageFound is: ", languageFound);
+            logger.debug("languageFound is: ", languageFound);
 
             db.UserCollection
                 .create(newUserLanguage)
                 .then((words: any) => {
-                    console.log(`inserted ${newUserLanguage.language} for this user`);
-                    console.log(words)
+                    const wordsLength = newUserLanguage.wordsLearned!.length;
+                    logger.info(`inserted ${newUserLanguage.language} for this user with ${wordsLength} words`);
+                    console.log(words);
                     res.json(words);
                     console.log('sent')
                 })
