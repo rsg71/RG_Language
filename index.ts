@@ -1,4 +1,4 @@
-import Express, { Request, Response } from "express";
+import Express from "express";
 
 import mongoose from "mongoose";
 import routes from "./routes/index";
@@ -14,11 +14,6 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import bodyParser from "body-parser";
 import cors from "cors";
-
-
-import ensureAuthenticated from './auth';
-
-import logger from './logger';
 
 
 
@@ -37,12 +32,9 @@ if (process.env.NODE_ENV === "production") {
 
 
 
-
-
 let isDev = process.env.NODE_ENV === 'dev';
 
 let chooseConnection = isDev ? process.env.DEV_MONGO : process.env.MONGODB_URI;
-
 
 
 
@@ -87,67 +79,8 @@ require('./passportConfig')(passport);
 
 
 
-
-app.get("/test", (req: Request, res) => {
-    logger.trace(`${req.method} ${req.url}`);
-    const date = new Date().toLocaleDateString();
-    return res.send(`/test working as of ${date}`);
-})
-
-
-
-
-
-app.get("/user", ensureAuthenticated, (req: Request, res: Response) => {
-    logger.trace(`${req.method} ${req.url}`);
-
-    if (req.user) {
-    } else {
-    }
-    res.send(req.user) // <--- this is where the entire user is stored 
-})
-
-
-app.get("/users-languages", ensureAuthenticated, (req: Request, res: Response) => {
-    logger.trace(`${req.method} ${req.url}`);
-
-    if (req.user) {
-        const user = req.user as any;
-        let id = user.id;
-        let userData = {
-            languages: [
-                {
-                    name: "Spanish",
-                    flag: "spain",
-                    bg: "warning",
-                    totalWords: "25,000",
-                    isActive: true, // what is this
-                    wordsLearned: [
-                        {
-                            id: 1,
-                            word: "hola",
-                            translation: "hello",
-                            lastDateAnsweredCorrectly: new Date()
-                        },
-                        {
-                            id: 2,
-                            word: "mono",
-                            translation: "monkey",
-                            lastDateAnsweredCorrectly: null
-                        }
-                    ]
-                }
-            ]
-        }
-
-        return res.send(userData)
-    } else throw new Error('no user')
-})
-
-
 // api routes
 app.use(routes);
-
 
 
 
