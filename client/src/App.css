@@ -18,13 +18,13 @@ input:focus, input:active {
     white-space: nowrap;
 }
 
-.rotateBtn::after {
-   content: url(/client/images/chevron-right.svg);
+/* .rotateBtn::after {
+   content: url(/images/chevron-right.svg);
    width:15px;
    height:15px;
    display:inline-flex;
    color:black;
-}
+} */
 
 .font-lg {
     font-size: large !important;
