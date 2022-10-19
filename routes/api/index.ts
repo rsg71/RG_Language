@@ -5,6 +5,7 @@ import germanRoutes from "./german";
 import italianRoutes from "./italian";
 import portugueseRoutes from "./portuguese";
 import userRoutes from "./users";
+import authRoutes from "./auth";
 
 
 // ALL below routes start with /api
@@ -19,6 +20,8 @@ router.use("/german", germanRoutes);
 router.use("/italian", italianRoutes);
 // Portuguese routes
 router.use("/portuguese", portugueseRoutes);
+// Auth routes
+router.use("/auth", authRoutes);
 
 // User routes 
 router.use("/users/languages", userRoutes);

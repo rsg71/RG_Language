@@ -10,6 +10,7 @@ const german_1 = __importDefault(require("./german"));
 const italian_1 = __importDefault(require("./italian"));
 const portuguese_1 = __importDefault(require("./portuguese"));
 const users_1 = __importDefault(require("./users"));
+const auth_1 = __importDefault(require("./auth"));
 // ALL below routes start with /api
 //Spanish Routes
 router.use("/spanish", spanish_1.default);
@@ -21,6 +22,8 @@ router.use("/german", german_1.default);
 router.use("/italian", italian_1.default);
 // Portuguese routes
 router.use("/portuguese", portuguese_1.default);
+// Auth routes
+router.use("/auth", auth_1.default);
 // User routes 
 router.use("/users/languages", users_1.default);
 exports.default = router;
