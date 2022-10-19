@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import routes from "./routes/index";
 const app = Express();
 const PORT = process.env.PORT || 3001;
+import config from './config/index';
 
 
 require('dotenv').config();
@@ -32,26 +33,22 @@ if (process.env.NODE_ENV === "production") {
 
 
 
-let isDev = process.env.NODE_ENV === 'dev';
+const mongooseOptions = {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true
+}
 
-let chooseConnection = isDev ? process.env.DEV_MONGO : process.env.MONGODB_URI;
 
 
 
-
-let whatIsEnvironment = process.env.NODE_ENV;
-console.log("ENVIRONMENT: ", whatIsEnvironment);
-//
 // Connect to Mongoose --- //
-mongoose.connect(chooseConnection || "",
-    { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
-)
+mongoose.connect(config.chooseConnection || "", mongooseOptions)
     .then((res: any) => {
         console.log("connected successfully to: ", res.connections[0]._connectionString)
         console.log("mongodb is successfully connected ✔");
     })
-    .catch((err: any) => console.log("err!: ", err))
-    ;
+    .catch((err: any) => console.log("err!: ", err));
 
 
 app.use(bodyParser.json());
