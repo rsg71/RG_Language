@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const auth_1 = __importDefault(require("../auth"));
 const path_1 = require("path");
+const config_1 = __importDefault(require("../config"));
 const router = require("express").Router();
 const api_1 = __importDefault(require("./api"));
 const logger_1 = __importDefault(require("../logger"));
@@ -59,7 +60,7 @@ router.get("/users-languages", auth_1.default, (req, res) => {
 router.use("/api", api_1.default);
 // If no API routes are hit, send the React app
 router.use(function (req, res) {
-    if (process.env.NODE_ENV === 'production') {
+    if (config_1.default.NODE_ENV === 'production') {
         // in production, we're already in app/dist/routes/index.js. We need to go outside of app/dist/routes/index.js all the way back into app/ and then from there into client/
         // this will be in /app/dist/client/build/index.html
         res.sendFile((0, path_1.join)(__dirname, "../../client/build/index.html"));

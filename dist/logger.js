@@ -4,9 +4,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const pino_1 = __importDefault(require("pino"));
-console.log("log level for pino is: ", process.env.LOG_LEVEL);
+const config_1 = __importDefault(require("./config"));
+console.log("log level for pino is: ", config_1.default.LOG_LEVEL);
 const logger = (0, pino_1.default)({
-    level: process.env.LOG_LEVEL || "info"
+    level: config_1.default.LOG_LEVEL || "info"
 });
 exports.default = logger;
 //# sourceMappingURL=logger.js.map
