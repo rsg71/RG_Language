@@ -19,12 +19,11 @@ const spanishSeed = require("../utils/spanishSeed");
 const germanSeed = require("../utils/germanSeed");
 const italianSeed = require("../utils/italianSeed");
 const portugueseSeed = require("../utils/portugueseSeed");
+const config_1 = __importDefault(require("../config"));
 // This file empties the spanish collection and inserts the spanish words & translations below
 require('dotenv').config();
-console.log("mongodb is: ", process.env.MONGODB_URI);
-let isDev = process.env.NODE_ENV === 'dev';
-let chooseConnection = isDev ? process.env.DEV_MONGO : process.env.MONGODB_URI;
-let whatIsEnvironment = process.env.NODE_ENV;
+console.log("mongodb is: ", config_1.default.MONGODB_URI);
+let whatIsEnvironment = config_1.default.NODE_ENV;
 console.log("ENVIRONMENT: ", whatIsEnvironment);
 //
 mongoose_1.default.connect('mongodb://localhost/rgLanguage').then((res) => {

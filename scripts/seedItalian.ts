@@ -1,20 +1,21 @@
 import mongoose from 'mongoose';
 import db from "../models";
 import italianSeed from "../utils/italianSeed";
+import config from '../config';
 
 // This file empties the italian collection and inserts the italian words & translations below
 
 require('dotenv').config();
 
-console.log("mongodb is: ", process.env.MONGODB_URI);
+console.log("mongodb is: ", config.MONGODB_URI);
 
 
 
-let isDev = process.env.NODE_ENV === 'dev';
+let isDev = config.NODE_ENV === 'dev';
 
-let chooseConnection = isDev ? process.env.DEV_MONGO : process.env.MONGODB_URI;
+let chooseConnection = isDev ? config.DEV_MONGO : config.MONGODB_URI;
 
-let whatIsEnvironment = process.env.NODE_ENV;
+let whatIsEnvironment = config.NODE_ENV;
 console.log("ENVIRONMENT: ", whatIsEnvironment);
 //
 
@@ -37,7 +38,7 @@ const seedDb = async () => {
 }
 
 
-mongoose.connect(process.env.MONGODB_URI as string).then((res: any) => {
+mongoose.connect(config.MONGODB_URI as string).then((res: any) => {
     console.log("connected successfully: ", res.connections[0]._connectionString);
     seedDb();
 })

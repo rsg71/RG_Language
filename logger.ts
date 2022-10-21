@@ -1,9 +1,10 @@
 import pino from 'pino';
+import config from './config';
 
-console.log("log level for pino is: ", process.env.LOG_LEVEL);
+console.log("log level for pino is: ", config.LOG_LEVEL);
 
 const logger = pino({
-    level: process.env.LOG_LEVEL || "info"
+    level: config.LOG_LEVEL || "info"
 });
 
 export default logger;

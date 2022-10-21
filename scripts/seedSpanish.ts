@@ -1,20 +1,20 @@
 import mongoose from 'mongoose';
 import db from "../models";
 import spanishSeed from "../utils/spanishSeed";
+import config from '../config';
 
 // This file empties the spanish collection and inserts the spanish words & translations below
 
-require('dotenv').config();
 
-console.log("mongodb is: ", process.env.MONGODB_URI);
-
+console.log("mongodb is: ", config.MONGODB_URI);
 
 
-let isDev = process.env.NODE_ENV === 'dev';
 
-let chooseConnection = isDev ? process.env.DEV_MONGO : process.env.MONGODB_URI;
+let isDev = config.NODE_ENV === 'dev';
 
-let whatIsEnvironment = process.env.NODE_ENV;
+let chooseConnection = isDev ? config.DEV_MONGO : config.MONGODB_URI;
+
+let whatIsEnvironment = config.NODE_ENV;
 console.log("ENVIRONMENT: ", whatIsEnvironment);
 //
 
