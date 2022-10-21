@@ -6,24 +6,25 @@ import italianRoutes from "./italian";
 import portugueseRoutes from "./portuguese";
 import userRoutes from "./users";
 import authRoutes from "./auth";
+import ensureAuthenticated from "./auth";
 
 
 // ALL below routes start with /api
 
 //Spanish Routes
-router.use("/spanish", spanishRoutes);
+router.use("/spanish", ensureAuthenticated, spanishRoutes);
 //French Routes
-router.use("/french", frenchRoutes);
+router.use("/french", ensureAuthenticated, frenchRoutes);
 // German Routes
-router.use("/german", germanRoutes);
+router.use("/german", ensureAuthenticated, germanRoutes);
 // Italian routes
-router.use("/italian", italianRoutes);
+router.use("/italian", ensureAuthenticated, italianRoutes);
 // Portuguese routes
-router.use("/portuguese", portugueseRoutes);
+router.use("/portuguese", ensureAuthenticated, portugueseRoutes);
 // Auth routes
 router.use("/auth", authRoutes);
 
 // User routes 
-router.use("/users/languages", userRoutes);
+router.use("/users/languages", ensureAuthenticated, userRoutes);
 
 export default router;
