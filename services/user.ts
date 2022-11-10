@@ -6,13 +6,17 @@ import { getDateXDaysAgo, getDateXDaysAhead } from '../utils/helperFunctions';
 
 const UserCollection = db.UserCollection;
 
+
 export default class UserService {
 
     public async FindLanguage(language: string, userId: string) {
-
-        const languageFound = await UserCollection.find({ language, userId });
-        console.log("languageFound is: ", languageFound);
-        return languageFound;
+        try {
+            const languageFound = await UserCollection.find({ language, userId });
+            console.log("languageFound is: ", languageFound);
+            return languageFound;
+        } catch (err: any) {
+            throw new Error(err.message);
+        }
     }
 
     public async FindAllLanguagesForUser(userId: string) {
@@ -20,16 +24,21 @@ export default class UserService {
             const allLanguageForUser = await db.UserCollection.find({ userId: userId });
             return allLanguageForUser
         } catch (err: any) {
-            return new Error(err.message);
+            throw new Error(err.message);
         }
     }
 
     public async CreateUserLanguage(newLanguageForUser: any) {
-        const newLanguageCreated = await UserCollection.create(newLanguageForUser);
-        console.log('newLangauge: ', newLanguageCreated);
-        const wordsLength = newLanguageForUser.wordsLearned!.length;
-        logger.info(`inserted ${newLanguageForUser.language} for this user with ${wordsLength} words`);
-        return newLanguageCreated;
+        try {
+            const newLanguageCreated = await UserCollection.create(newLanguageForUser);
+            console.log('newLangauge: ', newLanguageCreated);
+            const wordsLength = newLanguageForUser.wordsLearned!.length;
+            logger.info(`inserted ${newLanguageForUser.language} for this user with ${wordsLength} words`);
+            return newLanguageCreated;
+
+        } catch (err: any) {
+            throw new Error(err.message);
+        }
     }
 
     public assembleNewLanguageForUser(newLanguage: any, userId: string) {
@@ -43,28 +52,27 @@ export default class UserService {
 
 
     public async validateAndCreateLanguageForUser(languageToFind: any, userId: string) {
-        // ==========================================================
+        try {
+            const newUserLanguage = this.assembleNewLanguageForUser(languageToFind, userId)
+            console.log("newUserLanguage: ", newUserLanguage);
 
-        let newUserLanguage = this.assembleNewLanguageForUser(languageToFind, userId)
-        console.log("newUserLanguage: ", newUserLanguage);
+            // call to service layer
+            // Abstraction on how to access the data layer and the "business" logic
+            const languageFound = await this.FindLanguage(languageToFind, userId);
+            console.log("languageFound is: ", languageFound);
 
-        // call to service layer
-        // Abstraction on how to access the data layer and the "business" logic
-        let languageFound = await this.FindLanguage(languageToFind, userId);
-        console.log("languageFound is: ", languageFound);
+            if (languageFound.length > 0) {
+                throw new Error("language already exists")
+            } else {
+                logger.debug("languageFound is: ", languageFound);
 
-
-        if (languageFound.length > 0) {
-            throw new Error("language already exists")
-        } else {
-
-            logger.debug("languageFound is: ", languageFound);
-
-            const newLanguage = this.CreateUserLanguage(newUserLanguage);
-            return newLanguage;
-
+                const newLanguage = this.CreateUserLanguage(newUserLanguage);
+                return newLanguage;
+            }
+        } catch (err: any) {
+            logger.error(err);
+            throw new Error(err.message);
         }
-        // ==========================================================
     }
 
     public async answerWordCorrectly(user: any, wordToLookFor: string, language: string) {
@@ -74,14 +82,14 @@ export default class UserService {
                 return new Error('no user found');
             }
 
-            let filter = { userId: user.id, language: language };
-            let targetLanguageForUser = await db.UserCollection.find(filter);
+            const filter = { userId: user.id, language: language };
+            const targetLanguageForUser = await db.UserCollection.find(filter);
             console.log("targetLanguageForUser: ", targetLanguageForUser);
 
 
             // finding the word obj within the wordsLearned array for this user
-            let wordToUpdateObj = targetLanguageForUser[0].wordsLearned.find((item: any) => item.word === wordToLookFor);
-            let indexOfWordToUpdate = (targetLanguageForUser[0].wordsLearned.findIndex((item: any) => item.word === wordToLookFor)) + 1;
+            const wordToUpdateObj = targetLanguageForUser[0].wordsLearned.find((item: any) => item.word === wordToLookFor);
+            const indexOfWordToUpdate = (targetLanguageForUser[0].wordsLearned.findIndex((item: any) => item.word === wordToLookFor)) + 1;
 
             let instances = wordToUpdateObj.instancesWordHasBeenSeen;
 
@@ -137,7 +145,7 @@ export default class UserService {
             return 'language updated successfully with correctly answered word';
 
         } catch (err: any) {
-            return new Error(err.message)
+            throw new Error(err.message)
         }
 
     }
@@ -148,14 +156,14 @@ export default class UserService {
 
             if (user.id === undefined) { return new Error('no user') };
 
-            let filter = { userId: user.id, language: language };
-            let targetLanguageForUser = await db.UserCollection.find(filter);
+            const filter = { userId: user.id, language: language };
+            const targetLanguageForUser = await db.UserCollection.find(filter);
             console.log("targetLanguageForUser: ", targetLanguageForUser);
 
 
             // finding the word obj within the wordsLearned array for this user
-            let wordToUpdateObj = targetLanguageForUser[0].wordsLearned.find((item: any) => item.word === wordToLookFor);
-            let indexOfWordToUpdate = (targetLanguageForUser[0].wordsLearned.findIndex((item: any) => item.word === wordToLookFor)) + 1;
+            const wordToUpdateObj = targetLanguageForUser[0].wordsLearned.find((item: any) => item.word === wordToLookFor);
+            const indexOfWordToUpdate = (targetLanguageForUser[0].wordsLearned.findIndex((item: any) => item.word === wordToLookFor)) + 1;
             console.log("\nwordToUpdateObj is: ", wordToUpdateObj);
             console.log("\nindexOfWordToUpdate is: ", indexOfWordToUpdate);
 
@@ -192,7 +200,7 @@ export default class UserService {
             return 'finished updating word as having been answered incorrectly';
 
         } catch (err: any) {
-            return new Error(err.message)
+            throw new Error(err.message)
         }
 
 
@@ -237,85 +245,91 @@ export default class UserService {
 
         } catch (err: any) {
             logger.error(err);
-            return new Error(err.message);
+            throw new Error(err.message);
         }
     }
 
     public async getWordsForReviewForLanguageForUser(user: any, language: string) {
         console.log(`finding all reviewable ${language} words for user...`);
+        try {
+            const userId = user.id;
 
-        const userId = user.id;
+            // the date to look for should be x number of days in the past
 
-        // the date to look for should be x number of days in the past
+            // find all words that have a lastDateAnsweredCorrectly where the value (the date) is more than X # of days ago.
 
-        // find all words that have a lastDateAnsweredCorrectly where the value (the date) is more than X # of days ago.
+            // let date_to_look_for = new Date(2022, 05, 26, 20, 36, 8);
 
-        // let date_to_look_for = new Date(2022, 05, 26, 20, 36, 8);
-
-        let date_to_look_for = getDateXDaysAgo(2);
+            const date_to_look_for = getDateXDaysAgo(2);
 
 
-        console.log("==================================");
-        console.log("date_to_look_for is: ", date_to_look_for);
-        console.log("==================================");
+            console.log("==================================");
+            console.log("date_to_look_for is: ", date_to_look_for);
+            console.log("==================================");
 
-        // ^ I want to get everything before this date. 
+            // ^ I want to get everything before this date. 
 
-        let filter_for_past_certain_date = {
-            userId: userId,
-            language: language,
-            // "wordsLearned.lastDateAnsweredCorrectly": { $lte: date_to_look_for }
-        }
-
-        let words = await db.UserCollection.find(filter_for_past_certain_date);
-        console.log("words: ", words);
-
-        let arrAllWords = words[0].wordsLearned;
-
-        let wordsToReview = arrAllWords.filter((wordObj: any) => {
-            let { lastDateAnsweredCorrectly: lastDate } = wordObj;
-            if (lastDate === null) { return false }
-            else {
-                console.log("lastDate: ", lastDate);
-                if (lastDate < date_to_look_for) {
-                    console.log("==> ", lastDate, " IS LESS than", date_to_look_for)
-                    return true
-                } else {
-                    console.log(lastDate, " is NOT LESS than", date_to_look_for)
-                    return false
-                }
-
+            const filter_for_past_certain_date = {
+                userId: userId,
+                language: language,
+                // "wordsLearned.lastDateAnsweredCorrectly": { $lte: date_to_look_for }
             }
-        });
-        console.log("wordsToReview: ", wordsToReview);
 
-        return wordsToReview;
+            const words = await db.UserCollection.find(filter_for_past_certain_date);
+            console.log("words: ", words);
 
-        // db.UserCollection.aggregate([
-        //     {
-        //         $project: {
-        //             wordsLearned: {
-        //                 $filter: {
-        //                     input: "$wordsLearned",
-        //                     as: "item",
-        //                     cond: { $lte: ["$$item.lastDateAnsweredCorrectly", date_to_look_for] }
-        //                 }
-        //             }
-        //         }
-        //     }
-        // ])
+            const arrAllWords = words[0].wordsLearned;
 
-        // db.UserCollection
-        //     .find(filter_for_past_certain_date)
-        // .then(words => {
-        //     console.log('found all words for review');
-        //     console.log(words);
-        //     res.json(words[0]);
-        //     console.log('sent')
-        // })
-        // .catch((err: any) => {
-        //     console.log(err);
-        //     res.status(422).json(err)
-        // });
+            const wordsToReview = arrAllWords.filter((wordObj: any) => {
+                let { lastDateAnsweredCorrectly: lastDate } = wordObj;
+                if (lastDate === null) { return false }
+                else {
+                    console.log("lastDate: ", lastDate);
+                    if (lastDate < date_to_look_for) {
+                        console.log("==> ", lastDate, " IS LESS than", date_to_look_for)
+                        return true
+                    } else {
+                        console.log(lastDate, " is NOT LESS than", date_to_look_for)
+                        return false
+                    }
+
+                }
+            });
+            console.log("wordsToReview: ", wordsToReview);
+
+            return wordsToReview;
+
+            // db.UserCollection.aggregate([
+            //     {
+            //         $project: {
+            //             wordsLearned: {
+            //                 $filter: {
+            //                     input: "$wordsLearned",
+            //                     as: "item",
+            //                     cond: { $lte: ["$$item.lastDateAnsweredCorrectly", date_to_look_for] }
+            //                 }
+            //             }
+            //         }
+            //     }
+            // ])
+
+            // db.UserCollection
+            //     .find(filter_for_past_certain_date)
+            // .then(words => {
+            //     console.log('found all words for review');
+            //     console.log(words);
+            //     res.json(words[0]);
+            //     console.log('sent')
+            // })
+            // .catch((err: any) => {
+            //     console.log(err);
+            //     res.status(422).json(err)
+            // });
+
+        } catch (err: any) {
+            logger.error(err);
+            throw new Error(err.message);
+        }
     }
+
 }

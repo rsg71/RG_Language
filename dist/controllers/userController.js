@@ -22,52 +22,62 @@ const userController = {
             const userId = user.id;
             logger_1.default.debug(`attempting to add a language for user`);
             console.log("req.body: ", req.body);
+            if (!req.body.language) {
+                return res.status(400).send('Missing req.body.language');
+            }
             const languageToFind = req.body.language.toLowerCase();
             try {
-                let result = userService.validateAndCreateLanguageForUser(languageToFind, userId);
+                const result = userService.validateAndCreateLanguageForUser(languageToFind, userId);
                 logger_1.default.debug({ result });
                 logger_1.default.info(`language '${languageToFind}' added for user`);
                 res.status(200).send(result);
             }
             catch (err) {
-                console.log(err);
-                res.status(500).send(err);
+                logger_1.default.error(err);
+                res.status(500).send(err.message);
             }
         });
     },
     getLanguageDataForUser: function (req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log("here is the req.params: ", req.params);
+            console.log("here is the req.body: ", req.body);
             try {
-                console.log("here is the req.params: ", req.params);
-                console.log("here is the req.body: ", req.body);
+                if (!req.params.language) {
+                    logger_1.default.error("Missing req.params.language");
+                    return res.status(400);
+                }
+                if (!req.params.username) {
+                    logger_1.default.error("Missing req.params.username");
+                    return res.status(400);
+                }
                 const languageToFind = req.params.language.toLowerCase(); // ensuring it's lowercase (probably already is by this point)
                 const userIdToFind = req.params.username;
-                let languageFound = yield userService.FindLanguage(languageToFind, userIdToFind);
+                const languageFound = yield userService.FindLanguage(languageToFind, userIdToFind);
                 console.log("languageFound is: ", languageFound);
                 return res.status(200).send(languageFound);
             }
             catch (err) {
-                res.status(500).send(err);
+                logger_1.default.error(err);
+                res.status(500).send(err.message);
             }
         });
     },
     findAllLanguagesForThisUser: function (req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            let userId = req.params.userId;
-            console.log("userId: ", userId);
-            if (!userId) {
-                console.log("USER ID IS MISSING");
-                return res.status(400);
+            try {
+                const userId = req.params.userId;
+                console.log("userId: ", userId);
+                if (!userId) {
+                    logger_1.default.error("USER ID IS MISSING");
+                    return res.status(400);
+                }
+                const allWords = yield userService.FindAllLanguagesForUser(userId);
+                return res.send(allWords);
             }
-            else {
-                try {
-                    const allWords = yield userService.FindAllLanguagesForUser(userId);
-                    return res.send(allWords);
-                }
-                catch (err) {
-                    logger_1.default.error(err);
-                    return res.status(500).send(err);
-                }
+            catch (err) {
+                logger_1.default.error(err);
+                res.status(500).send(err.message);
             }
         });
     },
@@ -75,8 +85,8 @@ const userController = {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const user = req.user;
-                let wordToLookFor = req.query.word;
-                let language = req.query.language;
+                const wordToLookFor = req.query.word;
+                const language = req.query.language;
                 if (user.id === undefined) {
                     return res.status(422).send('no user');
                 }
@@ -86,12 +96,12 @@ const userController = {
                 if (!language) {
                     throw new Error('no language provided');
                 }
-                let answeredCorrectlyResponse = yield userService.answerWordCorrectly(req.user, wordToLookFor, language);
+                const answeredCorrectlyResponse = yield userService.answerWordCorrectly(req.user, wordToLookFor, language);
                 return res.status(200).send(answeredCorrectlyResponse);
             }
             catch (err) {
                 logger_1.default.error(err);
-                res.status(500).send(err);
+                res.status(500).send(err.message);
             }
         });
     },
@@ -99,51 +109,57 @@ const userController = {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const user = req.user;
-                let wordToLookFor = req.query.word;
-                let language = req.query.language;
                 if (user.id === undefined) {
-                    return res.status(422).send('no user');
+                    return res.status(400).send('no user');
                 }
-                if (!wordToLookFor) {
-                    throw new Error('no word provided');
+                if (!req.query.word) {
+                    return res.status(400).send('no word provided');
                 }
-                if (!language) {
-                    throw new Error('no language provided');
+                if (!req.query.language) {
+                    return res.status(400).send('no language provided');
                 }
-                let answeredIncorrectlyResponse = yield userService.answerWordIncorrectly(req.user, wordToLookFor, language);
+                const wordToLookFor = req.query.word;
+                const language = req.query.language;
+                const answeredIncorrectlyResponse = yield userService.answerWordIncorrectly(req.user, wordToLookFor, language);
                 return res.send(answeredIncorrectlyResponse);
             }
             catch (err) {
                 logger_1.default.error(err);
-                return new Error(err);
+                res.status(500).send(err.message);
             }
         });
     },
     findAllUnlearnedWordsForGivenLanguageForUser: function (req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                if (!req.query.language) {
+                    return res.status(400).send('no language provided');
+                }
                 const user = req.user;
                 const language = req.query.language;
-                let unlearnedForUser = yield userService.findAllUnlearnedWordsForGivenLanguageForUser(user, language);
+                const unlearnedForUser = yield userService.findAllUnlearnedWordsForGivenLanguageForUser(user, language);
                 return res.status(200).send(unlearnedForUser);
             }
             catch (err) {
                 logger_1.default.error(err);
-                res.status(500).send(err);
+                res.status(500).send(err.message);
             }
         });
     },
     getWordsForReviewForLanguageForUser: function (req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                if (!req.query.language) {
+                    return res.status(400).send('no language provided');
+                }
                 const user = req.user;
                 const language = req.query.language;
-                let unlearnedForUser = yield userService.findAllUnlearnedWordsForGivenLanguageForUser(user, language);
+                const unlearnedForUser = yield userService.findAllUnlearnedWordsForGivenLanguageForUser(user, language);
                 return res.status(200).send(unlearnedForUser);
             }
             catch (err) {
                 logger_1.default.error(err);
-                res.status(500).send(err);
+                res.status(500).send(err.message);
             }
         });
     }
