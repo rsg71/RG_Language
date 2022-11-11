@@ -22,25 +22,25 @@ export default function GenericHomepage() {
 
     const loadData = () => {
         if (languageName) {
-        API.getLanguageDataForUser(currentUser._id, languageName)
-            .then(res => {
-                console.log("languages for this user: ", res.data);
+            API.getLanguageDataForUser(currentUser._id, languageName)
+                .then(res => {
+                    console.log("languages for this user: ", res.data);
 
-                let totalWords = res.data[0].wordsLearned;
+                    let totalWords = res.data[0].wordsLearned;
 
-                let correct = totalWords.filter((word: any) => word.answeredCorrectly);
-                let numberCorrect = correct.length;
-                // console.log("numberCorrect: ", numberCorrect);
-                let percentCorrect = parseFloat(((numberCorrect / totalWords.length) * 100).toFixed(0));
-                // console.log("percentCorrect: ", percentCorrect);
+                    let correct = totalWords.filter((word: any) => word.answeredCorrectly);
+                    let numberCorrect = correct.length;
+                    // console.log("numberCorrect: ", numberCorrect);
+                    let percentCorrect = parseFloat(((numberCorrect / totalWords.length) * 100).toFixed(0));
+                    // console.log("percentCorrect: ", percentCorrect);
 
-                setTotalWords(totalWords.length);
-                setPercentCorrect(percentCorrect);
+                    setTotalWords(totalWords.length);
+                    setPercentCorrect(percentCorrect);
 
-            })
-            .catch(err => {
-                console.log(err);
-            })
+                })
+                .catch(err => {
+                    console.log(err);
+                })
         }
     }
 
@@ -52,6 +52,26 @@ export default function GenericHomepage() {
         }
     }, [currentUser]);
 
+
+    interface CardProps {
+        cardTitle: string;
+        navigationDestination: string;
+        iconName: string;
+    }
+
+    const refreshIcon = "bi bi-arrow-clockwise";
+    const notesIcon = "bi bi-card-checklist";
+
+    const MyCard = ({ cardTitle, navigationDestination, iconName }: CardProps) => {
+        return (
+            <button
+                className="shadow-sm p-3 btn text-left w-100 btn-primary"
+                onClick={() => navigate(navigationDestination)}
+            >
+                <span>{cardTitle}</span> <i className={`ms-1 ${iconName}`}></i>
+            </button>
+        )
+    }
 
     return (
         <div>
@@ -73,7 +93,6 @@ export default function GenericHomepage() {
 
                                 <h1>{capitalizeFirstLetter(languageName || "")} Home</h1>
                                 <div>
-                                    <p>language: {languageName}</p>
                                     <div className="form-text text-muted">Words learned:</div>
 
                                     {isLoaded &&
@@ -85,13 +104,28 @@ export default function GenericHomepage() {
                                 </div>
                             </Col>
                         </Row>
+{/* 
+                        <Row>
+                            <Col>
+                                <button className="btn btn-primary" onClick={() => navigate(`/quiz/generic/${languageName}`)}>Learn new words</button>{' '}
+                                <button className="btn btn-primary" onClick={() => navigate(`/review/generic/${languageName}`)}>Review words</button>
+                            </Col>
+                        </Row> */}
 
                         <Row>
                             <Col>
-                                <button className="btn btn-primary" onClick={() => navigate(`/quiz/generic/${languageName}`)}>Learn new words</button>
+                                <MyCard
+                                    cardTitle="Learn new words"
+                                    navigationDestination={`/quiz/generic/${languageName}`}
+                                    iconName={notesIcon}
+                                />
                             </Col>
                             <Col>
-                                <button className="btn btn-primary" onClick={() => navigate(`/review/generic/${languageName}`)}>Review words</button>
+                                <MyCard
+                                    cardTitle="Review words"
+                                    navigationDestination={`/review/generic/${languageName}`}
+                                    iconName={refreshIcon}
+                                />
                             </Col>
                         </Row>
                     </Col>

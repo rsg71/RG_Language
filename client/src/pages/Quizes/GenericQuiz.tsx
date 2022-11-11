@@ -9,6 +9,7 @@ import LoadingCard from "../../components/LoadingCard/LoadingCard"
 import "../SpanishQuiz/SpanishQuiz.css"
 import Error from "../../components/Error/Error"
 import { capitalizeFirstLetter } from '../../utils/helperFunctions';
+import AccentMarkButton from "../../components/AccentMarkButton/AccentMarkButton"
 
 
 
@@ -135,7 +136,7 @@ export default function GenericQuiz() {
             console.log("answer is correct!");
             setCorrect(true);
             setIncorrectAnswer(false);
-            
+
             let res = await API.answerWordCorrectly(languageNameUrlParam || "", currentWord._id, currentWord.word);
             console.log("word correctly answered res: ", res);
 
@@ -299,7 +300,9 @@ export default function GenericQuiz() {
 
                                         <div className="my-3">
                                             {thisLanguageAccentMarks.map((mark: any) => (
-                                                <button key={mark.letter} onClick={e => typeAccent(mark.letter)}>{mark.letter}</button>
+                                                <React.Fragment key={mark.letter}>
+                                                    <AccentMarkButton letter={mark.letter} onClick={typeAccent} />{' '}
+                                                </React.Fragment>
                                             ))}
                                         </div>
 
@@ -364,7 +367,7 @@ export default function GenericQuiz() {
 
 
 
-            </Container>
+            </Container >
         </>
     )
 }

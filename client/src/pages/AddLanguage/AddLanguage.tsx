@@ -126,8 +126,8 @@ export default function AddLanguage() {
                                     {languages.map(language => (
                                         <div className="mt-2 bg-light text-dark rounded p-2">
                                             <div className="d-flex justify-content-between">
-                                                <div>
-                                                    {language.name} {isLanguageAlreadyBeingLearned(language.name) && "✔"}
+                                                <div className="d-flex justify-content-between">
+                                                    {language.name} {isLanguageAlreadyBeingLearned(language.name) && "✔ Added"}
                                                 </div>
                                                 {!isLanguageAlreadyBeingLearned(language.name) &&
                                                     <button className="btn btn-primary" onClick={() => handleAddLanguage(language.name)}>Add</button>

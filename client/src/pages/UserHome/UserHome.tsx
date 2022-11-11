@@ -77,7 +77,7 @@ export default function UserHome() {
 
                         {!isLoadingData && isLoaded && !error && data &&
                             <div className="animate__animated animate__fadeIn">
-                                <p>Your languages: </p>
+                                <p className="lead">Your languages: </p>
 
                                 {data.length === 0 &&
                                     <>

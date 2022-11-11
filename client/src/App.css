@@ -65,6 +65,10 @@ input:focus, input:active {
     background-color: rgba(237,76,120,.1)!important;
 }
 
+.bg-light-blue{ 
+    color: #377DFF !important;
+    background-color: #EBF2FF !important
+}
 
 .containerX {
     position: relative;
