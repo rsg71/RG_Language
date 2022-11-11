@@ -6,7 +6,7 @@ import "./Footer.css";
 
 export default function Footer() {
 
-    const footerColClass = "footerColumn text-center"
+    const footerColClass = "footerColumn text-left"
     return (
         <div>
             <Container fluid className="footer">
