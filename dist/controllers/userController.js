@@ -14,7 +14,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const logger_1 = __importDefault(require("../logger"));
 const user_1 = __importDefault(require("../services/user"));
-const userService = new user_1.default();
+const models_1 = __importDefault(require("../models"));
+const userService = new user_1.default(models_1.default.UserCollection);
 const userController = {
     addLanguage: function (req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -87,7 +88,8 @@ const userController = {
                 const user = req.user;
                 const wordToLookFor = req.query.word;
                 const language = req.query.language;
-                if (user.id === undefined) {
+                const userId = user.id;
+                if (userId === undefined) {
                     return res.status(422).send('no user');
                 }
                 if (!wordToLookFor) {
@@ -96,7 +98,7 @@ const userController = {
                 if (!language) {
                     throw new Error('no language provided');
                 }
-                const answeredCorrectlyResponse = yield userService.answerWordCorrectly(req.user, wordToLookFor, language);
+                const answeredCorrectlyResponse = yield userService.answerWordCorrectly(userId, wordToLookFor, language);
                 return res.status(200).send(answeredCorrectlyResponse);
             }
             catch (err) {
@@ -109,7 +111,8 @@ const userController = {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const user = req.user;
-                if (user.id === undefined) {
+                const userId = user.id;
+                if (userId === undefined) {
                     return res.status(400).send('no user');
                 }
                 if (!req.query.word) {
@@ -120,7 +123,7 @@ const userController = {
                 }
                 const wordToLookFor = req.query.word;
                 const language = req.query.language;
-                const answeredIncorrectlyResponse = yield userService.answerWordIncorrectly(req.user, wordToLookFor, language);
+                const answeredIncorrectlyResponse = yield userService.answerWordIncorrectly(userId, wordToLookFor, language);
                 return res.send(answeredIncorrectlyResponse);
             }
             catch (err) {

@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
 import logger from '../logger';
 import UserService from '../services/user';
+import db from '../models';
 
-const userService = new UserService();
+const userService = new UserService(db.UserCollection);
 
 const userController = {
 
@@ -76,10 +77,11 @@ const userController = {
     answerCorrectly: async function (req: Request, res: Response) {
         try {
             const user = req.user as any;
-            const wordToLookFor = req.query.word;
-            const language = req.query.language;
+            const wordToLookFor: string = req.query.word as string;
+            const language: string = req.query.language as string;
+            const userId = user.id;
 
-            if (user.id === undefined) {
+            if (userId === undefined) {
                 return res.status(422).send('no user')
             }
             if (!wordToLookFor) {
@@ -89,7 +91,7 @@ const userController = {
                 throw new Error('no language provided');
             }
 
-            const answeredCorrectlyResponse = await userService.answerWordCorrectly(req.user, wordToLookFor as string, language as string);
+            const answeredCorrectlyResponse = await userService.answerWordCorrectly(userId, wordToLookFor, language);
 
             return res.status(200).send(answeredCorrectlyResponse);
 
@@ -102,8 +104,8 @@ const userController = {
     answerIncorrectly: async function (req: Request, res: Response) {
         try {
             const user = req.user as any;
-
-            if (user.id === undefined) {
+            const userId = user.id;
+            if (userId === undefined) {
                 return res.status(400).send('no user');
             }
             if (!req.query.word) {
@@ -117,7 +119,7 @@ const userController = {
 
 
 
-            const answeredIncorrectlyResponse = await userService.answerWordIncorrectly(req.user, wordToLookFor, language)
+            const answeredIncorrectlyResponse = await userService.answerWordIncorrectly(userId, wordToLookFor, language)
 
             return res.send(answeredIncorrectlyResponse);
 

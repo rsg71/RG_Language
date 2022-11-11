@@ -1,47 +1,59 @@
 import { determineSeedToUse } from '../utils/seederFunctions';
 import logger from '../logger';
-import db from '../models';
 import { getDateXDaysAgo, getDateXDaysAhead } from '../utils/helperFunctions';
+import { IWordGroupModel } from '../models/userModel';
 
 
-const UserCollection = db.UserCollection;
+declare type UserIdType = string;
 
+function handleError(err: any): void {
+    if (err instanceof Error && err.message) {
+        logger.error(err);
+        throw new Error(err.message)
+    } else throw new Error('An error has occurred')
+}
 
 export default class UserService {
 
-    public async FindLanguage(language: string, userId: string) {
+    userCollection: IWordGroupModel
+
+    constructor(userCollection: IWordGroupModel) {
+        this.userCollection = userCollection;
+    }
+
+    public async FindLanguage(language: string, userId: UserIdType) {
         try {
-            const languageFound = await UserCollection.find({ language, userId });
+            const languageFound = await this.userCollection.find({ language, userId });
             console.log("languageFound is: ", languageFound);
             return languageFound;
-        } catch (err: any) {
-            throw new Error(err.message);
+        } catch (err) {
+            handleError(err);
         }
     }
 
-    public async FindAllLanguagesForUser(userId: string) {
+    public async FindAllLanguagesForUser(userId: UserIdType) {
         try {
-            const allLanguageForUser = await db.UserCollection.find({ userId: userId });
+            const allLanguageForUser = await this.userCollection.find({ userId: userId });
             return allLanguageForUser
         } catch (err: any) {
-            throw new Error(err.message);
+            handleError(err);
         }
     }
 
     public async CreateUserLanguage(newLanguageForUser: any) {
         try {
-            const newLanguageCreated = await UserCollection.create(newLanguageForUser);
+            const newLanguageCreated = await this.userCollection.create(newLanguageForUser);
             console.log('newLangauge: ', newLanguageCreated);
             const wordsLength = newLanguageForUser.wordsLearned!.length;
             logger.info(`inserted ${newLanguageForUser.language} for this user with ${wordsLength} words`);
             return newLanguageCreated;
 
         } catch (err: any) {
-            throw new Error(err.message);
+            handleError(err);
         }
     }
 
-    public assembleNewLanguageForUser(newLanguage: any, userId: string) {
+    public assembleNewLanguageForUser(newLanguage: any, userId: UserIdType) {
         let newUserLanguage = {
             language: newLanguage,
             wordsLearned: determineSeedToUse(newLanguage),
@@ -51,14 +63,17 @@ export default class UserService {
     }
 
 
-    public async validateAndCreateLanguageForUser(languageToFind: any, userId: string) {
+    public async validateAndCreateLanguageForUser(languageToFind: any, userId: UserIdType) {
         try {
             const newUserLanguage = this.assembleNewLanguageForUser(languageToFind, userId)
-            console.log("newUserLanguage: ", newUserLanguage);
+            logger.debug({ newUserLanguage });
 
             // call to service layer
             // Abstraction on how to access the data layer and the "business" logic
             const languageFound = await this.FindLanguage(languageToFind, userId);
+            if (!languageFound) {
+                throw new Error('no languageFound');
+            }
             console.log("languageFound is: ", languageFound);
 
             if (languageFound.length > 0) {
@@ -70,26 +85,28 @@ export default class UserService {
                 return newLanguage;
             }
         } catch (err: any) {
-            logger.error(err);
-            throw new Error(err.message);
+            handleError(err);
         }
     }
 
-    public async answerWordCorrectly(user: any, wordToLookFor: string, language: string) {
+    public async answerWordCorrectly(userId: UserIdType, wordToLookFor: string, language: string) {
         try {
 
-            if (user.id === undefined) {
+            if (userId === undefined) {
                 return new Error('no user found');
             }
 
-            const filter = { userId: user.id, language: language };
-            const targetLanguageForUser = await db.UserCollection.find(filter);
-            console.log("targetLanguageForUser: ", targetLanguageForUser);
+            const filter = { userId: userId, language: language };
+            const targetLanguageForUser = await this.userCollection.find(filter);
+            logger.debug({ targetLanguageForUser });
 
 
             // finding the word obj within the wordsLearned array for this user
             const wordToUpdateObj = targetLanguageForUser[0].wordsLearned.find((item: any) => item.word === wordToLookFor);
-            const indexOfWordToUpdate = (targetLanguageForUser[0].wordsLearned.findIndex((item: any) => item.word === wordToLookFor)) + 1;
+            if (!wordToUpdateObj) {
+                throw new Error('no wordToUpdateObj');
+            }
+            // const indexOfWordToUpdate = (targetLanguageForUser[0].wordsLearned.findIndex((item: any) => item.word === wordToLookFor)) + 1;
 
             let instances = wordToUpdateObj.instancesWordHasBeenSeen;
 
@@ -124,13 +141,13 @@ export default class UserService {
 
             console.log('nextReviewDate: ', nextReviewDate);
 
-            await db.UserCollection.updateOne(
+            await this.userCollection.updateOne(
                 {
-                    userId: user.id, language: language, "wordsLearned.word": wordToLookFor // note that all three of these are used to narrow down the object within the document that we want to update (the nth object in the wordsLearned array). What happens here is the first two filters lock down the document itself. The wordsLearned.word loops through each word (element) in the wordsLearned array. If it finds the word we are looking for, it carries on in the update function to the next section ($set);
+                    userId: userId, language: language, "wordsLearned.word": wordToLookFor // note that all three of these are used to narrow down the object within the document that we want to update (the nth object in the wordsLearned array). What happens here is the first two filters lock down the document itself. The wordsLearned.word loops through each word (element) in the wordsLearned array. If it finds the word we are looking for, it carries on in the update function to the next section ($set);
                 },
                 // here we need to set new values for several fields
                 {
-                    "$set": {
+                    $set: {
                         "wordsLearned.$.answeredCorrectly": true,
                         "wordsLearned.$.lastDateAnsweredCorrectly": new Date(),
                         "wordsLearned.$.instancesWordHasBeenSeen": instances++,
@@ -145,24 +162,27 @@ export default class UserService {
             return 'language updated successfully with correctly answered word';
 
         } catch (err: any) {
-            throw new Error(err.message)
+            handleError(err);
         }
 
     }
 
-    public async answerWordIncorrectly(user: any, wordToLookFor: string, language: string) {
+    public async answerWordIncorrectly(userId: UserIdType, wordToLookFor: string, language: string) {
         try {
 
 
-            if (user.id === undefined) { return new Error('no user') };
+            if (userId === undefined) { return new Error('no user') };
 
-            const filter = { userId: user.id, language: language };
-            const targetLanguageForUser = await db.UserCollection.find(filter);
+            const filter = { userId: userId, language: language };
+            const targetLanguageForUser = await this.userCollection.find(filter);
             console.log("targetLanguageForUser: ", targetLanguageForUser);
 
 
             // finding the word obj within the wordsLearned array for this user
             const wordToUpdateObj = targetLanguageForUser[0].wordsLearned.find((item: any) => item.word === wordToLookFor);
+            if (!wordToUpdateObj) {
+                throw new Error('no wordToUpdateObj');
+            }
             const indexOfWordToUpdate = (targetLanguageForUser[0].wordsLearned.findIndex((item: any) => item.word === wordToLookFor)) + 1;
             console.log("\nwordToUpdateObj is: ", wordToUpdateObj);
             console.log("\nindexOfWordToUpdate is: ", indexOfWordToUpdate);
@@ -181,9 +201,9 @@ export default class UserService {
             nextReviewDate = getDateXDaysAhead(1, today);
             console.log('nextReviewDate: ', nextReviewDate);
 
-            await db.UserCollection.updateOne(
+            await this.userCollection.updateOne(
                 {
-                    userId: user.id, language: language, "wordsLearned.word": wordToLookFor // note that all three of these are used to narrow down the object within the document that we want to update (the nth object in the wordsLearned array). What happens here is the first two filters lock down the document itself. The wordsLearned.word loops through each word (element) in the wordsLearned array. If it finds the word we are looking for, it carries on in the update function to the next section ($set);
+                    userId: userId, language: language, "wordsLearned.word": wordToLookFor // note that all three of these are used to narrow down the object within the document that we want to update (the nth object in the wordsLearned array). What happens here is the first two filters lock down the document itself. The wordsLearned.word loops through each word (element) in the wordsLearned array. If it finds the word we are looking for, it carries on in the update function to the next section ($set);
                 },
                 // here we need to set new values for several fields
                 {
@@ -200,22 +220,20 @@ export default class UserService {
             return 'finished updating word as having been answered incorrectly';
 
         } catch (err: any) {
-            throw new Error(err.message)
+            handleError(err);
         }
 
 
 
     }
 
-    public async findAllUnlearnedWordsForGivenLanguageForUser(user: any, language: string) {
+    public async findAllUnlearnedWordsForGivenLanguageForUser(userId: UserIdType, language: string) {
         logger.debug(`finding all unlearned ${language} words for user...`);
 
         try {
-            let userId = user.id;
+            const unlearnedWordsFilter = { userId: userId, language: language, lastDateAnsweredCorrectly: null }
 
-            let unlearnedWordsFilter = { userId: userId, language: language, lastDateAnsweredCorrectly: null }
-
-            let words = await db.UserCollection
+            const words = await this.userCollection
                 .find(unlearnedWordsFilter)
             // .aggregate([
             //     {
@@ -238,21 +256,19 @@ export default class UserService {
 
             let base = words[0];
             console.log("baseis: ", base);
-            let sliced = { ...base, wordsLearned: base.wordsLearned.filter((word: any) => word.answeredCorrectly === false).slice(0, 15) } // for now, doing automatically up to 15 words in a quiz at a time. Might make this selectable by the user first.
+            let sliced: any = { ...base, wordsLearned: base.wordsLearned.filter((word: any) => word.answeredCorrectly === false).slice(0, 15) } // for now, doing automatically up to 15 words in a quiz at a time. Might make this selectable by the user first.
 
             console.log("sliced: ", sliced);
             return sliced;
 
         } catch (err: any) {
-            logger.error(err);
-            throw new Error(err.message);
+            handleError(err);
         }
     }
 
-    public async getWordsForReviewForLanguageForUser(user: any, language: string) {
+    public async getWordsForReviewForLanguageForUser(userId: UserIdType, language: string) {
         console.log(`finding all reviewable ${language} words for user...`);
         try {
-            const userId = user.id;
 
             // the date to look for should be x number of days in the past
 
@@ -275,7 +291,7 @@ export default class UserService {
                 // "wordsLearned.lastDateAnsweredCorrectly": { $lte: date_to_look_for }
             }
 
-            const words = await db.UserCollection.find(filter_for_past_certain_date);
+            const words = await this.userCollection.find(filter_for_past_certain_date);
             console.log("words: ", words);
 
             const arrAllWords = words[0].wordsLearned;
@@ -299,7 +315,7 @@ export default class UserService {
 
             return wordsToReview;
 
-            // db.UserCollection.aggregate([
+            // this.userCollection.aggregate([
             //     {
             //         $project: {
             //             wordsLearned: {
@@ -313,7 +329,7 @@ export default class UserService {
             //     }
             // ])
 
-            // db.UserCollection
+            // this.userCollection
             //     .find(filter_for_past_certain_date)
             // .then(words => {
             //     console.log('found all words for review');
@@ -327,8 +343,7 @@ export default class UserService {
             // });
 
         } catch (err: any) {
-            logger.error(err);
-            throw new Error(err.message);
+            handleError(err);
         }
     }
 

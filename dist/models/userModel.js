@@ -4,8 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
-const Schema = mongoose_1.default.Schema;
-const wordGroupSchema = new Schema({
+const wordGroupSchema = new mongoose_1.default.Schema({
     language: String,
     wordsLearned: [
         {
@@ -21,5 +20,5 @@ const wordGroupSchema = new Schema({
     userId: String // an id really
 });
 const WordGroup = mongoose_1.default.model("WordGroup", wordGroupSchema);
-module.exports = WordGroup;
+exports.default = WordGroup;
 //# sourceMappingURL=userModel.js.map
