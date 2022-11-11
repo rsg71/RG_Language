@@ -1,7 +1,9 @@
 import { determineSeedToUse } from '../utils/seederFunctions';
 import logger from '../logger';
 import { getDateXDaysAgo, getDateXDaysAhead } from '../utils/helperFunctions';
-import { IWordGroupModel } from '../models/userModel';
+import db from '../models';
+import { Document } from 'mongoose';
+import { IWordGroupModel } from '../utils/interfaces/users';
 
 
 declare type UserIdType = string;
@@ -22,6 +24,7 @@ export default class UserService {
     }
 
     public async FindLanguage(language: string, userId: UserIdType) {
+        logger.debug('Service called to find language');
         try {
             const languageFound = await this.userCollection.find({ language, userId });
             console.log("languageFound is: ", languageFound);
@@ -32,15 +35,17 @@ export default class UserService {
     }
 
     public async FindAllLanguagesForUser(userId: UserIdType) {
+        logger.debug('Service called to find all languages for user');
         try {
             const allLanguageForUser = await this.userCollection.find({ userId: userId });
-            return allLanguageForUser
+            return allLanguageForUser;
         } catch (err: any) {
             handleError(err);
         }
     }
 
     public async CreateUserLanguage(newLanguageForUser: any) {
+        logger.debug('Service called to create language for user');
         try {
             const newLanguageCreated = await this.userCollection.create(newLanguageForUser);
             console.log('newLangauge: ', newLanguageCreated);
@@ -54,6 +59,8 @@ export default class UserService {
     }
 
     public assembleNewLanguageForUser(newLanguage: any, userId: UserIdType) {
+        logger.debug('Service called to assemble new language for user');
+
         let newUserLanguage = {
             language: newLanguage,
             wordsLearned: determineSeedToUse(newLanguage),
@@ -64,6 +71,8 @@ export default class UserService {
 
 
     public async validateAndCreateLanguageForUser(languageToFind: any, userId: UserIdType) {
+        logger.debug('Service called to validate and create new language for user');
+
         try {
             const newUserLanguage = this.assembleNewLanguageForUser(languageToFind, userId)
             logger.debug({ newUserLanguage });
@@ -90,6 +99,8 @@ export default class UserService {
     }
 
     public async answerWordCorrectly(userId: UserIdType, wordToLookFor: string, language: string) {
+        logger.debug('Service called to answer word correctly');
+
         try {
 
             if (userId === undefined) {
@@ -168,6 +179,8 @@ export default class UserService {
     }
 
     public async answerWordIncorrectly(userId: UserIdType, wordToLookFor: string, language: string) {
+        logger.debug('Service called to answer word incorrectly');
+
         try {
 
 
@@ -228,9 +241,15 @@ export default class UserService {
     }
 
     public async findAllUnlearnedWordsForGivenLanguageForUser(userId: UserIdType, language: string) {
-        logger.debug(`finding all unlearned ${language} words for user...`);
+        logger.debug(`Service called to find all unlearned ${language} words for given language for user`);
 
         try {
+            if (!userId) {
+                throw new Error('no userId provided to service');
+            }
+            if (!language) {
+                throw new Error('no language provided to service');
+            }
             const unlearnedWordsFilter = { userId: userId, language: language, lastDateAnsweredCorrectly: null }
 
             const words = await this.userCollection
@@ -247,7 +266,7 @@ export default class UserService {
             //     }
             // ])
             logger.debug('found unlearned words for user...');
-            console.log("unlearned words: ", words);
+            // console.log("unlearned words: ", words);
 
             if (words.length === 0) {
                 logger.debug('user has no words to review at this time');
@@ -267,7 +286,7 @@ export default class UserService {
     }
 
     public async getWordsForReviewForLanguageForUser(userId: UserIdType, language: string) {
-        console.log(`finding all reviewable ${language} words for user...`);
+        logger.debug(`Service called to get all reviewable ${language} words for user...`);
         try {
 
             // the date to look for should be x number of days in the past

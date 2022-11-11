@@ -37,8 +37,8 @@ import GenericHomepage from "./pages/GenericHomepage/GenericHomepage";
 import GenericQuiz from "./pages/Quizes/GenericQuiz";
 import GenericReview from "./pages/GenericReview/GenericReview";
 import API from "./utils/API";
-import LoadingCard from "./components/LoadingCard/LoadingCard";
-import Error from "./components/Error/Error";
+// import LoadingCard from "./components/LoadingCard/LoadingCard";
+// import Error from "./components/Error/Error";
 
 import 'animate.css';
 import "./App.css";
@@ -88,9 +88,9 @@ function App() {
   //   })
   // }
 
-  const notLoggedInElement = <div></div>;
+  // const notLoggedInElement = <div></div>;
 
-  const isCurrentUser = currentUser !== null;
+  // const isCurrentUser = currentUser !== null;
 
 
   useEffect(() => {
@@ -106,8 +106,7 @@ function App() {
 
       })
       .catch(err => {
-        console.log("check if loggedin err");
-        console.log(err);
+        console.log("check if loggedin err: ", err);
         setLoading(false);
         setLoaded(false);
         setError(true);

@@ -5,11 +5,12 @@ import db from '../models';
 
 const userService = new UserService(db.UserCollection);
 
+
 const userController = {
 
     addLanguage: async function (req: Request, res: Response) {
         const user = req.user as any;
-        const userId = user.id;
+        const userId: string = user.id;
         logger.debug(`attempting to add a language for user`)
         console.log("req.body: ", req.body);
         if (!req.body.language) {
@@ -43,7 +44,7 @@ const userController = {
             }
 
             const languageToFind = req.params.language.toLowerCase(); // ensuring it's lowercase (probably already is by this point)
-            const userIdToFind = req.params.username;
+            const userIdToFind: string = req.params.username;
 
             const languageFound = await userService.FindLanguage(languageToFind, userIdToFind);
 
@@ -58,11 +59,12 @@ const userController = {
     },
 
     findAllLanguagesForThisUser: async function (req: Request, res: Response) {
+        logger.debug('Controller called to find all languages for this user');
         try {
-            const userId = req.params.userId;
+            const userId: string = req.params.userId;
             console.log("userId: ", userId);
             if (!userId) {
-                logger.error("USER ID IS MISSING");
+                logger.error("USER ID IS MISSING from controller request object");
                 return res.status(400);
             }
             const allWords = await userService.FindAllLanguagesForUser(userId);
@@ -79,7 +81,7 @@ const userController = {
             const user = req.user as any;
             const wordToLookFor: string = req.query.word as string;
             const language: string = req.query.language as string;
-            const userId = user.id;
+            const userId: string = user.id;
 
             if (userId === undefined) {
                 return res.status(422).send('no user')
@@ -104,7 +106,7 @@ const userController = {
     answerIncorrectly: async function (req: Request, res: Response) {
         try {
             const user = req.user as any;
-            const userId = user.id;
+            const userId: string = user.id;
             if (userId === undefined) {
                 return res.status(400).send('no user');
             }
@@ -136,9 +138,10 @@ const userController = {
                 return res.status(400).send('no language provided');
             }
             const user = req.user as any;
+            const userId: string = user.id;
             const language = req.query.language as string;
 
-            const unlearnedForUser = await userService.findAllUnlearnedWordsForGivenLanguageForUser(user, language);
+            const unlearnedForUser = await userService.findAllUnlearnedWordsForGivenLanguageForUser(userId, language);
 
             return res.status(200).send(unlearnedForUser);
 
@@ -149,14 +152,21 @@ const userController = {
     },
 
     getWordsForReviewForLanguageForUser: async function (req: Request, res: Response) {
+        logger.debug('Controller called to getWordsForReviewForLanguageForUser');
         try {
-            if (!req.query.language) {
+            if (!req.params.language) {
+                logger.error('req.params.language is missing');
                 return res.status(400).send('no language provided');
             }
             const user = req.user as any;
-            const language = req.query.language as string;
+            if (!user) {
+                throw new Error('no user exists on the req object');
+            }
+            const userId = user.id;
+            const language = req.params.language as string;
 
-            const unlearnedForUser = await userService.findAllUnlearnedWordsForGivenLanguageForUser(user, language);
+            const unlearnedForUser = await userService.findAllUnlearnedWordsForGivenLanguageForUser(userId, language);
+
 
             return res.status(200).send(unlearnedForUser);
 

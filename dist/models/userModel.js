@@ -20,5 +20,5 @@ const wordGroupSchema = new mongoose_1.default.Schema({
     userId: String // an id really
 });
 const WordGroup = mongoose_1.default.model("WordGroup", wordGroupSchema);
-exports.default = WordGroup;
+module.exports = WordGroup;
 //# sourceMappingURL=userModel.js.map

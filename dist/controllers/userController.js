@@ -66,11 +66,12 @@ const userController = {
     },
     findAllLanguagesForThisUser: function (req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            logger_1.default.debug('Controller called to find all languages for this user');
             try {
                 const userId = req.params.userId;
                 console.log("userId: ", userId);
                 if (!userId) {
-                    logger_1.default.error("USER ID IS MISSING");
+                    logger_1.default.error("USER ID IS MISSING from controller request object");
                     return res.status(400);
                 }
                 const allWords = yield userService.FindAllLanguagesForUser(userId);
@@ -139,8 +140,9 @@ const userController = {
                     return res.status(400).send('no language provided');
                 }
                 const user = req.user;
+                const userId = user.id;
                 const language = req.query.language;
-                const unlearnedForUser = yield userService.findAllUnlearnedWordsForGivenLanguageForUser(user, language);
+                const unlearnedForUser = yield userService.findAllUnlearnedWordsForGivenLanguageForUser(userId, language);
                 return res.status(200).send(unlearnedForUser);
             }
             catch (err) {
@@ -151,13 +153,19 @@ const userController = {
     },
     getWordsForReviewForLanguageForUser: function (req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            logger_1.default.debug('Controller called to getWordsForReviewForLanguageForUser');
             try {
-                if (!req.query.language) {
+                if (!req.params.language) {
+                    logger_1.default.error('req.params.language is missing');
                     return res.status(400).send('no language provided');
                 }
                 const user = req.user;
-                const language = req.query.language;
-                const unlearnedForUser = yield userService.findAllUnlearnedWordsForGivenLanguageForUser(user, language);
+                if (!user) {
+                    throw new Error('no user exists on the req object');
+                }
+                const userId = user.id;
+                const language = req.params.language;
+                const unlearnedForUser = yield userService.findAllUnlearnedWordsForGivenLanguageForUser(userId, language);
                 return res.status(200).send(unlearnedForUser);
             }
             catch (err) {

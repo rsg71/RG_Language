@@ -1,23 +1,6 @@
 import mongoose from "mongoose";
 
-
-export interface IWordsLearned {
-    number: number;
-    word: string;
-    translation: string;
-    answeredCorrectly: boolean;
-    lastDateAnsweredCorrectly: Date;
-    instancesWordHasBeenSeen: number;
-    nextReviewDate: Date;
-}
-
-export interface UserModelInterface {
-    language: String,
-    wordsLearned: IWordsLearned[],
-    userId: String // an id really
-}
-
-const wordGroupSchema = new mongoose.Schema<UserModelInterface>({
+const wordGroupSchema = new mongoose.Schema({
 
     language: String,
     wordsLearned: [
@@ -37,14 +20,4 @@ const wordGroupSchema = new mongoose.Schema<UserModelInterface>({
 
 const WordGroup = mongoose.model("WordGroup", wordGroupSchema);
 
-
-export interface IWordGroup extends mongoose.Document {
-    _id: string;
-    language: string,
-    wordsLearned: IWordsLearned[],
-    userId: string // an id really
-}
-
-export interface IWordGroupModel extends mongoose.Model<IWordGroup> { }
-
-export default WordGroup;
+module.exports = WordGroup;

@@ -47,7 +47,7 @@ export default function UserHome() {
                 setError(false);
             })
             .catch(err => {
-                console.log(err);
+                console.log("userHome retrieve all languages for this user err: ", err);
                 setIsLoadingData(false);
                 setIsLoaded(true);
                 setError(true);

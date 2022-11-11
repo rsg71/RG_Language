@@ -14,10 +14,11 @@ export interface authRequest extends Request {
 router.get("/page-load-login", (req: authRequest, res: Response) => {
     logger.trace(`${req.method} ${req.url}`);
     if (!req.user) {
+        logger.error('no user found on auth route');
         return res.status(404).send("no user found")
     } else {
         const user = req.user as any;
-        console.log('user is: ', user);
+        logger.debug(user, "user is:");
         logger.info({ user });
         let { username, id: _id } = user;
         let userData = { username, _id }
