@@ -44,6 +44,7 @@ import 'animate.css';
 import "./App.css";
 import { CurrentUserInterface } from "./utils/interfaces";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import LanguagesOffered from "./pages/LanguagesOffered/LanguagesOffered";
 
 export const CurrentUserContext = React.createContext<CurrentUserInterface>({
   _id: "",
@@ -212,6 +213,8 @@ function App() {
 
                 </>
 
+
+                <Route path="/languages-offered" element={<LanguagesOffered />} />
 
 
                 {/* 404 page */}

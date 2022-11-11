@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Row, Col, Card, CardDeck } from 'react-bootstrap';
+import { Container, Row, Col, CardDeck } from 'react-bootstrap';
 import API from '../../utils/API';
 import LoadingCard from '../../components/LoadingCard/LoadingCard';
-import { cardClass1, cardClass2 } from '../../styles/style';
 import { CurrentUserContext } from '../../App';
-import LanguagesJson from '../../data/languages.json';
-import { capitalizeFirstLetter } from '../../utils/helperFunctions';
+import LanguageCard from '../../components/LanguageCard/LanguageCard';
 
 export default function UserHome() {
 
@@ -20,19 +18,7 @@ export default function UserHome() {
     const [error, setError] = useState(false);
 
 
-    const determineFlag = (language: string) => {
-        if (language === 'portuguese') { return 'brazil' }
-        else if (language === 'french') { return 'france' }
-        else if (language === 'german') { return 'germany' }
-        else if (language === 'italian') { return 'italy' }
-        else if (language === 'spanish') { return 'spain' }
-    }
 
-    const determineBgColor = (language: string) => {
-        let foundLanguage = LanguagesJson.find(l => l.languageLowerCase === language) as any;
-        let backgroundColor = foundLanguage.bg;
-        return backgroundColor;
-    }
 
     useEffect(() => {
         setIsLoadingData(true);
@@ -89,40 +75,13 @@ export default function UserHome() {
 
                                 <CardDeck id="homeLanguagesCardDeck">
 
-                                    {/* <pre>{JSON.stringify(data, null, 4)}</pre> */}
-
-                                    {/* {data.map(language => (
-                                        <Col sm={6} md={6} lg={3} key={language.language}>
-                                            <Card key={language.language} bg="light" className="mb-1 p-3 pointer blue" onClick={() => navigate(`/generic/${language.language}`)}>
-                                                <div>{language.language}</div>
-                                            </Card>
-                                        </Col>
-
-                                    ))} */}
-
-
 
                                     {data.map((language: any) => (
                                         <Col sm={6} md={6} lg={3} key={language.language}>
-                                            <Card key={language.language} bg={determineBgColor(language.language)}
-                                                onClick={() => navigate(`/generic/${language.language}`)}
-                                                className={language.language === "german" || language.language === "Secret" ? cardClass1 : cardClass2}
-                                            >
-
-                                                <Card.Body className={language.isActive ? "notDisabledCard" : "disabledCard"}>
-                                                    <Card.Title> <span className="nowrap">{capitalizeFirstLetter(language.language)}</span></Card.Title>
-                                                    <Card.Text className="mb-1">
-                                                        {language.language === "Secret" ?
-                                                            <img style={{ height: "4em", color: "#007BFF" }} src={language.source} alt={language} />
-                                                            :
-                                                            <img className="flagImage" src={`images/flags/${determineFlag(language.language)}.svg`} alt={language.language} />
-                                                        }
-                                                    </Card.Text>
-                                                    <div>{language.wordsLearned.length} words</div>
-
-                                                </Card.Body>
-
-                                            </Card>
+                                            <LanguageCard
+                                                isClickable={true}
+                                                language={language}
+                                            />
                                         </Col>
                                     ))}
 
