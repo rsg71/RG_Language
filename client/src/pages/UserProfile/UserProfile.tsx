@@ -31,19 +31,31 @@ export default function UserProfile({ setCurrentUser }: Props) {
     return (
         <div>
             <Container>
+                <Row className="mb-4">
+                    <Col>
+                        <div className="card shadow-sm p-3 text-center bg-light-blue">
+                            <h1>User Profile</h1>
+                            <h2 className="text-center lead">Name: {currentUser && currentUser.username}</h2>
+
+                            <div style={{ visibility: "hidden" }}>A</div>
+                            <div style={{ visibility: "hidden" }}>A</div>
+                        </div>
+                    </Col>
+                </Row>
+
                 <Row>
                     <Col>
-                        <h1>User Profile</h1>
+                        <div className="card text-left shadow-sm p-3 bg-light">
+                            <div>
+                                <button onClick={handleLogout} className="btn btn-primary">Logout</button>
+                            </div>
 
-                        <h2>Name: {currentUser && currentUser.username}</h2>
-
-                        <button onClick={handleLogout}>Logout</button>
-
-                        {/* <Row>
-                            <Col>
-                                <h2>Username: </h2>
-                            </Col>
-                        </Row> */}
+                            <div style={{ visibility: "hidden" }}>A</div>
+                            <div style={{ visibility: "hidden" }}>A</div>
+                            <div style={{ visibility: "hidden" }}>A</div>
+                            <div style={{ visibility: "hidden" }}>A</div>
+                            <div style={{ visibility: "hidden" }}>A</div>
+                        </div>
 
                     </Col>
                 </Row>

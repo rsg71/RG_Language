@@ -87,11 +87,11 @@ export default function Contact() {
                                 {/* <ContactForm submitting={submitting} submitForm={submitForm} /> */}
                                 <form ref={form} onSubmit={sendEmail}>
                                     <Row className="mb-3">
-                                        <Col>
+                                        <Col sm={12} md={6}>
                                             <label>Name</label>
                                             <input className="form-control" type="text" disabled={submitting} name="from_name" />
                                         </Col>
-                                        <Col>
+                                        <Col sm={12} md={6}>
                                             <label>Email</label>
                                             <input className="form-control" type="email" disabled={submitting} name="from_name" placeholder="Enter email" />
                                         </Col>

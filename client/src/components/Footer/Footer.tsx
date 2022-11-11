@@ -10,7 +10,7 @@ export default function Footer() {
                 <hr/>
                 <Row id="footerRow">
                     <Col className="footerColumn" sm={4}>
-                        <h6>About</h6>
+                        <h5>About</h5>
                         <ul>
                             <li>How it works</li>
                             <li>Languages offered</li>
@@ -18,14 +18,14 @@ export default function Footer() {
                         </ul>
                     </Col>
                     <Col className="footerColumn" sm={4}>
-                        <h6>Follow</h6>
+                        <h5>Follow</h5>
                         <ul>
                             <li>Twitter</li>
                             <li>Github</li>
                         </ul>
                     </Col>
                     <Col className="footerColumn" sm={4}>
-                        <h6>Contact</h6>
+                        <h5>Contact</h5>
                         <ul>
                             <li>robert.greenawalt@protonmail.com</li>
                             <li>215-913-7231</li>

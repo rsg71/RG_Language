@@ -7,7 +7,7 @@ interface Props {
 
 export default function AccentMarkButton({ letter, onClick }: Props) {
     return (
-        <button onClick={e => onClick(letter)} className="card d-inline-block btn shadow-sm">{letter}</button>
+        <button onClick={e => onClick(letter)} className="card d-inline-block btn shadow-sm mb-2">{letter}</button>
 
     )
 }
