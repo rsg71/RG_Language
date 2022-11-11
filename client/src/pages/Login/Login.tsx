@@ -35,6 +35,14 @@ export default function Login({ handleSetUser, setLoading, setLoaded, setError, 
         setFormData({ ...formData, [name]: value })
     }
 
+    const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        const key = e.key;
+        console.log(`you pressed the ${key} key`);
+        if (key === 'Enter') {
+            handleLogin();
+        }
+    }
+
     const handleLogin = () => {
         setLoading(true);
         API.login(formData)
@@ -64,7 +72,7 @@ export default function Login({ handleSetUser, setLoading, setLoaded, setError, 
 
     useEffect(() => {
         if (process.env.NODE_ENV === 'development') {
-            mockLogin();
+            // mockLogin();
         }
     }, [])
 
@@ -115,21 +123,31 @@ export default function Login({ handleSetUser, setLoading, setLoaded, setError, 
 
                         {/* <pre>{JSON.stringify(formData, null, 4)}</pre> */}
 
-                        {loading && <LoadingCard />}
+                        {/* {loading && <LoadingCard />} */}
 
-                        {!loading &&
-                            <>
+                        <label>Username</label>
+                        <input
+                            name="username"
+                            value={formData.username}
+                            className="form-control"
+                            onChange={e => handleChange(e)}
+                            onKeyDown={e => handleKeyPress(e)}
+                            disabled={loading}
+                        />
 
-                                <label>Username</label>
-                                <input name="username" value={formData.username} className="form-control" onChange={e => handleChange(e)} />
+                        <label>Password: </label>
+                        <input
+                            name="password"
+                            value={formData.password}
+                            className="form-control d-inline"
+                            onChange={e => handleChange(e)} type={showPassword ? "text" : "password"}
+                            onKeyDown={e => handleKeyPress(e)}
+                            disabled={loading}
+                        />
+                        <span style={{ marginLeft: "-30px", cursor: "pointer" }} onClick={() => setShowPassword(!showPassword)} className="grey font-lg">
+                            <i className={showPassword ? "bi bi-eye" : "bi bi-eye-slash"} />
+                        </span>
 
-                                <label>Password: </label>
-                                <input name="password" value={formData.password} className="form-control d-inline" onChange={e => handleChange(e)} type={showPassword ? "text" : "password"} />
-                                <span style={{ marginLeft: "-30px", cursor: "pointer" }} onClick={() => setShowPassword(!showPassword)} className="grey font-lg">
-                                    <i className={showPassword ? "bi bi-eye" : "bi bi-eye-slash"} />
-                                </span>
-                            </>
-                        }
 
                         {isError &&
                             <div className="text-danger">
@@ -138,7 +156,12 @@ export default function Login({ handleSetUser, setLoading, setLoaded, setError, 
                         }
 
                         <div className="mt-2">
-                            <button className="btn btn-primary" onClick={handleLogin} disabled={loading}>Login</button>
+                            <button
+                                className="btn btn-primary"
+                                onClick={handleLogin}
+                                disabled={loading}>
+                                {loading ? "Loading..." : "Login"}
+                            </button>
                         </div>
 
                         <div className="mt-2">
