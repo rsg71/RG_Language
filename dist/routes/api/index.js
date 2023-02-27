@@ -4,25 +4,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const router = require("express").Router();
-const spanish_1 = __importDefault(require("./spanish"));
-const french_1 = __importDefault(require("./french"));
-const german_1 = __importDefault(require("./german"));
-const italian_1 = __importDefault(require("./italian"));
-const portuguese_1 = __importDefault(require("./portuguese"));
 const users_1 = __importDefault(require("./users"));
 const auth_1 = __importDefault(require("./auth"));
 const auth_2 = __importDefault(require("./auth"));
 // ALL below routes start with /api
-//Spanish Routes
-router.use("/spanish", auth_2.default, spanish_1.default);
-//French Routes
-router.use("/french", auth_2.default, french_1.default);
-// German Routes
-router.use("/german", auth_2.default, german_1.default);
-// Italian routes
-router.use("/italian", auth_2.default, italian_1.default);
-// Portuguese routes
-router.use("/portuguese", auth_2.default, portuguese_1.default);
 // Auth routes
 router.use("/auth", auth_1.default);
 // User routes 
