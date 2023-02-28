@@ -1,0 +1,36 @@
+name: Unit Tests
+
+on: 
+  push:
+    # only trigger on pushes to main
+    branches: 
+      - main
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    env: 
+      PORT: ${{ secrets.PORT }}
+      COOKIE_PARSER_SECRET_CODE: ${{ secrets.COOKIE_PARSER_SECRET_CODE }}
+      DEV_MONGO: ${{ secrets.DEV_MONGO }}
+      FRONT_END_ORIGIN_URL: ${{ secrets.FRONT_END_ORIGIN_URL }}
+      LOG_LEVEL: ${{ secrets.LOG_LEVEL }}
+      PORT: ${{ secrets.PORT }}
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
+
+    strategy:
+      matrix:
+        node-version: [18.x, 16.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm install
+        run: npm ci
+      - name: log context
+        run: echo "$GITHUB_CONTEXT"
+      - name: tests
+        run: npm test:e2e
