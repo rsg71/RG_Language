@@ -15,7 +15,6 @@ jobs:
       DEV_MONGO: ${{ secrets.DEV_MONGO }}
       FRONT_END_ORIGIN_URL: ${{ secrets.FRONT_END_ORIGIN_URL }}
       LOG_LEVEL: ${{ secrets.LOG_LEVEL }}
-      PORT: ${{ secrets.PORT }}
       MONGODB_URI: ${{ secrets.MONGODB_URI }}
 
     strategy:
