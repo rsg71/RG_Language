@@ -87,9 +87,6 @@ export default {
         return axios.get(`/api/auth/page-load-login`)
     },
 
-    getUser: function () {
-        return axios.get("/user", { withCredentials: true })
-    },
 
 
     // WIP
@@ -111,9 +108,6 @@ export default {
     },
 
 
-    getUsersHomepageData: function () {
-        return axios.get("/users-languages", { withCredentials: true })
-    },
 
     addLanguage: function (language: string) {
         let data = { language }
