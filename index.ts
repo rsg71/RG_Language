@@ -1,18 +1,16 @@
 import mongoose from "mongoose";
 import config from './config/index';
 // import ExpressLoader from './loaders/Express'
-
-
-
+import logger from './logger';
 import bodyParser from "body-parser";
-import Express from "express";
+import Express, { Request, Response, NextFunction } from "express";
 import routes from "./routes";
 import session from "express-session";
 import cors from "cors";
 // Authentication
 import passport from "passport";
 import cookieParser from "cookie-parser";
-const passportConfig = require('./config/passportConfig');
+import passportConfig from './config/passportConfig';
 
 
 
@@ -48,6 +46,10 @@ const app = Express();
 // Define middleware for JSON parsing
 app.use(Express.urlencoded({ extended: true }));
 app.use(Express.json());
+app.use((req: Request, res: Response, next: NextFunction) => {
+    logger.trace(`${req.method} ${req.url}`);
+    next()
+})
 
 // Serve up static assets (usually on heroku)
 if (config.NODE_ENV === "production") {
@@ -92,5 +94,4 @@ app.listen(config.PORT, function () {
 });
 
 
-module.exports = app;
-
+export default app;
