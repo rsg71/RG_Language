@@ -1,20 +1,16 @@
-//During the test the env variable is set to test
-process.env.NODE_ENV = 'test';
-
-
 require('dotenv').config();
 
 //Require the dev-dependencies
-let chai_ = require('chai');
-let chaiHttp = require('chai-http');
-let server = require('../index');
-let should = chai_.should();
+import chai_ from 'chai';
+const chaiHttp = require('chai-http');
+import server from '../index';
+chai_.should();
 
 
 
 // // Authenticated Tests
-var request = require('supertest');
-var expect = chai_.expect;
+const request = require('supertest');
+const expect = chai_.expect;
 
 
 chai_.use(chaiHttp);
@@ -23,16 +19,16 @@ chai_.use(chaiHttp);
 
 describe('--- HEALTH CHECK of API', () => {
 
-    describe('GET /test', () => {
+    describe('GET /api/status', () => {
         it('should return a 200 response and status with date time', function (done) {
             request(server)
-                .get('/test')
+                .get('/api/status')
                 .end(function (err: any, res: any) {
                     if (err) {
-                        throw new Error('error getting /test endpoint')
+                        throw new Error('error getting /api/status endpoint')
                     }
                     res.text.should.be.a('string');
-                    expect(res.text).to.include('/test working as of');
+                    expect(res.text).to.include('Status: API is working as of'); // this is case sensitive
                     res.should.have.status(200);
                     done();
                 })
@@ -40,3 +36,5 @@ describe('--- HEALTH CHECK of API', () => {
     });
 
 });
+
+export {};

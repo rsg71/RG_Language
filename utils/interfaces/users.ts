@@ -1,12 +1,9 @@
 import mongoose from 'mongoose';
 
-
 export interface UserRequestInterface {
     username: string;
     id: string;
 }
-
-
 
 export interface IWordsLearned {
     number: number;
@@ -17,7 +14,6 @@ export interface IWordsLearned {
     instancesWordHasBeenSeen: number;
     nextReviewDate: Date;
 }
-
 
 export interface IWordGroup extends mongoose.Document {
     _id: string;
