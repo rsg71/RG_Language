@@ -9,7 +9,7 @@
     "start:dev": "set NODE_ENV=dev&& concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "test:e2e": "set NODE_ENV=test && mocha --require ts-node/register tests/**/*.ts",
     "client": "cd client && npm run start",
-    "seed": "node scripts/seedDB.js",
+    "seed": "node dist/scripts/seedDB.js",
     "install": "cd client && npm install",
     "postinstall": "tsc",
     "build": "cd client && npm run build",
@@ -51,10 +51,11 @@
     "express": "^4.16.3",
     "express-session": "^1.17.3",
     "if-env": "^1.0.4",
+    "joi": "^17.10.1",
     "mongoose": "^5.11.15",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
-    "pino": "^8.4.1",
+    "pino": "^8.15.1",
     "pino-pretty": "^9.0.1"
   }
 }
