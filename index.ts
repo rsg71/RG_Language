@@ -28,11 +28,11 @@ const mongooseOptions = {
 mongoose.connect(config.chooseConnection || "", mongooseOptions)
     .then((res: any) => {
         console.log("connected successfully to: ", res.connections[0]._connectionString)
-        console.log("mongodb is successfully connected ✔");
+        console.log("mongodb is successfully connected!");
 
 
     })
-    .catch((err: any) => console.log("err!: ", err));
+    .catch((err: any) => console.log("mongoDB connection error!: ", err));
 
 // load Express instance
 // const app = new ExpressLoader();
@@ -57,7 +57,8 @@ if (config.NODE_ENV === "production") {
 } else {
     console.log("===============================================")
     console.log("config.NODE_ENV:", config.NODE_ENV);
-    console.log("config.MONGODB_URI: ", config.MONGODB_URI)
+    console.log("config.MONGODB_URI: ", config.MONGODB_URI);
+    console.log("===============================================")
 }
 
 
@@ -67,6 +68,7 @@ app.use(cors({
     origin: config.FRONT_END_ORIGIN_URL, // <-- location of the react app we're connecting to
     credentials: true
 }))
+
 
 // Express sessions
 app.use(session({
@@ -90,7 +92,7 @@ app.use(routes);
 
 
 app.listen(config.PORT, function () {
-    console.log(`==> API server is now listening on port ${config.PORT}!`);
+    console.log(`==> API server is now listening on port ${config.PORT}`);
 });
 
 
