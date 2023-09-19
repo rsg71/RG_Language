@@ -34,6 +34,7 @@
     "logger.ts",
     "config/**/*",
     "services/**/*",
+    "schemas/**/*"
   ],
   "exclude": [
     "./tests",
