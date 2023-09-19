@@ -2,6 +2,8 @@ import { Request, Response } from 'express';
 import logger from '../logger';
 import UserService from '../services/user';
 import db from '../models';
+import { validateRequest, handleValidationResult } from '../utils/validation/validate-requests';
+import validationSchemas from '../schemas/validation-schemas';
 
 const userService = new UserService(db.UserCollection);
 
@@ -9,14 +11,29 @@ const userService = new UserService(db.UserCollection);
 const userController = {
 
     addLanguage: async function (req: Request, res: Response) {
+        logger.trace('Controller called to addLanguage');
+
         const user = req.user as any;
-        const userId: string = user.id;
-        logger.debug(`attempting to add a language for user`)
-        console.log("req.body: ", req.body);
-        if (!req.body.language) {
-            return res.status(400).send('Missing req.body.language');
+        const userId: string = user.id.toString();
+        const language: string = req.body.language;
+
+        const inputs = {
+            language: language.toLowerCase(),
+            userId: user.id.toString()
         }
-        const languageToFind: string = req.body.language.toLowerCase();
+
+        const data = {
+            schema: validationSchemas.addLanguageSchema,
+            inputs
+        }
+
+        const isValid = await validateRequest(data);
+
+        if (!isValid) {
+            return handleValidationResult(res);
+        }
+
+        const languageToFind: string = language.toLowerCase();
 
         try {
             const result = userService.validateAndCreateLanguageForUser(languageToFind, userId);
@@ -31,16 +48,21 @@ const userController = {
     },
 
     getLanguageDataForUser: async function (req: Request, res: Response) {
-        console.log("here is the req.params: ", req.params);
-        console.log("here is the req.body: ", req.body);
+        logger.trace('Controller called to getLanguageDataForUser');
         try {
-            if (!req.params.language) {
-                logger.error("Missing req.params.language");
-                return res.status(400);
+            const inputs = {
+                language: req.params.language,
+                username: req.params.username
             }
-            if (!req.params.username) {
-                logger.error("Missing req.params.username");
-                return res.status(400);
+
+            const data = {
+                schema: validationSchemas.getLanguageDataForUserSchema,
+                inputs
+            }
+
+            const isValid = await validateRequest(data);
+            if (!isValid) {
+                return handleValidationResult(res);
             }
 
             const languageToFind = req.params.language.toLowerCase(); // ensuring it's lowercase (probably already is by this point)
@@ -59,14 +81,24 @@ const userController = {
     },
 
     findAllLanguagesForThisUser: async function (req: Request, res: Response) {
-        logger.debug('Controller called to find all languages for this user');
+        logger.trace('Controller called to findAllLanguagesForThisUser');
         try {
             const userId: string = req.params.userId;
-            console.log("userId: ", userId);
-            if (!userId) {
-                logger.error("USER ID IS MISSING from controller request object");
-                return res.status(400);
+
+            const inputs = {
+                userId: userId,
             }
+
+            const data = {
+                schema: validationSchemas.findAllLanguagesForThisUserSchema,
+                inputs
+            }
+
+            const isValid = await validateRequest(data);
+            if (!isValid) {
+                return handleValidationResult(res);
+            }
+
             const allWords = await userService.FindAllLanguagesForUser(userId);
             return res.send(allWords);
 
@@ -77,21 +109,30 @@ const userController = {
     },
 
     answerCorrectly: async function (req: Request, res: Response) {
+        logger.trace('Controller called to answerCorrectly');
         try {
             const user = req.user as any;
             const wordToLookFor: string = req.query.word as string;
             const language: string = req.query.language as string;
-            const userId: string = user.id;
+            const userId: string = user.id.toString();
 
-            if (userId === undefined) {
-                return res.status(422).send('no user')
+
+            const inputs = {
+                word: req.query.word,
+                language: language.toLowerCase(),
+                userId: userId
             }
-            if (!wordToLookFor) {
-                throw new Error('no word provided');
+
+            const data = {
+                schema: validationSchemas.answerCorrectlySchema,
+                inputs
             }
-            if (!language) {
-                throw new Error('no language provided');
+
+            const isValid = await validateRequest(data);
+            if (!isValid) {
+                return handleValidationResult(res);
             }
+
 
             const answeredCorrectlyResponse = await userService.answerWordCorrectly(userId, wordToLookFor, language);
 
@@ -104,21 +145,28 @@ const userController = {
     },
 
     answerIncorrectly: async function (req: Request, res: Response) {
+        logger.trace('Controller called to answerIncorrectly');
         try {
             const user = req.user as any;
-            const userId: string = user.id;
-            if (userId === undefined) {
-                return res.status(400).send('no user');
-            }
-            if (!req.query.word) {
-                return res.status(400).send('no word provided');
-            }
-            if (!req.query.language) {
-                return res.status(400).send('no language provided');
-            }
+            const userId: string = user.id.toString();
+            const language: string = req.query.language as string;
             const wordToLookFor = req.query.word as string;
-            const language = req.query.language as string;
 
+            const inputs = {
+                word: wordToLookFor,
+                language: language.toLowerCase(),
+                userId: userId
+            }
+
+            const data = {
+                schema: validationSchemas.answerIncorrectlySchema,
+                inputs
+            }
+
+            const isValid = await validateRequest(data);
+            if (!isValid) {
+                return handleValidationResult(res);
+            }
 
 
             const answeredIncorrectlyResponse = await userService.answerWordIncorrectly(userId, wordToLookFor, language)
@@ -132,16 +180,29 @@ const userController = {
     },
 
     findAllUnlearnedWordsForGivenLanguageForUser: async function (req: Request, res: Response) {
-
+        logger.trace('Controller called to findAllUnlearnedWordsForGivenLanguageForUser');
         try {
-            if (!req.query.language) {
-                return res.status(400).send('no language provided');
-            }
             const user = req.user as any;
-            const userId: string = user.id;
+            const userId: string = user.id.toString();
             const language = req.query.language as string;
 
-            const unlearnedForUser = await userService.findAllUnlearnedWordsForGivenLanguageForUser(userId, language);
+            const inputs = {
+                language: language.toLowerCase(),
+                userId: userId
+            }
+
+            const data = {
+                schema: validationSchemas.findAllUnlearnedWordsForGivenLanguageForUserSchema,
+                inputs
+            }
+
+            const isValid = await validateRequest(data);
+            if (!isValid) {
+                return handleValidationResult(res);
+            }
+
+
+            const unlearnedForUser = await userService.findAllUnlearnedWordsForGivenLanguageForUser(userId, language.toLowerCase());
 
             return res.status(200).send(unlearnedForUser);
 
@@ -152,18 +213,28 @@ const userController = {
     },
 
     getWordsForReviewForLanguageForUser: async function (req: Request, res: Response) {
-        logger.debug('Controller called to getWordsForReviewForLanguageForUser');
+        logger.trace('Controller called to getWordsForReviewForLanguageForUser');
         try {
-            if (!req.params.language) {
-                logger.error('req.params.language is missing');
-                return res.status(400).send('no language provided');
-            }
             const user = req.user as any;
-            if (!user) {
-                throw new Error('no user exists on the req object');
+            const userId: string = user.id.toString();
+            const language: string = req.params.language;
+
+            console.log('typeof userId: ', typeof userId);
+
+            const inputs = {
+                language: language.toLowerCase(),
+                userId: userId
             }
-            const userId = user.id;
-            const language = req.params.language as string;
+
+            const data = {
+                schema: validationSchemas.getWordsForReviewForLanguageForUserSchema,
+                inputs
+            }
+
+            const isValid = await validateRequest(data);
+            if (!isValid) {
+                return handleValidationResult(res);
+            }
 
             const unlearnedForUser = await userService.findAllUnlearnedWordsForGivenLanguageForUser(userId, language);
 

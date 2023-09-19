@@ -10,6 +10,7 @@
     "test:e2e": "set NODE_ENV=test && mocha --require ts-node/register tests/**/*.ts",
     "client": "cd client && npm run start",
     "seed": "node dist/scripts/seedDB.js",
+    "seed:spanish": "node dist/scripts/seedSpanish.js",
     "install": "cd client && npm install",
     "postinstall": "tsc",
     "build": "cd client && npm run build",

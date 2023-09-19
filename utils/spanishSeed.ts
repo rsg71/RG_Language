@@ -1,4 +1,7 @@
-const spanishSeed = [
+import { IWordSeed } from "./interfaces/words";
+
+
+const spanishSeed: IWordSeed[] = [
     {
         number: 1,
         word: "el,la",

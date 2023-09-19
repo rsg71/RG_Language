@@ -16,6 +16,6 @@ const wordBankSchema = new Schema({
 
 });
 
-const French = mongoose.model("WordGroup", wordBankSchema);
+const WordGroup = mongoose.model("WordGroup", wordBankSchema);
 
-module.exports = French;
+module.exports = WordGroup;

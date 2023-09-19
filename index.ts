@@ -48,6 +48,7 @@ app.use(Express.urlencoded({ extended: true }));
 app.use(Express.json());
 app.use((req: Request, res: Response, next: NextFunction) => {
     logger.trace(`${req.method} ${req.url}`);
+    logger.trace(`${JSON.stringify(req.body)}`);
     next()
 })
 
