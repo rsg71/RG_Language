@@ -11,7 +11,9 @@ import cors from "cors";
 import passport from "passport";
 import cookieParser from "cookie-parser";
 import passportConfig from './config/passportConfig';
-
+import swaggerUI from "swagger-ui-express";
+import swaggerJsDoc from "swagger-jsdoc";
+import { swaggerOptions } from "./config/swagger";
 
 
 
@@ -85,6 +87,13 @@ app.use(cookieParser(config.COOKIE_PARSER_SECRET_CODE))
 app.use(passport.initialize());
 app.use(passport.session());
 passportConfig(passport);
+
+
+
+
+// Swagger API documentation
+const specs = swaggerJsDoc(swaggerOptions);
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
 
 

@@ -29,9 +29,9 @@ const { value: envVars, error } = envVarsSchema
 
 
 if (error) {
-    throw new Error(`Config validation error: ${error.message}`);
+    throw new Error(`Env variables validation error: ${error.message}`);
 } else {
-    console.log('Environment validation passed successfully!')
+    console.log('Env variables validation passed successfully!')
 }
 
 
