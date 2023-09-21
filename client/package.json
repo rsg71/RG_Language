@@ -24,6 +24,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "test:html-report": "react-scripts test --testResultsProcessor=jest-stare",
+    "test:coverage": "jest --coverage",
     "eject": "react-scripts eject"
   },
   "browserslist": [
@@ -31,5 +33,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "jest-stare": "^2.5.1"
+  }
 }
