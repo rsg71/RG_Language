@@ -10,6 +10,17 @@ import ensureAuthenticated from "../isAuthenticated";
 // Auth routes
 router.use("/auth", authRoutes);
 
+
+/**
+ * @swagger
+ * /api/status:
+ *   get:
+ *     summary: Returns healthcheck
+ *     tags: [Healthcheck]
+ *     responses:
+ *       200:
+ *         description: the list of the posts
+ */
 router.get("/status", (req: Request, res: Response) => {
     const date = new Date().toLocaleDateString();
     const time = new Date().toLocaleTimeString();

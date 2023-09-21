@@ -11,6 +11,18 @@ export interface authRequest extends Request {
 }
 
 
+/**
+ * @swagger
+ * /api/auth/page-load-login:
+ *   get:
+ *     summary: Check if user is logged in
+ *     tags: [Auth]
+ *     responses:
+ *       200:
+ *         description: user is logged in
+ *       404:
+ *         description: Bad Request
+ */
 router.get("/page-load-login", (req: authRequest, res: Response) => {
     if (!req.user) {
         logger.error('no user found on auth route');
@@ -26,6 +38,31 @@ router.get("/page-load-login", (req: authRequest, res: Response) => {
 })
 
 
+/**
+ * @swagger
+ * /api/auth/login:
+ *   post:
+ *     summary: Log in
+ *     tags: [Auth]
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username: 
+ *                 type: string
+ *               password: 
+ *                 type: string
+ *             example:
+ *               username: "rob"
+ *               password: "123"  
+ *     responses:
+ *       200:
+ *         description: login successful
+ *       400:
+ *         description: Bad Request
+ */
 router.post("/login", (req: Request, res: Response, next: NextFunction) => {
     passport.authenticate("local", {}, (err: any, user: any, info: any) => {
         if (err) {
@@ -48,6 +85,29 @@ router.post("/login", (req: Request, res: Response, next: NextFunction) => {
 })
 
 
+/**
+ * @swagger
+ * /api/auth/signup:
+ *   post:
+ *     summary: Sign user up
+ *     tags: [Auth]
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username: 
+ *                 type: string
+ *               password: 
+ *                 type: string
+ *             example:
+ *               username: "jdoe"
+ *               password: "123"  
+ *     responses:
+ *       200:
+ *         description: signup successful
+ */
 router.post("/signup", (req: Request, res: Response) => {
     console.log("new username is: ", req.body.username)
 
@@ -73,6 +133,16 @@ router.post("/signup", (req: Request, res: Response) => {
 });
 
 
+/**
+ * @swagger
+ * /api/auth/logout:
+ *   get:
+ *     summary: Logs the user out
+ *     tags: [Auth]
+ *     responses:
+ *       200:
+ *         description: logout successful
+ */
 router.get("/logout", (req: Request, res: Response, next: NextFunction) => {
     req.logout(function (err) {
         if (err) {

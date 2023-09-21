@@ -19,7 +19,7 @@ export const determineFlag = (language: string) => {
 }
 
 export const determineBgColor = (language: string) => {
-    let foundLanguage = LanguagesJson.find(l => l.languageLowerCase === language) as any;
+    let foundLanguage = LanguagesJson.find(languageObject => languageObject.languageLowerCase === language) as any;
     if (!foundLanguage) {
         return "na"
     }

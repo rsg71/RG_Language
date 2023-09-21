@@ -5,5 +5,7 @@ client/package-lock.json
 .env.dev
 .notes.env
 client/build/
+client/coverage/
+client/jest-stare/
 .notes.env
 dist/
