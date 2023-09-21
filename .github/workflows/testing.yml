@@ -2,9 +2,10 @@ name: Unit Tests
 
 on: 
   push:
-    # only trigger on pushes to main
-    branches: 
-      - main
+    # only trigger on pushes to master
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   tests:
@@ -28,8 +29,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: npm install
-        run: npm ci
-      - name: log context
-        run: echo "$GITHUB_CONTEXT"
+        run: cd client && npm ci
       - name: tests
-        run: npm run test:e2e
+        run: npm run test
