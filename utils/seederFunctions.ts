@@ -8,14 +8,14 @@ import spanishSeed from './spanishSeed';
 
 export function determineSeedToUse (newLanguage: string) {
     if (newLanguage === 'french') {
-        return frenchSeed
+        return frenchSeed;
     } else if (newLanguage === 'german') {
-        return germanSeed
+        return germanSeed;
     } else if (newLanguage === 'italian') {
-        return italianSeed
+        return italianSeed;
     } else if (newLanguage === 'portuguese') {
-        return portugueseSeed
+        return portugueseSeed;
     } else if (newLanguage === 'spanish') {
-        return spanishSeed
+        return spanishSeed;
     }
 }
