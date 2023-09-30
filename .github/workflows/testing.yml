@@ -17,6 +17,8 @@ jobs:
       FRONT_END_ORIGIN_URL: ${{ secrets.FRONT_END_ORIGIN_URL }}
       LOG_LEVEL: ${{ secrets.LOG_LEVEL }}
       MONGODB_URI: ${{ secrets.MONGODB_URI }}
+      TEST_USERNAME: ${{ secrets.TEST_USERNAME }}
+      TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
 
     strategy:
       matrix:
