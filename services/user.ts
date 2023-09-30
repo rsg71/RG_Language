@@ -8,7 +8,7 @@ import { IWordGroupModel } from '../utils/interfaces/users';
 
 declare type UserIdType = string;
 
-function handleError(err: any): void {
+export async function handleError(err: any): Promise<void> {
     if (err instanceof Error && err.message) {
         logger.error(err);
         throw new Error(err.message)
