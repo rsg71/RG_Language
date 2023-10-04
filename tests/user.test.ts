@@ -24,9 +24,9 @@
 //     // click on French
 //     // take quiz
 //     //  - how to know what word is being tested?
-    
+
 //     // ultimately delete user
-    
+
 
 //     describe.skip('GET /something', () => {
 //         it('logs a user in, then gets their homepage', function (done) {
@@ -48,3 +48,11 @@
 // });
 
 // export {};
+
+
+describe.skip('placeholder', () => {
+
+    it('placeholder', () => {
+
+    })
+})

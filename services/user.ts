@@ -1,8 +1,6 @@
 import { determineSeedToUse } from '../utils/seederFunctions';
 import logger from '../logger';
 import { getDateXDaysAgo, getDateXDaysAhead } from '../utils/helperFunctions';
-import db from '../models';
-import { Document } from 'mongoose';
 import { IWordGroupModel } from '../utils/interfaces/users';
 
 
@@ -68,7 +66,6 @@ export default class UserService {
         }
         return newUserLanguage;
     }
-
 
     public async validateAndCreateLanguageForUser(languageToFind: any, userId: UserIdType) {
         logger.debug('Service called to validate and create new language for user');

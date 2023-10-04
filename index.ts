@@ -22,17 +22,18 @@ import { mongooseOptions } from "./config/database";
 
 
 
+const isTesting = process.env.NODE_ENV === 'test';
+if (!isTesting) {
+    // Connect to Mongoose --- //
+    mongoose.connect(dbConnectionString, mongooseOptions)
+        .then((res: any) => {
+            console.log("connected successfully to: ", res.connections[0]._connectionString)
+            console.log("mongodb is successfully connected!");
 
 
-// Connect to Mongoose --- //
-mongoose.connect(dbConnectionString, mongooseOptions)
-    .then((res: any) => {
-        console.log("connected successfully to: ", res.connections[0]._connectionString)
-        console.log("mongodb is successfully connected!");
-
-
-    })
-    .catch((err: any) => console.log("mongoDB connection error!: ", err));
+        })
+        .catch((err: any) => console.log("mongoDB connection error!: ", err));
+}
 
 // load Express instance
 // const app = new ExpressLoader();
@@ -99,9 +100,10 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 app.use(routes);
 
 
-app.listen(config.PORT, function () {
-    console.log(`==> API server is now listening on port ${config.PORT}`);
-});
-
+if (!isTesting) {
+    app.listen(config.PORT, function () {
+        console.log(`==> API server is now listening on port ${config.PORT}`);
+    });
+}
 
 export default app;
