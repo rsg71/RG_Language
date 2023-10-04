@@ -1,5 +1,5 @@
 import validationSchemas from '../../../schemas/validation-schemas';
-import { validateRequest } from '../../../utils/validation/validate-requests';
+import { handleValidationResult, validateRequest } from '../../../utils/validation/validate-requests';
 
 
 describe('validate-request', () => {
@@ -33,4 +33,22 @@ describe('validate-request', () => {
         expect(result).toBe(false);
     });
 
+});
+
+const mockResponse = () => {
+  const res: any = {};
+  res.status = jest.fn().mockReturnValue(res);
+  res.text = jest.fn().mockReturnValue(res);
+  return res;
+};
+
+describe('handleValidationResult', () => {
+    it('should return a 400 response', async () => {
+
+        const res = mockResponse();
+       
+        handleValidationResult(res);
+
+        expect(res.status).toHaveBeenCalledWith(400);
+    });
 })

@@ -14,20 +14,18 @@ import passportConfig from './config/passportConfig';
 import swaggerUI from "swagger-ui-express";
 import swaggerJsDoc from "swagger-jsdoc";
 import { swaggerOptions } from "./config/swagger";
+import { dbConnectionString } from "./config/database";
+import { mongooseOptions } from "./config/database";
 
 
 
-const mongooseOptions = {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true
-}
+
 
 
 
 
 // Connect to Mongoose --- //
-mongoose.connect(config.chooseConnection || "", mongooseOptions)
+mongoose.connect(dbConnectionString, mongooseOptions)
     .then((res: any) => {
         console.log("connected successfully to: ", res.connections[0]._connectionString)
         console.log("mongodb is successfully connected!");
