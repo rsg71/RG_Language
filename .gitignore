@@ -9,3 +9,5 @@ client/coverage/
 client/jest-stare/
 .notes.env
 dist/
+
+coverage/

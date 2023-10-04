@@ -2,13 +2,13 @@ name: Unit Tests
 
 on: 
   push:
-    # only trigger on pushes to master
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    # only trigger on pushes to development
+    branches: [ development ]
+  # pull_request:
+    # branches: [ master ]
 
 jobs:
-  tests:
+  run-tests:
     runs-on: ubuntu-latest
     env: 
       PORT: ${{ secrets.PORT }}
@@ -17,6 +17,8 @@ jobs:
       FRONT_END_ORIGIN_URL: ${{ secrets.FRONT_END_ORIGIN_URL }}
       LOG_LEVEL: ${{ secrets.LOG_LEVEL }}
       MONGODB_URI: ${{ secrets.MONGODB_URI }}
+      TEST_USERNAME: ${{ secrets.TEST_USERNAME }}
+      TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
 
     strategy:
       matrix:
@@ -29,6 +31,18 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: npm install
-        run: cd client && npm ci
+        run: npm ci
       - name: tests
-        run: npm run test
+        run: npm run test:coverage
+
+  merge-if-tests-pass:
+    needs: run-tests # Wait for the "run-tests" job to pass before running this job
+    runs-on: ubuntu-latest
+    steps:
+       - uses: actions/checkout@v2
+       - uses: everlytic/branch-merge@1.1.2
+         with:
+          github_token: ${{ github.token }}
+          source_ref: ${{ github.ref }}
+          target_branch: 'main'
+          commit_message_template: '[Automated] Merged {source_ref} into target {target_branch}'

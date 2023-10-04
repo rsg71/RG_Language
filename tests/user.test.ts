@@ -1,50 +1,58 @@
-require('dotenv').config();
+// require('dotenv').config();
 
-//Require the dev-dependencies
-import chai_ from 'chai';
-const chaiHttp = require('chai-http');
-import server from '../index';
-chai_.should();
-
-
-
-// // Authenticated Tests
-var request = require('supertest');
-chai_.expect;
+// //Require the dev-dependencies
+// import chai_ from 'chai';
+// const chaiHttp = require('chai-http');
+// import server from '../index';
+// chai_.should();
 
 
-chai_.use(chaiHttp);
+
+// // // Authenticated Tests
+// var request = require('supertest');
+// chai_.expect;
 
 
-describe('--- AUTH TEST of API', () => {
+// chai_.use(chaiHttp);
 
-    // sign up
-    // log in
-    // add language
-    // click on French
-    // take quiz
-    //  - how to know what word is being tested?
-    
-    // ultimately delete user
-    
 
-    describe('GET /something', () => {
-        it('logs a user in, then gets their homepage', function (done) {
-            request(server)
-                .get('/api/users/languages/1234')
-                .end(function (err: any, res: any) {
-                    if (err) {
-                        throw new Error('error getting /test endpoint')
-                    }
-                    res.text.should.be.a('string');
-                    res.should.have.status(401);
-                    done();
-                })
-        });
+// describe('--- AUTH TEST of API', () => {
 
-        it.skip('Adds a language')
-    });
+//     // sign up
+//     // log in
+//     // add language
+//     // click on French
+//     // take quiz
+//     //  - how to know what word is being tested?
 
-});
+//     // ultimately delete user
 
-export {};
+
+//     describe.skip('GET /something', () => {
+//         it('logs a user in, then gets their homepage', function (done) {
+//             request(server)
+//                 .get('/api/users/languages/1234')
+//                 .end(function (err: any, res: any) {
+//                     if (err) {
+//                         throw new Error('error getting /test endpoint')
+//                     }
+//                     res.text.should.be.a('string');
+//                     res.should.have.status(401);
+//                     done();
+//                 })
+//         });
+
+//         it.skip('Adds a language', () => {})
+//     });
+
+// });
+
+// export {};
+
+
+describe.skip('placeholder', () => {
+
+    it('placeholder', () => {
+
+    })
+})

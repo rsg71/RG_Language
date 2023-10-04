@@ -31,7 +31,8 @@ const { value: envVars, error } = envVarsSchema
 if (error) {
     throw new Error(`Env variables validation error: ${error.message}`);
 } else {
-    console.log('Env variables validation passed successfully!')
+    console.log('Env variables validation passed successfully!');
+console.log('node env is: ', process.env.NODE_ENV);
 }
 
 

@@ -14,27 +14,26 @@ import passportConfig from './config/passportConfig';
 import swaggerUI from "swagger-ui-express";
 import swaggerJsDoc from "swagger-jsdoc";
 import { swaggerOptions } from "./config/swagger";
+import { dbConnectionString } from "./config/database";
+import { mongooseOptions } from "./config/database";
 
 
 
-const mongooseOptions = {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true
+
+
+
+const isTesting = process.env.NODE_ENV === 'test';
+if (!isTesting) {
+    // Connect to Mongoose --- //
+    mongoose.connect(dbConnectionString, mongooseOptions)
+        .then((res: any) => {
+            console.log("connected successfully to: ", res.connections[0]._connectionString)
+            console.log("mongodb is successfully connected!");
+
+
+        })
+        .catch((err: any) => console.log("mongoDB connection error!: ", err));
 }
-
-
-
-
-// Connect to Mongoose --- //
-mongoose.connect(config.chooseConnection || "", mongooseOptions)
-    .then((res: any) => {
-        console.log("connected successfully to: ", res.connections[0]._connectionString)
-        console.log("mongodb is successfully connected!");
-
-
-    })
-    .catch((err: any) => console.log("mongoDB connection error!: ", err));
 
 // load Express instance
 // const app = new ExpressLoader();
@@ -101,9 +100,10 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 app.use(routes);
 
 
-app.listen(config.PORT, function () {
-    console.log(`==> API server is now listening on port ${config.PORT}`);
-});
-
+if (!isTesting) {
+    app.listen(config.PORT, function () {
+        console.log(`==> API server is now listening on port ${config.PORT}`);
+    });
+}
 
 export default app;
