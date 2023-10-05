@@ -5,6 +5,8 @@ import passport from 'passport';
 import User from "../../models/user";
 import bcrypt from "bcryptjs";
 import { UserRequestInterface } from '../../utils/interfaces/users';
+import jwt from 'jsonwebtoken';
+import config from '../../config/index';
 
 export interface authRequest extends Request {
     user?: UserRequestInterface;
@@ -64,6 +66,7 @@ router.get("/page-load-login", (req: authRequest, res: Response) => {
  *         description: Bad Request
  */
 router.post("/login", (req: Request, res: Response, next: NextFunction) => {
+
     passport.authenticate("local", {}, (err: any, user: any, info: any) => {
         if (err) {
             // throw err
@@ -72,13 +75,28 @@ router.post("/login", (req: Request, res: Response, next: NextFunction) => {
 
             res.status(400).send("No User Exists")
         } else {
-            req.logIn(user, (err) => {
-                if (err) throw err;
 
-                let { username, _id } = user;
-                let userData = { username, _id }
-                res.send(userData);
-                // console.log(req.user);
+
+            const token = jwt.sign(
+                {
+                    _id: user._id,
+                    username: user.username
+                },
+                config.JWT_SECRET,
+                {
+                    expiresIn: "1d",
+                }
+            );
+
+            res.status(200)
+            .cookie("access_token", token, {
+                httpOnly: false,
+            })
+            .json({
+                status: 200,
+                success: true,
+                message: "login success",
+                token: token,
             });
         }
     })(req, res, next)

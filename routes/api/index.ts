@@ -2,7 +2,7 @@ const router = require("express").Router();
 import { Request, Response } from "express";
 import userRoutes from "./users";
 import authRoutes from "./auth";
-import ensureAuthenticated from "../isAuthenticated";
+import ensureAuthenticated from "../../middleware/isAuthenticated";
 
 
 // ALL below routes start with /api
