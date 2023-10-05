@@ -34,8 +34,9 @@
     "logger.ts",
     "config/**/*",
     "services/**/*",
-    "schemas/**/*"
-, "middleware/isAuthenticated.ts"  ],
+    "schemas/**/*",
+    "middleware/**/*"
+  ],
   "exclude": [
     "./tests",
     "./node_modules"
