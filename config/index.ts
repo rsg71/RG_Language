@@ -14,6 +14,7 @@ const envVarsSchema = joi
         COOKIE_PARSER_SECRET_CODE: joi.string().required(),
         DEV_MONGO: joi.string().required(),
         FRONT_END_ORIGIN_URL: joi.string().required(),
+        JWT_SECRET: joi.string().required(),
         LOG_LEVEL: joi.string().valid("trace", "debug", "info", "warn", "error").required(),
         PORT: joi.number().positive().required(),
         MONGODB_URI: joi.string().required(),
@@ -32,7 +33,7 @@ if (error) {
     throw new Error(`Env variables validation error: ${error.message}`);
 } else {
     console.log('Env variables validation passed successfully!');
-console.log('node env is: ', process.env.NODE_ENV);
+    console.log('node env is: ', process.env.NODE_ENV);
 }
 
 
@@ -46,6 +47,7 @@ const config = {
     DEV_MONGO: envVars.NODE_ENV,
 
     FRONT_END_ORIGIN_URL: envVars.FRONT_END_ORIGIN_URL,
+    JWT_SECRET: envVars.JWT_SECRET,
     LOG_LEVEL: envVars.LOG_LEVEL,
     PORT: envVars.PORT,
     MONGODB_URI: envVars.MONGODB_URI,

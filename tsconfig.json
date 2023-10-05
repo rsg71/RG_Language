@@ -34,7 +34,8 @@
     "logger.ts",
     "config/**/*",
     "services/**/*",
-    "schemas/**/*"
+    "schemas/**/*",
+    "middleware/**/*"
   ],
   "exclude": [
     "./tests",

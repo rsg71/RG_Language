@@ -15,6 +15,7 @@ jobs:
       COOKIE_PARSER_SECRET_CODE: ${{ secrets.COOKIE_PARSER_SECRET_CODE }}
       DEV_MONGO: ${{ secrets.DEV_MONGO }}
       FRONT_END_ORIGIN_URL: ${{ secrets.FRONT_END_ORIGIN_URL }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
       LOG_LEVEL: ${{ secrets.LOG_LEVEL }}
       MONGODB_URI: ${{ secrets.MONGODB_URI }}
       TEST_USERNAME: ${{ secrets.TEST_USERNAME }}

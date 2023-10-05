@@ -57,10 +57,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 if (config.NODE_ENV === "production") {
     app.use(Express.static("client/build"));
 } else {
-    console.log("===============================================")
     console.log("config.NODE_ENV:", config.NODE_ENV);
-    console.log("config.MONGODB_URI: ", config.MONGODB_URI);
-    console.log("===============================================")
+    // console.log("config.MONGODB_URI: ", config.MONGODB_URI);
 }
 
 
@@ -102,7 +100,10 @@ app.use(routes);
 
 if (!isTesting) {
     app.listen(config.PORT, function () {
+        console.log('========================================================');
         console.log(`==> API server is now listening on port ${config.PORT}`);
+        console.log(`==> Swagger is now listening on port ${config.PORT}`);
+        console.log('========================================================');
     });
 }
 

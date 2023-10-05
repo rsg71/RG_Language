@@ -48,7 +48,8 @@ export default function Login({ handleSetUser, setLoading, setLoaded, setError, 
         API.login(formData)
             .then(res => {
                 console.log("user: ", res);
-                let userData = res.data;
+                const userData = res.data.userData;
+
                 handleSetUser(userData);
 
                 setLoading(false);
@@ -90,7 +91,7 @@ export default function Login({ handleSetUser, setLoading, setLoaded, setError, 
         API.login(formData)
             .then(res => {
                 // console.log("login res: ", res);
-                let userData = res.data;
+                const userData = res.data.userData;
                 handleSetUser(userData);
 
                 setLoading(false);

@@ -5,6 +5,8 @@ import passport from 'passport';
 import User from "../../models/user";
 import bcrypt from "bcryptjs";
 import { UserRequestInterface } from '../../utils/interfaces/users';
+import jwt from 'jsonwebtoken';
+import config from '../../config/index';
 
 export interface authRequest extends Request {
     user?: UserRequestInterface;
@@ -64,6 +66,7 @@ router.get("/page-load-login", (req: authRequest, res: Response) => {
  *         description: Bad Request
  */
 router.post("/login", (req: Request, res: Response, next: NextFunction) => {
+
     passport.authenticate("local", {}, (err: any, user: any, info: any) => {
         if (err) {
             // throw err
@@ -72,13 +75,35 @@ router.post("/login", (req: Request, res: Response, next: NextFunction) => {
 
             res.status(400).send("No User Exists")
         } else {
-            req.logIn(user, (err) => {
-                if (err) throw err;
 
-                let { username, _id } = user;
-                let userData = { username, _id }
-                res.send(userData);
-                // console.log(req.user);
+            const _id = user._id;
+            const username = user.username;
+
+
+            const token = jwt.sign(
+                {
+                    _id,
+                    username
+                },
+                config.JWT_SECRET,
+                {
+                    expiresIn: "1d",
+                }
+            );
+
+            res.status(200)
+            .cookie("access_token", token, {
+                httpOnly: true,
+            })
+            .json({
+                status: 200,
+                success: true,
+                message: "login success",
+                token: token,
+                userData: {
+                    username, 
+                    _id
+                }
             });
         }
     })(req, res, next)
@@ -144,13 +169,8 @@ router.post("/signup", (req: Request, res: Response) => {
  *         description: logout successful
  */
 router.get("/logout", (req: Request, res: Response, next: NextFunction) => {
-    req.logout(function (err) {
-        if (err) {
-            console.log("error upon logout attempt is: ", err);
-            return next(err);
-        }
-    });
-    res.status(200).send("User successfully logged out");
+
+    res.status(200).clearCookie("access_token").send("User successfully logged out");
 })
 
 
