@@ -1,8 +1,8 @@
 import React from 'react'
 import { Card } from 'react-bootstrap';
-import { capitalizeFirstLetter, determineBgColor, determineFlag } from '../../utils/helperFunctions';
 import { useNavigate } from 'react-router-dom';
-import { cardClass1, cardClass2 } from '../../styles/style';
+import { cardClass1, cardClass2 } from 'styles/style';
+import { capitalizeFirstLetter, determineBgColor, determineFlag } from 'utils/helperFunctions';
 
 interface Props {
     language: any;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import API from '../../utils/API';
+import API from 'utils/API';
 import { Row, Col } from 'react-bootstrap'
 
 

@@ -1,8 +1,8 @@
 import React from "react";
 import { Container, Row, Col, CardDeck } from "react-bootstrap"
-import { Link, useNavigate } from "react-router-dom"
-import LanguageCard from "../../components/LanguageCard/LanguageCard";
-import LanguagesJson from "../../data/languages.json"
+import { useNavigate } from "react-router-dom"
+import LanguageCard from "components/LanguageCard/LanguageCard";
+import LanguagesJson from "data/languages.json"
 import "./Home.css"
 
 function Home() {

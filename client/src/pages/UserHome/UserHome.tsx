@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, CardDeck } from 'react-bootstrap';
-import API from '../../utils/API';
-import LoadingCard from '../../components/LoadingCard/LoadingCard';
-import { CurrentUserContext } from '../../App';
-import LanguageCard from '../../components/LanguageCard/LanguageCard';
+import API from 'utils/API';
+import LoadingCard from 'components/LoadingCard/LoadingCard';
+import { CurrentUserContext } from 'App';
+import LanguageCard from 'components/LanguageCard/LanguageCard';
 
 export default function UserHome() {
 

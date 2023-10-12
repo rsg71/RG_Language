@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import API from '../../utils/API';
+import API from 'utils/API';
 import { useNavigate } from 'react-router-dom';
-import { CurrentUserContext } from '../../App';
+import { CurrentUserContext } from 'App';
 
 interface Props {
     setCurrentUser: (user: any) => void;

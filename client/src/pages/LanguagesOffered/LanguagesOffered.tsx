@@ -1,7 +1,7 @@
 import React from 'react'
 import { CardDeck, Col, Row, Container } from 'react-bootstrap'
-import LanguageCard from '../../components/LanguageCard/LanguageCard';
-import languages from '../../data/languages.json'
+import LanguageCard from 'components/LanguageCard/LanguageCard';
+import languages from 'data/languages.json'
 
 
 export default function LanguagesOffered() {

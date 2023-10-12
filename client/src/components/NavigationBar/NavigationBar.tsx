@@ -1,8 +1,8 @@
+import { CurrentUserContext } from 'App';
 import React, { useContext, useState } from 'react';
 import { Navbar, Nav, Dropdown, DropdownButton, ButtonGroup } from "react-bootstrap";
 import { Link, useNavigate } from 'react-router-dom';
-import { CurrentUserContext } from '../../App';
-import API from '../../utils/API';
+import API from 'utils/API';
 
 interface Props {
     setCurrentUser: (currentUser: any) => void;

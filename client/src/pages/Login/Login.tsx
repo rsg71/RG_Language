@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
-import API from '../../utils/API';
+import API from 'utils/API';
 import { useNavigate, Link } from 'react-router-dom';
-import LoadingCard from '../../components/LoadingCard/LoadingCard';
 
 interface Props {
     handleSetUser: any;

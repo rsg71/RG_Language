@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Row, Col, Breadcrumb } from 'react-bootstrap';
 import { CurrentUserContext } from '../../App';
-import LoadingCard from '../../components/LoadingCard/LoadingCard';
-import PageContainer from '../../components/PageContainer/PageContainer';
 import API from '../../utils/API';
 import { Link, useNavigate } from 'react-router-dom';
-import { CurrentUserInterface } from '../../utils/interfaces';
+import LoadingCard from 'components/LoadingCard/LoadingCard';
+import PageContainer from 'components/PageContainer/PageContainer';
+import { CurrentUserInterface } from 'utils/interfaces';
 
 export default function AddLanguage() {
 

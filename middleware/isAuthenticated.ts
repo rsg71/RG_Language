@@ -4,6 +4,14 @@ import jwt from 'jsonwebtoken';
 import config from "../config/index";
 
 
+export interface AuthenticatedRequest extends Request {
+  user: {
+    id: string;
+    username: string;
+  }
+}
+
+
 // /**
 //  * Check if a JWT is expired
 //  * @param expirationDate - the jwt.exp value 
@@ -67,6 +75,14 @@ function isAuthenticated(req: Request, res: Response, next: NextFunction) {
 
     logger.debug('decodedJWT (this jwt is valid): ');
     logger.debug(decodedJWT);
+
+
+    // add user to the request object
+    req.user = {
+      id: decodedJWT._id,
+      username: decodedJWT.username
+    }
+
 
     next();
   });

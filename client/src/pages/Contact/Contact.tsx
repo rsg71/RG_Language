@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Container, Row, Col, Spinner } from 'react-bootstrap'
 // import ContactForm from '../../components/ContactForm/ContactForm';
-import Error from '../../components/Error/Error';
 import emailjs from '@emailjs/browser';
+import Error from 'components/Error/Error';
 
 export default function Contact() {
 
