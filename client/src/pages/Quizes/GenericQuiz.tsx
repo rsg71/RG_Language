@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useRef } from "react"
 import { Container, Row, Col, Button, Form } from "react-bootstrap"
 import { Link, useParams } from "react-router-dom"
-import QuizQuestion from "../../components/QuizQuestion/QuizQuestion"
-import QuizProgressBar from "../../components/QuizProgressBar/QuizProgressBar"
-import API from "../../utils/API"
-import accentMarks from "../../utils/accentmarks/allAccentMarks"
-import LoadingCard from "../../components/LoadingCard/LoadingCard"
+import QuizQuestion from "components/QuizQuestion/QuizQuestion"
+import QuizProgressBar from "components/QuizProgressBar/QuizProgressBar"
+import API from "utils/API"
+import accentMarks from "utils/accentmarks/allAccentMarks"
+import LoadingCard from "components/LoadingCard/LoadingCard"
 import "../SpanishQuiz/SpanishQuiz.css"
-import Error from "../../components/Error/Error"
-import { capitalizeFirstLetter } from '../../utils/helperFunctions';
-import AccentMarkButton from "../../components/AccentMarkButton/AccentMarkButton"
+import Error from "components/Error/Error"
+import { capitalizeFirstLetter } from 'utils/helperFunctions';
+import AccentMarkButton from "components/AccentMarkButton/AccentMarkButton"
 
 
 

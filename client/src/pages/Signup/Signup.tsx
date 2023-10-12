@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
-import API from '../../utils/API';
+import API from 'utils/API';
 // import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import LoadingCard from '../../components/LoadingCard/LoadingCard';
+import LoadingCard from 'components/LoadingCard/LoadingCard';
 
 export default function Signup() {
 

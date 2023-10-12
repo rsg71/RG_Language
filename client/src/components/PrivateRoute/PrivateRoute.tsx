@@ -1,5 +1,5 @@
+import { CurrentUserContext } from 'App';
 import React, { useContext } from 'react';
-import { CurrentUserContext } from '../../App';
 
 interface Props {
     children: any;

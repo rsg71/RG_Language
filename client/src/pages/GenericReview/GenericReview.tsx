@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Container, Row, Col, Form, Button, Breadcrumb } from 'react-bootstrap';
 import { Link, useParams, useNavigate } from "react-router-dom";
-import Error from '../../components/Error/Error';
-import LoadingCard from '../../components/LoadingCard/LoadingCard';
-import QuizProgressBar from '../../components/QuizProgressBar/QuizProgressBar';
-import QuizQuestion from '../../components/QuizQuestion/QuizQuestion';
-import API from '../../utils/API';
+import Error from 'components/Error/Error';
+import LoadingCard from 'components/LoadingCard/LoadingCard';
+import QuizProgressBar from 'components/QuizProgressBar/QuizProgressBar';
+import QuizQuestion from 'components/QuizQuestion/QuizQuestion';
+import API from 'utils/API';
 
 export default function GenericReview() {
 

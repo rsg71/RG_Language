@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { CurrentUserContext } from '../../App';
+import { CurrentUserContext } from 'App';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { capitalizeFirstLetter } from '../../utils/helperFunctions';
+import { capitalizeFirstLetter } from 'utils/helperFunctions';
 import { Container, Row, Col, Breadcrumb } from 'react-bootstrap';
-import API from '../../utils/API';
-import Progress from '../../components/Progress/Progress';
-import { CurrentUserInterface } from '../../utils/interfaces';
+import API from 'utils/API';
+import Progress from 'components/Progress/Progress';
+import { CurrentUserInterface } from 'utils/interfaces';
 
 export default function GenericHomepage() {
     let { languageName } = useParams();

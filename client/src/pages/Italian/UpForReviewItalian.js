@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
-import QuizProgressBar from '../../components/QuizProgressBar/QuizProgressBar';
-import QuizQuestion from '../../components/QuizQuestion/QuizQuestion';
-import API from '../../utils/API';
+import QuizProgressBar from 'components/QuizProgressBar/QuizProgressBar';
+import QuizQuestion from 'components/QuizQuestion/QuizQuestion';
+import API from 'utils/API';
 
 export default function UpForReviewItalian() {
 

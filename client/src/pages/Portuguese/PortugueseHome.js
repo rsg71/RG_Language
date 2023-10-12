@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import API from "../../utils/API"
-import Progress from '../../components/Progress/Progress'
-import GoToButton from '../../components/GoToButton/GoToButton'
-import LoadingCard from '../../components/LoadingCard/LoadingCard'
+import API from "utils/API"
+import Progress from 'components/Progress/Progress'
+import GoToButton from 'components/GoToButton/GoToButton'
+import LoadingCard from 'components/LoadingCard/LoadingCard'
 
 export default function PortugueseHome() {
 
