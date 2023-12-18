@@ -1,4 +1,7 @@
 # RG_Language
+[![Code Coverage](https://img.shields.io/badge/Code%20Coverage-84%25-brightgreen.svg)](https://opensource.org/licenses/MIT)
+
+
 
 ## Description 
 A vocabulary website for foreign languages. Complete quizes to increase your vocabulary and track your progress over time. The app will help you revisit words that you have answered incorrectly.
