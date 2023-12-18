@@ -26,6 +26,7 @@
     "test": "react-scripts test --env=jsdom",
     "test:html-report": "react-scripts test --testResultsProcessor=jest-stare",
     "test:coverage": "jest --coverage",
+    "test:coverage2": "react-scripts test --coverage",
     "eject": "react-scripts eject"
   },
   "browserslist": [

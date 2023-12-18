@@ -2,8 +2,15 @@ require('dotenv').config();
 import joi from 'joi';
 
 
-export let isDev = process.env.NODE_ENV === 'dev';
-export let chooseConnection = isDev ? process.env.DEV_MONGO : process.env.MONGODB_URI;
+export const isDev = process.env.NODE_ENV === 'dev';
+export const isTest = process.env.NODE_ENV === 'test';
+// console.log('isTest? : ', isTest);
+// console.log('well then , what is is? : ', process.env.NODE_ENV);
+// console.log('=======')
+// console.log('does test === test? I think it should', process.env.NODE_ENV === 'test')
+export const chooseConnection = isDev ? process.env.DEV_MONGO : isTest ? process.env.DEV_MONGO : process.env.MONGODB_URI;
+// console.log('chosen connection string for mongoDB: ', chooseConnection);
+// export const chooseConnection = 'mongodb://localhost/booksDb';
 
 
 
@@ -15,7 +22,7 @@ const envVarsSchema = joi
         DEV_MONGO: joi.string().required(),
         FRONT_END_ORIGIN_URL: joi.string().required(),
         JWT_SECRET: joi.string().required(),
-        LOG_LEVEL: joi.string().valid("trace", "debug", "info", "warn", "error").required(),
+        LOG_LEVEL: joi.string().valid("silent", "trace", "debug", "info", "warn", "error").required(),
         PORT: joi.number().positive().required(),
         MONGODB_URI: joi.string().required(),
 
@@ -32,8 +39,10 @@ const { value: envVars, error } = envVarsSchema
 if (error) {
     throw new Error(`Env variables validation error: ${error.message}`);
 } else {
-    console.log('Env variables validation passed successfully!');
-    console.log('node env is: ', process.env.NODE_ENV);
+    if (process.env.NODE_ENV !== 'test') {
+        // console.log('Env variables validation passed successfully!');
+        // console.log('node env is: ', process.env.NODE_ENV);
+    }
 }
 
 

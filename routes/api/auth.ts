@@ -72,13 +72,10 @@ router.post("/login", (req: Request, res: Response, next: NextFunction) => {
             // throw err
             res.status(400).send('error with this user')
         } else if (!user) {
-
             res.status(400).send("No User Exists")
         } else {
-
             const _id = user._id;
             const username = user.username;
-
 
             const token = jwt.sign(
                 {
@@ -134,7 +131,7 @@ router.post("/login", (req: Request, res: Response, next: NextFunction) => {
  *         description: signup successful
  */
 router.post("/signup", (req: Request, res: Response) => {
-    console.log("new username is: ", req.body.username)
+    logger.debug(`new username is: ${req.body.username}`);
 
     User.findOne({ username: req.body.username }, async (err: any, doc: any) => {
         if (err) {

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import logger from '../logger';
-import UserService from '../services/user';
+import UserService from '../services/userService';
 import db from '../models';
 import { validateRequest, handleValidationResult } from '../utils/validation/validate-requests';
 import validationSchemas from '../schemas/validation-schemas';
@@ -12,7 +12,7 @@ const userController = {
 
     addLanguage: async function (req: Request, res: Response) {
         logger.trace('Controller called to addLanguage');
-
+        
         const user = req.user as any;
         const userId: string = user.id.toString();
         const language: string = req.body.language;

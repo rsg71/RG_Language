@@ -1,8 +1,9 @@
 const router = require("express").Router();
 import { Request, Response } from "express";
-import userRoutes from "./users";
+import userRoutes from "./user-routes";
 import authRoutes from "./auth";
 import ensureAuthenticated from "../../middleware/isAuthenticated";
+// import productsController from "../../controllers/productsController";
 
 
 // ALL below routes start with /api
@@ -26,6 +27,8 @@ router.get("/status", (req: Request, res: Response) => {
     const time = new Date().toLocaleTimeString();
     res.status(200).send(`Status: API is working as of ${date} at ${time}`);
 })
+
+
 
 // User routes 
 router.use("/users/languages", ensureAuthenticated, userRoutes);

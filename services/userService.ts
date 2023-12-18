@@ -6,7 +6,7 @@ import { IWordGroupModel } from '../utils/interfaces/users';
 
 declare type UserIdType = string;
 
-export async function handleError(err: any): Promise<void> {
+export function handleError(err: any): void {
     if (err instanceof Error && err.message) {
         logger.error(err);
         throw new Error(err.message)
@@ -46,7 +46,7 @@ export default class UserService {
         logger.debug('Service called to create language for user');
         try {
             const newLanguageCreated = await this.userCollection.create(newLanguageForUser);
-            console.log('newLangauge: ', newLanguageCreated);
+            // console.log('newLangauge: ', newLanguageCreated);
             const wordsLength = newLanguageForUser.wordsLearned!.length;
             logger.info(`inserted ${newLanguageForUser.language} for this user with ${wordsLength} words`);
             return newLanguageCreated;

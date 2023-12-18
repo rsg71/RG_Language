@@ -97,7 +97,7 @@ router.route("/:language/for-review")
 * @swagger
 * /api/users/languages/{language}/quiz/answer-word:
 *   patch:
-*     summary: Answer word on quiz for language for user
+*     summary: Answer word from quiz for language for user
 *     tags: [Quiz]
 *     requestBody:
 *       content:

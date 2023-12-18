@@ -4,7 +4,8 @@ module.exports = {
   testEnvironment: 'node',
   coverageThreshold: {
     global: {
-      lines: 40
+      lines: 80,
+      statements: 80
     }
   },
   testPathIgnorePatterns: [
